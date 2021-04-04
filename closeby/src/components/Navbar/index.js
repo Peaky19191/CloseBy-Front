@@ -16,6 +16,12 @@ const Navbar = () => {
                     <NavLink to='/contact' activeStyle>
                         Contact
                     </NavLink>
+                    <NavLink to='/accountsList' activeStyle>
+                        Accounts List
+                    </NavLink>
+                    <NavLink to='/formBox' activeStyle>
+                        Sign in/Login
+                    </NavLink>
                     {/*<NavLink to='/signup' activeStyle>
                         Sign Up
                     </NavLink>*/}
