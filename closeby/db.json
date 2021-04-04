@@ -1,0 +1,34 @@
+{
+    "accounts": [
+      {
+        "id": "1",
+        "fullName": "Trololol Lolol",
+        "email": "asdasda@gmail.com",
+        "password": "1234"
+      },
+      {
+        "id": "2",
+        "fullName": "Trololol Lolol",
+        "email": "asdasda@gmail.com",
+        "password": "1234"
+      },
+      {
+        "id": "3",
+        "fullName": "Trololol Lolol",
+        "email": "asdasda@gmail.com",
+        "password": "1234"
+      },
+      {
+        "id": "4",
+        "fullName": "Trololol Lolol",
+        "email": "asdasda@gmail.com",
+        "password": "1234"
+      },
+      {
+        "id": "1",
+        "fullName": "Trololol Lolol",
+        "email": "asdasda@gmail.com",
+        "password": "1234"
+      }
+    ]
+  }
