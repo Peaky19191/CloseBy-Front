@@ -18,6 +18,15 @@ export const AccountsList = () => {
       }  
     };
 
+    const deleteAccount = async (id) => {
+        const response  = await axios.delete(`/accounts/${id}`)
+        .catch((err) => console.log("Error: ", err));
+    
+        if(response){
+            getAccount();
+        }
+      }
+
     useEffect(() => {
         getAccount();
     }, []);
@@ -28,9 +37,9 @@ export const AccountsList = () => {
             alignItems: 'center', 
             }}
         >
-            {noAccounts && <h2>No Reminders found!</h2>}
+            {noAccounts && <h2>No Accounts found!</h2>}
             {!noAccounts && accounts.map((account, idx) => (
-                <Account key={idx} {...account}/>
+                <Account key={idx} {...account} onDelete={deleteAccount}/>
             ))}
         </div>
     )
