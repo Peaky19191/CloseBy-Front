@@ -38,13 +38,16 @@ export function SignupForm(props){
 
     <div>
         <form onSubmit={addAccount}>
-				  <input name="id"  placeholder="Id" onChange={handleChange}/>
-				  <input name="fullName"  placeholder="fullName" onChange={handleChange}/>
-				  <input name="email"  placeholder="Email" onChange={handleChange}/>
-				  <input name="password" placeholder="Password" onChange={handleChange}/>
-				  {/* <Input type="password" placeholder="Confirm Password" /> */}
-				<button type="submit">Sign up</button>
-			  </form>
+        <FormContainer>
+          <Input name="id" htmlFor="id" type="number" placeholder="Id" onChange={handleChange}/>
+          <Input name="fullName" htmlFor="fullName" type="text" placeholder="Full Name" onChange={handleChange}/>
+          <Input name="email" htmlFor="email" type="email" placeholder="Email" onChange={handleChange}/>
+          <Input name="password" htmlFor="password" type="password" placeholder="Password" onChange={handleChange}/>
+          {/* <Input type="password" placeholder="Confirm Password" /> */}
+        </FormContainer>
+        <SubmitButton type="submit">Sign up</SubmitButton>
+        </form>
+		
 
         <MutedLink href="#">Already have an account? <BoldLink href="#" onClick={switchToSignIn}>Sign in</BoldLink>
         </MutedLink>

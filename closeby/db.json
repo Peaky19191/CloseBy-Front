@@ -1,12 +1,6 @@
 {
   "accounts": [
     {
-      "id": "1",
-      "fullName": "Trololol Lolol",
-      "email": "asdasda@gmail.com",
-      "password": "1234"
-    },
-    {
       "id": "2",
       "fullName": "Trololol Lolol",
       "email": "asdasda@gmail.com",
@@ -31,15 +25,16 @@
       "password": "1234"
     },
     {
-      "id": "11111111111",
-      "fullName": "FFFF",
-      "": "FFF"
-    },
-    {
       "id": "19191",
       "fullName": "TEST",
       "email": "TEST",
       "password": "TEST"
+    },
+    {
+      "id": "99",
+      "fullName": "adasd",
+      "email": "asdad",
+      "password": "asas"
     }
   ]
 }
