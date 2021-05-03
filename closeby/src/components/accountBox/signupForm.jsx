@@ -1,9 +1,8 @@
 import React, { useContext, useState, useEffect} from 'react';
 import { AccountContext } from './accountContext';
-import {BoxContainer, FormContainer, MutedLink, SubmitButton, Input, BoldLink, Label, Select} from './common';
+import { FormContainer, MutedLink, SubmitButton, Input, BoldLink, Label, Select} from './common';
 import { axios } from '../../axios';
-import { AccountsList } from '../../pages/accountsList'
-import { Account } from './accounts';
+
 
 
 export function SignupForm(props){
@@ -12,33 +11,20 @@ export function SignupForm(props){
   const [formData, setFormData] = useState([]);
   const [accounts, setAccounts] = useState([]);
 
-  const getAccount = async () => {
-    const response = await axios.get("/accounts")
-    .catch((err) => console.log("Error: ", err));
-
-    if (response && response.data){
-      setAccounts(response.data);
-    }  
-  };
-
   const addAccount = async () => {
     const response = await axios.post("/accounts", formData)
     .catch((err) => {console.log("Error: ", err)});
   };
-
-  useEffect(() => {
-      getAccount();
-  }, []);
 
   const handleChange = (e) => {
     setFormData({...formData, [e.target.name]: e.target.value});
   };
 
   return (
-
     <div>
         <form onSubmit={addAccount}>
         <FormContainer>
+          <Input name="id" htmlFor="id" type="number" placeholder="Id" onChange={handleChange}/>
           <Input name="firstName" htmlFor="firstName" type="text" placeholder="First Name" onChange={handleChange}/>
           <Input name="lastName" htmlFor="firstName" type="text" placeholder="Last Name" onChange={handleChange}/>
           <Label for="gender">Select your gender</Label>
@@ -52,8 +38,6 @@ export function SignupForm(props){
         </FormContainer>
         <SubmitButton type="submit">Sign up</SubmitButton>
         </form>
-		
-
         <MutedLink href="#">Already have an account? <BoldLink href="#" onClick={switchToSignIn}>Sign in</BoldLink>
         </MutedLink>
     </div>
