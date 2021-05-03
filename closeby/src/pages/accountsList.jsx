@@ -18,8 +18,8 @@ export const AccountsList = () => {
       }  
     };
 
-    const deleteAccount = async (id) => {
-        const response  = await axios.delete(`/accounts/${id}`)
+    const deleteAccount = async (firstName) => {
+        const response  = await axios.delete(`/accounts/${firstName}`)
         .catch((err) => console.log("Error: ", err));
     
         if(response){
@@ -38,8 +38,8 @@ export const AccountsList = () => {
             }}
         >
             {noAccounts && <h2>No Accounts found!</h2>}
-            {!noAccounts && accounts.map((account, idx) => (
-                <Account key={idx} {...account} onDelete={deleteAccount}/>
+            {!noAccounts && accounts.map((account, firstNames) => (
+                <Account key={firstNames} {...account} onDelete={deleteAccount}/>
             ))}
         </div>
     )

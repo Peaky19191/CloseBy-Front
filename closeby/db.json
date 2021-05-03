@@ -1,40 +1,31 @@
 {
   "accounts": [
     {
-      "id": "2",
-      "fullName": "Trololol Lolol",
-      "email": "asdasda@gmail.com",
+      "firstName": "Trololol Lolol",
+      "lastName": "Trololol Lolol",
+      "gender": "Male",
+      "email": "a@gmail.com",
       "password": "1234"
     },
     {
-      "id": "3",
-      "fullName": "Trololol Lolol",
-      "email": "asdasda@gmail.com",
+      "firstName": "Trololol Lolol",
+      "lastName": "Trololol Lolol",
+      "gender": "Male",
+      "email": "a@gmail.com",
       "password": "1234"
     },
     {
-      "id": "4",
-      "fullName": "Trololol Lolol",
-      "email": "asdasda@gmail.com",
+      "firstName": "Trololol Lolol",
+      "lastName": "Trololol Lolol",
+      "gender": "Male",
+      "email": "a@gmail.com",
       "password": "1234"
     },
     {
-      "id": "1",
-      "fullName": "Trololol Lolol",
-      "email": "asdasda@gmail.com",
-      "password": "1234"
-    },
-    {
-      "id": "19191",
-      "fullName": "TEST",
-      "email": "TEST",
-      "password": "TEST"
-    },
-    {
-      "id": "99",
-      "fullName": "adasd",
-      "email": "asdad",
-      "password": "asas"
+      "firstName": "aaa",
+      "lastName": "aaada",
+      "email": "2adsad@sad.cc",
+      "password": "aasd"
     }
   ]
 }
