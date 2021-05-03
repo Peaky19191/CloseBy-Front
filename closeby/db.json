@@ -24,32 +24,25 @@
       "password": "aasd"
     },
     {
-      "id": "11111111111",
-      "firstName": "Krzysztof",
-      "lastName": "Kop",
-      "email": "pajeczak97@op.pl",
-      "password": "asdasd"
-    },
-    {
-      "id": "6886",
-      "firstName": "Krzysztof",
-      "lastName": "Kop",
-      "email": "pajeczak97@op.pl",
-      "password": "asdasd"
-    },
-    {
-      "id": "23456789",
-      "lastName": "Kop",
-      "firstName": "Krzysztof",
-      "email": "pajeczak97@op.pl",
-      "password": "adasd"
-    },
-    {
-      "id": "99999",
+      "id": "11111",
       "firstName": "Krzysztof",
       "lastName": "Kop",
       "email": "keqm@onet.pl",
-      "password": "kk"
+      "password": "sss"
+    }
+  ],
+  "login": [
+    {
+      "email": "a@gmail.com",
+      "password": "1234"
+    },
+    {
+      "email": "a@gmail.com",
+      "password": "1234"
+    },
+    {
+      "email": "2adsad@sad.cc",
+      "password": "aasd"
     }
   ]
 }
