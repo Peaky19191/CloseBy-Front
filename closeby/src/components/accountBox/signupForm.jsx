@@ -6,6 +6,7 @@ import { axios } from '../../axios';
 
 
 export function SignupForm(props){
+  
   const { switchToSignIn } = useContext(AccountContext);
 
   const [formData, setFormData] = useState([]);
@@ -14,6 +15,7 @@ export function SignupForm(props){
   const addAccount = async () => {
     const response = await axios.post("/api/user/register", formData)
     .catch((err) => {console.log("Error: ", err)});
+
   };
 
   const handleChange = (e) => {
@@ -28,12 +30,13 @@ export function SignupForm(props){
           <Input name="lastName" htmlFor="firstName" type="text" placeholder="Last Name" onChange={handleChange}/>
           <Label for="gender">Select your gender</Label>
           <Select name="gender" htmlFor="gender" type="text" placeholder="Gender" onChange={handleChange}>
+          <option hidden></option>
             <option value="Male">Male</option> 
             <option value="Female">Female</option>
           </Select>
           <Input name="email" htmlFor="email" type="email" placeholder="Email" onChange={handleChange}/>
           <Input name="password" htmlFor="password" type="password" placeholder="Password" onChange={handleChange}/>
-          {/* <Input type="password" placeholder="Confirm Password" /> */}
+          {/* <Input type="password" placeholder="Confirm Password" /> TODO*/}
         </FormContainer>
         <SubmitButton type="submit">Sign up</SubmitButton>
         </form>
