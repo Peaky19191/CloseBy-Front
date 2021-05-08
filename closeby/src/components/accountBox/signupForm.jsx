@@ -1,42 +1,37 @@
 import React, { useContext, useState, useEffect} from 'react';
 import { AccountContext } from './accountContext';
 import { FormContainer, MutedLink, SubmitButton, Input, BoldLink, Label, Select} from './common';
-import { axios } from '../../axios';
-
-
+import { Field, useFormik } from "formik";
+import * as yup from 'yup';
 
 export function SignupForm(props){
   
   const { switchToSignIn } = useContext(AccountContext);
 
-  const [formData, setFormData] = useState([]);
-  const [accounts, setAccounts] = useState([]);
+  const onSubmit = (values) => {
+    alert(JSON.stringify(values))
+  } 
 
-  const addAccount = async () => {
-    const response = await axios.post("/api/user/register", formData)
-    .catch((err) => {console.log("Error: ", err)});
-
-  };
-
-  const handleChange = (e) => {
-    setFormData({...formData, [e.target.name]: e.target.value});
-  };
+  const formik = useFormik({ initialValues: { firstName: "", lastName: "", gender: "", email: "", password: "", confirmPassword: "" },
+    validateOnBlur: true,
+    onSubmit
+  });
 
   return (
     <div>
-        <form onSubmit={addAccount}>
+        <form onSubmit={formik.handleSubmit}>
         <FormContainer>
-          <Input name="firstName" htmlFor="firstName" type="text" placeholder="First Name" onChange={handleChange}/>
-          <Input name="lastName" htmlFor="firstName" type="text" placeholder="Last Name" onChange={handleChange}/>
+          <Input name="firstName" type="text" placeholder="First Name" value={formik.values.firstName} onChange={formik.handleChange}/>
+          <Input name="lastName" type="text" placeholder="Last Name" value={formik.values.lastName} onChange={formik.handleChange}/>
           <Label for="gender">Select your gender</Label>
-          <Select name="gender" htmlFor="gender" type="text" placeholder="Gender" onChange={handleChange}>
+          <Select name="gender" type="text" placeholder="Gender" value={formik.values.gender} onChange={formik.handleChange}>
             <option hidden></option>
             <option value="Male">Male</option> 
             <option value="Female">Female</option>
           </Select>
-          <Input name="email" htmlFor="email" type="email" placeholder="Email" onChange={handleChange}/>
-          <Input name="password" htmlFor="password" type="password" placeholder="Password" onChange={handleChange}/>
-          {/* <Input type="password" placeholder="Confirm Password" /> TODO*/}
+          <Input name="email" type="email" placeholder="Email" value={formik.values.email} onChange={formik.handleChange}/>
+          <Input name="password" type="password" placeholder="Password" value={formik.values.password} onChange={formik.handleChange}/>
+          <Input name="confirmPassword" type="password" placeholder="Confirm Password" value={formik.values.confirmPassword} onChange={formik.handleChange}/>
         </FormContainer>
         <SubmitButton type="submit">Sign up</SubmitButton>
         </form>
