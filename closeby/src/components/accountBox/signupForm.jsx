@@ -30,7 +30,7 @@ export function SignupForm(props){
           <Input name="lastName" htmlFor="firstName" type="text" placeholder="Last Name" onChange={handleChange}/>
           <Label for="gender">Select your gender</Label>
           <Select name="gender" htmlFor="gender" type="text" placeholder="Gender" onChange={handleChange}>
-          <option hidden></option>
+            <option hidden></option>
             <option value="Male">Male</option> 
             <option value="Female">Female</option>
           </Select>

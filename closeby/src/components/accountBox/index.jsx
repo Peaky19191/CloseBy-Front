@@ -119,7 +119,13 @@ export function AccountBox(props){
     }, 400);
   };
 
-  const contextValue = { switchToSignUp, switchToSignIn };
+  const switchToRegistred = () => {
+    playExpandingAnimation();
+    setTimeout(() => {
+      setActive("registered");
+    }, 400);
+  };
+  const contextValue = { switchToSignUp, switchToSignIn, switchToRegistred};
 
   return (
     <AccountContext.Provider value={contextValue}>
@@ -145,10 +151,17 @@ export function AccountBox(props){
               <SmallText>Please sign-up to continue!</SmallText>
             </HeaderContainer>
           )}
+          {active === "registered" && (
+            <HeaderContainer>
+              <HeaderText>Well Done!</HeaderText>
+              <SmallText>You have registered properly</SmallText>
+            </HeaderContainer>
+          )}
         </TopContainer>
         <InnerContainer>
           {active === "signin" && <LoginForm />}
           {active === "signup" && <SignupForm />}
+          {active === "registered"}
         </InnerContainer>
       </BoxContainer>
     </AccountContext.Provider>
