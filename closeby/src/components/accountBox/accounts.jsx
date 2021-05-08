@@ -6,7 +6,6 @@ export function Account(props) {
   return (
     <div className="account-wrapper">
       <div className="account-container">
-        <div className="account-id">{id}</div>
         <div className="account-first-name">{firstName}</div>
         <div className="account-last-name">{lastName}</div>
         <div className="account-gender">{gender}</div>

@@ -12,7 +12,7 @@ export function LoginForm(props){
   const [login, setLogin] = useState([]);
 
   const submit = async () => {
-    const response = await axios.post("/login", formData)
+    const response = await axios.post("/api/identity/login", formData)
     .catch((err) => {console.log("Error: ", err)});
   };
 

@@ -12,7 +12,7 @@ export function SignupForm(props){
   const [accounts, setAccounts] = useState([]);
 
   const addAccount = async () => {
-    const response = await axios.post("/accounts", formData)
+    const response = await axios.post("/api/user/register", formData)
     .catch((err) => {console.log("Error: ", err)});
   };
 
@@ -24,7 +24,6 @@ export function SignupForm(props){
     <div>
         <form onSubmit={addAccount}>
         <FormContainer>
-          <Input name="id" htmlFor="id" type="number" placeholder="Id" onChange={handleChange}/>
           <Input name="firstName" htmlFor="firstName" type="text" placeholder="First Name" onChange={handleChange}/>
           <Input name="lastName" htmlFor="firstName" type="text" placeholder="Last Name" onChange={handleChange}/>
           <Label for="gender">Select your gender</Label>
