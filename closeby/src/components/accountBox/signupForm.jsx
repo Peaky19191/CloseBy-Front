@@ -1,9 +1,9 @@
-import React, { useContext, useState, useEffect} from 'react';
-import { AccountContext } from './accountContext';
-import { FormContainer, MutedLink, SubmitButton, Input, BoldLink, Label, Select, FieldContainer, FieldError} from './common';
 import { Field, useFormik } from "formik";
-import * as yup from 'yup';
-
+import React, { useContext, useState } from "react";
+import { BoxContainer, FormContainer, MutedLink, SubmitButton, Input, BoldLink, Label, Select, FieldContainer, FieldError, FormSuccess, FormError} from './common';
+import { AccountContext } from './accountContext';
+import * as yup from "yup";
+import axios from "axios";
 
 const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 
@@ -19,38 +19,60 @@ const validationSchema = yup.object({
   }).required("Please confirm your password")
 });
 
-export function SignupForm(props){
-  
+export function SignupForm(props) {
   const { switchToSignIn } = useContext(AccountContext);
+  const [success, setSuccess] = useState(null);
+  const [error, setError] = useState(null);
 
-  const onSubmit = (values) => {
-  } 
+  const onSubmit = async (values) => {
+    const { confirmPassword, ...data } = values;
 
-  const formik = useFormik({ initialValues: { firstName: "", lastName: "", gender: "", email: "", password: "", confirmPassword: "" },
-    validateOnBlur: true,
-    onSubmit,
-    validationSchema: validationSchema
+    const response = await axios
+      .post("http://localhost:5000/api/user/register", data)
+      .catch((err) => {
+        if (err && err.response) setError(err.response.data.message);
+        setSuccess(null);
+      });
+
+    if (response && response.data) {
+      setError(null);
+      setSuccess("You have registered properly");
+      formik.resetForm();
+    }
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      gender: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    onSubmit
   });
 
   return (
-    <div>
-        <form onSubmit={formik.handleSubmit}>
-        <FormContainer>
+    <BoxContainer>
+      {!error && <FormSuccess>{success ? success : ""}</FormSuccess>}
+      {!success && <FormError>{error ? error : ""}</FormError>}
+      <FormContainer onSubmit={formik.handleSubmit}>
         <FieldContainer>
-        <Input name="firstName" type="text" placeholder="First Name" value={formik.values.firstName} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
-        <FieldError>
-            {formik.touched.firstName && formik.errors.firstName ? formik.errors.firstName : ""}
-          </FieldError>
+          <Input name="firstName" htmlFor="firstName" type="text" placeholder="First Name" value={formik.values.firstName} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+            <FieldError>
+              {formik.touched.firstName && formik.errors.firstName ? formik.errors.firstName : ""}
+            </FieldError>
         </FieldContainer>
         <FieldContainer>
-          <Input name="lastName" type="text" placeholder="Last Name" value={formik.values.lastName} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
-          <FieldError>
-            {formik.touched.lastName && formik.errors.lastName ? formik.errors.lastName : ""}
-          </FieldError>
-          </FieldContainer>
-          <FieldContainer>
+          <Input name="lastName" htmlFor="lastName" type="text" placeholder="Last Name" value={formik.values.lastName} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+            <FieldError>
+              {formik.touched.lastName && formik.errors.lastName ? formik.errors.lastName : ""}
+            </FieldError>
+        </FieldContainer>
+        <FieldContainer>
           <Label for="gender">Select your gender</Label>
-          <Select name="gender" type="text" placeholder="Gender" value={formik.values.gender} onChange={formik.handleChange} onBlur={formik.handleBlur}>
+          <Select name="gender" htmlFor="gender" type="text" placeholder="Gender" value={formik.values.gender} onChange={formik.handleChange} onBlur={formik.handleBlur}>
             <option hidden></option>
             <option value="Male">Male</option> 
             <option value="Female">Female</option>
@@ -58,30 +80,28 @@ export function SignupForm(props){
           <FieldError>
             {formik.touched.gender && formik.errors.gender ? formik.errors.gender : ""}
           </FieldError>
-          </FieldContainer>
-          <FieldContainer>
-          <Input name="email" type="email" placeholder="Email" value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
-          <FieldError>
-            {formik.touched.email && formik.errors.email ? formik.errors.email : ""}
-          </FieldError>
-          </FieldContainer>
-          <FieldContainer>
-          <Input name="password" type="password" placeholder="Password" value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
-          <FieldError>
-            {formik.touched.password && formik.errors.password ? formik.errors.password : ""}
-          </FieldError>
-          </FieldContainer>
-          <FieldContainer>
-          <Input name="confirmPassword" type="password" placeholder="Confirm Password" value={formik.values.confirmPassword} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
-          <FieldError>
-            {formik.touched.confirmPassword && formik.errors.confirmPassword ? formik.errors.confirmPassword : ""}
-          </FieldError>
-          </FieldContainer>
-        </FormContainer>
-        <SubmitButton type="submit">Sign up</SubmitButton>
-        </form>
-        <MutedLink href="#">Already have an account? <BoldLink href="#" onClick={switchToSignIn}>Sign in</BoldLink>
-        </MutedLink>
-    </div>
+        </FieldContainer>
+        <FieldContainer>
+          <Input name="email" htmlFor="email" type="email" placeholder="Email" value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+            <FieldError>
+              {formik.touched.email && formik.errors.email ? formik.errors.email : ""}
+            </FieldError>
+        </FieldContainer>
+        <FieldContainer>
+          <Input name="password" htmlFor="password" type="password" placeholder="Password" value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+            <FieldError>
+              {formik.touched.password && formik.errors.password ? formik.errors.password : ""}
+            </FieldError>
+        </FieldContainer>
+        <FieldContainer>
+          <Input name="confirmPassword" htmlFor="confirmPassword" type="password" placeholder="Confirm Password" value={formik.values.confirmPassword} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+            <FieldError>
+              {formik.touched.confirmPassword && formik.errors.confirmPassword ? formik.errors.confirmPassword : ""}
+            </FieldError>
+        </FieldContainer>
+        <SubmitButton type="submit" disabled={!formik.isValid}>Signup</SubmitButton>
+      </FormContainer>
+        <MutedLink href="#">Already have an account?<BoldLink href="#" onClick={switchToSignIn}>sign in</BoldLink></MutedLink>
+    </BoxContainer>
   );
 }
