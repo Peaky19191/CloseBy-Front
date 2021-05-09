@@ -7,6 +7,7 @@ import Home from './pages';
 import About from './pages/about';
 import Contact from './pages/contact';
 import Events from './pages/events';
+import FormBox from './pages/formBox';
 
 const AppContainer = styled.div`
 width: 100%;
@@ -27,6 +28,7 @@ function App() {
       <Route path="/about" exact component={About} />
       <Route path="/contact" exact component={Contact} />
       <Route path="/events" exact component={Events} />
+      <Route path="/formBox" exact component={FormBox} />
     </Switch>
     </Router>
 
