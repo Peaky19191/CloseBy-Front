@@ -4,8 +4,8 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Home from './pages';
 import About from './pages/about';
 import Contact from './pages/contact';
-import FormBox from './pages/formBox';
 import Events from './pages/events';
+import FormBox from './pages/formBox';
 
 
 function App() {
