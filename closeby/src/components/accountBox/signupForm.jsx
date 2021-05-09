@@ -30,15 +30,15 @@ export function SignupForm(props) {
     const response = await axios
       .post("http://localhost:5000/api/user/register", data)
       .catch((err) => {
-        if (err && err.response) setError(err.response.data.message);
-        setSuccess(null);
-      });
-
-    if (response && response.data) {
-      setError(null);
-      setSuccess("You have registered properly");
-      formik.resetForm();
-    }
+        if (err && err.response) 
+          setError(err.response.data.message);
+          setSuccess(null);
+        });
+        if (response && response.data) {
+          setError(null);
+          setSuccess("You have registered properly");
+          formik.resetForm();
+        }
   };
 
   const formik = useFormik({
@@ -50,7 +50,9 @@ export function SignupForm(props) {
       password: "",
       confirmPassword: "",
     },
-    onSubmit
+    validateOnBlur: true,
+    onSubmit,
+    validationSchema: validationSchema,
   });
 
   return (
@@ -101,7 +103,7 @@ export function SignupForm(props) {
         </FieldContainer>
         <SubmitButton type="submit" disabled={!formik.isValid}>Signup</SubmitButton>
       </FormContainer>
-        <MutedLink href="#">Already have an account?<BoldLink href="#" onClick={switchToSignIn}>sign in</BoldLink></MutedLink>
+        <MutedLink href="#">Already have an account?<BoldLink href="#" onClick={switchToSignIn}>Sign in</BoldLink></MutedLink>
     </BoxContainer>
   );
 }
