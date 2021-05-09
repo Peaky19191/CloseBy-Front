@@ -16,6 +16,9 @@ const Navbar = () => {
                     <NavLink to='/contact' activeStyle>
                         Contact
                     </NavLink>
+                    <NavLink to='/events' activeStyle>
+                        Events
+                    </NavLink>
                     {/*<NavLink to='/signup' activeStyle>
                         Sign Up
                     </NavLink>*/}
