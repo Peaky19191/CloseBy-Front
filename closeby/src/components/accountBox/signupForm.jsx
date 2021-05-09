@@ -26,7 +26,6 @@ export function SignupForm(props) {
 
   const onSubmit = async (values) => {
     const { confirmPassword, ...data } = values;
-
     const response = await axios
       .post("http://localhost:5000/api/user/register", data)
       .catch((err) => {
@@ -34,7 +33,7 @@ export function SignupForm(props) {
           setError(err.response.data.message);
           setSuccess(null);
         });
-        if (response && response.data) {
+        if (response && response.data && response.status==200) {
           setError(null);
           setSuccess("You have registered properly");
           formik.resetForm();

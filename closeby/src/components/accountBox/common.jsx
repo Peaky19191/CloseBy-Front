@@ -106,6 +106,10 @@ export const SubmitButton = styled.button`
   &:hover {
     filter: brightness(1.03);
   }
+
+  &:disabled {
+    filter: contrast(0.7);
+  }
 `;
 
 export const FieldContainer = styled.div`
