@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
-import { LoginForm } from './loginForm';
-import { SignupForm } from './signupForm';
+import { LoginForm } from './forms/loginForm';
+import { SignupForm } from './forms/signupForm';
 import { motion } from 'framer-motion';
 import { AccountContext } from "./accountContext";
 
@@ -94,7 +94,7 @@ const expandingTransition = {
   stiffness: 30,
 };
 
-export function AccountBox(props){
+export function AccountBox(props) {
   const [isExpanded, setExpanded] = useState(false);
   const [active, setActive] = useState("signin");
 
@@ -119,7 +119,7 @@ export function AccountBox(props){
     }, 400);
   };
 
-  const contextValue = { switchToSignUp, switchToSignIn};
+  const contextValue = { switchToSignUp, switchToSignIn };
 
   return (
     <AccountContext.Provider value={contextValue}>

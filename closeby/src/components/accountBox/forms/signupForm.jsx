@@ -1,7 +1,7 @@
 import { Field, useFormik } from "formik";
 import React, { useContext, useState } from "react";
-import { BoxContainer, FormContainer, MutedLink, SubmitButton, Input, BoldLink, Label, Select, FieldContainer, FieldError, FormSuccess, FormError} from './common';
-import { AccountContext } from './accountContext';
+import { BoxContainer, FormContainer, MutedLink, SubmitButton, Input, BoldLink, Label, Select, FieldContainer, FieldError, FormSuccess, FormError } from '../common';
+import { AccountContext } from '../accountContext';
 import * as yup from "yup";
 import axios from "axios";
 
@@ -29,15 +29,15 @@ export function SignupForm(props) {
     const response = await axios
       .post("http://localhost:5000/api/user/register", data)
       .catch((err) => {
-        if (err && err.response) 
+        if (err && err.response)
           setError(err.response.data.message);
-          setSuccess(null);
-        });
-        if (response && response.data && response.status==200) {
-          setError(null);
-          setSuccess("You have registered properly");
-          formik.resetForm();
-        }
+        setSuccess(null);
+      });
+    if (response && response.data && response.status == 200) {
+      setError(null);
+      setSuccess("You have registered properly");
+      formik.resetForm();
+    }
   };
 
   const formik = useFormik({
@@ -60,22 +60,22 @@ export function SignupForm(props) {
       {!success && <FormError>{error ? error : ""}</FormError>}
       <FormContainer onSubmit={formik.handleSubmit}>
         <FieldContainer>
-          <Input name="firstName" htmlFor="firstName" type="text" placeholder="First Name" value={formik.values.firstName} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
-            <FieldError>
-              {formik.touched.firstName && formik.errors.firstName ? formik.errors.firstName : ""}
-            </FieldError>
+          <Input name="firstName" htmlFor="firstName" type="text" placeholder="First Name" value={formik.values.firstName} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+          <FieldError>
+            {formik.touched.firstName && formik.errors.firstName ? formik.errors.firstName : ""}
+          </FieldError>
         </FieldContainer>
         <FieldContainer>
-          <Input name="lastName" htmlFor="lastName" type="text" placeholder="Last Name" value={formik.values.lastName} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
-            <FieldError>
-              {formik.touched.lastName && formik.errors.lastName ? formik.errors.lastName : ""}
-            </FieldError>
+          <Input name="lastName" htmlFor="lastName" type="text" placeholder="Last Name" value={formik.values.lastName} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+          <FieldError>
+            {formik.touched.lastName && formik.errors.lastName ? formik.errors.lastName : ""}
+          </FieldError>
         </FieldContainer>
         <FieldContainer>
           <Label for="gender">Select your gender</Label>
           <Select name="gender" htmlFor="gender" type="text" placeholder="Gender" value={formik.values.gender} onChange={formik.handleChange} onBlur={formik.handleBlur}>
             <option hidden></option>
-            <option value="Male">Male</option> 
+            <option value="Male">Male</option>
             <option value="Female">Female</option>
           </Select>
           <FieldError>
@@ -83,26 +83,26 @@ export function SignupForm(props) {
           </FieldError>
         </FieldContainer>
         <FieldContainer>
-          <Input name="email" htmlFor="email" type="email" placeholder="Email" value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
-            <FieldError>
-              {formik.touched.email && formik.errors.email ? formik.errors.email : ""}
-            </FieldError>
+          <Input name="email" htmlFor="email" type="email" placeholder="Email" value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+          <FieldError>
+            {formik.touched.email && formik.errors.email ? formik.errors.email : ""}
+          </FieldError>
         </FieldContainer>
         <FieldContainer>
-          <Input name="password" htmlFor="password" type="password" placeholder="Password" value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
-            <FieldError>
-              {formik.touched.password && formik.errors.password ? formik.errors.password : ""}
-            </FieldError>
+          <Input name="password" htmlFor="password" type="password" placeholder="Password" value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+          <FieldError>
+            {formik.touched.password && formik.errors.password ? formik.errors.password : ""}
+          </FieldError>
         </FieldContainer>
         <FieldContainer>
-          <Input name="confirmPassword" htmlFor="confirmPassword" type="password" placeholder="Confirm Password" value={formik.values.confirmPassword} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
-            <FieldError>
-              {formik.touched.confirmPassword && formik.errors.confirmPassword ? formik.errors.confirmPassword : ""}
-            </FieldError>
+          <Input name="confirmPassword" htmlFor="confirmPassword" type="password" placeholder="Confirm Password" value={formik.values.confirmPassword} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+          <FieldError>
+            {formik.touched.confirmPassword && formik.errors.confirmPassword ? formik.errors.confirmPassword : ""}
+          </FieldError>
         </FieldContainer>
         <SubmitButton type="submit" disabled={!formik.isValid}>Signup</SubmitButton>
       </FormContainer>
-        <MutedLink href="#">Already have an account?<BoldLink href="#" onClick={switchToSignIn}>Sign in</BoldLink></MutedLink>
+      <MutedLink href="#">Already have an account?<BoldLink href="#" onClick={switchToSignIn}>Sign in</BoldLink></MutedLink>
     </BoxContainer>
   );
 }
