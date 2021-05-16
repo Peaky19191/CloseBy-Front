@@ -1,12 +1,12 @@
 import React from 'react'
-import {Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink} from './navbarElements';
+import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink } from './navbarElements';
 
 const Navbar = () => {
     return (
         <>
             <Nav>
                 <NavLink to='/'>
-                    <img src="https://i.imgur.com/Tngx1R2.png" alt="logo"/>
+                    <img src="https://i.imgur.com/Tngx1R2.png" alt="logo" />
                 </NavLink>
                 <Bars />
                 <NavMenu>

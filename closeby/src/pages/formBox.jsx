@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import { AccountBox } from '../components/accountBox';
+import { AccountBox } from '../components/accountBox/accountBox';
 
 const AppContainer = styled.div`
 width: 100%;
@@ -15,7 +15,7 @@ justify-content: center;
 export const FormBox = () => {
     return (
         <AppContainer>
-            <AccountBox/>
+            <AccountBox />
         </AppContainer>
     )
 }
