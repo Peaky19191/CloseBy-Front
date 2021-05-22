@@ -1,9 +1,12 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from 'react-router-dom';
 import { AccountContext } from '../accountContext';
 import { BoxContainer, FormContainer, MutedLink, SubmitButton, Input, BoldLink, FieldContainer, FieldError, FormSuccess, FormError } from '../common';
 import * as yup from "yup";
 import axios from "axios";
 import { Field, useFormik } from "formik";
+import { login } from "../../../actions/auth";
 
 
 const validationSchema = yup.object({
@@ -11,21 +14,59 @@ const validationSchema = yup.object({
   password: yup.string().required("Password is required!"),
 });
 
-export function LoginForm(props) {
-  const { switchToSignUp } = useContext(AccountContext);
-  const [error, setError] = useState(null);
+const Login = (props) => {
+  // const { switchToSignUp } = useContext(AccountContext);
 
-  const onSubmit = async (values) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const { isLoggedIn } = useSelector(state => state.auth);
+  const { message } = useSelector(state => state.message);
+
+  const dispatch = useDispatch();
+
+  const onChangeUsername = (e) => {
+    const username = e.target.value;
+    setUsername(username);
+  };
+
+  const onChangePassword = (e) => {
+    const password = e.target.value;
+    setPassword(password);
+  };
+
+  // const onSubmit = async (values) => {
+  //   setError(null);
+  //   const response = await axios
+  //     .post("http://localhost:5000/api/identity/login", values)
+  //     .catch((err) => {
+  //       if (err && err.response)
+  //         setError(err.response.data.type);
+  //     });
+  //   if (response && response.status == 200) {
+  //     alert("Welcome back in. Authenticating...");
+  //   }
+  // };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
     setError(null);
-    const response = await axios
-      .post("http://localhost:5000/api/identity/login", values)
-      .catch((err) => {
-        if (err && err.response)
-          setError(err.response.data.type);
+
+    setLoading(true);
+
+    dispatch(login(username, password))
+      .then(() => {
+        props.history.push("/profile");
+        window.location.reload();
+      })
+      .catch(() => {
+        setLoading(false);
       });
-    if (response && response.status == 200) {
-      alert("Welcome back in. Authenticating...");
-    }
+
   };
 
   const formik = useFormik({
@@ -34,31 +75,46 @@ export function LoginForm(props) {
       password: ""
     },
     validateOnBlur: true,
-    onSubmit,
+    handleLogin,
     validationSchema: validationSchema,
   });
+
+  if (isLoggedIn) {
+    return <Redirect to="/profile" />;
+  };
 
   return (
     <BoxContainer>
       <FormError>{error ? error : ""}</FormError>
-      <FormContainer onSubmit={formik.handleSubmit}>
+      {message && (
+        <div>
+          {message}
+        </div>
+      )}
+      <FormContainer onSubmit={handleLogin}>
         <FieldContainer>
-          <Input name="email" htmlFor="email" type="email" placeholder="Email" value={formik.values.email} onChange={formik.handleChange} onBlur={formik.handleBlur} />
-          <FieldError>
+          <Input name="email" htmlFor="email" type="email" placeholder="Email" value={username} onChange={onChangeUsername} />
+          {/* <FieldError>
             {formik.touched.email && formik.errors.email ? formik.errors.email : ""}
-          </FieldError>
+          </FieldError> */}
         </FieldContainer>
         <FieldContainer>
-          <Input name="password" htmlFor="password" type="password" placeholder="Password" value={formik.values.password} onChange={formik.handleChange} onBlur={formik.handleBlur} />
-          <FieldError>
+          <Input name="password" htmlFor="password" type="password" placeholder="Password" value={password} onChange={onChangePassword} />
+          {/* <FieldError>
             {formik.touched.password && formik.errors.password ? formik.errors.password : ""}
-          </FieldError>
+          </FieldError> */}
         </FieldContainer>
         <MutedLink href="#">Forget your password?</MutedLink>
-        <SubmitButton type="submit" disabled={!formik.isValid}>Sign in</SubmitButton>
+        <SubmitButton type="submit" disabled={loading}>
+          {loading && (
+            <span>WAITING....</span>
+          )}
+          Sign in
+        </SubmitButton>
       </FormContainer>
-      <MutedLink href="#">Don't have an account? <BoldLink href="#" onClick={switchToSignUp}>Sign up</BoldLink>
-      </MutedLink>
+      {/* <MutedLink href="#">Don't have an account? <BoldLink href="#" onClick={switchToSignUp}>Sign up</BoldLink>
+      </MutedLink> */}
     </BoxContainer>
   );
 }
+export default Login;

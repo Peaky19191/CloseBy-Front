@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { LoginForm } from './forms/loginForm';
-import { SignupForm } from './forms/signupForm';
+import Login from './forms/loginForm';
+import Register from './forms/signupForm';
 import { AccountContext } from "./accountContext";
 import { BoxContainerIndex, TopContainer, BackDrop, HeaderContainer, HeaderText, SmallText, InnerContainer, backdropVariants, expandingTransition } from './common'
 
@@ -57,8 +57,8 @@ export function AccountBox(props) {
           )}
         </TopContainer>
         <InnerContainer>
-          {active === "signin" && <LoginForm />}
-          {active === "signup" && <SignupForm />}
+          {active === "signin" && <Login />}
+          {active === "signup" && <Register />}
         </InnerContainer>
       </BoxContainerIndex>
     </AccountContext.Provider>

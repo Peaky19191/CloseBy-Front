@@ -19,7 +19,7 @@ const validationSchema = yup.object({
   }).required("Please confirm your password")
 });
 
-export function SignupForm(props) {
+const Register = () => {
   const { switchToSignIn } = useContext(AccountContext);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
@@ -49,6 +49,9 @@ export function SignupForm(props) {
       password: "",
       confirmPassword: "",
     },
+
+
+
     validateOnBlur: true,
     onSubmit,
     validationSchema: validationSchema,
@@ -105,4 +108,5 @@ export function SignupForm(props) {
       <MutedLink href="#">Already have an account?<BoldLink href="#" onClick={switchToSignIn}>Sign in</BoldLink></MutedLink>
     </BoxContainer>
   );
-}
+};
+export default Register;
