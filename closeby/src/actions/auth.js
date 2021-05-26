@@ -5,80 +5,75 @@ import {
     LOGIN_FAIL,
     LOGOUT,
     SET_MESSAGE,
-} from "./types";
+    AUTH
+} from "../constants/actionTypes";
 
-import AuthService from "../services/auth.service";
+import * as api from '../api/index.js';
 
 export const register = (firstName, lastName, gender, email, password) => (dispatch) => {
-    return AuthService.register(firstName, lastName, gender, email, password).then(
-        (response) => {
-            dispatch({
-                type: REGISTER_SUCCESS,
-            });
-
-            dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
-            });
-
-            return Promise.resolve();
-        },
-        (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
-
-            dispatch({
-                type: REGISTER_FAIL,
-            });
-
-            dispatch({
-                type: SET_MESSAGE,
-                payload: message,
-            });
-
-            return Promise.reject();
-        }
-    );
+    return null;
 };
 
-export const login = (email, password) => (dispatch) => {
-    return AuthService.login(email, password).then(
-        (data) => {
-            dispatch({
-                type: LOGIN_SUCCESS,
-                payload: { user: data },
-            });
+export const login = (formData, router) => async (dispatch) => {
+    try {
+        const { data } = await api.signIn(formData);
 
-            return Promise.resolve();
-        },
-        (error) => {
-            const message = error.response.data.type;
-            // (error.response &&
-            //     error.response.data &&
-            //     error.response.data.message) ||
-            // error.message ||
-            // error.toString();
-            dispatch({
-                type: LOGIN_FAIL,
-            });
+        dispatch({ type: AUTH, data });
 
-            dispatch({
-                type: SET_MESSAGE,
-                payload: message,
-            });
+        router.push('/');
+    } catch (error) {
+        const message =
+            (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+            error.message ||
+            error.toString();
+        console.log(error);
+        dispatch({
+            type: LOGIN_FAIL,
+        });
 
-            return Promise.reject();
-        }
-    );
+        dispatch({
+            type: SET_MESSAGE,
+            payload: message,
+        });
+    }
 };
 
-export const logout = () => (dispatch) => {
-    AuthService.logout();
-    dispatch({
-        type: LOGOUT,
-    });
-};
+// (email, password) => (dispatch) => {
+//     return AuthService.login(email, password).then(
+//         (data) => {
+//             dispatch({
+//                 type: LOGIN_SUCCESS,
+//                 payload: { user: data },
+//             });
+
+//             return Promise.resolve();
+//         },
+//         (error) => {
+//             const message = error.response.data.type;
+//             // (error.response &&
+//             //     error.response.data &&
+//             //     error.response.data.message) ||
+//             // error.message ||
+//             // error.toString();
+//             dispatch({
+//                 type: LOGIN_FAIL,
+//             });
+
+//             dispatch({
+//                 type: SET_MESSAGE,
+//                 payload: message,
+//             });
+
+//             return Promise.reject();
+//         }
+//     );
+// };
+
+// export const logout = () => (dispatch) => {
+//     AuthService.logout();
+//     dispatch({
+//         type: LOGOUT,
+//     });
+// };

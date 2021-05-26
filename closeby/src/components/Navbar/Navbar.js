@@ -11,27 +11,27 @@ const Navbar = () => {
     const classes = useStyles();
     const [showModeratorBoard, setShowModeratorBoard] = useState(false);
     const [showAdminBoard, setShowAdminBoard] = useState(false);
+    const [user, setUSer] = useState(JSON.parse(localStorage.getItem('profile')));
 
-    const { user: currentUser } = useSelector((state) => state.auth);
+    const locaction = useLocation();
+    const history = useHistory();
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        history.listen((location) => {
-            dispatch(clearMessage()); // clear message when changing location
-        });
-    }, [dispatch]);
 
     useEffect(() => {
-        // if (currentUser) {
-        //   setShowModeratorBoard(currentUser.roles.includes("ROLE_MODERATOR"));
-        //   setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
-        // }
-    }, [currentUser]);
+        const token = user?.token;
+        dispatch(clearMessage()); // clear message when changing location
+
+        setUSer(JSON.parse(localStorage.getItem('profile')));
+    }, [locaction]);
 
     const logOut = () => {
-        dispatch(logout());
-    };
+        dispatch({ type: 'LOGOUT' })
 
+        history.push('/');
+
+        setUSer(null);
+    };
 
     return (
         <AppBar className={classes.appBar} position="static" color="inherit">
@@ -40,7 +40,7 @@ const Navbar = () => {
                 {/* <Typography component={Link} to="/" className={classes.heading} variant="h4" align="left" color="primary">Find or create your own event!</Typography> */}
             </div>
             <Toolbar className={classes.toolbar}>
-                {currentUser ? (
+                {user ? (
                     <div className={classes.profile}>
                         {/* <Avatar className={classes.purple} alt={user.result.name} src={user.result.image}>{user.result.name.charAt(0)}</Avatar>
                         <Typography className={classes.userName} variant="h6">{user.result.name}</Typography> */}

@@ -5,9 +5,8 @@ import Contact from './pages/contact';
 import Events from './pages/events';
 import Auth from './pages/auth';
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Router, Switch, Route, Link } from "react-router-dom";
-import { AppBar, Avatar, Button, Toolbar, Typography } from '@material-ui/core';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Container } from '@material-ui/core';
 
 
 
@@ -21,9 +20,10 @@ const App = () => {
 
 
   return (
-    <Router history={history}>
-      <Navbar />
-      <div className="container mt-3">
+    <BrowserRouter>
+      <Container maxWidth="lg" >
+        <Navbar />
+        {/* <div className="container mt-3"> */}
         <Switch>
           <Route exact path="/" exact component={Home} />
           <Route exact path="/about" exact component={About} />
@@ -35,8 +35,8 @@ const App = () => {
             <Route path="/mod" component={BoardModerator} />
             <Route path="/admin" component={BoardAdmin} /> */}
         </Switch>
-      </div>
-    </Router>
-  );
+        {/* </div> */}
+      </Container>
+    </BrowserRouter>);
 }
 export default App;
