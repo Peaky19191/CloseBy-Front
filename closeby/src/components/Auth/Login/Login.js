@@ -15,11 +15,16 @@ const Login = (props) => {
 
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+
 
     const { isLoggedIn } = useSelector(state => state.auth);
     const { message } = useSelector(state => state.message);
 
+
     const dispatch = useDispatch();
+
+    const handleShowPassword = () => setShowPassword(!showPassword);
 
     const onChangeUsername = (e) => {
         const username = e.target.value;
@@ -68,7 +73,7 @@ const Login = (props) => {
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         <Input name="email" htmlFor="email" type="email" placeholder="Email" value={username} handleChange={onChangeUsername} autoFocus half />
-                        <Input name="password" htmlFor="password" type="password" placeholder="Password" value={password} handleChange={onChangePassword} half />
+                        <Input name="password" htmlFor="password" type="password" placeholder="Password" value={password} handleChange={onChangePassword} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} half />
                     </Grid>
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                         Sign Up

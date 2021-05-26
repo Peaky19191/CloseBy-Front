@@ -22,33 +22,6 @@ const App = () => {
 
   return (
     <Router history={history}>
-      {/* <>
-        <nav>
-          <Link to='/'>
-            <img src="https://i.imgur.com/Tngx1R2.png" alt="logo" />
-          </Link>
-
-          {currentUser ? (
-            <div >
-              <div>
-                <Link to='/about' activeStyle>About</Link>
-                <Link to='/contact' activeStyle>Contact</Link>
-                <Link to='/events' activeStyle>Events</Link>
-                <Link to='/profile' activeStyle>ss</Link>
-                <Link to='/' onClick={logOut} activeStyle>LogOut</Link></div>
-            </div>
-          ) : (
-            <div >
-              <div>
-                <nav>
-                  <Button component={Link} to="/auth" variant="contained" color="primary">Sign In</Button>
-                </nav>
-              </div>
-            </div>
-          )}
-
-        </nav>
-      </> */}
       <Navbar />
       <div className="container mt-3">
         <Switch>
