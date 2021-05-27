@@ -7,54 +7,42 @@ import useStyles from './styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Input from '../Input'
 import { GoogleLogin } from 'react-google-login';
-import { LOGIN_SUCCESS } from "../../../actions/types";
+import { useHistory } from 'react-router-dom';
+import { AUTH } from '../../../constants/actionTypes'
+import Icon from '../icon';
+import { Link } from 'react-router-dom'
+import { Alert, AlertTitle } from '@material-ui/lab';
 
-const Login = (props) => {
+const initialState = { email: '', password: '' };
+
+const Login = () => {
     const classes = useStyles();
+    const history = useHistory();
 
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [form, setForm] = useState(initialState);
 
     const [showPassword, setShowPassword] = useState(false);
+    const handleShowPassword = () => setShowPassword(!showPassword);
 
-
-    const { isLoggedIn } = useSelector(state => state.auth);
     const { message } = useSelector(state => state.message);
-
 
     const dispatch = useDispatch();
 
-    const handleShowPassword = () => setShowPassword(!showPassword);
-
-    const onChangeUsername = (e) => {
-        const username = e.target.value;
-        setUsername(username);
-    };
-
-    const onChangePassword = (e) => {
-        const password = e.target.value;
-        setPassword(password);
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        dispatch(login(username, password))
-            .then(() => {
-                props.history.push("/profile");
-                window.location.reload();
-            })
-            .catch(() => {
-            });
-
+        dispatch(login(form, history));
     };
+
+    const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
     const googleSuccess = async (res) => {
         const result = res?.profileObj;
         const token = res?.tokenId;
 
         try {
-            dispatch({ type: LOGIN_SUCCESS, payload: { result, token } });
+            dispatch({ type: AUTH, data: { result, token } });
+
+            history.push('/');
         } catch (error) {
             console.log(error);
         }
@@ -62,38 +50,32 @@ const Login = (props) => {
 
     const googleError = () => alert('Google Sign In was unsuccessful. Try again later');
 
-
-    if (isLoggedIn) {
-        return <Redirect to="/profile" />;
-    };
-
     return (
         <Container component="main" maxWidth="xs">
             <Paper className={classes.paper} elevation={3}>
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">Sign up</Typography>
+                <Typography component="h1" variant="h5">Login</Typography>
                 {message && (
-                    <div className="form-group">
-                        <div className="alert alert-danger" role="alert">
-                            {message}
-                        </div>
-                    </div>
+                    <Alert className={classes.alert} severity="error">
+                        <AlertTitle>Error</AlertTitle>
+                        <strong> {message}</strong>
+                    </Alert>
                 )}
                 <form className={classes.form} onSubmit={handleSubmit} >
                     <Grid container spacing={2}>
-                        <Input name="email" htmlFor="email" type="email" placeholder="Email" value={username} handleChange={onChangeUsername} autoFocus half />
-                        <Input name="password" htmlFor="password" type="password" placeholder="Password" value={password} handleChange={onChangePassword} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} half />
+                        <Input name="email" label="Email Address" handleChange={handleChange} type="email" autoFocus half />
+                        <Input Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} half />
                     </Grid>
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-                        Sign Up
+                        Login
                     </Button>
                     <GoogleLogin
                         clientId="1057934852749-l14q86dick3e4rpd15gntfqcp6l4kl55.apps.googleusercontent.com"
                         render={(renderProps) => (
-                            <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} variant="contained">
-                                Google Sign In
+                            <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} startIcon={<Icon />} variant="contained">
+                                Google Login
                             </Button>
                         )}
                         onSuccess={googleSuccess}
@@ -102,8 +84,8 @@ const Login = (props) => {
                     />
                     <Grid container justify="flex-end">
                         <Grid item>
-                            <Button >
-                                Don't have an account? Sign Up
+                            <Button component={Link} to="/register">
+                                Don't have an account? Register
                             </Button>
                         </Grid>
                     </Grid>

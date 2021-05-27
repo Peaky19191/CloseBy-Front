@@ -3,82 +3,76 @@ import {
     REGISTER_FAIL,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
-    LOGOUT,
     SET_MESSAGE,
-} from "./types";
+    AUTH
+} from "../constants/actionTypes";
 
-import AuthService from "../services/auth.service";
+import * as api from '../api/index.js';
 
-export const register = (firstName, lastName, gender, email, password) => (dispatch) => {
-    return AuthService.register(firstName, lastName, gender, email, password).then(
-        (response) => {
-            dispatch({
-                type: REGISTER_SUCCESS,
-            });
+export const register = (formData, router) => async (dispatch) => {
+    try {
+        const { data } = await api.postRegister(formData);
 
-            dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
-            });
+        dispatch({ type: AUTH, data });
 
-            return Promise.resolve();
-        },
-        (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+        router.push('/');
 
-            dispatch({
-                type: REGISTER_FAIL,
-            });
+    } catch (error) {
+        const errorCode = error.response.status;
+        let message =
+            // error.response.data.type;
+            (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+            error.message ||
+            error.toString();
 
-            dispatch({
-                type: SET_MESSAGE,
-                payload: message,
-            });
-
-            return Promise.reject();
+        console.log(error);
+        console.log(error.response.data.type);
+        if (errorCode === 400 && error.response.data.type === "validation") {
+            message = "Some variables are missing"
         }
-    );
+        dispatch({
+            type: REGISTER_FAIL,
+        });
+        dispatch({
+            type: SET_MESSAGE,
+            payload: message,
+        });
+
+    }
 };
 
-export const login = (email, password) => (dispatch) => {
-    return AuthService.login(email, password).then(
-        (data) => {
-            dispatch({
-                type: LOGIN_SUCCESS,
-                payload: { user: data },
-            });
+export const login = (formData, router) => async (dispatch) => {
+    try {
+        const { data } = await api.postLogin(formData);
 
-            return Promise.resolve();
-        },
-        (error) => {
-            const message = error.response.data.type;
-            // (error.response &&
-            //     error.response.data &&
-            //     error.response.data.message) ||
-            // error.message ||
-            // error.toString();
-            dispatch({
-                type: LOGIN_FAIL,
-            });
+        dispatch({ type: AUTH, data });
 
-            dispatch({
-                type: SET_MESSAGE,
-                payload: message,
-            });
+        router.push('/');
+    } catch (error) {
+        const errorCode = error.response.status;
 
-            return Promise.reject();
+        let message = error.response.data.type;
+        // (error.response &&
+        //     error.response.data &&
+        //     error.response.data.message) ||
+        // error.message ||
+        // error.toString();
+
+        console.log(error);
+        if (errorCode === 401) {
+            message = "Email and Password do not match"
+        } else if (errorCode === 400) {
+            message = "Some variables are invalid"
         }
-    );
-};
 
-export const logout = () => (dispatch) => {
-    AuthService.logout();
-    dispatch({
-        type: LOGOUT,
-    });
+        dispatch({
+            type: LOGIN_FAIL,
+        });
+        dispatch({
+            type: SET_MESSAGE,
+            payload: message,
+        });
+    }
 };

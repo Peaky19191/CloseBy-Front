@@ -3,7 +3,6 @@ import { deepPurple } from '@material-ui/core/colors';
 
 export default makeStyles((theme) => ({
     appBar: {
-        display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -29,6 +28,9 @@ export default makeStyles((theme) => ({
     userName: {
         display: 'flex',
         alignItems: 'center',
+        color: 'rgb(255, 255, 255)',
+        backgroundColor: theme.palette.primary.main,
+
     },
     brandContainer: {
         display: 'flex',
