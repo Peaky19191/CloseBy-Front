@@ -6,13 +6,9 @@ import Events from './pages/events';
 import Auth from './pages/auth';
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Container } from '@material-ui/core';
 import { Register } from './components/Auth/Register/Register'
 
 
-import { logout } from "./actions/auth";
-import { clearMessage } from "./actions/message";
-import { history } from "./helpers/history";
 import Navbar from './components/Navbar/Navbar';
 
 const App = () => {
