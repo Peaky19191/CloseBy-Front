@@ -10,5 +10,5 @@ const API = axios.create({ baseURL: 'http://localhost:5000' });
 //     return req;
 // });
 
-export const signIn = (formData) => API.post('/api/identity/login', formData);
-export const signUp = (formData) => API.post('/api/user/register', formData);
+export const postLogin = (formData) => API.post('/api/identity/login', formData);
+export const postRegister = (formData) => API.post('/api/user/register', formData);

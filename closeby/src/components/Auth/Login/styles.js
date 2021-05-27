@@ -18,7 +18,6 @@ export default makeStyles((theme) => ({
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
-        width: '100%', // Fix IE 11 issue.
         marginTop: theme.spacing(3),
     },
     submit: {
@@ -26,5 +25,12 @@ export default makeStyles((theme) => ({
     },
     googleButton: {
         marginBottom: theme.spacing(2),
+    },
+    alert: {
+        margin: theme.spacing(1),
+        display: 'flex',
+        alignItems: 'center',
+        width: 'auto',
+        justifyContent: 'center',
     },
 }));
