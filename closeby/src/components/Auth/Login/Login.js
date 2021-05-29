@@ -6,8 +6,8 @@ import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui
 import useStyles from './styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Input from '../Input'
-import { GoogleLogin } from 'react-google-login';
-import { LOGIN_SUCCESS } from "../../../actions/types";
+import { Link } from 'react-router-dom'
+import { Alert, AlertTitle } from '@material-ui/lab';
 
 const Login = (props) => {
     const classes = useStyles();
@@ -49,20 +49,6 @@ const Login = (props) => {
 
     };
 
-    const googleSuccess = async (res) => {
-        const result = res?.profileObj;
-        const token = res?.tokenId;
-
-        try {
-            dispatch({ type: LOGIN_SUCCESS, payload: { result, token } });
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const googleError = () => alert('Google Sign In was unsuccessful. Try again later');
-
-
     if (isLoggedIn) {
         return <Redirect to="/profile" />;
     };
@@ -73,13 +59,12 @@ const Login = (props) => {
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">Sign up</Typography>
+                <Typography component="h1" variant="h5">Login</Typography>
                 {message && (
-                    <div className="form-group">
-                        <div className="alert alert-danger" role="alert">
-                            {message}
-                        </div>
-                    </div>
+                    <Alert className={classes.alert} severity="error">
+                        <AlertTitle>Error</AlertTitle>
+                        <strong> {message}</strong>
+                    </Alert>
                 )}
                 <form className={classes.form} onSubmit={handleSubmit} >
                     <Grid container spacing={2}>
@@ -87,23 +72,12 @@ const Login = (props) => {
                         <Input name="password" htmlFor="password" type="password" placeholder="Password" value={password} handleChange={onChangePassword} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} half />
                     </Grid>
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-                        Sign Up
+                        Login
                     </Button>
-                    <GoogleLogin
-                        clientId="1057934852749-l14q86dick3e4rpd15gntfqcp6l4kl55.apps.googleusercontent.com"
-                        render={(renderProps) => (
-                            <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} variant="contained">
-                                Google Sign In
-                            </Button>
-                        )}
-                        onSuccess={googleSuccess}
-                        onFailure={googleError}
-                        cookiePolicy="single_host_origin"
-                    />
                     <Grid container justify="flex-end">
                         <Grid item>
-                            <Button >
-                                Don't have an account? Sign Up
+                            <Button component={Link} to="/register">
+                                Don't have an account? Register
                             </Button>
                         </Grid>
                     </Grid>

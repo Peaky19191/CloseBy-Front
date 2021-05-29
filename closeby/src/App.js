@@ -8,6 +8,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Router, Switch, Route, Link } from "react-router-dom";
 import { AppBar, Avatar, Button, Toolbar, Typography } from '@material-ui/core';
+import { Register } from './components/Auth/Register/Register'
 
 
 
@@ -30,6 +31,7 @@ const App = () => {
           <Route exact path="/contact" exact component={Contact} />
           <Route exact path="/events" exact component={Events} />
           <Route exact path="/auth" component={Auth} />
+          <Route exact path="/register" component={Register} />
           {/* <Route exact path="/profile" component={Profile} />
             <Route path="/user" component={BoardUser} />
             <Route path="/mod" component={BoardModerator} />
