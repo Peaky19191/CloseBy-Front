@@ -8,7 +8,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Input from '../Input'
 import { GoogleLogin } from 'react-google-login';
 import { useHistory } from 'react-router-dom';
-import { AUTH } from '../../../constants/actionTypes'
+import { LOGIN_SUCCESS } from '../../../constants/actionTypes'
 import Icon from '../icon';
 import { Link } from 'react-router-dom'
 import { Alert, AlertTitle } from '@material-ui/lab';
@@ -40,7 +40,7 @@ const Login = () => {
         const token = res?.tokenId;
 
         try {
-            dispatch({ type: AUTH, data: { result, token } });
+            dispatch({ type: LOGIN_SUCCESS, data: { result, token } });
 
             history.push('/');
         } catch (error) {

@@ -9,7 +9,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { reducers } from './reducers';
 
 
-const store = createStore(reducers, compose(applyMiddleware(thunk)));
+import store from "./store";
 
 ReactDOM.render(
   <Provider store={store}>
