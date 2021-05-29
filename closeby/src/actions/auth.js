@@ -4,17 +4,22 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     SET_MESSAGE,
-    AUTH
+    AUTH,
+    LOGOUT
 } from "../constants/actionTypes";
 
 import * as api from '../api/index.js';
+import AuthService from "../services/auth.service";
 
 export const register = (formData, router) => async (dispatch) => {
     try {
         const { data } = await api.postRegister(formData);
 
-        dispatch({ type: AUTH, data });
-
+        dispatch({ type: REGISTER_FAIL });
+        dispatch({
+            type: SET_MESSAGE,
+            payload: data,
+        });
         router.push('/');
 
     } catch (error) {
@@ -47,7 +52,7 @@ export const login = (formData, router) => async (dispatch) => {
     try {
         const { data } = await api.postLogin(formData);
 
-        dispatch({ type: AUTH, data });
+        dispatch({ type: LOGIN_SUCCESS, data });
 
         router.push('/');
     } catch (error) {
@@ -64,7 +69,7 @@ export const login = (formData, router) => async (dispatch) => {
         if (errorCode === 401) {
             message = "Email and Password do not match"
         } else if (errorCode === 400) {
-            message = "Some variables are invalid"
+            message = "Some variables are missing"
         }
 
         dispatch({
@@ -75,4 +80,10 @@ export const login = (formData, router) => async (dispatch) => {
             payload: message,
         });
     }
+};
+
+export const logout = () => (dispatch) => {
+    dispatch({
+        type: LOGOUT,
+    });
 };
