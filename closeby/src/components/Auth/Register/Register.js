@@ -6,8 +6,6 @@ import { Avatar, Button, Paper, Grid, Typography, Container, Select } from '@mat
 import useStyles from './styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Input from '../Input'
-import { GoogleLogin } from 'react-google-login';
-import { useHistory } from 'react-router-dom';
 import Icon from '../icon';
 import { Link } from 'react-router-dom'
 import { Alert, AlertTitle } from '@material-ui/lab';
