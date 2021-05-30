@@ -2,16 +2,17 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from 'react-router-dom';
 import { register } from "../../../actions/auth";
-import { Avatar, Button, Paper, Grid, Typography, Container, Select } from '@material-ui/core';
+import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
 import useStyles from './styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Input from '../Input'
-import Icon from '../icon';
 import { Link } from 'react-router-dom'
 import { Alert, AlertTitle } from '@material-ui/lab';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-
+import Form from "react-validation/build/form";
+import { InputAdornment, IconButton } from '@material-ui/core';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 export const Register = () => {
     const classes = useStyles();
@@ -82,15 +83,36 @@ export const Register = () => {
                 )}
                 <form className={classes.form} onSubmit={handleSubmit} >
                     <Grid container spacing={2}>
-                        <Input name="firstName" label="First Name" value={firstName} handleChange={onChangeFirstName} type="text" autoFocus />
-                        <Input name="lastName" label="Last Name" value={lastName} handleChange={onChangeLastName} type="text" />
-                        <InputLabel className={classes.select} id="selectLabel"   >Select your gender</InputLabel>
+                        <Grid item xs={12} >
+                            <TextField label="First Name"
+                                name="firstName" htmlFor="firstName" variant="outlined" fullWidth value={firstName} handleChange={onChangeFirstName} type="text" autoFocus />
+                        </Grid>
+                        <Grid item xs={12} >
+                            <TextField label="Last Name"
+                                name="lastName" htmlFor="lastName" variant="outlined" fullWidth value={lastName} handleChange={onChangeLastName} type="text" />
+                        </Grid>
+                        <InputLabel className={classes.select} id="selectLabel">Select your gender</InputLabel>
                         <Select className={classes.select} name="gender" value={gender} labelId="selectLabel" open={open} onClose={handleClose} onOpen={handleOpen} onChange={onChangeGender} type="text" variant="outlined" fullWidth>
                             <MenuItem value="Male" >Male</MenuItem>
                             <MenuItem value="Female" >Female</MenuItem>
                         </Select>
-                        <Input name="email" label="Email Address" value={email} handleChange={onChangeEmail} type="email" autoFocus />
-                        <Input Input name="password" label="Password" value={password} handleChange={onChangePassword} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
+                        <Grid item xs={12} >
+                            <TextField label="Email Address"
+                                name="email" htmlFor="email" type="email" variant="outlined" fullWidth value={email} handleChange={onChangeEmail} type="email" />
+                        </Grid>
+                        <Grid item xs={12} >
+                            <TextField
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton onClick={handleShowPassword}>
+                                                {!showPassword ? <Visibility /> : <VisibilityOff />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    )
+                                }}
+                                fullWidth ame="password" htmlFor="password" type="password" label="Password" value={password} onChange={onChangePassword} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} variant="outlined" />
+                        </Grid>
                     </Grid>
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                         Register
