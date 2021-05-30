@@ -15,7 +15,7 @@ import { Register } from './components/Auth/Register/Register'
 import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import { history } from "./helpers/history";
-import Navbar from './components/Navbar/Navbar';
+import Navbar from './components/Navbar/navbar';
 
 const App = () => {
 
