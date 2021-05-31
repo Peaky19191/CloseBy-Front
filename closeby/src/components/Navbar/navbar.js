@@ -22,16 +22,15 @@ const Navbar = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        // if (currentUser) {
-        //   setShowModeratorBoard(currentUser.roles.includes("ROLE_MODERATOR"));
-        //   setShowAdminBoard(currentUser.roles.includes("ROLE_ADMIN"));
-        // }
+        if (currentUser && currentUser.role) {
+            setShowModeratorBoard(currentUser.role.includes("CompanyWorker"));
+            setShowAdminBoard(currentUser.role.includes("GlobalAdmin"));
+        }
     }, [currentUser]);
 
     const logOut = () => {
         dispatch(logout());
     };
-
 
     return (
         <AppBar className={classes.appBar} position="static" color="inherit">
@@ -39,6 +38,16 @@ const Navbar = () => {
                 <img className={classes.image} src="https://i.imgur.com/Tngx1R2.png" alt="logo" />
             </div>
             <Toolbar className={classes.toolbar}>
+                {currentUser && showModeratorBoard && (
+                    <div className={classes.profile}>
+                        <Button component={Link} to="/org" variant="contained" color="primary">Organizer</Button>
+                    </div>
+                )}
+                {currentUser && showAdminBoard && (
+                    <div className={classes.profile}>
+                        <Button component={Link} to="/admin" variant="contained" color="primary">Admin</Button>
+                    </div>
+                )}
                 {currentUser ? (
                     <div className={classes.profile}>
                         <Button component={Link} to="/about" variant="contained" color="primary">About</Button>
@@ -50,7 +59,6 @@ const Navbar = () => {
                 ) : (
                     <Button component={Link} to="/auth" variant="contained" color="primary">Login</Button>
                 )}
-
             </Toolbar>
         </AppBar>
     );

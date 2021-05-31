@@ -9,7 +9,6 @@ const Profile = () => {
     return <Redirect to="/login" />;
   }
 
-  console.log(currentUser);
   return (
     <div >
       <header >

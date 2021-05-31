@@ -39,6 +39,8 @@ export default function (state = initialState, action) {
                 user: null,
             };
         case LOGOUT:
+            localStorage.clear();
+
             return {
                 ...state,
                 isLoggedIn: false,

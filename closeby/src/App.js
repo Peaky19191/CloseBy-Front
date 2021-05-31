@@ -16,6 +16,9 @@ import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import { history } from "./helpers/history";
 import Navbar from './components/Navbar/navbar';
+import User from './components/Account/User';
+import Organizer from './components/Account/Organizer';
+import Admin from './components/Account/Admin';
 
 const App = () => {
 
@@ -33,9 +36,9 @@ const App = () => {
           <Route exact path="/auth" component={Auth} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/profile" component={Profile} />
-          {/* <Route exact path="/user" component={BoardUser} />
-          <Route exact path="/mod" component={BoardModerator} />
-          <Route exact path="/admin" component={BoardAdmin} /> */}
+          <Route exact path="/user" component={User} />
+          <Route exact path="/org" component={Organizer} />
+          <Route exact path="/admin" component={Admin} />
         </Switch>
       </div>
     </Router>

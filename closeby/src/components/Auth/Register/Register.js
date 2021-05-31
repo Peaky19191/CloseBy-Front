@@ -83,10 +83,14 @@ export const Register = () => {
                         <strong>You have successfully registered your account</strong>
                     </Alert>
                     :
-                    <Alert className={successful ? classes.alert : classes.alert} severity="error">
-                        <AlertTitle>Error</AlertTitle>
-                        <strong> {message}</strong>
-                    </Alert>
+                    (message ?
+                        <Alert className={successful ? classes.alert : classes.alert} severity="error">
+                            <AlertTitle>Error</AlertTitle>
+                            <strong> {message}</strong>
+                        </Alert>
+                        :
+                        null
+                    )
                 }
                 <form className={classes.form} onSubmit={handleSubmit} >
                     <Grid container spacing={2}>
