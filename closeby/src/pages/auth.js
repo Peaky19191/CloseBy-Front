@@ -3,7 +3,9 @@ import Login from '../components/Auth/Login/Login'
 
 export const Auth = () => {
     return (
-        <Login />
+        <div>
+            <Login />
+        </div>
     )
 }
 

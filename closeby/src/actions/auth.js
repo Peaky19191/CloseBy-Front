@@ -3,86 +3,81 @@ import {
     REGISTER_FAIL,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
+    LOGOUT,
     SET_MESSAGE,
-    AUTH,
-    LOGOUT
 } from "../constants/actionTypes";
 
-import * as api from '../api/index.js';
 import AuthService from "../services/auth.service";
 
-export const register = (formData, router) => async (dispatch) => {
-    try {
-        const { data } = await api.postRegister(formData);
+export const register = (firstName, lastName, gender, email, password) => (dispatch) => {
+    return AuthService.register(firstName, lastName, gender, email, password).then(
+        (response) => {
+            dispatch({
+                type: REGISTER_SUCCESS,
+            });
 
-        dispatch({ type: REGISTER_FAIL });
-        dispatch({
-            type: SET_MESSAGE,
-            payload: data,
-        });
-        router.push('/');
+            dispatch({
+                type: SET_MESSAGE,
+                payload: response.data.message,
+            });
 
-    } catch (error) {
-        const errorCode = error.response.status;
-        let message =
-            // error.response.data.type;
-            (error.response &&
-                error.response.data &&
-                error.response.data.message) ||
-            error.message ||
-            error.toString();
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
 
-        console.log(error);
-        console.log(error.response.data.type);
-        if (errorCode === 400 && error.response.data.type === "validation") {
-            message = "Some variables are missing"
+            dispatch({
+                type: REGISTER_FAIL,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+
+            return Promise.reject();
         }
-        dispatch({
-            type: REGISTER_FAIL,
-        });
-        dispatch({
-            type: SET_MESSAGE,
-            payload: message,
-        });
-
-    }
+    );
 };
 
-export const login = (formData, router) => async (dispatch) => {
-    try {
-        const { data } = await api.postLogin(formData);
+export const login = (email, password) => (dispatch) => {
+    return AuthService.login(email, password).then(
+        (data) => {
+            dispatch({
+                type: LOGIN_SUCCESS,
+                payload: { user: data },
+            });
 
-        dispatch({ type: LOGIN_SUCCESS, data });
+            return Promise.resolve();
+        },
+        (error) => {
+            const message = error.response.data.type;
+            // (error.response &&
+            //     error.response.data &&
+            //     error.response.data.message) ||
+            // error.message ||
+            // error.toString();
+            dispatch({
+                type: LOGIN_FAIL,
+            });
 
-        router.push('/');
-    } catch (error) {
-        const errorCode = error.response.status;
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
 
-        let message = error.response.data.type;
-        // (error.response &&
-        //     error.response.data &&
-        //     error.response.data.message) ||
-        // error.message ||
-        // error.toString();
-
-        console.log(error);
-        if (errorCode === 401) {
-            message = "Email and Password do not match"
-        } else if (errorCode === 400) {
-            message = "Some variables are missing"
+            return Promise.reject();
         }
-
-        dispatch({
-            type: LOGIN_FAIL,
-        });
-        dispatch({
-            type: SET_MESSAGE,
-            payload: message,
-        });
-    }
+    );
 };
 
 export const logout = () => (dispatch) => {
+    AuthService.logout();
     dispatch({
         type: LOGOUT,
     });

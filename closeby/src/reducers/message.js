@@ -1,5 +1,6 @@
 import { SET_MESSAGE, CLEAR_MESSAGE } from "../constants/actionTypes";
 
+
 const initialState = {};
 
 export default function (state = initialState, action) {
