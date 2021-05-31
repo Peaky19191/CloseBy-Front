@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom'
 import { Alert, AlertTitle } from '@material-ui/lab';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import Form from "react-validation/build/form";
 import { InputAdornment, IconButton } from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -21,6 +20,7 @@ export const Register = () => {
     const [gender, setGender] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [successful, setSuccessful] = useState(false);
 
     const [open, setOpen] = React.useState(false);
     const handleClose = () => {
@@ -59,12 +59,14 @@ export const Register = () => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
+        setSuccessful(false);
 
         dispatch(register(firstName, lastName, gender, email, password))
             .then(() => {
-                window.location.reload();
+                setSuccessful(true);
             })
             .catch(() => {
+                setSuccessful(false);
             });
     };
 
@@ -75,21 +77,25 @@ export const Register = () => {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">Register</Typography>
-                {message && (
-                    <Alert className={classes.alert} severity="error">
+                {successful ?
+                    <Alert className={classes.alert} severity="success">
+                        <AlertTitle>Success</AlertTitle>
+                        <strong>You have successfully registered your account</strong>
+                    </Alert> :
+                    <Alert className={successful ? classes.alert : classes.alert} severity="error">
                         <AlertTitle>Error</AlertTitle>
                         <strong> {message}</strong>
                     </Alert>
-                )}
+                }
                 <form className={classes.form} onSubmit={handleSubmit} >
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
                             <TextField label="First Name"
-                                name="firstName" htmlFor="firstName" variant="outlined" fullWidth value={firstName} handleChange={onChangeFirstName} type="text" autoFocus />
+                                name="firstName" htmlFor="firstName" variant="outlined" fullWidth value={firstName} onChange={onChangeFirstName} type="text" autoFocus />
                         </Grid>
                         <Grid item xs={12} >
                             <TextField label="Last Name"
-                                name="lastName" htmlFor="lastName" variant="outlined" fullWidth value={lastName} handleChange={onChangeLastName} type="text" />
+                                name="lastName" htmlFor="lastName" variant="outlined" fullWidth value={lastName} onChange={onChangeLastName} type="text" />
                         </Grid>
                         <InputLabel className={classes.select} id="selectLabel">Select your gender</InputLabel>
                         <Select className={classes.select} name="gender" value={gender} labelId="selectLabel" open={open} onClose={handleClose} onOpen={handleOpen} onChange={onChangeGender} type="text" variant="outlined" fullWidth>
@@ -98,7 +104,7 @@ export const Register = () => {
                         </Select>
                         <Grid item xs={12} >
                             <TextField label="Email Address"
-                                name="email" htmlFor="email" type="email" variant="outlined" fullWidth value={email} handleChange={onChangeEmail} type="email" />
+                                name="email" htmlFor="email" type="email" variant="outlined" fullWidth value={email} onChange={onChangeEmail} type="email" />
                         </Grid>
                         <Grid item xs={12} >
                             <TextField
