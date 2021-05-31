@@ -37,17 +37,14 @@ const Navbar = () => {
         <AppBar className={classes.appBar} position="static" color="inherit">
             <div className={classes.brandContainer} >
                 <img className={classes.image} src="https://i.imgur.com/Tngx1R2.png" alt="logo" />
-                {/* <Typography component={Link} to="/" className={classes.heading} variant="h4" align="left" color="primary">Find or create your own event!</Typography> */}
             </div>
             <Toolbar className={classes.toolbar}>
                 {currentUser ? (
                     <div className={classes.profile}>
-                        {/* <Avatar className={classes.purple} alt={user.result.name} src={user.result.image}>{user.result.name.charAt(0)}</Avatar>
-                        <Typography className={classes.userName} variant="h6">{user.result.name}</Typography> */}
                         <Button component={Link} to="/about" variant="contained" color="primary">About</Button>
                         <Button component={Link} to="/contact" variant="contained" color="primary">Contact</Button>
                         <Button component={Link} to="/events" variant="contained" color="primary">Events</Button>
-                        {/* <Button component={Link} to="/profile" variant="contained" color="primary">Sign In</Button> */}
+                        <Button component={Link} to="/profile" variant="contained" color="primary">Profile</Button>
                         <Button component={Link} to="/" variant="contained" color="secondary" onClick={logOut}>Logout</Button>
                     </div>
                 ) : (

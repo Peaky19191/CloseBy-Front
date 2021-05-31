@@ -81,7 +81,8 @@ export const Register = () => {
                     <Alert className={classes.alert} severity="success">
                         <AlertTitle>Success</AlertTitle>
                         <strong>You have successfully registered your account</strong>
-                    </Alert> :
+                    </Alert>
+                    :
                     <Alert className={successful ? classes.alert : classes.alert} severity="error">
                         <AlertTitle>Error</AlertTitle>
                         <strong> {message}</strong>
