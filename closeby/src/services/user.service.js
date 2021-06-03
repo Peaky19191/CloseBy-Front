@@ -12,7 +12,7 @@ const getOrganizerData = () => {
 };
 
 const getAdminData = () => {
-    return axios.get(API_URL, { headers: authHeader() }, { params: {} });
+    return axios.get(API_URL, { headers: authHeader() });
 };
 
 export default {
