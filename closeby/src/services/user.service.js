@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-const API_URL = "http://localhost:5000/api/event";
+const API_URL = "http://localhost:5000/api/user/test";
 
 const getUserData = () => {
     return axios.get(API_URL + "user", { headers: authHeader() });
@@ -12,7 +12,7 @@ const getOrganizerData = () => {
 };
 
 const getAdminData = () => {
-    return axios.get(API_URL + "admin", { headers: authHeader() });
+    return axios.get(API_URL, { headers: authHeader() }, { params: {} });
 };
 
 export default {
