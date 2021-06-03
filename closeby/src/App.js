@@ -11,14 +11,15 @@ import { AppBar, Avatar, Button, Toolbar, Typography } from '@material-ui/core';
 import { Register } from './components/Auth/Register/Register'
 import Profile from './components/Account/Profile'
 
-
 import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import { history } from "./helpers/history";
 import Navbar from './components/Navbar/navbar';
 import User from './components/Account/User';
 import Organizer from './components/Account/Organizer';
-import Admin from './components/Account/Admin';
+import Admin from './components/GlobalAdmin/Profile/Admin';
+import AdminForm from './components/GlobalAdmin/Form/AdminForm';
+import AdminList from './components/GlobalAdmin/List/AdminList';
 
 const App = () => {
 
@@ -39,6 +40,9 @@ const App = () => {
           <Route exact path="/user" component={User} />
           <Route exact path="/org" component={Organizer} />
           <Route exact path="/admin" component={Admin} />
+          <Route exact path="/adminAdd" component={AdminForm} />
+          <Route exact path="/adminList" component={AdminList} />
+
         </Switch>
       </div>
     </Router>
