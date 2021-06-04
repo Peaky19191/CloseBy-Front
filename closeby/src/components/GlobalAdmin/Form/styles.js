@@ -30,4 +30,7 @@ export default makeStyles((theme) => ({
         width: 'auto',
         justifyContent: 'center',
     },
+    select: {
+        margin: 8,
+    }
 }));

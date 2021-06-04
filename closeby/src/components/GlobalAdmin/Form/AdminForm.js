@@ -2,11 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import useStyles from './styles';
-
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
 import UserService from "../../../services/user.service";
 
 const AdminForm = () => {
     const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleOpen = () => {
+        setOpen(true);
+    };
 
     return (
         <Container component="main" maxWidth="xs">
@@ -26,6 +34,11 @@ const AdminForm = () => {
                         <Grid item xs={12} >
                             <TextField label="Email Address" name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
                         </Grid>
+                        <InputLabel className={classes.select} id="selectLabel">Select your gender</InputLabel>
+                        <Select className={classes.select} name="gender" labelId="selectLabel" open={open} onClose={handleClose} onOpen={handleOpen} type="text" variant="outlined" fullWidth>
+                            <MenuItem value="Male" >Male</MenuItem>
+                            <MenuItem value="Female" >Female</MenuItem>
+                        </Select>
                     </Grid>
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                         Register Admin
