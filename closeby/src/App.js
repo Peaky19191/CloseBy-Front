@@ -18,7 +18,7 @@ import Navbar from './components/Navbar/navbar';
 import User from './components/Account/User';
 import Organizer from './components/Account/Organizer';
 import Admin from './components/GlobalAdmin/Profile/Admin';
-import AdminForm from './components/GlobalAdmin/Form/AdminForm';
+import RegCustAdmin from './components/GlobalAdmin/RegCustAdmin/RegCustAdmin';
 import AdminList from './components/GlobalAdmin/List/AdminList';
 
 const App = () => {
@@ -40,7 +40,7 @@ const App = () => {
           <Route exact path="/user" component={User} />
           <Route exact path="/org" component={Organizer} />
           <Route exact path="/admin" component={Admin} />
-          <Route exact path="/adminAdd" component={AdminForm} />
+          <Route exact path="/adminAdd" component={RegCustAdmin} />
           <Route exact path="/adminList" component={AdminList} />
 
         </Switch>
