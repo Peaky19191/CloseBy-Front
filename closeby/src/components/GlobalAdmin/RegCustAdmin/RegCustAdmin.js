@@ -6,6 +6,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useDispatch, useSelector } from "react-redux";
 import { regCustAdmin } from "../../../actions/globAdmin";
+import { Alert, AlertTitle } from '@material-ui/lab';
 
 const RegCustAdmin = () => {
     const classes = useStyles();
@@ -66,6 +67,21 @@ const RegCustAdmin = () => {
                     <SupervisorAccountIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">Register Customer Admin</Typography>
+                {successful ?
+                    <Alert className={classes.alert} severity="success">
+                        <AlertTitle>Success</AlertTitle>
+                        <strong>You have successfully registered your account</strong>
+                    </Alert>
+                    :
+                    (message ?
+                        <Alert className={successful ? classes.alert : classes.alert} severity="error">
+                            <AlertTitle>Error</AlertTitle>
+                            <strong> {message}</strong>
+                        </Alert>
+                        :
+                        null
+                    )
+                }
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
