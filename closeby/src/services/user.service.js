@@ -11,8 +11,6 @@ const getOrganizerData = () => {
     return axios.get(API_URL + "mod", { headers: authHeader() });
 };
 
-
-
 export default {
     getUserData,
     getOrganizerData,
