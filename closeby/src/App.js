@@ -19,7 +19,7 @@ import User from './components/Profile/User';
 import Organizer from './components/Organizer/Organizer';
 import Admin from './components/GlobalAdmin/Profile/Admin';
 import RegCustAdmin from './components/GlobalAdmin/RegCustAdmin/RegCustAdmin';
-import AdminList from './components/GlobalAdmin/List/AdminList';
+import UserList from './components/GlobalAdmin/List/UserList';
 
 const App = () => {
 
@@ -41,7 +41,7 @@ const App = () => {
           <Route exact path="/org" component={Organizer} />
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/adminAdd" component={RegCustAdmin} />
-          <Route exact path="/adminList" component={AdminList} />
+          <Route exact path="/adminList" component={UserList} />
 
         </Switch>
       </div>
