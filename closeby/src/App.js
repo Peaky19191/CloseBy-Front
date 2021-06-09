@@ -9,14 +9,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Router, Switch, Route, Link } from "react-router-dom";
 import { AppBar, Avatar, Button, Toolbar, Typography } from '@material-ui/core';
 import { Register } from './components/Auth/Register/Register'
-import Profile from './components/Account/Profile'
+import Profile from './components/Profile/Profile'
 
 import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import { history } from "./helpers/history";
 import Navbar from './components/Navbar/navbar';
-import User from './components/Account/User';
-import Organizer from './components/Account/Organizer';
+import User from './components/Profile/User';
+import Organizer from './components/Organizer/Organizer';
 import Admin from './components/GlobalAdmin/Profile/Admin';
 import RegCustAdmin from './components/GlobalAdmin/RegCustAdmin/RegCustAdmin';
 import AdminList from './components/GlobalAdmin/List/AdminList';
