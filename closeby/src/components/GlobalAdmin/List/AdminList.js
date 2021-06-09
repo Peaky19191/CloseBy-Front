@@ -1,34 +1,39 @@
 import React, { useState, useEffect } from "react";
-
-import GlobalAdminServices from "../../../services/globAdmin.service";
+import { getUsersListGlAdm } from '../../../actions/globAdmin'
+import { useDispatch, useSelector } from "react-redux";
 
 const AdminList = () => {
-    const [content, setContent] = useState([]);
+    const [currentUser, setCurrentUser] = useState(null);
+    const [currentIndex, setCurrentIndex] = useState(-1);
+
+    const users = useSelector(state => state.userListGlAdm);
+    const dispatch = useDispatch();
+
+    const setActiveUser = (user, index) => {
+        setCurrentUser(user);
+        setCurrentIndex(index);
+    };
 
     useEffect(() => {
-        GlobalAdminServices.getUsersList().then(
-            (response) => {
-                setContent([response.data.items]);
-                console.log(response.data);
-            },
-            (error) => {
-                const _content =
-                    (error.response &&
-                        error.response.data &&
-                        error.response.data.message) ||
-                    error.message ||
-                    error.toString();
-
-                setContent(_content);
-            }
-        );
+        dispatch(getUsersListGlAdm());
+        console.log(users);
     }, []);
 
     return (
         <div >
-            <header >
-                <h3>{content}</h3>
-            </header>
+            <h3>Users List</h3>
+            <ul>
+                {users &&
+                    users.map((user, index) => (
+                        <li
+                            key={index}
+                            onClick={() => setActiveUser(user, index)}
+                        >
+                            { user.email}
+
+                        </li>
+                    ))}
+            </ul>
         </div>
     );
 };

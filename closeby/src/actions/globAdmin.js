@@ -2,6 +2,7 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
     SET_MESSAGE,
+    GET_USERS,
 } from "../constants/actionTypes";
 
 import GlobAdminService from "../services/globAdmin.service";
@@ -40,4 +41,17 @@ export const regCustAdmin = (firstName, lastName, gender, email) => (dispatch) =
             return Promise.reject();
         }
     );
+};
+
+export const getUsersListGlAdm = () => async (dispatch) => {
+    try {
+        const res = await GlobAdminService.getUsersList();
+
+        dispatch({
+            type: GET_USERS,
+            payload: res.data.items,
+        });
+    } catch (err) {
+        console.log(err);
+    }
 };
