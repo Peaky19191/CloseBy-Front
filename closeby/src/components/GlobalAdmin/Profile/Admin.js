@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import GlobalAdminServices from "../../../services/globAdmin.service";
+import UserService from "../../../services/user.service";
 
 const Admin = () => {
     const [content, setContent] = useState("");
 
     useEffect(() => {
-        GlobalAdminServices.getUsersList().then(
+        UserService.getUserData().then(
             (response) => {
                 setContent(response.data);
             },
