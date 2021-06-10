@@ -21,6 +21,7 @@ import Organizer from './components/Account/Organizer';
 import Admin from './components/GlobalAdmin/Profile/Admin';
 import RegCustAdmin from './components/GlobalAdmin/RegCustAdmin/RegCustAdmin';
 import AdminList from './components/GlobalAdmin/List/AdminList';
+import Header from './components/Header/Header';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,12 +37,12 @@ const App = () => {
   const classes = useStyles();
   return (
     <Router history={history}>
-    <div className={classes.root}>
+    <div >
       <CssBaseline />  
       <Navbar />
-      <Home />
+      
     </div>
-      <div className="container mt-3">
+      <div className={classes.root}>
         <Switch>
           <Route exact path="/" exact component={Home} />
           <Route exact path="/about" exact component={About} />
