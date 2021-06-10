@@ -1,8 +1,9 @@
 import React from 'react'
+import Header from '../components/Header/Header';
 
 export const Home = () => {
     return (
-        <div style={{
+        /*<div style={{
             display: 'flex',
             justifyContent: 'center', 
             alignItems: 'center', 
@@ -10,7 +11,8 @@ export const Home = () => {
             }}
         >
             <h1>Home</h1>
-        </div>
+        </div>*/
+        <Header />
     )
 }
 

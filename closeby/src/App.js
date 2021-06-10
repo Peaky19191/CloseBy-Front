@@ -4,13 +4,14 @@ import About from './pages/about';
 import Contact from './pages/contact';
 import Events from './pages/events';
 import Auth from './pages/auth';
+import { CssBaseline } from '@material-ui/core';
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Router, Switch, Route, Link } from "react-router-dom";
 import { AppBar, Avatar, Button, Toolbar, Typography } from '@material-ui/core';
 import { Register } from './components/Auth/Register/Register'
 import Profile from './components/Account/Profile'
-
+import { makeStyles } from '@material-ui/core/styles';
 import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 import { history } from "./helpers/history";
@@ -21,13 +22,25 @@ import Admin from './components/GlobalAdmin/Profile/Admin';
 import RegCustAdmin from './components/GlobalAdmin/RegCustAdmin/RegCustAdmin';
 import AdminList from './components/GlobalAdmin/List/AdminList';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    minHeight: '100vh',
+    backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/bg2.jpg'})`,
+    backgroundRepeat: 'no-repeat', 
+    backgroundSize: 'cover',
+  },
+}));
+
 const App = () => {
 
-
-
+  const classes = useStyles();
   return (
     <Router history={history}>
+    <div className={classes.root}>
+      <CssBaseline />  
       <Navbar />
+      <Home />
+    </div>
       <div className="container mt-3">
         <Switch>
           <Route exact path="/" exact component={Home} />

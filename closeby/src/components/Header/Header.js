@@ -3,7 +3,7 @@ import { Collapse, IconButton } from '@material-ui/core';
 import useStyles from './styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Link as Scroll } from 'react-scroll';
-import Logo from '../images/logo2.jpg'
+import Logo from '../../images/logo2.jpg'
 
 
 const Header = () => {
