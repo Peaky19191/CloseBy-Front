@@ -38,9 +38,7 @@ const App = () => {
   return (
     <Router history={history}>
     <div >
-      <CssBaseline />  
-      <Navbar />
-      
+      <Navbar />  
     </div>
       <div className={classes.root}>
         <Switch>
