@@ -1,8 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
-    table: {
-        minWidth: 650,
-        padding: theme.spacing(2),
+    tableContainer: {
+        maxWidth: "99%",
+        margin: theme.spacing(3, 0, 0, 1),
+        display: 'flex',
+        alignItems: 'center',
+
     },
 }));

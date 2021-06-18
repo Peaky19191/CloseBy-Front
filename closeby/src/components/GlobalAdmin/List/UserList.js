@@ -22,7 +22,7 @@ const UserList = () => {
 
 
     return (
-        <TableContainer component={Paper}>
+        <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >
             <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                     <TableRow >
