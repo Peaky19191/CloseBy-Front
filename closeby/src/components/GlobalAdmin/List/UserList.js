@@ -22,27 +22,27 @@ const UserList = () => {
 
 
     return (
-        <TableContainer component={Paper}>
+        <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >
             <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                     <TableRow >
-                        <TableCell>User</TableCell>
-                        <TableCell align="center">Email</TableCell>
-                        <TableCell align="center">Role</TableCell>
-                        <TableCell align="center">Company</TableCell>
-                        <TableCell align="center">Gender</TableCell>
+                        <TableCell className={classes.tableCellTitle}>User</TableCell>
+                        <TableCell align="center" className={classes.tableCellTitle}>Email</TableCell>
+                        <TableCell align="center" className={classes.tableCellTitle}>Role</TableCell>
+                        <TableCell align="center" className={classes.tableCellTitle}>Company</TableCell>
+                        <TableCell align="center" className={classes.tableCellTitle}>Gender</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {users.map((user) => (
-                        <TableRow key={user}>
-                            <TableCell component="th" scope="row">
+                        <TableRow key={user} >
+                            <TableCell component="th" scope="row" className={classes.tableCell}>
                                 {user.firstName}    {user.lastName}
                             </TableCell>
-                            <TableCell align="center">{user.email}</TableCell>
-                            <TableCell align="center">{user.role}</TableCell>
-                            <TableCell align="center">Placeholder</TableCell>
-                            <TableCell align="center">{user.gender}</TableCell>
+                            <TableCell align="center" className={classes.tableCell}>{user.email}</TableCell>
+                            <TableCell align="center" className={classes.tableCell}>{user.role}</TableCell>
+                            <TableCell align="center" className={classes.tableCell}>Placeholder</TableCell>
+                            <TableCell align="center" className={classes.tableCell}>{user.gender}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
