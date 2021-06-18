@@ -4,8 +4,10 @@ export default makeStyles((theme) => ({
     tableContainer: {
         maxWidth: "99%",
         margin: theme.spacing(3, 0, 0, 1),
-        display: 'flex',
-        alignItems: 'center',
-
+    },
+    tableCellTitle: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+        fontSize: 14,
     },
 }));
