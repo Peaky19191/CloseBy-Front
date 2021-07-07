@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getUsersListGlAdm } from '../../../actions/globAdmin'
 import { useDispatch, useSelector } from "react-redux";
 import useStyles from './styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,17 +10,38 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableFooter from '@material-ui/core/TableFooter';
+
 
 const UserList = () => {
     const classes = useStyles();
     const users = useSelector(state => state.userListGlAdm);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getUsersListGlAdm());
-        console.log(users);
-    }, []);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
 
+    const handleChangePage = (event, newPage) => {
+        console.log(event)
+        console.log(newPage)
+        console.log("22")
+
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        console.log(event)
+        console.log("33")
+
+        setRowsPerPage(5);
+        setPage(0);
+    };
+
+    useEffect(() => {
+        console.log("1111")
+        dispatch(getUsersListGlAdm(page, rowsPerPage));
+    }, []);
 
     return (
         <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >
@@ -35,63 +57,39 @@ const UserList = () => {
                 </TableHead>
                 <TableBody>
                     {users.map((user) => (
-                        <TableRow key={user} >
-                            <TableCell component="th" scope="row" className={classes.tableCell}>
+                        <TableRow key={user.email} >
+                            <TableCell component="th" scope="row">
                                 {user.firstName}    {user.lastName}
                             </TableCell>
-                            <TableCell align="center" className={classes.tableCell}>{user.email}</TableCell>
-                            <TableCell align="center" className={classes.tableCell}>{user.role}</TableCell>
-                            <TableCell align="center" className={classes.tableCell}>Placeholder</TableCell>
-                            <TableCell align="center" className={classes.tableCell}>{user.gender}</TableCell>
+                            <TableCell align="center">{user.email}</TableCell>
+                            <TableCell align="center">{user.role}</TableCell>
+                            <TableCell align="center">{user.company.name}</TableCell>
+                            <TableCell align="center">{user.gender}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
+                <TableFooter>
+                    <TableRow>
+                        <TablePagination
+                            rowsPerPageOptions={[5, 10, 25, 100]}
+                            component="div"
+                            count={users.length}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            onPageChange={useState(handleChangePage)}
+                            onRowsPerPageChange={useState(handleChangeRowsPerPage)}
+                        />
+                        <button onClick={() => setPage(page + 1)}>
+                            Kliknij mnie
+                        </button>
+                        <button onClick={() => setPage(page - 1)}>
+                            Kliknij mnie
+                        </button>
+                    </TableRow>
+                </TableFooter>
             </Table>
         </TableContainer>
-
     );
 };
 
 export default UserList;
-
-
-{/* <Grid >
-    {users.map((user) => (
-        <Grid item key={user} >
-            <Typography gutterBottom variant="h5">
-                {user.firstName}    {user.lastName}
-            </Typography>
-            <Typography>
-                Email: {user.email}    Role: {user.role}
-            </Typography>
-        </Grid>
-    ))}
-</Grid> */}
-
-{/* <div>
-            <div>
-                <h3>Users List</h3>
-            </div>
-            <div >
-                <Container className={classes.itemList} maxWidth="xl">
-                    <List >
-                        {users.map((user) => (
-                            <ListItem
-                                key={user}
-                                // dense
-                                button
-                                onClick={""}
-                            >
-                                <ListItemText primary={`${user.firstName} ${user.lastName}`} />
-                                <ListItemText secondary={`Email: ${user.email}`} />
-                                <ListItemSecondaryAction>
-                                    <IconButton edge="end" aria-label="comments">
-                                        <CommentIcon />
-                                    </IconButton>
-                                </ListItemSecondaryAction>
-                            </ListItem>
-                        ))}
-                    </List>
-                </Container>
-            </div>
-        </div> */}

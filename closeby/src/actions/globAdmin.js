@@ -43,9 +43,9 @@ export const regCustAdmin = (firstName, lastName, gender, email) => (dispatch) =
     );
 };
 
-export const getUsersListGlAdm = () => async (dispatch) => {
+export const getUsersListGlAdm = (page, rowsPerPage) => async (dispatch) => {
     try {
-        const res = await GlobAdminService.getUsersList();
+        const res = await GlobAdminService.getUsersList(page, rowsPerPage);
 
         dispatch({
             type: GET_USERS,

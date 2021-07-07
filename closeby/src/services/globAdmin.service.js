@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-const API_URL = "http://localhost:5000/api/CompanyAdmin";
+const API_URL = "http://localhost:5000/api/company-admin";
 
 const registerCustomerAdmin = (firstName, lastName, gender, email) => {
     return axios.post(API_URL + "/register",
@@ -14,16 +14,15 @@ const registerCustomerAdmin = (firstName, lastName, gender, email) => {
         });
 };
 
-const getUsersList = () => {
+const getUsersList = (pageInt, rowsPerPage) => {
     return axios.get(API_URL + "/list",
         {
             headers: authHeader(),
             params: {
-                page: 1,
-                limit: 100
+                page: pageInt,
+                limit: rowsPerPage
             }
         },
-
     );
 };
 
