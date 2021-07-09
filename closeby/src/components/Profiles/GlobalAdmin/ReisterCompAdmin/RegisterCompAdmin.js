@@ -5,7 +5,7 @@ import useStyles from './styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useDispatch, useSelector } from "react-redux";
-import { regCustAdmin } from "../../../actions/globAdmin";
+import { regCustAdmin } from "../../../../Actions/Profiles/globalAdmin";
 import { Alert, AlertTitle } from '@material-ui/lab';
 
 const RegCustAdmin = () => {
@@ -101,7 +101,7 @@ const RegCustAdmin = () => {
                     </Grid>
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                         Register Customer Admin
-                </Button>
+                    </Button>
                 </form>
             </Paper>
         </Container>

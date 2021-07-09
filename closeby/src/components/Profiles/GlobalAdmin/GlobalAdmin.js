@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import UserService from "../../services/user.service";
+import UserService from "../../../Services/Profiles/user.service";
 
-const User = () => {
+const Admin = () => {
     const [content, setContent] = useState("");
 
     useEffect(() => {
@@ -25,11 +25,11 @@ const User = () => {
 
     return (
         <div >
-            <header>
+            <header >
                 <h3>{content}</h3>
             </header>
         </div>
     );
 };
 
-export default User;
+export default Admin;

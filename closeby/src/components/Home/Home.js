@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Grow, Grid } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 
-import { getEvents } from '../../actions/events';
+import { getEvents } from '../../Actions/events';
 
 const Home = () => {
     const [currentId, setCurrentId] = useState(0);

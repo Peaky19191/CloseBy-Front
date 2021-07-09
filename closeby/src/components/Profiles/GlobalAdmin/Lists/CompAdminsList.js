@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getUsersListGlAdm } from '../../../actions/globAdmin'
+import { getUsersListGlAdm } from '../../../../Actions/Profiles/globalAdmin'
+import getGlobalAdminListCW from '../../../../Api/globalAdmin'
 import { useDispatch, useSelector } from "react-redux";
 import useStyles from './styles';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -16,33 +17,38 @@ import TableFooter from '@material-ui/core/TableFooter';
 
 const UserList = () => {
     const classes = useStyles();
-    const users = useSelector(state => state.userListGlAdm);
-    const dispatch = useDispatch();
+    const [users, setUsers] = useState([]);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [count, setCount] = useState(0);
+
+
+    const getList = () => {
+
+        getGlobalAdminListCW.update(page, rowsPerPage)
+            .then((response) => {
+                const users = response.data.items;
+                const totalPages = response.data.count;
+
+                setUsers(users);
+                setCount(totalPages);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    };
+
+    useEffect(getList, [page, rowsPerPage]);
 
     const handleChangePage = (event, newPage) => {
-        console.log(event)
-        console.log(newPage)
-        console.log("22")
-
         setPage(newPage);
     };
 
     const handleChangeRowsPerPage = (event) => {
-        console.log(event)
-        console.log("33")
-
-        setRowsPerPage(5);
+        setRowsPerPage(+event.target.value);
         setPage(0);
     };
-
-    useEffect(() => {
-        console.log("1111")
-        dispatch(getUsersListGlAdm(page, rowsPerPage));
-    }, []);
-
     return (
         <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >
             <Table className={classes.table} aria-label="simple table">
@@ -56,15 +62,15 @@ const UserList = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {users.map((user) => (
-                        <TableRow key={user.email} >
+                    {users.map((items) => (
+                        <TableRow key={items.email} >
                             <TableCell component="th" scope="row">
-                                {user.firstName}    {user.lastName}
+                                {items.firstName}    {items.lastName}
                             </TableCell>
-                            <TableCell align="center">{user.email}</TableCell>
-                            <TableCell align="center">{user.role}</TableCell>
-                            <TableCell align="center">{user.company.name}</TableCell>
-                            <TableCell align="center">{user.gender}</TableCell>
+                            <TableCell align="center">{items.email}</TableCell>
+                            <TableCell align="center">{items.role}</TableCell>
+                            <TableCell align="center">{items.company.name}</TableCell>
+                            <TableCell align="center">{items.gender}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
@@ -73,18 +79,12 @@ const UserList = () => {
                         <TablePagination
                             rowsPerPageOptions={[5, 10, 25, 100]}
                             component="div"
-                            count={users.length}
+                            count={count}
                             rowsPerPage={rowsPerPage}
                             page={page}
-                            onPageChange={useState(handleChangePage)}
-                            onRowsPerPageChange={useState(handleChangeRowsPerPage)}
+                            onPageChange={handleChangePage}
+                            onRowsPerPageChange={handleChangeRowsPerPage}
                         />
-                        <button onClick={() => setPage(page + 1)}>
-                            Kliknij mnie
-                        </button>
-                        <button onClick={() => setPage(page - 1)}>
-                            Kliknij mnie
-                        </button>
                     </TableRow>
                 </TableFooter>
             </Table>
