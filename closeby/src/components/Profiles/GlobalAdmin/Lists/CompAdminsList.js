@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getUsersListGlAdm } from '../../../actions/globAdmin'
-import getGlobalAdminListCW from '../../../api/Api'
+import { getUsersListGlAdm } from '../../../../Actions/Profiles/globalAdmin'
+import getGlobalAdminListCW from '../../../../Api/globalAdmin'
 import { useDispatch, useSelector } from "react-redux";
 import useStyles from './styles';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -33,8 +33,6 @@ const UserList = () => {
 
                 setUsers(users);
                 setCount(totalPages);
-
-                console.log(response.data);
             })
             .catch((e) => {
                 console.log(e);

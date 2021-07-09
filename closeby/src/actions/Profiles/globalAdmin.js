@@ -2,10 +2,9 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
     SET_MESSAGE,
-    GET_USERS,
-} from "../constants/actionTypes";
+} from "../../Constants/actionTypes";
 
-import GlobAdminService from "../services/globAdmin.service";
+import GlobAdminService from "../../Services/Profiles/globalAdmin.service";
 
 export const regCustAdmin = (firstName, lastName, gender, email) => (dispatch) => {
     return GlobAdminService.registerCustomerAdmin(firstName, lastName, gender, email).then(
@@ -41,17 +40,4 @@ export const regCustAdmin = (firstName, lastName, gender, email) => (dispatch) =
             return Promise.reject();
         }
     );
-};
-
-export const getUsersListGlAdm = (page, rowsPerPage) => async (dispatch) => {
-    try {
-        const res = await GlobAdminService.getUsersList(page, rowsPerPage);
-
-        dispatch({
-            type: GET_USERS,
-            payload: res.data.items,
-        });
-    } catch (err) {
-        console.log(err);
-    }
 };

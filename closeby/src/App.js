@@ -1,25 +1,25 @@
 import './App.css';
-import Home from './pages/home';
-import About from './pages/about';
-import Contact from './pages/contact';
-import Events from './pages/events';
-import Auth from './pages/auth';
+import Home from './Pages/home';
+import About from './Pages/about';
+import Contact from './Pages/contact';
+import Events from './Pages/events';
+import Auth from './Pages/auth';
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Router, Switch, Route, Link } from "react-router-dom";
 import { AppBar, Avatar, Button, Toolbar, Typography } from '@material-ui/core';
-import { Register } from './components/Auth/Register/Register'
-import Profile from './components/Profile/Profile'
+import { Register } from './Components/Auth/Register/Register'
+import Profile from './Components/Profiles/Profile'
 
-import { logout } from "./actions/auth";
-import { clearMessage } from "./actions/message";
-import { history } from "./helpers/history";
-import Navbar from './components/Navbar/navbar';
-import User from './components/Profile/User';
-import Organizer from './components/Organizer/Organizer';
-import Admin from './components/GlobalAdmin/Profile/Admin';
-import RegCustAdmin from './components/GlobalAdmin/RegCustAdmin/RegCustAdmin';
-import UserList from './components/GlobalAdmin/List/UserList';
+import { logout } from "./Actions/auth";
+import { clearMessage } from "./Actions/message";
+import { history } from "./Helpers/history";
+import Navbar from './Components/Navbar/Navbar';
+import User from './Components/Profiles/User/User';
+import Organizer from './Components/Profiles/CompanyWorker/CompanyWorker';
+import Admin from './Components/Profiles/GlobalAdmin/GlobalAdmin';
+import RegCustAdmin from './Components/Profiles/GlobalAdmin/ReisterCompAdmin/RegisterCompAdmin';
+import UserList from './Components/Profiles/GlobalAdmin/Lists/CompAdminsList';
 
 const App = () => {
 

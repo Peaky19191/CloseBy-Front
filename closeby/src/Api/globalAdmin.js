@@ -1,5 +1,5 @@
 import axios from "axios";
-import authHeader from "../services/auth-header";
+import authHeader from "../Services/Auth/auth-header";
 
 const API_URL = "http://localhost:5000/api/company-admin";
 
@@ -10,6 +10,7 @@ const update = (pageInt, rowsPerPage) => {
             params: {
                 page: pageInt,
                 limit: rowsPerPage
+
             }
         },
     );

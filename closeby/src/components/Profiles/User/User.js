@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import UserService from "../../services/user.service";
+import UserService from "../../../Services/Profiles/user.service";
 
-const Organizer = () => {
+const User = () => {
     const [content, setContent] = useState("");
 
     useEffect(() => {
-        UserService.getOrganizerData().then(
+        UserService.getUserData().then(
             (response) => {
                 setContent(response.data);
             },
@@ -24,7 +24,7 @@ const Organizer = () => {
     }, []);
 
     return (
-        <div>
+        <div >
             <header>
                 <h3>{content}</h3>
             </header>
@@ -32,4 +32,4 @@ const Organizer = () => {
     );
 };
 
-export default Organizer;
+export default User;

@@ -3,9 +3,9 @@ import { AppBar, Avatar, Button, Grid, Toolbar, Typography } from '@material-ui/
 import useStyles from './styles';
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import { history } from "../../helpers/history";
-import { logout } from "../../actions/auth";
-import { clearMessage } from "../../actions/message";
+import { history } from "../../Helpers/history";
+import { logout } from "../../Actions/auth";
+import { clearMessage } from "../../Actions/message";
 
 const Navbar = () => {
     const classes = useStyles();
