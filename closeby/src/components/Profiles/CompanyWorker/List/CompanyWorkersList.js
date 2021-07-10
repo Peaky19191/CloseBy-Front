@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getUsersListGlAdm } from '../../../../Actions/Profiles/globalAdmin'
-import getCompanyAdminListCW from '../../../../Api/companyAdmin'
+import getCompWorkerList from '../../../../Api/companyWorker'
 import { useDispatch, useSelector } from "react-redux";
 import useStyles from './styles';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -17,20 +17,21 @@ import TableFooter from '@material-ui/core/TableFooter';
 
 const CompanyAdminsList = () => {
     const classes = useStyles();
-    const [adminsComp, setAdminsComp] = useState([]);
+    const [workersComp, setCompWorkers] = useState([]);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [company, setCompany] = useState(0);
     const [count, setCount] = useState(0);
 
 
     const getList = () => {
-        getCompanyAdminListCW.getCompanyAdminsList(page, rowsPerPage)
+        getCompWorkerList.getCompanyworkersList(page, rowsPerPage, company)
             .then((response) => {
-                const adminsComp = response.data.items;
+                const workersComp = response.data.workers;
                 const totalPages = response.data.count;
 
-                setAdminsComp(adminsComp);
+                setCompWorkers(workersComp);
                 setCount(totalPages);
             })
             .catch((e) => {
@@ -61,15 +62,15 @@ const CompanyAdminsList = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {adminsComp.map((items) => (
-                        <TableRow key={items.email} >
+                    {workersComp.map((workers) => (
+                        <TableRow key={workers.email} >
                             <TableCell component="th" scope="row">
-                                {items.firstName}    {items.lastName}
+                                {workers.firstName}    {workers.lastName}
                             </TableCell>
-                            <TableCell align="center">{items.email}</TableCell>
-                            <TableCell align="center">{items.role}</TableCell>
-                            <TableCell align="center">{items.company.name}</TableCell>
-                            <TableCell align="center">{items.gender}</TableCell>
+                            <TableCell align="center">{workers.email}</TableCell>
+                            <TableCell align="center">{workers.role}</TableCell>
+                            <TableCell align="center">{workers.company.name}</TableCell>
+                            <TableCell align="center">{workers.gender}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
