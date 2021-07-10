@@ -6,8 +6,8 @@ import {
 
 import GlobAdminService from "../../Services/Profiles/globalAdmin.service";
 
-export const regCustAdmin = (firstName, lastName, gender, email) => (dispatch) => {
-    return GlobAdminService.registerCustomerAdmin(firstName, lastName, gender, email).then(
+export const regCompAdmin = (firstName, lastName, gender, email) => (dispatch) => {
+    return GlobAdminService.registerCompanyAdmin(firstName, lastName, gender, email).then(
         (response) => {
             dispatch({
                 type: REGISTER_SUCCESS,

@@ -8,7 +8,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Router, Switch, Route, Link } from "react-router-dom";
 import { AppBar, Avatar, Button, Toolbar, Typography } from '@material-ui/core';
-import { Register } from './Components/Auth/Register/Register'
+import { Register } from './Components/Profiles/User/Register/Register'
 import Profile from './Components/Profiles/Profile'
 
 import { logout } from "./Actions/auth";
@@ -18,8 +18,8 @@ import Navbar from './Components/Navbar/Navbar';
 import User from './Components/Profiles/User/User';
 import Organizer from './Components/Profiles/CompanyWorker/CompanyWorker';
 import Admin from './Components/Profiles/GlobalAdmin/GlobalAdmin';
-import RegCustAdmin from './Components/Profiles/GlobalAdmin/ReisterCompAdmin/RegisterCompAdmin';
-import UserList from './Components/Profiles/GlobalAdmin/Lists/CompAdminsList';
+import RegCompAdmin from './Components/Profiles/GlobalAdmin/ReisterCompAdmin/RegisterCompAdmin';
+import UserList from './Components/Profiles/GlobalAdmin/List/CompAdminsList';
 
 const App = () => {
 
@@ -40,7 +40,7 @@ const App = () => {
           <Route exact path="/user" component={User} />
           <Route exact path="/org" component={Organizer} />
           <Route exact path="/admin" component={Admin} />
-          <Route exact path="/adminAdd" component={RegCustAdmin} />
+          <Route exact path="/adminAdd" component={RegCompAdmin} />
           <Route exact path="/adminList" component={UserList} />
 
         </Switch>

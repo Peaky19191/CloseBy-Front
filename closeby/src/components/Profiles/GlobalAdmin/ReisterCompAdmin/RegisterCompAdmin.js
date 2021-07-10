@@ -5,10 +5,10 @@ import useStyles from './styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useDispatch, useSelector } from "react-redux";
-import { regCustAdmin } from "../../../../Actions/Profiles/globalAdmin";
+import { regCompAdmin } from "../../../../Actions/Profiles/globalAdmin";
 import { Alert, AlertTitle } from '@material-ui/lab';
 
-const RegCustAdmin = () => {
+const RegCompAdmin = () => {
     const classes = useStyles();
 
     const [firstName, setFirstName] = useState("");
@@ -51,7 +51,7 @@ const RegCustAdmin = () => {
         e.preventDefault();
         setSuccessful(false);
 
-        dispatch(regCustAdmin(firstName, lastName, gender, email))
+        dispatch(regCompAdmin(firstName, lastName, gender, email))
             .then(() => {
                 setSuccessful(true);
             })
@@ -108,4 +108,4 @@ const RegCustAdmin = () => {
     );
 };
 
-export default RegCustAdmin;
+export default RegCompAdmin;
