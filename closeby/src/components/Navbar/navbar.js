@@ -34,17 +34,17 @@ const Navbar = () => {
 
     return (
         <AppBar className={classes.appBar} position="static" color="inherit">
-            <Grid className={classes.brandContainer} >
+            <Grid >
                 <img className={classes.image} src="https://i.imgur.com/Tngx1R2.png" alt="logo" />
             </Grid>
             <Toolbar className={classes.toolbar}>
                 {currentProfile && showModeratorBoard && (
-                    <Grid className={classes.profile}>
+                    <Grid>
                         <Button component={Link} to="/compWork" variant="contained" color="primary">Company Worker</Button>
                     </Grid>
                 )}
                 {currentProfile && showGlobalAdminBoard && (
-                    <Grid className={classes.profile}>
+                    <Grid>
                         <Button component={Link} to="/globAdmin" variant="contained" color="primary">Main</Button>
                         <Button component={Link} to="/reisterCompAdmin" variant="contained" color="primary">Register Company Admin</Button>
                         <Button component={Link} to="/compAdminList" variant="contained" color="primary">Company Admins List</Button>
@@ -53,7 +53,7 @@ const Navbar = () => {
                     </Grid>
                 )}
                 {currentProfile ? (
-                    <Grid className={classes.profile}>
+                    <Grid>
                         <Button component={Link} to="/about" variant="contained" color="primary">About</Button>
                         <Button component={Link} to="/contact" variant="contained" color="primary">Contact</Button>
                         <Button component={Link} to="/events" variant="contained" color="primary">Events</Button>
