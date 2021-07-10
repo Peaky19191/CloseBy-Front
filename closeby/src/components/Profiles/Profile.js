@@ -3,9 +3,9 @@ import { Redirect } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
 const Profile = () => {
-  const { user: currentUser } = useSelector((state) => state.auth);
+  const { profile: currentProfile } = useSelector((state) => state.auth);
 
-  if (!currentUser) {
+  if (!currentProfile) {
     return <Redirect to="/login" />;
   }
 
@@ -17,15 +17,15 @@ const Profile = () => {
         </h3>
       </header>
       <p>
-        <strong>Token:</strong> {currentUser.accessToken.substring(0, 20)} ...{" "}
-        {currentUser.accessToken.substr(currentUser.accessToken.length - 20)}
+        <strong>Token:</strong> {currentProfile.accessToken.substring(0, 20)} ...{" "}
+        {currentProfile.accessToken.substr(currentProfile.accessToken.length - 20)}
       </p>
       <p>
-        <strong>Email:</strong> {currentUser.email}
+        <strong>Email:</strong> {currentProfile.email}
       </p>
       <strong>Authorities:</strong>
       <ul>
-        {currentUser.role}
+        {currentProfile.role}
       </ul>
     </div>
   );

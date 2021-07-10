@@ -10,9 +10,9 @@ import { clearMessage } from "../../Actions/message";
 const Navbar = () => {
     const classes = useStyles();
     const [showModeratorBoard, setShowModeratorBoard] = useState(false);
-    const [showAdminBoard, setShowAdminBoard] = useState(false);
+    const [showGlobalAdminBoard, setShowAdminBoard] = useState(false);
 
-    const { user: currentUser } = useSelector((state) => state.auth);
+    const { profile: currentProfile } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -22,11 +22,11 @@ const Navbar = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (currentUser && currentUser.role) {
-            setShowModeratorBoard(currentUser.role.includes("CompanyWorker"));
-            setShowAdminBoard(currentUser.role.includes("GlobalAdmin"));
+        if (currentProfile && currentProfile.role) {
+            setShowModeratorBoard(currentProfile.role.includes("CompanyWorker"));
+            setShowAdminBoard(currentProfile.role.includes("GlobalAdmin"));
         }
-    }, [currentUser]);
+    }, [currentProfile]);
 
     const logOut = () => {
         dispatch(logout());
@@ -38,20 +38,20 @@ const Navbar = () => {
                 <img className={classes.image} src="https://i.imgur.com/Tngx1R2.png" alt="logo" />
             </Grid>
             <Toolbar className={classes.toolbar}>
-                {currentUser && showModeratorBoard && (
+                {currentProfile && showModeratorBoard && (
                     <Grid className={classes.profile}>
-                        <Button component={Link} to="/org" variant="contained" color="primary">Organizer</Button>
+                        <Button component={Link} to="/compWork" variant="contained" color="primary">Company Worker</Button>
                     </Grid>
                 )}
-                {currentUser && showAdminBoard && (
+                {currentProfile && showGlobalAdminBoard && (
                     <Grid className={classes.profile}>
-                        <Button component={Link} to="/admin" variant="contained" color="primary">Admin</Button>
-                        <Button component={Link} to="/adminAdd" variant="contained" color="primary">Add Admin</Button>
-                        <Button component={Link} to="/adminList" variant="contained" color="primary">Admin List</Button>
+                        <Button component={Link} to="/globAdmin" variant="contained" color="primary">Main</Button>
+                        <Button component={Link} to="/reisterCompAdmin" variant="contained" color="primary">Register Company Admin</Button>
+                        <Button component={Link} to="/compAdminList" variant="contained" color="primary">Company Admins List</Button>
 
                     </Grid>
                 )}
-                {currentUser ? (
+                {currentProfile ? (
                     <Grid className={classes.profile}>
                         <Button component={Link} to="/about" variant="contained" color="primary">About</Button>
                         <Button component={Link} to="/contact" variant="contained" color="primary">Contact</Button>

@@ -5,10 +5,10 @@ import useStyles from './styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useDispatch, useSelector } from "react-redux";
-import { regCustAdmin } from "../../../../Actions/Profiles/globalAdmin";
+import { regCompAdmin } from "../../../../Actions/Profiles/companyAdmin";
 import { Alert, AlertTitle } from '@material-ui/lab';
 
-const RegCustAdmin = () => {
+const RegCompAdmin = () => {
     const classes = useStyles();
 
     const [firstName, setFirstName] = useState("");
@@ -51,7 +51,7 @@ const RegCustAdmin = () => {
         e.preventDefault();
         setSuccessful(false);
 
-        dispatch(regCustAdmin(firstName, lastName, gender, email))
+        dispatch(regCompAdmin(firstName, lastName, gender, email))
             .then(() => {
                 setSuccessful(true);
             })
@@ -66,7 +66,7 @@ const RegCustAdmin = () => {
                 <Avatar className={classes.avatar}>
                     <SupervisorAccountIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">Register Customer Admin</Typography>
+                <Typography component="h1" variant="h5">Register Company Admin</Typography>
                 {successful ?
                     <Alert className={classes.alert} severity="success">
                         <AlertTitle>Success</AlertTitle>
@@ -100,7 +100,7 @@ const RegCustAdmin = () => {
                         </Select>
                     </Grid>
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-                        Register Customer Admin
+                        Register Company Admin
                     </Button>
                 </form>
             </Paper>
@@ -108,4 +108,4 @@ const RegCustAdmin = () => {
     );
 };
 
-export default RegCustAdmin;
+export default RegCompAdmin;

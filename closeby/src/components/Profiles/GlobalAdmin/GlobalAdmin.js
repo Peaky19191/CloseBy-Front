@@ -1,32 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-import UserService from "../../../Services/Profiles/user.service";
-
 const Admin = () => {
-    const [content, setContent] = useState("");
-
-    useEffect(() => {
-        UserService.getUserData().then(
-            (response) => {
-                setContent(response.data);
-            },
-            (error) => {
-                const _content =
-                    (error.response &&
-                        error.response.data &&
-                        error.response.data.message) ||
-                    error.message ||
-                    error.toString();
-
-                setContent(_content);
-            }
-        );
-    }, []);
 
     return (
         <div >
             <header >
-                <h3>{content}</h3>
+                <h3>Content for Global Admin</h3>
             </header>
         </div>
     );

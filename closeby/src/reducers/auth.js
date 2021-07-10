@@ -6,11 +6,11 @@ import {
     LOGOUT,
 } from "../Constants/actionTypes";
 
-const user = JSON.parse(localStorage.getItem("user"));
+const profile = JSON.parse(localStorage.getItem("profile"));
 
-const initialState = user
-    ? { isLoggedIn: true, user }
-    : { isLoggedIn: false, user: null };
+const initialState = profile
+    ? { isLoggedIn: true, profile }
+    : { isLoggedIn: false, profile: null };
 
 export default function (state = initialState, action) {
     const { type, payload } = action;
@@ -30,13 +30,13 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 isLoggedIn: true,
-                user: payload.user,
+                profile: payload.profile,
             };
         case LOGIN_FAIL:
             return {
                 ...state,
                 isLoggedIn: false,
-                user: null,
+                profile: null,
             };
         case LOGOUT:
             localStorage.clear();
@@ -44,7 +44,7 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 isLoggedIn: false,
-                user: null,
+                profile: null,
             };
         default:
             return state;

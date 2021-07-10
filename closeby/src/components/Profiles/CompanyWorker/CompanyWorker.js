@@ -2,34 +2,15 @@ import React, { useState, useEffect } from "react";
 
 import UserService from "../../../Services/Profiles/user.service";
 
-const Organizer = () => {
-    const [content, setContent] = useState("");
-
-    useEffect(() => {
-        UserService.getOrganizerData().then(
-            (response) => {
-                setContent(response.data);
-            },
-            (error) => {
-                const _content =
-                    (error.response &&
-                        error.response.data &&
-                        error.response.data.message) ||
-                    error.message ||
-                    error.toString();
-
-                setContent(_content);
-            }
-        );
-    }, []);
+const CompanyWorker = () => {
 
     return (
         <div>
             <header>
-                <h3>{content}</h3>
+                <h3>Content for Company Worker</h3>
             </header>
         </div>
     );
 };
 
-export default Organizer;
+export default CompanyWorker;

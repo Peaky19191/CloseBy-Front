@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../../../Actions/auth";
+import { registerUser } from "../../../../Actions/Profiles/user";
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
 import useStyles from './styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -60,7 +60,7 @@ export const Register = () => {
         e.preventDefault();
         setSuccessful(false);
 
-        dispatch(register(firstName, lastName, gender, email, password))
+        dispatch(registerUser(firstName, lastName, gender, email, password))
             .then(() => {
                 setSuccessful(true);
             })
