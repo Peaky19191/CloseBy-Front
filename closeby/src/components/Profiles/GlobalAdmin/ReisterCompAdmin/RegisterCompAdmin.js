@@ -5,7 +5,7 @@ import useStyles from './styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useDispatch, useSelector } from "react-redux";
-import { regCompAdmin } from "../../../../Actions/Profiles/globalAdmin";
+import { regCompAdmin } from "../../../../Actions/Profiles/companyAdmin";
 import { Alert, AlertTitle } from '@material-ui/lab';
 
 const RegCompAdmin = () => {

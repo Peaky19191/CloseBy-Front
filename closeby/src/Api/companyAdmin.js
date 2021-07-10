@@ -3,12 +3,12 @@ import authHeader from "../Services/Auth/auth-header";
 
 const API_URL = "http://localhost:5000/api/company-admin";
 
-const update = (pageInt, rowsPerPage) => {
+const getCompanyAdminsList = (pageNumberr, rowsPerPage) => {
     return axios.get(API_URL + "/list",
         {
             headers: authHeader(),
             params: {
-                page: pageInt,
+                page: pageNumberr,
                 limit: rowsPerPage
 
             }
@@ -17,5 +17,5 @@ const update = (pageInt, rowsPerPage) => {
 };
 
 export default {
-    update,
+    getCompanyAdminsList,
 };

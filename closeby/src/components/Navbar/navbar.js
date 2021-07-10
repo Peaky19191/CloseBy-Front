@@ -12,7 +12,7 @@ const Navbar = () => {
     const [showModeratorBoard, setShowModeratorBoard] = useState(false);
     const [showAdminBoard, setShowAdminBoard] = useState(false);
 
-    const { user: currentUser } = useSelector((state) => state.auth);
+    const { profile: currentProfile } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -22,11 +22,11 @@ const Navbar = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (currentUser && currentUser.role) {
-            setShowModeratorBoard(currentUser.role.includes("CompanyWorker"));
-            setShowAdminBoard(currentUser.role.includes("GlobalAdmin"));
+        if (currentProfile && currentProfile.role) {
+            setShowModeratorBoard(currentProfile.role.includes("CompanyWorker"));
+            setShowAdminBoard(currentProfile.role.includes("GlobalAdmin"));
         }
-    }, [currentUser]);
+    }, [currentProfile]);
 
     const logOut = () => {
         dispatch(logout());
@@ -38,12 +38,12 @@ const Navbar = () => {
                 <img className={classes.image} src="https://i.imgur.com/Tngx1R2.png" alt="logo" />
             </Grid>
             <Toolbar className={classes.toolbar}>
-                {currentUser && showModeratorBoard && (
+                {currentProfile && showModeratorBoard && (
                     <Grid className={classes.profile}>
                         <Button component={Link} to="/org" variant="contained" color="primary">Organizer</Button>
                     </Grid>
                 )}
-                {currentUser && showAdminBoard && (
+                {currentProfile && showAdminBoard && (
                     <Grid className={classes.profile}>
                         <Button component={Link} to="/admin" variant="contained" color="primary">Admin</Button>
                         <Button component={Link} to="/adminAdd" variant="contained" color="primary">Add Admin</Button>
@@ -51,7 +51,7 @@ const Navbar = () => {
 
                     </Grid>
                 )}
-                {currentUser ? (
+                {currentProfile ? (
                     <Grid className={classes.profile}>
                         <Button component={Link} to="/about" variant="contained" color="primary">About</Button>
                         <Button component={Link} to="/contact" variant="contained" color="primary">Contact</Button>

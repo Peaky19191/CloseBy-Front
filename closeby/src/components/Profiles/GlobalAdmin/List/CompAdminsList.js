@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getUsersListGlAdm } from '../../../../Actions/Profiles/globalAdmin'
-import getGlobalAdminListCW from '../../../../Api/globalAdmin'
+import getGlobalAdminListCW from '../../../../Api/companyAdmin'
 import { useDispatch, useSelector } from "react-redux";
 import useStyles from './styles';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -26,7 +26,7 @@ const UserList = () => {
 
     const getList = () => {
 
-        getGlobalAdminListCW.update(page, rowsPerPage)
+        getGlobalAdminListCW.getCompanyAdminsList(page, rowsPerPage)
             .then((response) => {
                 const users = response.data.items;
                 const totalPages = response.data.count;
