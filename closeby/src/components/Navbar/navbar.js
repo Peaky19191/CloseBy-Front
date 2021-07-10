@@ -48,6 +48,7 @@ const Navbar = () => {
                         <Button component={Link} to="/globAdmin" variant="contained" color="primary">Main</Button>
                         <Button component={Link} to="/reisterCompAdmin" variant="contained" color="primary">Register Company Admin</Button>
                         <Button component={Link} to="/compAdminList" variant="contained" color="primary">Company Admins List</Button>
+                        <Button component={Link} to="/usersList" variant="contained" color="primary">Users List</Button>
 
                     </Grid>
                 )}

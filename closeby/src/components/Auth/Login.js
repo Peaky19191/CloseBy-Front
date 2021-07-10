@@ -88,7 +88,7 @@ const Login = (props) => {
                                         </InputAdornment>
                                     )
                                 }}
-                                name="password" htmlFor="password" type="password" label="Password" value={password} onChange={onChangePassword} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} variant="outlined" half item />
+                                name="password" htmlFor="password" type="password" label="Password" value={password} onChange={onChangePassword} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} fullWidth variant="outlined" half item />
                         </Grid>
                     </Grid>
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit} disabled={loading}>
