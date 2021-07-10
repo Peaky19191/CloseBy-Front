@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getUsersListGlAdm } from '../../../../Actions/Profiles/globalAdmin'
-import getCompanyAdminListCW from '../../../../Api/companyAdmin'
-import { useDispatch, useSelector } from "react-redux";
+import getUsersList from '../../../../Api/user'
 import useStyles from './styles';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -15,9 +12,9 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableFooter from '@material-ui/core/TableFooter';
 
 
-const CompanyAdminsList = () => {
+const UsersList = () => {
     const classes = useStyles();
-    const [adminsComp, setAdminsComp] = useState([]);
+    const [users, setUsers] = useState([]);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -25,12 +22,12 @@ const CompanyAdminsList = () => {
 
 
     const getList = () => {
-        getCompanyAdminListCW.getCompanyAdminsList(page, rowsPerPage)
+        getUsersList.getUsersList(page, rowsPerPage)
             .then((response) => {
-                const adminsComp = response.data.items;
+                const users = response.data.items;
                 const totalPages = response.data.count;
 
-                setAdminsComp(adminsComp);
+                setUsers(users);
                 setCount(totalPages);
             })
             .catch((e) => {
@@ -56,19 +53,17 @@ const CompanyAdminsList = () => {
                         <TableCell className={classes.tableCellTitle}>User</TableCell>
                         <TableCell align="center" className={classes.tableCellTitle}>Email</TableCell>
                         <TableCell align="center" className={classes.tableCellTitle}>Role</TableCell>
-                        <TableCell align="center" className={classes.tableCellTitle}>Company</TableCell>
                         <TableCell align="center" className={classes.tableCellTitle}>Gender</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {adminsComp.map((items) => (
+                    {users.map((items) => (
                         <TableRow key={items.email} >
                             <TableCell component="th" scope="row">
                                 {items.firstName}    {items.lastName}
                             </TableCell>
                             <TableCell align="center">{items.email}</TableCell>
                             <TableCell align="center">{items.role}</TableCell>
-                            <TableCell align="center">{items.company.name}</TableCell>
                             <TableCell align="center">{items.gender}</TableCell>
                         </TableRow>
                     ))}
@@ -91,4 +86,4 @@ const CompanyAdminsList = () => {
     );
 };
 
-export default CompanyAdminsList;
+export default UsersList;
