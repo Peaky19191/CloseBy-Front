@@ -10,7 +10,7 @@ import { clearMessage } from "../../Actions/message";
 const Navbar = () => {
     const classes = useStyles();
     const [showModeratorBoard, setShowModeratorBoard] = useState(false);
-    const [showAdminBoard, setShowAdminBoard] = useState(false);
+    const [showGlobalAdminBoard, setShowAdminBoard] = useState(false);
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
@@ -40,14 +40,14 @@ const Navbar = () => {
             <Toolbar className={classes.toolbar}>
                 {currentProfile && showModeratorBoard && (
                     <Grid className={classes.profile}>
-                        <Button component={Link} to="/org" variant="contained" color="primary">Organizer</Button>
+                        <Button component={Link} to="/compWork" variant="contained" color="primary">Company Worker</Button>
                     </Grid>
                 )}
-                {currentProfile && showAdminBoard && (
+                {currentProfile && showGlobalAdminBoard && (
                     <Grid className={classes.profile}>
-                        <Button component={Link} to="/admin" variant="contained" color="primary">Admin</Button>
-                        <Button component={Link} to="/adminAdd" variant="contained" color="primary">Add Admin</Button>
-                        <Button component={Link} to="/adminList" variant="contained" color="primary">Admin List</Button>
+                        <Button component={Link} to="/globAdmin" variant="contained" color="primary">Main</Button>
+                        <Button component={Link} to="/reisterCompAdmin" variant="contained" color="primary">Register Company Admin</Button>
+                        <Button component={Link} to="/compAdminList" variant="contained" color="primary">Company Admins List</Button>
 
                     </Grid>
                 )}

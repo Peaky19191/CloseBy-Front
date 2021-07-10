@@ -4,10 +4,10 @@ import {
     SET_MESSAGE,
 } from "../../Constants/actionTypes";
 
-import AuthService from "../../Services/Auth/auth.service";
+import AuthService from "../../Services/Profiles/user.service";
 
 export const registerUser = (firstName, lastName, gender, email, password) => (dispatch) => {
-    return AuthService.register(firstName, lastName, gender, email, password).then(
+    return AuthService.registerUser(firstName, lastName, gender, email, password).then(
         (response) => {
             dispatch({
                 type: REGISTER_SUCCESS,

@@ -66,7 +66,7 @@ const RegCompAdmin = () => {
                 <Avatar className={classes.avatar}>
                     <SupervisorAccountIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">Register Customer Admin</Typography>
+                <Typography component="h1" variant="h5">Register Company Admin</Typography>
                 {successful ?
                     <Alert className={classes.alert} severity="success">
                         <AlertTitle>Success</AlertTitle>
@@ -100,7 +100,7 @@ const RegCompAdmin = () => {
                         </Select>
                     </Grid>
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-                        Register Customer Admin
+                        Register Company Admin
                     </Button>
                 </form>
             </Paper>

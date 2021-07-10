@@ -15,7 +15,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableFooter from '@material-ui/core/TableFooter';
 
 
-const UserList = () => {
+const CompanyAdminsList = () => {
     const classes = useStyles();
     const [users, setUsers] = useState([]);
 
@@ -92,4 +92,4 @@ const UserList = () => {
     );
 };
 
-export default UserList;
+export default CompanyAdminsList;

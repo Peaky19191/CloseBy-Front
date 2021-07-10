@@ -3,12 +3,12 @@ import authHeader from "../Services/Auth/auth-header";
 
 const API_URL = "http://localhost:5000/api/company-admin";
 
-const getCompanyAdminsList = (pageNumberr, rowsPerPage) => {
+const getCompanyAdminsList = (pageNumber, rowsPerPage) => {
     return axios.get(API_URL + "/list",
         {
             headers: authHeader(),
             params: {
-                page: pageNumberr,
+                page: pageNumber,
                 limit: rowsPerPage
 
             }

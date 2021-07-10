@@ -1,15 +1,5 @@
 import axios from "axios";
 
-const register = (firstName, lastName, gender, email, password) => {
-  return axios.post("http://localhost:5000/api/user/register", {
-    firstName,
-    lastName,
-    gender,
-    email,
-    password,
-  });
-};
-
 const login = (email, password) => {
   return axios
     .post("http://localhost:5000/api/identity/login", {
@@ -30,7 +20,6 @@ const logout = () => {
 };
 
 export default {
-  register,
   login,
   logout,
 };

@@ -4,10 +4,10 @@ import {
     SET_MESSAGE,
 } from "../../Constants/actionTypes";
 
-import GlobAdminService from "../../Services/Profiles/globalAdmin.service";
+import CompanyAdminService from "../../Services/Profiles/companyAdmin.service";
 
 export const regCompAdmin = (firstName, lastName, gender, email) => (dispatch) => {
-    return GlobAdminService.registerCompanyAdmin(firstName, lastName, gender, email).then(
+    return CompanyAdminService.registerCompanyAdmin(firstName, lastName, gender, email).then(
         (response) => {
             dispatch({
                 type: REGISTER_SUCCESS,
