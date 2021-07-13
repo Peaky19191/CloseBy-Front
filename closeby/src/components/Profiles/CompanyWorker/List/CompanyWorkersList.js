@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getUsersListGlAdm } from '../../../../Actions/Profiles/globalAdmin'
 import getCompWorkerList from '../../../../Api/companyWorker'
-import { useDispatch, useSelector } from "react-redux";
 import useStyles from './styles';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';

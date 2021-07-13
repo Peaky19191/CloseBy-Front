@@ -13,8 +13,8 @@ const registerUser = (firstName, lastName, gender, email, password) => {
     });
 };
 
-const getUserData = () => {
-    return axios.get(API_URL + "user", { headers: authHeader() });
+const getUserData = (id) => {
+    return axios.get(API_URL + "user", { id });
 };
 
 export default {

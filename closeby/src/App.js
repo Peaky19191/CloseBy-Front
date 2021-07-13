@@ -15,6 +15,7 @@ import CompanyWorker from './Components/Profiles/CompanyWorker/CompanyWorker';
 import GlobalAdmin from './Components/Profiles/GlobalAdmin/GlobalAdmin';
 import RegCompAdmin from './Components/Profiles/CompanyAdmin/Register/RegisterCompAdmin';
 import CompanyAdminList from './Components/Profiles/CompanyAdmin/List/CompAdminsList';
+import UsersList from './Components/Profiles/User/List/UsersList';
 
 const App = () => {
 
@@ -37,7 +38,7 @@ const App = () => {
           <Route exact path="/globAdmin" component={GlobalAdmin} />
           <Route exact path="/reisterCompAdmin" component={RegCompAdmin} />
           <Route exact path="/compAdminList" component={CompanyAdminList} />
-
+          <Route exact path="/usersList" component={UsersList} />
         </Switch>
       </div>
     </Router>
