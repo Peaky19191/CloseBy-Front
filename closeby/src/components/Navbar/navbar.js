@@ -40,28 +40,28 @@ const Navbar = () => {
             <Toolbar className={classes.toolbar}>
                 {currentProfile && showModeratorBoard && (
                     <Grid>
-                        <Button component={Link} to="/compWork" variant="contained" color="primary">Company Worker</Button>
+                        <Button className={classes.button} component={Link} to="/compWork" variant="contained" color="primary">Company Worker</Button>
                     </Grid>
                 )}
                 {currentProfile && showGlobalAdminBoard && (
                     <Grid>
-                        <Button component={Link} to="/globAdmin" variant="contained" color="primary">Main</Button>
-                        <Button component={Link} to="/reisterCompAdmin" variant="contained" color="primary">Register Company Admin</Button>
-                        <Button component={Link} to="/compAdminList" variant="contained" color="primary">Company Admins List</Button>
-                        <Button component={Link} to="/usersList" variant="contained" color="primary">Users List</Button>
+                        <Button className={classes.button} component={Link} to="/globAdmin" variant="contained" color="primary">Main</Button>
+                        <Button className={classes.button} component={Link} to="/reisterCompAdmin" variant="contained" color="primary">Register Company Admin</Button>
+                        <Button className={classes.button} component={Link} to="/compAdminList" variant="contained" color="primary">Company Admins List</Button>
+                        <Button className={classes.button} component={Link} to="/usersList" variant="contained" color="primary">Users List</Button>
 
                     </Grid>
                 )}
                 {currentProfile ? (
                     <Grid>
-                        <Button component={Link} to="/about" variant="contained" color="primary">About</Button>
-                        <Button component={Link} to="/contact" variant="contained" color="primary">Contact</Button>
-                        <Button component={Link} to="/events" variant="contained" color="primary">Events</Button>
-                        <Button component={Link} to="/profile" variant="contained" color="primary">Profile</Button>
-                        <Button component={Link} to="/" variant="contained" color="secondary" onClick={logOut}>Logout</Button>
+                        <Button className={classes.button} component={Link} to="/about" variant="contained" color="primary">About</Button>
+                        <Button className={classes.button} component={Link} to="/contact" variant="contained" color="primary">Contact</Button>
+                        <Button className={classes.button} component={Link} to="/events" variant="contained" color="primary">Events</Button>
+                        <Button className={classes.button} component={Link} to="/profile" variant="contained" color="primary">Profile</Button>
+                        <Button className={classes.button} component={Link} to="/" variant="contained" color="secondary" onClick={logOut}>Logout</Button>
                     </Grid>
                 ) : (
-                    <Button component={Link} to="/auth" variant="contained" color="primary">Login</Button>
+                    <Button className={classes.button} component={Link} to="/auth" variant="contained" color="primary">Login</Button>
                 )}
             </Toolbar>
         </AppBar>

@@ -7,5 +7,9 @@ export default makeStyles((theme) => ({
     },
     toolbar: {
         width: '100%',
+        justifyContent: "flex-end",
+    },
+    button: {
+        margin: theme.spacing(1),
     },
 }));
