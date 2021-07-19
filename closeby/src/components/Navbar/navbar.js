@@ -61,7 +61,7 @@ const Navbar = () => {
                         <Button className={classes.button} component={Link} to="/" variant="contained" color="secondary" onClick={logOut}>Logout</Button>
                     </Grid>
                 ) : (
-                    <Button className={classes.button} component={Link} to="/auth" variant="contained" color="primary">Login</Button>
+                    <Button className={classes.button} component={Link} to="/login" variant="contained" color="primary">Login</Button>
                 )}
             </Toolbar>
         </AppBar>

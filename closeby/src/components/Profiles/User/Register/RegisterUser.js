@@ -129,7 +129,7 @@ export const Register = () => {
                     </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
-                            <Button component={Link} to="/auth">
+                            <Button component={Link} to="/login">
                                 Already have an account? Login
                             </Button>
                         </Grid>

@@ -3,10 +3,11 @@ import Home from './Pages/home';
 import About from './Pages/about';
 import Contact from './Pages/contact';
 import Events from './Pages/events';
-import Auth from './Pages/auth';
+import Login from './Pages/auth';
 import React from "react";
 import { Router, Switch, Route } from "react-router-dom";
 import { Register } from './Components/Profiles/User/Register/RegisterUser'
+import { ResetPassword } from './Components/Auth/ResetPassword/ResetPassword'
 import Profile from './Components/Profiles/Profile'
 import { history } from "./Helpers/history";
 import Navbar from './Components/Navbar/Navbar';
@@ -30,8 +31,9 @@ const App = () => {
           <Route exact path="/about" exact component={About} />
           <Route exact path="/contact" exact component={Contact} />
           <Route exact path="/events" exact component={Events} />
-          <Route exact path="/auth" component={Auth} />
+          <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/resetPassword" component={ResetPassword} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/user" component={User} />
           <Route exact path="/compWork" component={CompanyWorker} />
