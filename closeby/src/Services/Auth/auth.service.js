@@ -1,8 +1,11 @@
 import axios from "axios";
 
+const API_URL = "http://localhost:5000/api/identity";
+
+
 const login = (email, password) => {
   return axios
-    .post("http://localhost:5000/api/identity/login", {
+    .post(API_URL + "/login", {
       email,
       password
     })
@@ -19,7 +22,14 @@ const logout = () => {
 
 };
 
+const resetUsersPassword = (email) => {
+  return axios.post(API_URL + "/request-password-reset", {
+    email
+  });
+};
+
 export default {
   login,
   logout,
+  resetUsersPassword
 };

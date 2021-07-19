@@ -10,4 +10,5 @@ export const AUTH = "AUTH";
 
 export const GET_USERS = "GET_USERS";
 
-
+export const RESET_PASSW_FAIL = "RESET_PASSW_FAIL";
+export const RESET_PASSW_SUCCESS = "RESET_PASSW_SUCCESS";

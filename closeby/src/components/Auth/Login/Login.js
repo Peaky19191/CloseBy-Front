@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from 'react-router-dom';
-import { login } from "../../Actions/auth";
+import { login } from "../../../Actions/auth";
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
 import useStyles from './styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -101,6 +101,11 @@ const Login = (props) => {
                         <Grid item>
                             <Button component={Link} to="/register">
                                 Don't have an account? Register
+                            </Button>
+                        </Grid>
+                        <Grid item>
+                            <Button component={Link} to="/resetPassword">
+                                Forgot the password? Click Here
                             </Button>
                         </Grid>
                     </Grid>
