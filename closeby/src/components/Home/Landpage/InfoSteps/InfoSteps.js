@@ -2,10 +2,7 @@ import React from 'react'
 import  useStyles  from './styles';
 import ImageCard from '../ImageCard/ImageCard';
 import infos from '../../../../Static/infos';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import useWindowPosition from '../../../../Hook/useWindowPosition';
-//import { Link as Scroll } from 'react-scroll';
-
+import useWindowPosition from '../useWindowPosition';
 
 const InfoSteps = () => {
     const classes = useStyles();
