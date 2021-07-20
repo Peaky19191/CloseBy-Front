@@ -35,7 +35,7 @@ const Navbar = () => {
     return (
         <AppBar className={classes.appBar} position="static" color="inherit">
             <Grid >
-                <img className={classes.image} src="https://i.imgur.com/Tngx1R2.png" alt="logo" />
+                <a href="/"><img className={classes.image} src="https://i.imgur.com/Tngx1R2.png" alt="logo" /></a>
             </Grid>
             <Toolbar className={classes.toolbar}>
                 {currentProfile && showModeratorBoard && (
