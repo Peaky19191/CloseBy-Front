@@ -9,6 +9,11 @@ const Header = () => {
     useEffect(()=>{
         setChecked(true);
     },[]);
+
+    window.onbeforeunload = function () {
+        window.scrollTo(0, 0);
+      }
+      
     return (
         <div className={classes.root} id="header">
             <Collapse in={checked} {...(checked ? {timeout: 1000 } : {})} collapsedHeight={50}>
