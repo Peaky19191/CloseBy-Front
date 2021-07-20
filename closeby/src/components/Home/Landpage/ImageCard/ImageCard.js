@@ -15,7 +15,6 @@ const ImageCard = ({ info, checked }) => {
           <CardMedia
             className={classes.media}
             image={info.imageUrl}
-            title="Contemplative Reptile"
           />
           <CardContent>
             <Typography

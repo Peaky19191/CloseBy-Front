@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export default makeStyles((theme) => ({
     root: {
         maxWidth: 645,
-        background: 'rgba(168,224,238,0.2)',
+        background: 'rgba(168,224,238,0)',
         margin: '20px',
       },
       media: {
