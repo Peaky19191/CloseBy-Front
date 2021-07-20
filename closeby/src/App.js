@@ -1,11 +1,11 @@
 import './App.css';
+import useStyles from './styles';
 import Home from './Pages/home';
 import About from './Pages/about';
 import Contact from './Pages/contact';
 import Events from './Pages/events';
 import Login from './Pages/auth';
 import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
 import { Router, Switch, Route } from "react-router-dom";
 import { Register } from './Components/Profiles/User/Register/RegisterUser'
 import { ResetPassword } from './Components/Auth/ResetPassword/ResetPassword'
@@ -19,18 +19,9 @@ import RegCompAdmin from './Components/Profiles/CompanyAdmin/Register/RegisterCo
 import CompanyAdminList from './Components/Profiles/CompanyAdmin/List/CompAdminsList';
 import UsersList from './Components/Profiles/User/List/UsersList';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    minHeight: '100vh',
-    backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/bg2.jpg'})`,
-    backgroundRepeat: 'no-repeat', 
-    backgroundSize: 'cover',
-  },
-}));
-
 const App = () => {
-
   const classes = useStyles();
+
   return (
     <Router history={history}>
       <Navbar />
