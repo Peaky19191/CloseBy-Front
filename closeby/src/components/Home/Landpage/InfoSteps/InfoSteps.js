@@ -14,9 +14,9 @@ const InfoSteps = () => {
         <div className={classes.container}>
         <div className={classes.root} id="info">
         <ImageCard info={infos[0]} checked={checked}/>
-        <ArrowForwardIcon className={classes.arrowForward}/>
+        
         <ImageCard info={infos[1]} checked={checked}/>
-        <ArrowForwardIcon className={classes.arrowForward}/>
+        
         <ImageCard info={infos[2]} checked={checked}/>
         </div>                 
     </div>

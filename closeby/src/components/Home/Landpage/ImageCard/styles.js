@@ -2,12 +2,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
     root: {
-        maxWidth: 645,
+        maxWidth: 800,
         background: 'rgba(168,224,238,0)',
         margin: '20px',
       },
       media: {
-        height: 440,
+        height: 500,
       },
       title: {
         fontFamily: 'Montserrat',
