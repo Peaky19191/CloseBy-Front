@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import getCompanyAdminListCW from '../../../../Api/companyAdmin'
+import getCompanyAdminListCW from '../../../../api/companyAdmin'
 import useStyles from './styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';

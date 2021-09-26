@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import getCompWorkerList from '../../../../Api/companyWorker'
+import getCompWorkerList from '../../../../api/companyWorker'
 import useStyles from './styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,18 +12,17 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableFooter from '@material-ui/core/TableFooter';
 
 
-const CompanyAdminsList = () => {
+const CompanyWorkersList = () => {
     const classes = useStyles();
     const [workersComp, setCompWorkers] = useState([]);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [company, setCompany] = useState(0);
     const [count, setCount] = useState(0);
 
 
     const getList = () => {
-        getCompWorkerList.getCompanyworkersList(page, rowsPerPage, company)
+        getCompWorkerList.getCompanyworkersList(page, rowsPerPage)
             .then((response) => {
                 const workersComp = response.data.workers;
                 const totalPages = response.data.count;
@@ -89,4 +88,4 @@ const CompanyAdminsList = () => {
     );
 };
 
-export default CompanyAdminsList;
+export default CompanyWorkersList;

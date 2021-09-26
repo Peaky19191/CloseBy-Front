@@ -1,22 +1,24 @@
 import './App.css';
-import Home from './Pages/home';
-import About from './Pages/about';
-import Contact from './Pages/contact';
-import Events from './Pages/events';
-import Login from './Pages/auth';
+import Home from './pages/home';
+import About from './pages/about';
+import Contact from './pages/contact';
+import Events from './pages/events';
+import Login from './pages/auth';
 import React from "react";
 import { Router, Switch, Route } from "react-router-dom";
-import { Register } from './Components/Profiles/User/Register/RegisterUser'
-import { ResetPassword } from './Components/Auth/ResetPassword/ResetPassword'
-import Profile from './Components/Profiles/Profile'
-import { history } from "./Helpers/history";
-import Navbar from './Components/Navbar/Navbar';
-import User from './Components/Profiles/User/User';
-import CompanyWorker from './Components/Profiles/CompanyWorker/CompanyWorker';
-import GlobalAdmin from './Components/Profiles/GlobalAdmin/GlobalAdmin';
-import RegCompAdmin from './Components/Profiles/CompanyAdmin/Register/RegisterCompAdmin';
-import CompanyAdminList from './Components/Profiles/CompanyAdmin/List/CompAdminsList';
-import UsersList from './Components/Profiles/User/List/UsersList';
+import { Register } from './components/Profiles/User/Register/RegisterUser'
+import { ResetPassword } from './components/Auth/ResetPassword/ResetPassword'
+import Profile from './components/Profiles/Profile'
+import { history } from "./helpers/history";
+import Navbar from './components/Navbar/Navbar';
+import User from './components/Profiles/User/User';
+import CompanyWorker from './components/Profiles/CompanyWorker/CompanyWorker';
+import GlobalAdmin from './components/Profiles/GlobalAdmin/GlobalAdmin';
+import RegCompAdmin from './components/Profiles/CompanyAdmin/Register/RegisterCompAdmin';
+import CompanyAdminList from './components/Profiles/CompanyAdmin/List/CompAdminsList';
+import UsersList from './components/Profiles/User/List/UsersList';
+import CompanyWorkerList from './components/Profiles/CompanyWorker/List/CompanyWorkersList';
+
 
 const App = () => {
 
@@ -41,6 +43,7 @@ const App = () => {
           <Route exact path="/reisterCompAdmin" component={RegCompAdmin} />
           <Route exact path="/compAdminList" component={CompanyAdminList} />
           <Route exact path="/usersList" component={UsersList} />
+          <Route exact path="/compWorkerList" component={CompanyWorkerList} />
         </Switch>
       </div>
     </Router>
