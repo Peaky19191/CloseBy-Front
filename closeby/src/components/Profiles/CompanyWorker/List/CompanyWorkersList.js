@@ -10,24 +10,28 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableFooter from '@material-ui/core/TableFooter';
+import { useSelector } from "react-redux";
 
 
 const CompanyWorkersList = () => {
+    const { profile: currentProfile } = useSelector((state) => state.auth);
+
     const classes = useStyles();
-    const [workersComp, setCompWorkers] = useState([]);
+    const [compWorkers, setCompWorkers] = useState([]);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [company, setCompany] = useState("08101c44-477a-4c29-9004-6ec44808d96d");
     const [count, setCount] = useState(0);
 
 
     const getList = () => {
-        getCompWorkerList.getCompanyworkersList(page, rowsPerPage)
+        getCompWorkerList.getCompanyworkersList(page, rowsPerPage, company)
             .then((response) => {
-                const workersComp = response.data.workers;
+                const compWorkers = response.data.workers;
                 const totalPages = response.data.count;
 
-                setCompWorkers(workersComp);
+                setCompWorkers(compWorkers);
                 setCount(totalPages);
             })
             .catch((e) => {
@@ -35,7 +39,7 @@ const CompanyWorkersList = () => {
             });
     };
 
-    useEffect(getList, [page, rowsPerPage]);
+    useEffect(getList, [page, rowsPerPage, company]);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -58,7 +62,7 @@ const CompanyWorkersList = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {workersComp.map((workers) => (
+                    {compWorkers.map((workers) => (
                         <TableRow key={workers.email} >
                             <TableCell component="th" scope="row">
                                 {workers.firstName}    {workers.lastName}
