@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 
 
 const CompanyWorkersList = () => {
-    const { profile: currentProfile } = useSelector((state) => state.auth);
+
 
     const classes = useStyles();
     const [compWorkers, setCompWorkers] = useState([]);
