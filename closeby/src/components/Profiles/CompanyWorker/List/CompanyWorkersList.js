@@ -19,12 +19,12 @@ const CompanyWorkersList = () => {
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    // const [company, setCompany] = useState("08101c44-477a-4c29-9004-6ec44808d96d");
+    const [company, setCompany] = useState("08101c44-477a-4c29-9004-6ec44808d96d");
     const [count, setCount] = useState(0);
 
 
     const getList = () => {
-        getCompWorkerList.getCompanyworkersList(page, rowsPerPage)
+        getCompWorkerList.getCompanyworkersList(page, rowsPerPage, company)
             .then((response) => {
                 const compWorkers = response.data.items;
                 const totalPages = response.data.count;
