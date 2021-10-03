@@ -24,6 +24,7 @@ const CompanyAdminsList = () => {
     const getList = () => {
         getCompanyAdminListCW.getCompanyAdminsList(page, rowsPerPage)
             .then((response) => {
+                console.log(response);
                 const adminsComp = response.data.items;
                 const totalPages = response.data.count;
 
@@ -36,6 +37,10 @@ const CompanyAdminsList = () => {
     };
 
     useEffect(getList, [page, rowsPerPage]);
+
+    // const deleteAdmin = () => {
+    //     getCompanyAdminListCW.deleteCompanyAdmin(id);
+    // }
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);

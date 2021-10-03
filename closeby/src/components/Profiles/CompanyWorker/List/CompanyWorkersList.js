@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import getCompWorkerList from '../../../../api/companyWorker'
+import CompWorker from '../../../../api/companyWorker'
 import useStyles from './styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableFooter from '@material-ui/core/TableFooter';
 import { useSelector } from "react-redux";
+import { Button } from '@material-ui/core';
 
 const CompanyWorkersList = () => {
 
@@ -21,10 +22,11 @@ const CompanyWorkersList = () => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [company, setCompany] = useState("08101c44-477a-4c29-9004-6ec44808d96d");
     const [count, setCount] = useState(0);
+    const [id, setId] = useState("482fe996-e791-46a8-ba37-38fc58f1ace1");
 
 
     const getList = () => {
-        getCompWorkerList.getCompanyworkersList(page, rowsPerPage, company)
+        CompWorker.getCompanyworkersList(page, rowsPerPage, company)
             .then((response) => {
                 const compWorkers = response.data.items;
                 const totalPages = response.data.count;
@@ -38,6 +40,10 @@ const CompanyWorkersList = () => {
     };
 
     useEffect(getList, [page, rowsPerPage]);
+
+    const deleteFromList = () => {
+        CompWorker.deleteCompanyWorker(id);
+    }
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -55,8 +61,9 @@ const CompanyWorkersList = () => {
                         <TableCell className={classes.tableCellTitle}>User</TableCell>
                         <TableCell align="center" className={classes.tableCellTitle}>Email</TableCell>
                         <TableCell align="center" className={classes.tableCellTitle}>Role</TableCell>
-                        {/* <TableCell align="center" className={classes.tableCellTitle}>Company</TableCell> */}
+                        <TableCell align="center" className={classes.tableCellTitle}>Company</TableCell>
                         <TableCell align="center" className={classes.tableCellTitle}>Gender</TableCell>
+                        <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -67,8 +74,12 @@ const CompanyWorkersList = () => {
                             </TableCell>
                             <TableCell align="center">{item.email}</TableCell>
                             <TableCell align="center">{item.role}</TableCell>
-                            {/* <TableCell align="center">{item.company.name}</TableCell> */}
+                            <TableCell align="center">{item.company.name}</TableCell>
                             <TableCell align="center">{item.gender}</TableCell>
+                            <TableCell align="center"><Button onClick={() => {
+                                deleteFromList(id)
+                            }}>Delete</Button></TableCell>
+
                         </TableRow>
                     ))}
                 </TableBody>

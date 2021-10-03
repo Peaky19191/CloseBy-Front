@@ -3,15 +3,19 @@ import authHeader from "../Auth/auth-header";
 
 const API_URL = "http://localhost:5000/api/company-admin";
 
-const registerCompanyAdmin = (firstName, lastName, gender, email) => {
+const registerCompanyAdmin = (firstName, lastName, gender, email, companyId) => {
     return axios.post(API_URL + "/create",
-        { headers: authHeader() },
         {
             firstName,
             lastName,
-            gender,
             email,
-        });
+            gender,
+            companyId
+        },
+        {
+            headers: authHeader()
+        }
+    );
 };
 
 export default {

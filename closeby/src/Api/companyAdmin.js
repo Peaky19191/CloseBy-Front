@@ -15,6 +15,11 @@ const getCompanyAdminsList = (pageNumber, rowsPerPage) => {
     );
 };
 
+const deleteCompanyAdmin = (id) => {
+    return axios.delete(API_URL + "/delete/" + id);
+};
+
 export default {
     getCompanyAdminsList,
+    deleteCompanyAdmin
 };

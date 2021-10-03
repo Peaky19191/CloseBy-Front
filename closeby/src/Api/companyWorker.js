@@ -16,6 +16,11 @@ const getCompanyworkersList = (pageNumber, rowsPerPage, company) => {
     );
 };
 
+const deleteCompanyWorker = (id) => {
+    return axios.delete(API_URL + "/delete/" + id);
+};
+
 export default {
     getCompanyworkersList,
+    deleteCompanyWorker
 };
