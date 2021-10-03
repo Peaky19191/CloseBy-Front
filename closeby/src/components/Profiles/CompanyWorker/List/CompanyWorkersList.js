@@ -12,23 +12,21 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableFooter from '@material-ui/core/TableFooter';
 import { useSelector } from "react-redux";
 
-
 const CompanyWorkersList = () => {
-
 
     const classes = useStyles();
     const [compWorkers, setCompWorkers] = useState([]);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [company, setCompany] = useState("08101c44-477a-4c29-9004-6ec44808d96d");
+    // const [company, setCompany] = useState("08101c44-477a-4c29-9004-6ec44808d96d");
     const [count, setCount] = useState(0);
 
 
     const getList = () => {
-        getCompWorkerList.getCompanyworkersList(page, rowsPerPage, company)
+        getCompWorkerList.getCompanyworkersList(page, rowsPerPage)
             .then((response) => {
-                const compWorkers = response.data.workers;
+                const compWorkers = response.data.items;
                 const totalPages = response.data.count;
 
                 setCompWorkers(compWorkers);
@@ -39,7 +37,7 @@ const CompanyWorkersList = () => {
             });
     };
 
-    useEffect(getList, [page, rowsPerPage, company]);
+    useEffect(getList, [page, rowsPerPage]);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -57,20 +55,20 @@ const CompanyWorkersList = () => {
                         <TableCell className={classes.tableCellTitle}>User</TableCell>
                         <TableCell align="center" className={classes.tableCellTitle}>Email</TableCell>
                         <TableCell align="center" className={classes.tableCellTitle}>Role</TableCell>
-                        <TableCell align="center" className={classes.tableCellTitle}>Company</TableCell>
+                        {/* <TableCell align="center" className={classes.tableCellTitle}>Company</TableCell> */}
                         <TableCell align="center" className={classes.tableCellTitle}>Gender</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {compWorkers.map((workers) => (
-                        <TableRow key={workers.email} >
+                    {compWorkers.map((item) => (
+                        <TableRow key={item.email} >
                             <TableCell component="th" scope="row">
-                                {workers.firstName}    {workers.lastName}
+                                {item.firstName}    {item.lastName}
                             </TableCell>
-                            <TableCell align="center">{workers.email}</TableCell>
-                            <TableCell align="center">{workers.role}</TableCell>
-                            <TableCell align="center">{workers.company.name}</TableCell>
-                            <TableCell align="center">{workers.gender}</TableCell>
+                            <TableCell align="center">{item.email}</TableCell>
+                            <TableCell align="center">{item.role}</TableCell>
+                            {/* <TableCell align="center">{item.company.name}</TableCell> */}
+                            <TableCell align="center">{item.gender}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
@@ -88,7 +86,7 @@ const CompanyWorkersList = () => {
                     </TableRow>
                 </TableFooter>
             </Table>
-        </TableContainer>
+        </TableContainer >
     );
 };
 

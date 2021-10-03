@@ -58,15 +58,15 @@ const CompanyAdminsList = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {adminsComp.map((items) => (
-                        <TableRow key={items.email} >
+                    {adminsComp.map((item) => (
+                        <TableRow key={item.email} >
                             <TableCell component="th" scope="row">
-                                {items.firstName}    {items.lastName}
+                                {item.firstName}    {item.lastName}
                             </TableCell>
-                            <TableCell align="center">{items.email}</TableCell>
-                            <TableCell align="center">{items.role}</TableCell>
-                            <TableCell align="center">{items.company.name}</TableCell>
-                            <TableCell align="center">{items.gender}</TableCell>
+                            <TableCell align="center">{item.email}</TableCell>
+                            <TableCell align="center">{item.role}</TableCell>
+                            <TableCell align="center">{item.company.name}</TableCell>
+                            <TableCell align="center">{item.gender}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
