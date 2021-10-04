@@ -21,6 +21,7 @@ export const Register = () => {
     const [password, setPassword] = useState("");
     const [successful, setSuccessful] = useState(false);
     const [errors, setErrors] = useState({});
+    //const [btnDisabled, setBtnDisabled] = useState(true);
 
     const [open, setOpen] = React.useState(false);
     const handleClose = () => {
@@ -76,15 +77,22 @@ export const Register = () => {
         let temp = {}
         temp.firstName = firstName ? "" : "This field is required (First name)"
         temp.lastName = lastName ? "" : "This field is required (Last name)"
-        temp.email = (/$^|.+@.+..+/).test(email) ? "" : "Email is not valid"
+        temp.email = (/$^|.+@.+..+/).test(email) ? "" : "Email is not valid" 
         temp.gender = gender.length != 0 ? "" : "This field is required (gender)"
         temp.password = (/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,50}$/).test(password) ? "" : "At least 6 characters required including one number and one special character"
         setErrors({
             ...temp
         })
 
-        return Object.values(temp).every( x => x == "")
+        return Object.values(temp).every( x => x == "");
     }
+
+    const enabled = 
+        firstName.length > 0 &&
+        lastName.length > 0 &&
+        email.length > 0 &&
+        gender.length > 0 &&
+        password.length > 0;
 
     return (
         <Container component="main" maxWidth="xs">
@@ -120,16 +128,14 @@ export const Register = () => {
                                 error={errors.lastName} helperText={(errors.lastName)} name="lastName" htmlFor="lastName" variant="outlined" fullWidth value={lastName} onChange={onChangeLastName} type="text" />
                         </Grid>
                         
-                        <FormControl className={classes.formControl} error={errors.gender} fullWidth>               
-                        <InputLabel fullWidth className={classes.select} id="selectLabel">Select your gender</InputLabel>                      
-                        <Select error={errors.gender} className={classes.select} name="gender" value={gender} labelId="selectLabel" open={open} onClose={handleClose} onOpen={handleOpen} onChange={onChangeGender} type="text" variant="outlined" fullWidth>
-                            <MenuItem value="Male" >Male</MenuItem>
-                            <MenuItem value="Female" >Female</MenuItem>
-                        </Select>
-                        <FormHelperText>{errors.gender}</FormHelperText>  
-                        </FormControl>
-                        
-                        
+                        <Grid item xs={12} >
+                            <TextField label="Gender"
+                                error={errors.gender} helperText={(errors.gender)} name="gender" htmlFor="gender" variant="outlined" fullWidth value={gender} onChange={onChangeGender} type="text" select label="Gender">
+                                <MenuItem value={"Male"} >Male</MenuItem>
+                                <MenuItem value={"Female"} >Female</MenuItem>
+                            </TextField>
+                        </Grid>
+           
                         <Grid item xs={12} >
                             <TextField label="Email Address"
                                 error={errors.email} helperText={(errors.email)} name="email" htmlFor="email" variant="outlined" fullWidth value={email} onChange={onChangeEmail}  />
@@ -149,8 +155,7 @@ export const Register = () => {
                                 fullWidth error={errors.password} helperText={(errors.password)} ame="password" htmlFor="password" type="password" label="Password" value={password} onChange={onChangePassword} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} variant="outlined" />
                         </Grid>
                     </Grid>
-                    
-                    <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+                    <Button disabled={!enabled} type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                         Register
                     </Button>
                     <Grid container justify="flex-end">
