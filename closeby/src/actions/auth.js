@@ -5,9 +5,9 @@ import {
     SET_MESSAGE,
     RESET_PASSW_SUCCESS,
     RESET_PASSW_FAIL
-} from "../Constants/actionTypes";
+} from "../constants/actionTypes";
 
-import AuthService from "../Services/Auth/auth.service";
+import AuthService from "../services/Auth/auth.service";
 
 export const login = (email, password) => (dispatch) => {
     return AuthService.login(email, password).then(

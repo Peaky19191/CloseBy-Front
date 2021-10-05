@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../../../../Actions/Profiles/user";
+import { registerUser } from "../../../../actions/Profiles/user";
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField, FormHelperText, FormControl } from '@material-ui/core';
 import useStyles from './styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';

@@ -3,14 +3,14 @@ import { AppBar, Avatar, Button, Grid, Toolbar, Typography } from '@material-ui/
 import useStyles from './styles';
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import { history } from "../../Helpers/history";
-import { logout } from "../../Actions/auth";
-import { clearMessage } from "../../Actions/message";
+import { history } from "../../helpers/history";
+import { logout } from "../../actions/auth";
+import { clearMessage } from "../../actions/message";
 
 const Navbar = () => {
     const classes = useStyles();
-    const [showModeratorBoard, setShowModeratorBoard] = useState(false);
-    const [showGlobalAdminBoard, setShowAdminBoard] = useState(false);
+    const [showGlobalAdminBoard, setShowGlobalAdminBoard] = useState(false);
+    const [showCompanyAdminBoard, setShowCompanyAdminBoard] = useState(false);
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
@@ -23,8 +23,8 @@ const Navbar = () => {
 
     useEffect(() => {
         if (currentProfile && currentProfile.role) {
-            setShowModeratorBoard(currentProfile.role.includes("CompanyWorker"));
-            setShowAdminBoard(currentProfile.role.includes("GlobalAdmin"));
+            setShowGlobalAdminBoard(currentProfile.role.includes("GlobalAdmin"));
+            setShowCompanyAdminBoard(currentProfile.role.includes("CompanyAdmin"));
         }
     }, [currentProfile]);
 
@@ -38,9 +38,10 @@ const Navbar = () => {
                 <a href="/"><img className={classes.image} src="https://i.imgur.com/Tngx1R2.png" alt="logo" /></a>
             </Grid>
             <Toolbar className={classes.toolbar}>
-                {currentProfile && showModeratorBoard && (
+                {currentProfile && showCompanyAdminBoard && (
                     <Grid>
-                        <Button className={classes.button} component={Link} to="/compWork" variant="contained" color="primary">Company Worker</Button>
+                        <Button className={classes.button} component={Link} to="/compWorkerList" variant="contained" color="primary">Company Worksers List</Button>
+                        <Button className={classes.button} component={Link} to="/usersList" variant="contained" color="primary">Users List</Button>
                     </Grid>
                 )}
                 {currentProfile && showGlobalAdminBoard && (

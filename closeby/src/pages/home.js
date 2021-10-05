@@ -1,6 +1,6 @@
 import React from 'react'
-import Header from '../Components/Home/Header/Header';
-import InfoSteps from '../Components/Home/Landpage/InfoSteps/InfoSteps';
+import Header from '../components/Home/Header/Header';
+import InfoSteps from '../components/Home/Landpage/InfoSteps/InfoSteps';
 
 export const Home = () => {
     return (

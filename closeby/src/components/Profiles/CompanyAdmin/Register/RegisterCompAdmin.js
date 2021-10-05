@@ -5,7 +5,7 @@ import useStyles from './styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useDispatch, useSelector } from "react-redux";
-import { regCompAdmin } from "../../../../Actions/Profiles/companyAdmin";
+import { regCompAdmin } from "../../../../actions/Profiles/companyAdmin";
 import { Alert, AlertTitle } from '@material-ui/lab';
 
 const RegCompAdmin = () => {
@@ -15,6 +15,7 @@ const RegCompAdmin = () => {
     const [lastName, setLastName] = useState("");
     const [gender, setGender] = useState("");
     const [email, setEmail] = useState("");
+    const [companyId, setCompanyId] = useState("");
 
     const [successful, setSuccessful] = useState(false);
 
@@ -46,12 +47,16 @@ const RegCompAdmin = () => {
         const email = e.target.value;
         setEmail(email);
     };
+    const onChangeCompanyId = (e) => {
+        const companyId = e.target.value;
+        setCompanyId(companyId);
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
 
-        dispatch(regCompAdmin(firstName, lastName, gender, email))
+        dispatch(regCompAdmin(firstName, lastName, gender, email, companyId))
             .then(() => {
                 setSuccessful(true);
             })
@@ -98,6 +103,9 @@ const RegCompAdmin = () => {
                             <MenuItem value="Male" >Male</MenuItem>
                             <MenuItem value="Female" >Female</MenuItem>
                         </Select>
+                        <Grid item xs={12} >
+                            <TextField label="Company Id" name="companyId" htmlFor="companyId" variant="outlined" type="text" value={companyId} onChange={onChangeCompanyId} fullWidth />
+                        </Grid>
                     </Grid>
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                         Register Company Admin

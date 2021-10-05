@@ -2,9 +2,9 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
     SET_MESSAGE,
-} from "../../Constants/actionTypes";
+} from "../../constants/actionTypes";
 
-import AuthService from "../../Services/Profiles/user.service";
+import AuthService from "../../services/Profiles/user.service";
 
 export const registerUser = (firstName, lastName, gender, email, password) => (dispatch) => {
     return AuthService.registerUser(firstName, lastName, gender, email, password).then(

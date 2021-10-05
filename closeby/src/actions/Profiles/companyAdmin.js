@@ -2,12 +2,12 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
     SET_MESSAGE,
-} from "../../Constants/actionTypes";
+} from "../../constants/actionTypes";
 
-import CompanyAdminService from "../../Services/Profiles/companyAdmin.service";
+import CompanyAdminService from "../../services/Profiles/companyAdmin.service";
 
-export const regCompAdmin = (firstName, lastName, gender, email) => (dispatch) => {
-    return CompanyAdminService.registerCompanyAdmin(firstName, lastName, gender, email).then(
+export const regCompAdmin = (firstName, lastName, gender, email, companyId) => (dispatch) => {
+    return CompanyAdminService.registerCompanyAdmin(firstName, lastName, gender, email, companyId).then(
         (response) => {
             dispatch({
                 type: REGISTER_SUCCESS,

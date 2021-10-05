@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import getCompWorkerList from '../../../../Api/companyWorker'
+import CompWorker from '../../../../api/companyWorker'
 import useStyles from './styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,25 +10,28 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableFooter from '@material-ui/core/TableFooter';
+import { useSelector } from "react-redux";
+import { Button } from '@material-ui/core';
 
+const CompanyWorkersList = () => {
 
-const CompanyAdminsList = () => {
     const classes = useStyles();
-    const [workersComp, setCompWorkers] = useState([]);
+    const [compWorkers, setCompWorkers] = useState([]);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [company, setCompany] = useState(0);
+    const [company, setCompany] = useState("08101c44-477a-4c29-9004-6ec44808d96d");
     const [count, setCount] = useState(0);
+    const [id, setId] = useState("482fe996-e791-46a8-ba37-38fc58f1ace1");
 
 
     const getList = () => {
-        getCompWorkerList.getCompanyworkersList(page, rowsPerPage, company)
+        CompWorker.getCompanyworkersList(page, rowsPerPage, company)
             .then((response) => {
-                const workersComp = response.data.workers;
+                const compWorkers = response.data.items;
                 const totalPages = response.data.count;
 
-                setCompWorkers(workersComp);
+                setCompWorkers(compWorkers);
                 setCount(totalPages);
             })
             .catch((e) => {
@@ -37,6 +40,10 @@ const CompanyAdminsList = () => {
     };
 
     useEffect(getList, [page, rowsPerPage]);
+
+    const deleteFromList = () => {
+        CompWorker.deleteCompanyWorker(id);
+    }
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -56,18 +63,23 @@ const CompanyAdminsList = () => {
                         <TableCell align="center" className={classes.tableCellTitle}>Role</TableCell>
                         <TableCell align="center" className={classes.tableCellTitle}>Company</TableCell>
                         <TableCell align="center" className={classes.tableCellTitle}>Gender</TableCell>
+                        <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {workersComp.map((workers) => (
-                        <TableRow key={workers.email} >
+                    {compWorkers.map((item) => (
+                        <TableRow key={item.email} >
                             <TableCell component="th" scope="row">
-                                {workers.firstName}    {workers.lastName}
+                                {item.firstName}    {item.lastName}
                             </TableCell>
-                            <TableCell align="center">{workers.email}</TableCell>
-                            <TableCell align="center">{workers.role}</TableCell>
-                            <TableCell align="center">{workers.company.name}</TableCell>
-                            <TableCell align="center">{workers.gender}</TableCell>
+                            <TableCell align="center">{item.email}</TableCell>
+                            <TableCell align="center">{item.role}</TableCell>
+                            <TableCell align="center">{item.company.name}</TableCell>
+                            <TableCell align="center">{item.gender}</TableCell>
+                            <TableCell align="center"><Button onClick={() => {
+                                deleteFromList(id)
+                            }}>Delete</Button></TableCell>
+
                         </TableRow>
                     ))}
                 </TableBody>
@@ -85,8 +97,8 @@ const CompanyAdminsList = () => {
                     </TableRow>
                 </TableFooter>
             </Table>
-        </TableContainer>
+        </TableContainer >
     );
 };
 
-export default CompanyAdminsList;
+export default CompanyWorkersList;
