@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import getCompanyAdminListCW from '../../../../api/companyAdmin'
+import CompanyAdmin from '../../../../api/companyAdmin'
 import useStyles from './styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,6 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableFooter from '@material-ui/core/TableFooter';
+import { Button } from '@material-ui/core';
 
 
 const CompanyAdminsList = () => {
@@ -22,9 +23,8 @@ const CompanyAdminsList = () => {
 
 
     const getList = () => {
-        getCompanyAdminListCW.getCompanyAdminsList(page, rowsPerPage)
+        CompanyAdmin.getCompanyAdminsList(page, rowsPerPage)
             .then((response) => {
-                console.log(response);
                 const adminsComp = response.data.items;
                 const totalPages = response.data.count;
 
@@ -38,9 +38,10 @@ const CompanyAdminsList = () => {
 
     useEffect(getList, [page, rowsPerPage]);
 
-    // const deleteAdmin = () => {
-    //     getCompanyAdminListCW.deleteCompanyAdmin(id);
-    // }
+    const deleteFromList = async (id, companyId) => {
+        await CompanyAdmin.deleteCompanyAdmin(id, companyId);
+        getList();
+    }
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -60,6 +61,7 @@ const CompanyAdminsList = () => {
                         <TableCell align="center" className={classes.tableCellTitle}>Role</TableCell>
                         <TableCell align="center" className={classes.tableCellTitle}>Company</TableCell>
                         <TableCell align="center" className={classes.tableCellTitle}>Gender</TableCell>
+                        <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -72,6 +74,11 @@ const CompanyAdminsList = () => {
                             <TableCell align="center">{item.role}</TableCell>
                             <TableCell align="center">{item.company.name}</TableCell>
                             <TableCell align="center">{item.gender}</TableCell>
+                            <TableCell align="center"><Button
+                                onClick={() => {
+                                    deleteFromList(item.id, item.company.id)
+                                }}>Delete</Button></TableCell>
+
                         </TableRow>
                     ))}
                 </TableBody>

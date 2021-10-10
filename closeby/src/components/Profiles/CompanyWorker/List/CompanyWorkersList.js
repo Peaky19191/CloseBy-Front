@@ -83,7 +83,6 @@ const CompanyWorkersList = () => {
                                 onClick={() => {
                                     deleteFromList(item.id, item.company.id)
                                 }}>Delete</Button></TableCell>
-
                         </TableRow>
                     ))}
                 </TableBody>
