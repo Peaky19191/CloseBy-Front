@@ -3,12 +3,12 @@ import authHeader from "../services/Auth/auth-header";
 
 const API_URL = "http://localhost:5000/api/company-worker";
 
-const getCompanyworkersList = (pageNumber, rowsPerPage, company) => {
+const getCompanyWorkersList = (pageNumber, rowsPerPage, companyId) => {
     return axios.post(API_URL + "/list",
         {
             page: pageNumber,
             limit: rowsPerPage,
-            id: company
+            id: companyId
         },
         {
             headers: authHeader()
@@ -16,11 +16,20 @@ const getCompanyworkersList = (pageNumber, rowsPerPage, company) => {
     );
 };
 
-const deleteCompanyWorker = (id) => {
-    return axios.delete(API_URL + "/delete/" + id);
+const deleteCompanyWorker = (id, companyId) => {
+    return axios.delete(API_URL + "/delete",
+        {
+            headers: authHeader(),
+            data: {
+                id: id,
+                companyId: companyId
+            }
+        },
+
+    );
 };
 
 export default {
-    getCompanyworkersList,
+    getCompanyWorkersList,
     deleteCompanyWorker
 };

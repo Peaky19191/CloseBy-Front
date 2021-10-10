@@ -15,18 +15,20 @@ import { Button } from '@material-ui/core';
 
 const CompanyWorkersList = () => {
 
+    const { profile: currentProfile } = useSelector((state) => state.auth);
+
+
     const classes = useStyles();
     const [compWorkers, setCompWorkers] = useState([]);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [company, setCompany] = useState("08101c44-477a-4c29-9004-6ec44808d96d");
+    const [companyId, setCompanyId] = useState("cf98b4c5-ceb5-4571-8588-3ffb6bcc4023");
     const [count, setCount] = useState(0);
-    const [id, setId] = useState("482fe996-e791-46a8-ba37-38fc58f1ace1");
 
 
     const getList = () => {
-        CompWorker.getCompanyworkersList(page, rowsPerPage, company)
+        CompWorker.getCompanyWorkersList(page, rowsPerPage, companyId)
             .then((response) => {
                 const compWorkers = response.data.items;
                 const totalPages = response.data.count;
@@ -41,8 +43,9 @@ const CompanyWorkersList = () => {
 
     useEffect(getList, [page, rowsPerPage]);
 
-    const deleteFromList = () => {
-        CompWorker.deleteCompanyWorker(id);
+    const deleteFromList = async (id, companyId) => {
+        await CompWorker.deleteCompanyWorker(id, companyId);
+        getList();
     }
 
     const handleChangePage = (event, newPage) => {
@@ -76,9 +79,10 @@ const CompanyWorkersList = () => {
                             <TableCell align="center">{item.role}</TableCell>
                             <TableCell align="center">{item.company.name}</TableCell>
                             <TableCell align="center">{item.gender}</TableCell>
-                            <TableCell align="center"><Button onClick={() => {
-                                deleteFromList(id)
-                            }}>Delete</Button></TableCell>
+                            <TableCell align="center"><Button
+                                onClick={() => {
+                                    deleteFromList(item.id, item.company.id)
+                                }}>Delete</Button></TableCell>
 
                         </TableRow>
                     ))}

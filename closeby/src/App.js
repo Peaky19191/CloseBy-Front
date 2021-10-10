@@ -40,7 +40,7 @@ const App = () => {
           <Route exact path="/user" component={User} />
           <Route exact path="/compWork" component={CompanyWorker} />
           <Route exact path="/globAdmin" component={GlobalAdmin} />
-          <Route exact path="/reisterCompAdmin" component={RegCompAdmin} />
+          <Route exact path="/reigsterCompAdmin" component={RegCompAdmin} />
           <Route exact path="/compAdminList" component={CompanyAdminList} />
           <Route exact path="/usersList" component={UsersList} />
           <Route exact path="/compWorkerList" component={CompanyWorkerList} />
