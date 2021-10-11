@@ -41,7 +41,7 @@ const Navbar = () => {
                 {currentProfile && showCompanyAdminBoard && (
                     <Grid>
                         <Button className={classes.button} component={Link} to="/compWorkerList" variant="contained" color="primary">Company Worksers List</Button>
-                        <Button className={classes.button} component={Link} to="/usersList" variant="contained" color="primary">Users List</Button>
+                        {/* <Button className={classes.button} component={Link} to="/usersList" variant="contained" color="primary">Users List</Button> */}
                     </Grid>
                 )}
                 {currentProfile && showGlobalAdminBoard && (
