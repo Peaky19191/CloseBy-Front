@@ -23,8 +23,9 @@ const Navbar = () => {
 
     useEffect(() => {
         if (currentProfile && currentProfile.role) {
-            setShowGlobalAdminBoard(currentProfile.role.includes("GlobalAdmin"));
             setShowCompanyAdminBoard(currentProfile.role.includes("CompanyAdmin"));
+
+            setShowGlobalAdminBoard(currentProfile.role.includes("GlobalAdmin"));
         }
     }, [currentProfile]);
 
@@ -50,7 +51,6 @@ const Navbar = () => {
                         <Button className={classes.button} component={Link} to="/reisterCompAdmin" variant="contained" color="primary">Register Company Admin</Button>
                         <Button className={classes.button} component={Link} to="/compAdminList" variant="contained" color="primary">Company Admins List</Button>
                         <Button className={classes.button} component={Link} to="/usersList" variant="contained" color="primary">Users List</Button>
-
                     </Grid>
                 )}
                 {currentProfile ? (
