@@ -15,6 +15,19 @@ const getUsersList = (pageNumber, rowsPerPage) => {
     );
 };
 
+const deleteUser = (id) => {
+    return axios.delete(API_URL + "/delete",
+        {
+            headers: authHeader(),
+            data: {
+                id: id
+            }
+        },
+
+    );
+};
+
 export default {
     getUsersList,
+    deleteUser
 };

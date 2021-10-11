@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import getUsersList from '../../../../api/user'
+import User from '../../../../api/user'
 import useStyles from './styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,6 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableFooter from '@material-ui/core/TableFooter';
+import { Button } from '@material-ui/core';
 
 
 const UsersList = () => {
@@ -22,7 +23,7 @@ const UsersList = () => {
 
 
     const getList = () => {
-        getUsersList.getUsersList(page, rowsPerPage)
+        User.getUsersList(page, rowsPerPage)
             .then((response) => {
                 const users = response.data.items;
                 const totalPages = response.data.count;
@@ -36,6 +37,11 @@ const UsersList = () => {
     };
 
     useEffect(getList, [page, rowsPerPage]);
+
+    const deleteFromList = async (id) => {
+        await User.deleteUser(id);
+        getList();
+    }
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -54,6 +60,7 @@ const UsersList = () => {
                         <TableCell align="center" className={classes.tableCellTitle}>Email</TableCell>
                         <TableCell align="center" className={classes.tableCellTitle}>Role</TableCell>
                         <TableCell align="center" className={classes.tableCellTitle}>Gender</TableCell>
+                        <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -65,6 +72,10 @@ const UsersList = () => {
                             <TableCell align="center">{item.email}</TableCell>
                             <TableCell align="center">{item.role}</TableCell>
                             <TableCell align="center">{item.gender}</TableCell>
+                            <TableCell align="center"><Button
+                                onClick={() => {
+                                    deleteFromList(item.id)
+                                }}>Delete</Button></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
