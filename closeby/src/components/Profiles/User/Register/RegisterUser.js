@@ -61,7 +61,7 @@ export const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
-        if (validate())
+        if (!validate())         
             window.alert('testing...')
             dispatch(registerUser(firstName, lastName, gender, email, password))
             .then(() => {
@@ -138,7 +138,7 @@ export const Register = () => {
            
                         <Grid item xs={12} >
                             <TextField label="Email Address"
-                                error={errors.email} helperText={(errors.email)} name="email" htmlFor="email" variant="outlined" fullWidth value={email} onChange={onChangeEmail}  />
+                                error={errors.email} helperText={(errors.email)} type="email" name="email" htmlFor="email" variant="outlined" fullWidth value={email} onChange={onChangeEmail}  />
                         </Grid>
                         
                         <Grid item xs={12} >

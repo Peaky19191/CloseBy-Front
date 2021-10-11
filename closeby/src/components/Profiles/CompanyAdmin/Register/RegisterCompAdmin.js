@@ -18,6 +18,7 @@ const RegCompAdmin = () => {
     const [companyId, setCompanyId] = useState("");
 
     const [successful, setSuccessful] = useState(false);
+    const [errors, setErrors] = useState({});
 
     const [open, setOpen] = React.useState(false);
     const handleClose = () => {
@@ -55,15 +56,36 @@ const RegCompAdmin = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
-
-        dispatch(regCompAdmin(firstName, lastName, gender, email, companyId))
-            .then(() => {
-                setSuccessful(true);
-            })
-            .catch(() => {
-                setSuccessful(false);
-            });
+        if (validate())
+            window.alert('testing...')
+            dispatch(regCompAdmin(firstName, lastName, gender, email, companyId))
+                .then(() => {
+                    setSuccessful(true);
+                })
+                .catch(() => {
+                    setSuccessful(false);
+                });
     };
+
+    const validate = () => {
+        let temp = {}
+        temp.firstName = firstName ? "" : "This field is required (First name)"
+        temp.lastName = lastName ? "" : "This field is required (Last name)"
+        temp.email = (/$^|.+@.+..+/).test(email) ? "" : "Email is not valid"
+        temp.gender = gender.length != 0 ? "" : "This field is required (gender)"
+        setErrors({
+            ...temp
+        })
+
+        return Object.values(temp).every( x => x == "");
+    }
+
+    const enabled = 
+        firstName.length > 0 &&
+        lastName.length > 0 &&
+        email.length > 0 &&
+        gender.length > 0 &&
+        companyId.length > 0;
 
     return (
         <Container component="main" maxWidth="xs">
@@ -90,24 +112,26 @@ const RegCompAdmin = () => {
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
-                            <TextField label="First Name" name="firstName" htmlFor="firstName" variant="outlined" type="text" value={firstName} onChange={onChangeFirstName} fullWidth autoFocus />
+                            <TextField label="First Name" error={errors.firstName} helperText={(errors.firstName)} name="firstName" htmlFor="firstName" variant="outlined" type="text" value={firstName} onChange={onChangeFirstName} fullWidth autoFocus />
                         </Grid>
                         <Grid item xs={12} >
-                            <TextField label="Last Name" name="lastName" htmlFor="lastName" variant="outlined" type="text" value={lastName} onChange={onChangeLastName} fullWidth />
+                            <TextField label="Last Name" error={errors.lastName} helperText={(errors.lastName)} name="lastName" htmlFor="lastName" variant="outlined" type="text" value={lastName} onChange={onChangeLastName} fullWidth />
                         </Grid>
                         <Grid item xs={12} >
-                            <TextField label="Email Address" name="email" htmlFor="email" variant="outlined" type="email" value={email} onChange={onChangeEmail} fullWidth />
+                            <TextField label="Email Address"  error={errors.email} helperText={(errors.email)} name="email" htmlFor="email" variant="outlined" type="email" value={email} onChange={onChangeEmail} fullWidth />
                         </Grid>
-                        <InputLabel className={classes.select} id="selectLabel">Select your gender</InputLabel>
-                        <Select className={classes.select} name="gender" labelId="selectLabel" value={gender} onChange={onChangeGender} open={open} onClose={handleClose} onOpen={handleOpen} type="text" variant="outlined" fullWidth>
-                            <MenuItem value="Male" >Male</MenuItem>
-                            <MenuItem value="Female" >Female</MenuItem>
-                        </Select>
+                        <Grid item xs={12} >
+                            <TextField label="Gender"
+                                error={errors.gender} helperText={(errors.gender)} name="gender" htmlFor="gender" variant="outlined" fullWidth value={gender} onChange={onChangeGender} type="text" select label="Gender">
+                                <MenuItem value={"Male"} >Male</MenuItem>
+                                <MenuItem value={"Female"} >Female</MenuItem>
+                            </TextField>
+                        </Grid>
                         <Grid item xs={12} >
                             <TextField label="Company Id" name="companyId" htmlFor="companyId" variant="outlined" type="text" value={companyId} onChange={onChangeCompanyId} fullWidth />
                         </Grid>
                     </Grid>
-                    <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+                    <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>
                         Register Company Admin
                     </Button>
                 </form>
