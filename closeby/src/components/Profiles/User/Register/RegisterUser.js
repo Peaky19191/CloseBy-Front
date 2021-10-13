@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../../../actions/Profiles/user";
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
+import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField, FormHelperText, FormControl } from '@material-ui/core';
 import useStyles from './styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Link } from 'react-router-dom'
@@ -20,6 +20,8 @@ export const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [successful, setSuccessful] = useState(false);
+    const [errors, setErrors] = useState({});
+    //const [btnDisabled, setBtnDisabled] = useState(true);
 
     const [open, setOpen] = React.useState(false);
     const handleClose = () => {
@@ -59,15 +61,38 @@ export const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
-
-        dispatch(registerUser(firstName, lastName, gender, email, password))
+        if (!validate())         
+            window.alert('testing...')
+            dispatch(registerUser(firstName, lastName, gender, email, password))
             .then(() => {
                 setSuccessful(true);
             })
             .catch(() => {
                 setSuccessful(false);
             });
+       
     };
+
+    const validate = () => {
+        let temp = {}
+        temp.firstName = firstName ? "" : "This field is required (First name)"
+        temp.lastName = lastName ? "" : "This field is required (Last name)"
+        temp.email = (/$^|.+@.+..+/).test(email) ? "" : "Email is not valid" 
+        temp.gender = gender.length != 0 ? "" : "This field is required (gender)"
+        temp.password = (/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,50}$/).test(password) ? "" : "At least 6 characters required including one number and one special character"
+        setErrors({
+            ...temp
+        })
+
+        return Object.values(temp).every( x => x == "");
+    }
+
+    const enabled = 
+        firstName.length > 0 &&
+        lastName.length > 0 &&
+        email.length > 0 &&
+        gender.length > 0 &&
+        password.length > 0;
 
     return (
         <Container component="main" maxWidth="xs">
@@ -92,24 +117,30 @@ export const Register = () => {
                     )
                 }
                 <form className={classes.form} onSubmit={handleSubmit} >
+                    
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
                             <TextField label="First Name"
-                                name="firstName" htmlFor="firstName" variant="outlined" fullWidth value={firstName} onChange={onChangeFirstName} type="text" autoFocus />
+                                error={errors.firstName} helperText={(errors.firstName)} name="firstName" htmlFor="firstName" variant="outlined" fullWidth value={firstName} onChange={onChangeFirstName} type="text" autoFocus />
                         </Grid>
                         <Grid item xs={12} >
                             <TextField label="Last Name"
-                                name="lastName" htmlFor="lastName" variant="outlined" fullWidth value={lastName} onChange={onChangeLastName} type="text" />
+                                error={errors.lastName} helperText={(errors.lastName)} name="lastName" htmlFor="lastName" variant="outlined" fullWidth value={lastName} onChange={onChangeLastName} type="text" />
                         </Grid>
-                        <InputLabel className={classes.select} id="selectLabel">Select your gender</InputLabel>
-                        <Select className={classes.select} name="gender" value={gender} labelId="selectLabel" open={open} onClose={handleClose} onOpen={handleOpen} onChange={onChangeGender} type="text" variant="outlined" fullWidth>
-                            <MenuItem value="Male" >Male</MenuItem>
-                            <MenuItem value="Female" >Female</MenuItem>
-                        </Select>
+                        
+                        <Grid item xs={12} >
+                            <TextField label="Gender"
+                                error={errors.gender} helperText={(errors.gender)} name="gender" htmlFor="gender" variant="outlined" fullWidth value={gender} onChange={onChangeGender} type="text" select label="Gender">
+                                <MenuItem value={"Male"} >Male</MenuItem>
+                                <MenuItem value={"Female"} >Female</MenuItem>
+                            </TextField>
+                        </Grid>
+           
                         <Grid item xs={12} >
                             <TextField label="Email Address"
-                                name="email" htmlFor="email" type="email" variant="outlined" fullWidth value={email} onChange={onChangeEmail} type="email" />
+                                error={errors.email} helperText={(errors.email)} type="email" name="email" htmlFor="email" variant="outlined" fullWidth value={email} onChange={onChangeEmail}  />
                         </Grid>
+                        
                         <Grid item xs={12} >
                             <TextField
                                 InputProps={{
@@ -121,15 +152,15 @@ export const Register = () => {
                                         </InputAdornment>
                                     )
                                 }}
-                                fullWidth ame="password" htmlFor="password" type="password" label="Password" value={password} onChange={onChangePassword} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} variant="outlined" />
+                                fullWidth error={errors.password} helperText={(errors.password)} ame="password" htmlFor="password" type="password" label="Password" value={password} onChange={onChangePassword} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} variant="outlined" />
                         </Grid>
                     </Grid>
-                    <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
+                    <Button disabled={!enabled} type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                         Register
                     </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
-                            <Button component={Link} to="/login">
+                            <Button component={Link} to="/auth">
                                 Already have an account? Login
                             </Button>
                         </Grid>

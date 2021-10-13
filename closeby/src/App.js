@@ -1,4 +1,5 @@
 import './App.css';
+import useStyles from './styles';
 import Home from './pages/home';
 import About from './pages/about';
 import Contact from './pages/contact';
@@ -10,7 +11,7 @@ import { Register } from './components/Profiles/User/Register/RegisterUser'
 import { ResetPassword } from './components/Auth/ResetPassword/ResetPassword'
 import Profile from './components/Profiles/Profile'
 import { history } from "./helpers/history";
-import Navbar from './components/Navbar/Navbar';
+import Navbar from './components/Navbar/navbar';
 import User from './components/Profiles/User/User';
 import CompanyWorker from './components/Profiles/CompanyWorker/CompanyWorker';
 import GlobalAdmin from './components/Profiles/GlobalAdmin/GlobalAdmin';
@@ -19,15 +20,13 @@ import CompanyAdminList from './components/Profiles/CompanyAdmin/List/CompAdmins
 import UsersList from './components/Profiles/User/List/UsersList';
 import CompanyWorkerList from './components/Profiles/CompanyWorker/List/CompanyWorkersList';
 
-
 const App = () => {
-
-
+  const classes = useStyles();
 
   return (
     <Router history={history}>
       <Navbar />
-      <div className="container mt-3">
+      <div className={classes.root}>
         <Switch>
           <Route exact path="/" exact component={Home} />
           <Route exact path="/about" exact component={About} />

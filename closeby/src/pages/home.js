@@ -1,16 +1,14 @@
 import React from 'react'
+import Header from '../components/Home/Header/Header';
+import InfoSteps from '../components/Home/Landpage/InfoSteps/InfoSteps';
 
 export const Home = () => {
     return (
-        <div style={{
-            display: 'flex',
-            justifyContent: 'center', 
-            alignItems: 'center', 
-            height: '90vh'
-            }}
-        >
-            <h1>Home</h1>
+        <div>
+            <Header /> 
+            <InfoSteps />
         </div>
+        
     )
 }
 
