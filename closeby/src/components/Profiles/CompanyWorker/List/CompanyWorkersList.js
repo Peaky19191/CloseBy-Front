@@ -12,6 +12,8 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableFooter from '@material-ui/core/TableFooter';
 import { useSelector } from "react-redux";
 import { Button } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
 
 const CompanyWorkersList = () => {
 
@@ -23,7 +25,7 @@ const CompanyWorkersList = () => {
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [companyId, setCompanyId] = useState("cf98b4c5-ceb5-4571-8588-3ffb6bcc4023");
+    const [companyId, setCompanyId] = useState("049384ca-1082-442d-bf4a-b28e7e067563");
     const [count, setCount] = useState(0);
 
 
@@ -79,10 +81,17 @@ const CompanyWorkersList = () => {
                             <TableCell align="center">{item.role}</TableCell>
                             <TableCell align="center">{item.company.name}</TableCell>
                             <TableCell align="center">{item.gender}</TableCell>
-                            <TableCell align="center"><Button
+                            <TableCell align="center">
+                                {/* <Button
                                 onClick={() => {
                                     deleteFromList(item.id, item.company.id)
-                                }}>Delete</Button></TableCell>
+                                }}>Delete</Button> */}
+                                <IconButton aria-label="delete" size="large">
+                                    <DeleteIcon onClick={() => {
+                                        deleteFromList(item.id, item.company.id)
+                                    }} />
+                                </IconButton>
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

@@ -23,13 +23,13 @@ export const Register = () => {
     const [errors, setErrors] = useState({});
     //const [btnDisabled, setBtnDisabled] = useState(true);
 
-    const [open, setOpen] = React.useState(false);
-    const handleClose = () => {
-        setOpen(false);
-    };
-    const handleOpen = () => {
-        setOpen(true);
-    };
+    // const [open, setOpen] = React.useState(false);
+    // const handleClose = () => {
+    //     setOpen(false);
+    // };
+    // const handleOpen = () => {
+    //     setOpen(true);
+    // };
 
     const [showPassword, setShowPassword] = useState(false);
     const handleShowPassword = () => setShowPassword(!showPassword);
@@ -61,33 +61,33 @@ export const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
-        if (!validate())         
+        if (!validate())
             window.alert('testing...')
-            dispatch(registerUser(firstName, lastName, gender, email, password))
+        dispatch(registerUser(firstName, lastName, gender, email, password))
             .then(() => {
                 setSuccessful(true);
             })
             .catch(() => {
                 setSuccessful(false);
             });
-       
+
     };
 
     const validate = () => {
         let temp = {}
         temp.firstName = firstName ? "" : "This field is required (First name)"
         temp.lastName = lastName ? "" : "This field is required (Last name)"
-        temp.email = (/$^|.+@.+..+/).test(email) ? "" : "Email is not valid" 
+        temp.email = (/$^|.+@.+..+/).test(email) ? "" : "Email is not valid"
         temp.gender = gender.length != 0 ? "" : "This field is required (gender)"
         temp.password = (/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,50}$/).test(password) ? "" : "At least 6 characters required including one number and one special character"
         setErrors({
             ...temp
         })
 
-        return Object.values(temp).every( x => x == "");
+        return Object.values(temp).every(x => x == "");
     }
 
-    const enabled = 
+    const enabled =
         firstName.length > 0 &&
         lastName.length > 0 &&
         email.length > 0 &&
@@ -117,7 +117,7 @@ export const Register = () => {
                     )
                 }
                 <form className={classes.form} onSubmit={handleSubmit} >
-                    
+
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
                             <TextField label="First Name"
@@ -127,7 +127,7 @@ export const Register = () => {
                             <TextField label="Last Name"
                                 error={errors.lastName} helperText={(errors.lastName)} name="lastName" htmlFor="lastName" variant="outlined" fullWidth value={lastName} onChange={onChangeLastName} type="text" />
                         </Grid>
-                        
+
                         <Grid item xs={12} >
                             <TextField label="Gender"
                                 error={errors.gender} helperText={(errors.gender)} name="gender" htmlFor="gender" variant="outlined" fullWidth value={gender} onChange={onChangeGender} type="text" select label="Gender">
@@ -135,12 +135,16 @@ export const Register = () => {
                                 <MenuItem value={"Female"} >Female</MenuItem>
                             </TextField>
                         </Grid>
-           
+                        <InputLabel className={classes.select} id="selectLabel">Select your gender</InputLabel>
+                        <Select className={classes.select} name="gender" value={gender} labelId="selectLabel" onChange={onChangeGender} type="text" variant="outlined" fullWidth>
+                            <MenuItem value="Male" >Male</MenuItem>
+                            <MenuItem value="Female" >Female</MenuItem>
+                        </Select>
                         <Grid item xs={12} >
                             <TextField label="Email Address"
-                                error={errors.email} helperText={(errors.email)} type="email" name="email" htmlFor="email" variant="outlined" fullWidth value={email} onChange={onChangeEmail}  />
+                                error={errors.email} helperText={(errors.email)} type="email" name="email" htmlFor="email" variant="outlined" fullWidth value={email} onChange={onChangeEmail} />
                         </Grid>
-                        
+
                         <Grid item xs={12} >
                             <TextField
                                 InputProps={{
@@ -170,5 +174,4 @@ export const Register = () => {
         </Container>
     );
 }
-
 export default Register;
