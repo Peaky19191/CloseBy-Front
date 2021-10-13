@@ -21,6 +21,14 @@ export const Register = () => {
     const [password, setPassword] = useState("");
     const [successful, setSuccessful] = useState(false);
     const [errors, setErrors] = useState({});
+
+    const enabled =
+        firstName.length > 0 &&
+        lastName.length > 0 &&
+        email.length > 0 &&
+        gender.length > 0 &&
+        password.length > 0;
+
     //const [btnDisabled, setBtnDisabled] = useState(true);
 
     // const [open, setOpen] = React.useState(false);
@@ -61,16 +69,15 @@ export const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
-        if (!validate())
-            window.alert('testing...')
-        dispatch(registerUser(firstName, lastName, gender, email, password))
-            .then(() => {
-                setSuccessful(true);
-            })
-            .catch(() => {
-                setSuccessful(false);
-            });
 
+        if (validate())
+            dispatch(registerUser(firstName, lastName, gender, email, password))
+                .then(() => {
+                    setSuccessful(true);
+                })
+                .catch(() => {
+                    setSuccessful(false);
+                });
     };
 
     const validate = () => {
@@ -83,16 +90,11 @@ export const Register = () => {
         setErrors({
             ...temp
         })
-
+        console.log(Object.values(temp).every(x => x == ""));
         return Object.values(temp).every(x => x == "");
     }
 
-    const enabled =
-        firstName.length > 0 &&
-        lastName.length > 0 &&
-        email.length > 0 &&
-        gender.length > 0 &&
-        password.length > 0;
+
 
     return (
         <Container component="main" maxWidth="xs">
@@ -135,11 +137,11 @@ export const Register = () => {
                                 <MenuItem value={"Female"} >Female</MenuItem>
                             </TextField>
                         </Grid>
-                        <InputLabel className={classes.select} id="selectLabel">Select your gender</InputLabel>
+                        {/* <InputLabel className={classes.select} id="selectLabel">Select your gender</InputLabel>
                         <Select className={classes.select} name="gender" value={gender} labelId="selectLabel" onChange={onChangeGender} type="text" variant="outlined" fullWidth>
                             <MenuItem value="Male" >Male</MenuItem>
                             <MenuItem value="Female" >Female</MenuItem>
-                        </Select>
+                        </Select> */}
                         <Grid item xs={12} >
                             <TextField label="Email Address"
                                 error={errors.email} helperText={(errors.email)} type="email" name="email" htmlFor="email" variant="outlined" fullWidth value={email} onChange={onChangeEmail} />
@@ -164,7 +166,7 @@ export const Register = () => {
                     </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
-                            <Button component={Link} to="/auth">
+                            <Button component={Link} to="/login">
                                 Already have an account? Login
                             </Button>
                         </Grid>
