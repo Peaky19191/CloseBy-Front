@@ -57,7 +57,6 @@ const RegCompAdmin = () => {
         e.preventDefault();
         setSuccessful(false);
         if (validate())
-            window.alert('testing...')
             dispatch(regCompAdmin(firstName, lastName, gender, email, companyId))
                 .then(() => {
                     setSuccessful(true);
@@ -77,10 +76,10 @@ const RegCompAdmin = () => {
             ...temp
         })
 
-        return Object.values(temp).every( x => x == "");
+        return Object.values(temp).every(x => x == "");
     }
 
-    const enabled = 
+    const enabled =
         firstName.length > 0 &&
         lastName.length > 0 &&
         email.length > 0 &&
@@ -118,7 +117,7 @@ const RegCompAdmin = () => {
                             <TextField label="Last Name" error={errors.lastName} helperText={(errors.lastName)} name="lastName" htmlFor="lastName" variant="outlined" type="text" value={lastName} onChange={onChangeLastName} fullWidth />
                         </Grid>
                         <Grid item xs={12} >
-                            <TextField label="Email Address"  error={errors.email} helperText={(errors.email)} name="email" htmlFor="email" variant="outlined" type="email" value={email} onChange={onChangeEmail} fullWidth />
+                            <TextField label="Email Address" error={errors.email} helperText={(errors.email)} name="email" htmlFor="email" variant="outlined" type="email" value={email} onChange={onChangeEmail} fullWidth />
                         </Grid>
                         <Grid item xs={12} >
                             <TextField label="Gender"

@@ -1,10 +1,10 @@
 import axios from "axios";
 import authHeader from "../services/Auth/auth-header";
 
-const API_URL = "http://localhost:5000/api/company-admin";
+const API_URL = "http://localhost:5000/api/company-admin/";
 
 const getCompanyAdminsList = (pageNumber, rowsPerPage) => {
-    return axios.post(API_URL + "/list",
+    return axios.post(API_URL + "list",
         {
             page: pageNumber,
             limit: rowsPerPage
@@ -16,7 +16,7 @@ const getCompanyAdminsList = (pageNumber, rowsPerPage) => {
 };
 
 const deleteCompanyAdmin = (id, companyId) => {
-    return axios.delete(API_URL + "/delete",
+    return axios.delete(API_URL + "delete",
         {
             headers: authHeader(),
             data: {
@@ -28,7 +28,16 @@ const deleteCompanyAdmin = (id, companyId) => {
     );
 };
 
+const infoCompanyAdmin = (id) => {
+    return axios.get(API_URL + id,
+        {
+            headers: authHeader(),
+        },
+    );
+};
+
 export default {
     getCompanyAdminsList,
-    deleteCompanyAdmin
+    deleteCompanyAdmin,
+    infoCompanyAdmin
 };

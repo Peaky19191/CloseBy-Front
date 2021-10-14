@@ -10,8 +10,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableFooter from '@material-ui/core/TableFooter';
-import { Button } from '@material-ui/core';
-
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
 
 const CompanyAdminsList = () => {
     const classes = useStyles();
@@ -74,10 +74,13 @@ const CompanyAdminsList = () => {
                             <TableCell align="center">{item.role}</TableCell>
                             <TableCell align="center">{item.company.name}</TableCell>
                             <TableCell align="center">{item.gender}</TableCell>
-                            <TableCell align="center"><Button
-                                onClick={() => {
-                                    deleteFromList(item.id, item.company.id)
-                                }}>Delete</Button></TableCell>
+                            <TableCell align="center">
+                                <IconButton aria-label="delete" size="large">
+                                    <DeleteIcon onClick={() => {
+                                        deleteFromList(item.id, item.company.id)
+                                    }} />
+                                </IconButton>
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

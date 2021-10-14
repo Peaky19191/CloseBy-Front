@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CompWorker from '../../../../api/companyWorker'
+import CompAdmin from '../../../../api/companyAdmin'
 import useStyles from './styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -11,7 +12,6 @@ import Paper from '@material-ui/core/Paper';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableFooter from '@material-ui/core/TableFooter';
 import { useSelector } from "react-redux";
-import { Button } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 
@@ -25,11 +25,24 @@ const CompanyWorkersList = () => {
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [companyId, setCompanyId] = useState("049384ca-1082-442d-bf4a-b28e7e067563");
+    const [companyId, setCompanyId] = useState();
     const [count, setCount] = useState(0);
 
 
-    const getList = () => {
+    const getList = async () => {
+
+        await CompAdmin.infoCompanyAdmin(currentProfile.id)
+            .then((response) => {
+                const compId = response.data.company.id;
+
+                setCompanyId(compId);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+
+        console.log(companyId);
+
         CompWorker.getCompanyWorkersList(page, rowsPerPage, companyId)
             .then((response) => {
                 const compWorkers = response.data.items;
@@ -82,10 +95,6 @@ const CompanyWorkersList = () => {
                             <TableCell align="center">{item.company.name}</TableCell>
                             <TableCell align="center">{item.gender}</TableCell>
                             <TableCell align="center">
-                                {/* <Button
-                                onClick={() => {
-                                    deleteFromList(item.id, item.company.id)
-                                }}>Delete</Button> */}
                                 <IconButton aria-label="delete" size="large">
                                     <DeleteIcon onClick={() => {
                                         deleteFromList(item.id, item.company.id)

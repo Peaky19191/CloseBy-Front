@@ -29,16 +29,6 @@ export const Register = () => {
         gender.length > 0 &&
         password.length > 0;
 
-    //const [btnDisabled, setBtnDisabled] = useState(true);
-
-    // const [open, setOpen] = React.useState(false);
-    // const handleClose = () => {
-    //     setOpen(false);
-    // };
-    // const handleOpen = () => {
-    //     setOpen(true);
-    // };
-
     const [showPassword, setShowPassword] = useState(false);
     const handleShowPassword = () => setShowPassword(!showPassword);
 
@@ -94,8 +84,6 @@ export const Register = () => {
         return Object.values(temp).every(x => x == "");
     }
 
-
-
     return (
         <Container component="main" maxWidth="xs">
             <Paper className={classes.paper} elevation={3}>
@@ -110,7 +98,7 @@ export const Register = () => {
                     </Alert>
                     :
                     (message ?
-                        <Alert className={successful ? classes.alert : classes.alert} severity="error">
+                        <Alert className={classes.alert} severity="error">
                             <AlertTitle>Error</AlertTitle>
                             <strong> {message}</strong>
                         </Alert>
@@ -119,7 +107,6 @@ export const Register = () => {
                     )
                 }
                 <form className={classes.form} onSubmit={handleSubmit} >
-
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
                             <TextField label="First Name"
@@ -137,11 +124,6 @@ export const Register = () => {
                                 <MenuItem value={"Female"} >Female</MenuItem>
                             </TextField>
                         </Grid>
-                        {/* <InputLabel className={classes.select} id="selectLabel">Select your gender</InputLabel>
-                        <Select className={classes.select} name="gender" value={gender} labelId="selectLabel" onChange={onChangeGender} type="text" variant="outlined" fullWidth>
-                            <MenuItem value="Male" >Male</MenuItem>
-                            <MenuItem value="Female" >Female</MenuItem>
-                        </Select> */}
                         <Grid item xs={12} >
                             <TextField label="Email Address"
                                 error={errors.email} helperText={(errors.email)} type="email" name="email" htmlFor="email" variant="outlined" fullWidth value={email} onChange={onChangeEmail} />
