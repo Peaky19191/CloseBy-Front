@@ -5,10 +5,10 @@ import useStyles from './styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useDispatch, useSelector } from "react-redux";
-import { regCompAdmin } from "../../../../actions/Profiles/companyAdmin";
+import { regCompWorker } from "../../../../actions/Profiles/companyWorker";
 import { Alert, AlertTitle } from '@material-ui/lab';
 
-const RegCompAdmin = () => {
+const RegCompWorker = () => {
     const classes = useStyles();
 
     const [firstName, setFirstName] = useState("");
@@ -49,7 +49,7 @@ const RegCompAdmin = () => {
         e.preventDefault();
         setSuccessful(false);
         if (validate())
-            dispatch(regCompAdmin(firstName, lastName, gender, email, companyId))
+            dispatch(regCompWorker(firstName, lastName, gender, email, companyId))
                 .then(() => {
                     setSuccessful(true);
                 })
@@ -123,7 +123,7 @@ const RegCompAdmin = () => {
                         </Grid>
                     </Grid>
                     <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>
-                        Register Company Admin
+                        Register Company Worker
                     </Button>
                 </form>
             </Paper>
@@ -131,4 +131,4 @@ const RegCompAdmin = () => {
     );
 };
 
-export default RegCompAdmin;
+export default RegCompWorker;

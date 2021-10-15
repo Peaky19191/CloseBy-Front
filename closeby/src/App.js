@@ -19,6 +19,7 @@ import RegCompAdmin from './components/Profiles/CompanyAdmin/Register/RegisterCo
 import CompanyAdminList from './components/Profiles/CompanyAdmin/List/CompAdminsList';
 import UsersList from './components/Profiles/User/List/UsersList';
 import CompanyWorkerList from './components/Profiles/CompanyWorker/List/CompanyWorkersList';
+import RegCompWorker from './components/Profiles/CompanyWorker/Register/RegisterCompWorker';
 
 const App = () => {
   const classes = useStyles();
@@ -42,7 +43,8 @@ const App = () => {
           <Route exact path="/reigsterCompAdmin" component={RegCompAdmin} />
           <Route exact path="/compAdminList" component={CompanyAdminList} />
           <Route exact path="/usersList" component={UsersList} />
-          <Route exact path="/compWorkerList" component={CompanyWorkerList} />
+          <Route exact path="/compWorkerList" component={CompanyWorkerList} />\
+          <Route exact path="/reigsterCompWorker" component={RegCompWorker} />
         </Switch>
       </div>
     </Router>
