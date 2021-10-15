@@ -21,11 +21,6 @@ export const login = (email, password) => (dispatch) => {
         },
         (error) => {
             const message = error.response.data.type;
-            // (error.response &&
-            //     error.response.data &&
-            //     error.response.data.message) ||
-            // error.message ||
-            // error.toString();
             dispatch({
                 type: LOGIN_FAIL,
             });
