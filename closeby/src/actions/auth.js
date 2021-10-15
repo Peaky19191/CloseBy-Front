@@ -4,7 +4,9 @@ import {
     LOGOUT,
     SET_MESSAGE,
     RESET_PASSW_SUCCESS,
-    RESET_PASSW_FAIL
+    RESET_PASSW_FAIL,
+    NEW_PASSW_SUCCESS,
+    NEW_PASSW_FAIL,
 } from "../constants/actionTypes";
 
 import AuthService from "../services/Auth/auth.service";
@@ -66,6 +68,42 @@ export const resetPassword = (email) => (dispatch) => {
 
             dispatch({
                 type: RESET_PASSW_FAIL,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
+export const setNewPassword = (password, token) => (dispatch) => {
+    return AuthService.setNewUsersPassword(password, token).then(
+        (response) => {
+            dispatch({
+                type: NEW_PASSW_SUCCESS,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: response.data.message,
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: NEW_PASSW_FAIL,
             });
 
             dispatch({

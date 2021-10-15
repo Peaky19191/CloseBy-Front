@@ -20,6 +20,7 @@ import CompanyAdminList from './components/Profiles/CompanyAdmin/List/CompAdmins
 import UsersList from './components/Profiles/User/List/UsersList';
 import CompanyWorkerList from './components/Profiles/CompanyWorker/List/CompanyWorkersList';
 import RegCompWorker from './components/Profiles/CompanyWorker/Register/RegisterCompWorker';
+import NewPassword from './components/Auth/NewPassword/NewPassword';
 
 const App = () => {
   const classes = useStyles();
@@ -45,6 +46,7 @@ const App = () => {
           <Route exact path="/usersList" component={UsersList} />
           <Route exact path="/compWorkerList" component={CompanyWorkerList} />\
           <Route exact path="/reigsterCompWorker" component={RegCompWorker} />
+          <Route exact path="/password-reset/:token" component={NewPassword} />
         </Switch>
       </div>
     </Router>
