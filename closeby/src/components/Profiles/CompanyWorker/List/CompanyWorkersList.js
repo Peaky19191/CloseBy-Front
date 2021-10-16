@@ -54,6 +54,8 @@ const CompanyWorkersList = () => {
 
         console.log(companyId);
 
+
+
         CompWorker.getCompanyWorkersList(page, rowsPerPage, companyId)
             .then((response) => {
                 const compWorkers = response.data.items;
