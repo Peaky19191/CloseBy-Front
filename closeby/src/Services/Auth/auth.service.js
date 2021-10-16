@@ -28,8 +28,16 @@ const resetUsersPassword = (email) => {
   });
 };
 
+const setNewUsersPassword = (newPassword, passwordResetToken) => {
+  return axios.put(API_URL + "/reset-password", {
+    newPassword,
+    passwordResetToken
+  });
+};
+
 export default {
   login,
   logout,
-  resetUsersPassword
+  resetUsersPassword,
+  setNewUsersPassword,
 };
