@@ -7,15 +7,17 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { useDispatch, useSelector } from "react-redux";
 import { regCompWorker } from "../../../../actions/Profiles/companyWorker";
 import { Alert, AlertTitle } from '@material-ui/lab';
+import CompAdmin from '../../../../api/companyAdmin'
 
 const RegCompWorker = () => {
     const classes = useStyles();
+
+    const { profile: currentProfile } = useSelector((state) => state.auth);
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [gender, setGender] = useState("");
     const [email, setEmail] = useState("");
-    const [companyId, setCompanyId] = useState("");
 
     const [successful, setSuccessful] = useState(false);
     const [errors, setErrors] = useState({});
@@ -23,6 +25,19 @@ const RegCompWorker = () => {
     const { message } = useSelector(state => state.message);
 
     const dispatch = useDispatch();
+
+    const [companyId, setCompanyId] = useState("");
+    useEffect(() => {
+        CompAdmin.infoCompanyAdmin(currentProfile.id)
+            .then((response) => {
+                const compId = response.data.company.id;
+
+                setCompanyId(compId);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }, [companyId])
 
     const onChangeFirstName = (e) => {
         const firstName = e.target.value;
@@ -40,10 +55,10 @@ const RegCompWorker = () => {
         const email = e.target.value;
         setEmail(email);
     };
-    const onChangeCompanyId = (e) => {
-        const companyId = e.target.value;
-        setCompanyId(companyId);
-    };
+    // const onChangeCompanyId = (e) => {
+    //     const companyId = e.target.value;
+    //     setCompanyId(companyId);
+    // };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -75,8 +90,8 @@ const RegCompWorker = () => {
         firstName.length > 0 &&
         lastName.length > 0 &&
         email.length > 0 &&
-        gender.length > 0 &&
-        companyId.length > 0;
+        gender.length > 0;
+    // companyId.length > 0;
 
     return (
         <Container component="main" maxWidth="xs">
@@ -84,11 +99,11 @@ const RegCompWorker = () => {
                 <Avatar className={classes.avatar}>
                     <SupervisorAccountIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">Register Company Admin</Typography>
+                <Typography component="h1" variant="h5">Register Company Worker</Typography>
                 {successful ?
                     <Alert className={classes.alert} severity="success">
                         <AlertTitle>Success</AlertTitle>
-                        <strong>You have successfully registered your account</strong>
+                        <strong>You have successfully registered your Company Worker account</strong>
                     </Alert>
                     :
                     (message ?
@@ -118,9 +133,9 @@ const RegCompWorker = () => {
                                 <MenuItem value={"Female"} >Female</MenuItem>
                             </TextField>
                         </Grid>
-                        <Grid item xs={12} >
+                        {/* <Grid item xs={12} >
                             <TextField label="Company Id" name="companyId" htmlFor="companyId" variant="outlined" type="text" value={companyId} onChange={onChangeCompanyId} fullWidth />
-                        </Grid>
+                        </Grid> */}
                     </Grid>
                     <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>
                         Register Company Worker

@@ -25,13 +25,11 @@ const CompanyWorkersList = () => {
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [companyId, setCompanyId] = useState();
     const [count, setCount] = useState(0);
 
-
-    const getList = async () => {
-
-        await CompAdmin.infoCompanyAdmin(currentProfile.id)
+    const [companyId, setCompanyId] = useState();
+    useEffect(() => {
+        CompAdmin.infoCompanyAdmin(currentProfile.id)
             .then((response) => {
                 const compId = response.data.company.id;
 
@@ -40,6 +38,19 @@ const CompanyWorkersList = () => {
             .catch((e) => {
                 console.log(e);
             });
+    }, [companyId])
+
+    const getList = async () => {
+
+        // await CompAdmin.infoCompanyAdmin(currentProfile.id)
+        //     .then((response) => {
+        //         const compId = response.data.company.id;
+
+        //         setCompanyId(compId);
+        //     })
+        //     .catch((e) => {
+        //         console.log(e);
+        //     });
 
         console.log(companyId);
 
