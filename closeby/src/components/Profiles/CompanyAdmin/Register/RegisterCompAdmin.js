@@ -135,19 +135,11 @@ const RegCompAdmin = () => {
                                 <MenuItem value={"Female"} >Female</MenuItem>
                             </TextField>
                         </Grid>
-                        {/* <Grid item xs={12} >
-                            <TextField label="Company Id" name="companyId" htmlFor="companyId" variant="outlined" type="text" value={companyId} onChange={onChangeCompanyId} fullWidth />
-                        </Grid> */}
                         <Grid item xs={12} >
                             <TextField label="Company Id" error={errors.companyId} helperText={(errors.companyId)} name="companyId" htmlFor="companyId" variant="outlined" type="text" value={companyId} onChange={onChangeCompanyId} fullWidth select label="Company Name">
-                                <MenuItem value={"Male"} >Male</MenuItem>
-                                <MenuItem value={"Female"} >Female</MenuItem>
-
                                 {company.map((item) => (
                                     <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
                                 ))}
-
-
                             </TextField>
                         </Grid>
                     </Grid>
