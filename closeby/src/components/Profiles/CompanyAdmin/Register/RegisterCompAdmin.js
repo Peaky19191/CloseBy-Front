@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import useStyles from './styles';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useDispatch, useSelector } from "react-redux";
 import { regCompAdmin } from "../../../../actions/Profiles/companyAdmin";
 import { Alert, AlertTitle } from '@material-ui/lab';
+import Company from '../../../../api/company'
 
 const RegCompAdmin = () => {
     const classes = useStyles();
@@ -23,6 +23,23 @@ const RegCompAdmin = () => {
     const { message } = useSelector(state => state.message);
 
     const dispatch = useDispatch();
+
+    const [company, setCompany] = useState([]);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(100);
+    const getList = () => {
+        Company.getCompanyList(page, rowsPerPage)
+            .then((response) => {
+                const companysTemp = response.data.items;
+
+                setCompany(companysTemp);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    };
+
+    useEffect(getList, [page, rowsPerPage]);
 
     const onChangeFirstName = (e) => {
         const firstName = e.target.value;
@@ -64,6 +81,7 @@ const RegCompAdmin = () => {
         temp.lastName = lastName ? "" : "This field is required (Last name)"
         temp.email = (/$^|.+@.+..+/).test(email) ? "" : "Email is not valid"
         temp.gender = gender.length != 0 ? "" : "This field is required (gender)"
+        temp.companyId = gender.length != 0 ? "" : "This field is required (Compnay Name)"
         setErrors({
             ...temp
         })
@@ -112,14 +130,25 @@ const RegCompAdmin = () => {
                             <TextField label="Email Address" error={errors.email} helperText={(errors.email)} name="email" htmlFor="email" variant="outlined" type="email" value={email} onChange={onChangeEmail} fullWidth />
                         </Grid>
                         <Grid item xs={12} >
-                            <TextField label="Gender"
-                                error={errors.gender} helperText={(errors.gender)} name="gender" htmlFor="gender" variant="outlined" fullWidth value={gender} onChange={onChangeGender} type="text" select label="Gender">
+                            <TextField label="Gender" error={errors.gender} helperText={(errors.gender)} name="gender" htmlFor="gender" variant="outlined" fullWidth value={gender} onChange={onChangeGender} type="text" select label="Gender">
                                 <MenuItem value={"Male"} >Male</MenuItem>
                                 <MenuItem value={"Female"} >Female</MenuItem>
                             </TextField>
                         </Grid>
-                        <Grid item xs={12} >
+                        {/* <Grid item xs={12} >
                             <TextField label="Company Id" name="companyId" htmlFor="companyId" variant="outlined" type="text" value={companyId} onChange={onChangeCompanyId} fullWidth />
+                        </Grid> */}
+                        <Grid item xs={12} >
+                            <TextField label="Company Id" error={errors.companyId} helperText={(errors.companyId)} name="companyId" htmlFor="companyId" variant="outlined" type="text" value={companyId} onChange={onChangeCompanyId} fullWidth select label="Company Name">
+                                <MenuItem value={"Male"} >Male</MenuItem>
+                                <MenuItem value={"Female"} >Female</MenuItem>
+
+                                {company.map((item) => (
+                                    <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
+                                ))}
+
+
+                            </TextField>
                         </Grid>
                     </Grid>
                     <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>
