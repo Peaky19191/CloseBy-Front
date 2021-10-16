@@ -70,7 +70,7 @@ const CompanyList = () => {
                             <TableCell align="center">
                                 <IconButton aria-label="delete" size="large">
                                     <DeleteIcon onClick={() => {
-                                        deleteFromList(item.id, item.company.id)
+                                        deleteFromList(item.id)
                                     }} />
                                 </IconButton>
                             </TableCell>

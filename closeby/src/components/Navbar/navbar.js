@@ -52,6 +52,7 @@ const Navbar = () => {
                         <Button className={classes.button} component={Link} to="/reigsterCompAdmin" variant="contained" color="primary">Register Company Admin</Button>
                         <Button className={classes.button} component={Link} to="/compAdminList" variant="contained" color="primary">Company Admins List</Button>
                         <Button className={classes.button} component={Link} to="/usersList" variant="contained" color="primary">Users List</Button>
+                        <Button className={classes.button} component={Link} to="/reigsterCompany" variant="contained" color="primary">Register Company</Button>
                         <Button className={classes.button} component={Link} to="/companyList" variant="contained" color="primary">Company List</Button>
 
                     </Grid>
