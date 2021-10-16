@@ -4,7 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        padding: theme.spacing(0, 0, 8)
+        padding: theme.spacing(1, 0, 8),
+        color: "#FFFFFF"
     },
     cardGrid: {
         padding: '20px 0'

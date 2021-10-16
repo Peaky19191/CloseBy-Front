@@ -30,7 +30,7 @@ export const NewPassword = () => {
         e.preventDefault();
         setSuccessful(false);
         console.log(token);
-        dispatch(setNewPassword(password, token))  //zmiana
+        dispatch(setNewPassword(password, token))  
             .then(() => {
                 setSuccessful(true);
             })
