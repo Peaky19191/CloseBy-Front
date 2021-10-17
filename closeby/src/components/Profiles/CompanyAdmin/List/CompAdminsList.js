@@ -44,7 +44,7 @@ const CompanyAdminsList = () => {
         getList();
     }
 
-    const userDetails = async (id) => {
+    const compAdminDetails = async (id) => {
         await CompanyAdmin.getCompanyAdminId(id)
             .then((response) => {
                 const users = response.data.items;
@@ -96,7 +96,7 @@ const CompanyAdminsList = () => {
                                 </IconButton>
                                 <IconButton aria-label="delete" size="large">
                                     <SettingsApplicationsIcon onClick={() => {
-                                        userDetails(item.id)
+                                        compAdminDetails(item.id)
                                     }} />
                                 </IconButton>
                             </TableCell>

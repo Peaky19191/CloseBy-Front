@@ -29,8 +29,19 @@ const deleteCompanyWorker = (id, companyId) => {
     );
 };
 
+
+const getCompanyWorkerId = (id) => {
+    return axios.get(API_URL + "/" + id,
+        {
+            headers: authHeader(),
+        },
+
+    );
+};
+
 export default {
     getCompanyWorkersList,
-    deleteCompanyWorker
+    deleteCompanyWorker,
+    getCompanyWorkerId
 };
 

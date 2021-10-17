@@ -14,6 +14,7 @@ import TableFooter from '@material-ui/core/TableFooter';
 import { useSelector } from "react-redux";
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
+import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 
 const CompanyWorkersList = () => {
 
@@ -28,21 +29,10 @@ const CompanyWorkersList = () => {
     const [count, setCount] = useState(0);
 
     const [companyId, setCompanyId] = useState();
-    useEffect(() => {
-        CompAdmin.infoCompanyAdmin(currentProfile.id)
-            .then((response) => {
-                const compId = response.data.company.id;
-
-                setCompanyId(compId);
-            })
-            .catch((e) => {
-                console.log(e);
-            });
-    }, [companyId])
 
     const getList = async () => {
 
-        // await CompAdmin.infoCompanyAdmin(currentProfile.id)
+        // await CompAdmin.getCompanyAdminId(currentProfile.id)
         //     .then((response) => {
         //         const compId = response.data.company.id;
 
@@ -74,6 +64,19 @@ const CompanyWorkersList = () => {
     const deleteFromList = async (id, companyId) => {
         await CompWorker.deleteCompanyWorker(id, companyId);
         getList();
+    }
+
+    const compWorkerDetails = async (id) => {
+        await CompWorker.getCompanyWorkerId(id)
+            .then((response) => {
+                const users = response.data.items;
+                console.log(users)
+
+                // setUsers(users);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
     }
 
     const handleChangePage = (event, newPage) => {
@@ -111,6 +114,11 @@ const CompanyWorkersList = () => {
                                 <IconButton aria-label="delete" size="large">
                                     <DeleteIcon onClick={() => {
                                         deleteFromList(item.id, item.company.id)
+                                    }} />
+                                </IconButton>
+                                <IconButton aria-label="delete" size="large">
+                                    <SettingsApplicationsIcon onClick={() => {
+                                        compWorkerDetails(item.id)
                                     }} />
                                 </IconButton>
                             </TableCell>
