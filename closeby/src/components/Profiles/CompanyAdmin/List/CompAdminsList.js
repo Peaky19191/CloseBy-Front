@@ -12,6 +12,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableFooter from '@material-ui/core/TableFooter';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
+import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 
 const CompanyAdminsList = () => {
     const classes = useStyles();
@@ -41,6 +42,19 @@ const CompanyAdminsList = () => {
     const deleteFromList = async (id, companyId) => {
         await CompanyAdmin.deleteCompanyAdmin(id, companyId);
         getList();
+    }
+
+    const userDetails = async (id) => {
+        await CompanyAdmin.getCompanyAdminId(id)
+            .then((response) => {
+                const users = response.data.items;
+                console.log(users)
+
+                // setUsers(users);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
     }
 
     const handleChangePage = (event, newPage) => {
@@ -78,6 +92,11 @@ const CompanyAdminsList = () => {
                                 <IconButton aria-label="delete" size="large">
                                     <DeleteIcon onClick={() => {
                                         deleteFromList(item.id, item.company.id)
+                                    }} />
+                                </IconButton>
+                                <IconButton aria-label="delete" size="large">
+                                    <SettingsApplicationsIcon onClick={() => {
+                                        userDetails(item.id)
                                     }} />
                                 </IconButton>
                             </TableCell>

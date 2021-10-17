@@ -28,16 +28,17 @@ const deleteCompanyAdmin = (id, companyId) => {
     );
 };
 
-const infoCompanyAdmin = (id) => {
-    return axios.get(API_URL + id,
+const getCompanyAdminId = (id) => {
+    return axios.get(API_URL + "/" + id,
         {
             headers: authHeader(),
         },
+
     );
 };
 
 export default {
     getCompanyAdminsList,
     deleteCompanyAdmin,
-    infoCompanyAdmin
+    getCompanyAdminId
 };

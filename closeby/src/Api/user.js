@@ -27,7 +27,17 @@ const deleteUser = (id) => {
     );
 };
 
+const getUserId = (id) => {
+    return axios.get(API_URL + "/" + id,
+        {
+            headers: authHeader(),
+        },
+
+    );
+};
+
 export default {
     getUsersList,
-    deleteUser
+    deleteUser,
+    getUserId
 };

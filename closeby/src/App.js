@@ -43,14 +43,14 @@ const App = () => {
           <Route exact path="/user" component={User} />
           <Route exact path="/compWork" component={CompanyWorker} />
           <Route exact path="/globAdmin" component={GlobalAdmin} />
-          <Route exact path="/reigsterCompAdmin" component={RegCompAdmin} />
+          <Route exact path="/registerCompAdmin" component={RegCompAdmin} />
           <Route exact path="/compAdminList" component={CompanyAdminList} />
           <Route exact path="/usersList" component={UsersList} />
           <Route exact path="/compWorkerList" component={CompanyWorkerList} />\
-          <Route exact path="/reigsterCompWorker" component={RegCompWorker} />
+          <Route exact path="/registerCompWorker" component={RegCompWorker} />
           <Route exact path="/password-reset/:token" component={NewPassword} />
           <Route exact path="/companyList" component={CompanyList} />
-          <Route exact path="/reigsterCompany" component={RegCompany} />
+          <Route exact path="/registerCompany" component={RegCompany} />
         </Switch>
       </div>
     </Router>

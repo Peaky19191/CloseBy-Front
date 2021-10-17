@@ -42,17 +42,16 @@ const Navbar = () => {
                 {currentProfile && showCompanyAdminBoard && (
                     <Grid>
                         <Button className={classes.button} component={Link} to="/compWorkerList" variant="contained" color="primary">Company Worksers List</Button>
-                        <Button className={classes.button} component={Link} to="/reigsterCompWorker" variant="contained" color="primary">Register Company Worker</Button>
-                        {/* <Button className={classes.button} component={Link} to="/usersList" variant="contained" color="primary">Users List</Button> */}
+                        <Button className={classes.button} component={Link} to="/registerCompWorker" variant="contained" color="primary">Register Company Worker</Button>
                     </Grid>
                 )}
                 {currentProfile && showGlobalAdminBoard && (
                     <Grid>
                         <Button className={classes.button} component={Link} to="/globAdmin" variant="contained" color="primary">Main</Button>
-                        <Button className={classes.button} component={Link} to="/reigsterCompAdmin" variant="contained" color="primary">Register Company Admin</Button>
+                        <Button className={classes.button} component={Link} to="/registerCompAdmin" variant="contained" color="primary">Register Company Admin</Button>
                         <Button className={classes.button} component={Link} to="/compAdminList" variant="contained" color="primary">Company Admins List</Button>
                         <Button className={classes.button} component={Link} to="/usersList" variant="contained" color="primary">Users List</Button>
-                        <Button className={classes.button} component={Link} to="/reigsterCompany" variant="contained" color="primary">Register Company</Button>
+                        <Button className={classes.button} component={Link} to="/registerCompany" variant="contained" color="primary">Register Company</Button>
                         <Button className={classes.button} component={Link} to="/companyList" variant="contained" color="primary">Company List</Button>
 
                     </Grid>
