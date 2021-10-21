@@ -11,6 +11,8 @@ import Company from '../../../../api/company'
 const RegCompAdmin = () => {
     const classes = useStyles();
 
+    const { message } = useSelector(state => state.message);
+
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [gender, setGender] = useState("");
@@ -20,13 +22,13 @@ const RegCompAdmin = () => {
     const [successful, setSuccessful] = useState(false);
     const [errors, setErrors] = useState({});
 
-    const { message } = useSelector(state => state.message);
-
     const dispatch = useDispatch();
 
-    const [company, setCompany] = useState([]);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(100);
+
+    const [company, setCompany] = useState([]);
+
     const getList = () => {
         Company.getCompanyList(page, rowsPerPage)
             .then((response) => {

@@ -13,6 +13,7 @@ import TableFooter from '@material-ui/core/TableFooter';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
+import UserDetails from "../Details/UserDetails";
 
 const UsersList = () => {
     const classes = useStyles();
@@ -22,6 +23,13 @@ const UsersList = () => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [count, setCount] = useState(0);
 
+    const [isOpen, setIsOpen] = useState(false);
+    const [data, setData] = useState('');
+
+    const togglePopup = (id) => {
+        setData(id);
+        setIsOpen(!isOpen);
+    }
 
     const getList = () => {
         User.getUsersList(page, rowsPerPage)
@@ -44,16 +52,16 @@ const UsersList = () => {
         getList();
     }
 
-    const userDetails = async (id) => {
+    const rendrUserDetails = async (id) => {
         await User.getUserId(id)
             .then((response) => {
-                const users = response.data.items;
-                console.log(users)
+                const userData = response.data.items;
+                console.log(userData)
 
-                // setUsers(users);
+                // UserDetails(userData);
             })
             .catch((e) => {
-                console.log(e);
+                console.log(test);
             });
     }
 
@@ -66,56 +74,64 @@ const UsersList = () => {
         setPage(0);
     };
     return (
-        <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >
-            <Table className={classes.table} aria-label="simple table">
-                <TableHead>
-                    <TableRow >
-                        <TableCell className={classes.tableCellTitle}>User</TableCell>
-                        <TableCell align="center" className={classes.tableCellTitle}>Email</TableCell>
-                        <TableCell align="center" className={classes.tableCellTitle}>Role</TableCell>
-                        <TableCell align="center" className={classes.tableCellTitle}>Gender</TableCell>
-                        <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {users.map((item) => (
-                        <TableRow key={item.email} >
-                            <TableCell component="th" scope="row">
-                                {item.firstName}    {item.lastName}
-                            </TableCell>
-                            <TableCell align="center">{item.email}</TableCell>
-                            <TableCell align="center">{item.role}</TableCell>
-                            <TableCell align="center">{item.gender}</TableCell>
-                            <TableCell align="center">
-                                <IconButton aria-label="delete" size="large">
-                                    <DeleteIcon onClick={() => {
-                                        deleteFromList(item.id)
-                                    }} />
-                                </IconButton>
-                                <IconButton aria-label="delete" size="large">
-                                    <SettingsApplicationsIcon onClick={() => {
-                                        userDetails(item.id)
-                                    }} />
-                                </IconButton>
-                            </TableCell>
+        <div>
+            {isOpen && <UserDetails passData={data} />}
+
+            <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >
+                <Table className={classes.table} aria-label="simple table">
+                    <TableHead>
+                        <TableRow >
+                            <TableCell className={classes.tableCellTitle}>User</TableCell>
+                            <TableCell align="center" className={classes.tableCellTitle}>Email</TableCell>
+                            <TableCell align="center" className={classes.tableCellTitle}>Role</TableCell>
+                            <TableCell align="center" className={classes.tableCellTitle}>Gender</TableCell>
+                            <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
                         </TableRow>
-                    ))}
-                </TableBody>
-                <TableFooter>
-                    <TableRow>
-                        <TablePagination
-                            rowsPerPageOptions={[5, 10, 25, 100]}
-                            component="div"
-                            count={count}
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            onPageChange={handleChangePage}
-                            onRowsPerPageChange={handleChangeRowsPerPage}
-                        />
-                    </TableRow>
-                </TableFooter>
-            </Table>
-        </TableContainer>
+                    </TableHead>
+                    <TableBody>
+                        {users.map((item) => (
+                            <TableRow key={item.email} >
+                                <TableCell component="th" scope="row">
+                                    {item.firstName}    {item.lastName}
+                                </TableCell>
+                                <TableCell align="center">{item.email}</TableCell>
+                                <TableCell align="center">{item.role}</TableCell>
+                                <TableCell align="center">{item.gender}</TableCell>
+                                <TableCell align="center">
+                                    <IconButton aria-label="delete" size="large">
+                                        <DeleteIcon onClick={() => {
+                                            deleteFromList(item.id)
+                                        }} />
+                                    </IconButton>
+                                    <IconButton aria-label="delete" size="large">
+                                        <SettingsApplicationsIcon
+                                            // onClick={() => {
+                                            //     rendrUserDetails(item.id)
+                                            // }}
+                                            onClick={() => {
+                                                togglePopup(item.id)
+                                            }} />
+                                    </IconButton>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                    <TableFooter>
+                        <TableRow>
+                            <TablePagination
+                                rowsPerPageOptions={[5, 10, 25, 100]}
+                                component="div"
+                                count={count}
+                                rowsPerPage={rowsPerPage}
+                                page={page}
+                                onPageChange={handleChangePage}
+                                onRowsPerPageChange={handleChangeRowsPerPage}
+                            />
+                        </TableRow>
+                    </TableFooter>
+                </Table>
+            </TableContainer>
+        </div >
     );
 };
 
