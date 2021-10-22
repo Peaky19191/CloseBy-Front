@@ -24,10 +24,10 @@ const UsersList = () => {
     const [count, setCount] = useState(0);
 
     const [isOpen, setIsOpen] = useState(false);
-    const [data, setData] = useState('');
+    const [idUser, setIdUser] = useState('');
 
     const togglePopup = (id) => {
-        setData(id);
+        setIdUser(id);
         setIsOpen(!isOpen);
     }
 
@@ -52,18 +52,7 @@ const UsersList = () => {
         getList();
     }
 
-    const rendrUserDetails = async (id) => {
-        await User.getUserId(id)
-            .then((response) => {
-                const userData = response.data.items;
-                console.log(userData)
 
-                // UserDetails(userData);
-            })
-            .catch((e) => {
-                console.log(test);
-            });
-    }
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -76,8 +65,7 @@ const UsersList = () => {
 
     return (
         <div>
-            {isOpen &&
-                <UserDetails content={data} handleClose={togglePopup} />}
+            {isOpen && <UserDetails idUser={idUser} handleClose={togglePopup} />}
             <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
