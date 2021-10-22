@@ -73,10 +73,11 @@ const UsersList = () => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+
     return (
         <div>
-            {isOpen && <UserDetails passData={data} />}
-
+            {isOpen &&
+                <UserDetails content={data} handleClose={togglePopup} />}
             <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>

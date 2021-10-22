@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 
-function UserDetails({ passData }) {
-    console.log(passData)
+const UserDetails = props => {
     return (
         <div className="popup-box">
             <div className="box">
-                {passData}
+                <span className="close-icon" onClick={props.handleClose}>x</span>
+                {props.content}
             </div>
         </div>
     );
