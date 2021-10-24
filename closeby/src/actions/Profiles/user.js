@@ -44,12 +44,8 @@ export const registerUser = (firstName, lastName, gender, email, password) => (d
 };
 
 export const setUserId = (idToPass) => (dispatch) => {
-    console.log(idToPass)
-    const id = idToPass;
-    console.log("id " + id)
-
     dispatch({
         type: SET_USER_ID,
-        payload: id,
+        payload: idToPass,
     });
 };

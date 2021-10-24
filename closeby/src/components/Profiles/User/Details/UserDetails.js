@@ -10,7 +10,6 @@ const UserDetails = () => {
     const classes = useStyles();
     const userId = useSelector(state => state.profiles.id);
 
-
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -55,7 +54,6 @@ const UserDetails = () => {
     }
 
     const getUserDetails = () => {
-        console.log(userId)
         User.getUserId(userId)
             .then((response) => {
                 const user = response.data.items;

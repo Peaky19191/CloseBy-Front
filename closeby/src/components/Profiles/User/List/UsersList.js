@@ -45,7 +45,6 @@ const UsersList = () => {
 
 
     const setIdUser = (id) => {
-        console.log(id)
         dispatch(setUserId(id))
     }
 
@@ -111,7 +110,6 @@ const UsersList = () => {
                     </TableFooter>
                 </Table>
             </TableContainer>
-            {/* } */}
         </div >
     );
 };
