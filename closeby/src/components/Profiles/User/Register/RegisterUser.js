@@ -116,7 +116,6 @@ export const Register = () => {
                             <TextField label="Last Name"
                                 error={errors.lastName} helperText={(errors.lastName)} name="lastName" htmlFor="lastName" variant="outlined" fullWidth value={lastName} onChange={onChangeLastName} type="text" />
                         </Grid>
-
                         <Grid item xs={12} >
                             <TextField label="Gender"
                                 error={errors.gender} helperText={(errors.gender)} name="gender" htmlFor="gender" variant="outlined" fullWidth value={gender} onChange={onChangeGender} type="text" select label="Gender">
@@ -128,7 +127,6 @@ export const Register = () => {
                             <TextField label="Email Address"
                                 error={errors.email} helperText={(errors.email)} type="email" name="email" htmlFor="email" variant="outlined" fullWidth value={email} onChange={onChangeEmail} />
                         </Grid>
-
                         <Grid item xs={12} >
                             <TextField
                                 InputProps={{

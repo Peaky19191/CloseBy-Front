@@ -9,8 +9,24 @@ const UserDetails = ({ idUser, handleClose }) => {
     const classes = useStyles();
     const userId = idUser;
 
-    const [disaled, setDisabled] = useState(true);
-    const [editMode, setEditMode] = useState(false);
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+
+    const onChangeFirstName = (e) => {
+        const firstName = e.target.value;
+        setFirstName(firstName);
+    };
+
+    const onChangeLastName = (e) => {
+        const lastName = e.target.value;
+        setLastName(lastName);
+    };
+
+    const onChangeEmail = (e) => {
+        const email = e.target.value;
+        setEmail(email);
+    };
 
     const [userData, setUserData] = useState([]);
 
@@ -22,6 +38,9 @@ const UserDetails = ({ idUser, handleClose }) => {
         "firstName": "Aaron",
         "lastName": "Cannon",
     };
+
+    const [disaled, setDisabled] = useState(true);
+    const [editMode, setEditMode] = useState(false);
 
     const startEditing = () => {
         setDisabled(false);
@@ -44,6 +63,9 @@ const UserDetails = ({ idUser, handleClose }) => {
             })
             .catch((e) => {
                 console.log(e);
+                setFirstName(dataTem.firstName);
+                setLastName(dataTem.lastName);
+                setEmail(dataTem.email);
             });
     }
     useEffect(getUserDetails, [userId]);
@@ -59,13 +81,13 @@ const UserDetails = ({ idUser, handleClose }) => {
                     <form className={classes.form}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} >
-                                <TextField value={dataTem.firstName} disabled={disaled} name="firstName" htmlFor="firstName" variant="outlined" fullWidth />
+                                <TextField value={firstName} onChange={onChangeFirstName} disabled={disaled} name="firstName" htmlFor="firstName" variant="outlined" fullWidth />
                             </Grid>
                             <Grid item xs={12} >
-                                <TextField value={dataTem.lastName} disabled={disaled} name="lastName" htmlFor="lastName" variant="outlined" fullWidth />
+                                <TextField value={lastName} onChange={onChangeLastName} disabled={disaled} name="lastName" htmlFor="lastName" variant="outlined" fullWidth />
                             </Grid>
                             <Grid item xs={12} >
-                                <TextField value={dataTem.email} disabled={disaled} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
+                                <TextField value={email} onChange={onChangeEmail} disabled={disaled} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
                             </Grid>
                         </Grid>
                         {editMode ?
