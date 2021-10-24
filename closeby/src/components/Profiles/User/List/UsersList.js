@@ -65,61 +65,65 @@ const UsersList = () => {
 
     return (
         <div>
-            {isOpen && <UserDetails idUser={idUser} handleClose={togglePopup} />}
-            <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >
-                <Table className={classes.table} aria-label="simple table">
-                    <TableHead>
-                        <TableRow >
-                            <TableCell className={classes.tableCellTitle}>User</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>Email</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>Role</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>Gender</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {users.map((item) => (
-                            <TableRow key={item.email} >
-                                <TableCell component="th" scope="row">
-                                    {item.firstName}    {item.lastName}
-                                </TableCell>
-                                <TableCell align="center">{item.email}</TableCell>
-                                <TableCell align="center">{item.role}</TableCell>
-                                <TableCell align="center">{item.gender}</TableCell>
-                                <TableCell align="center">
-                                    <IconButton aria-label="delete" size="large">
-                                        <DeleteIcon onClick={() => {
-                                            deleteFromList(item.id)
-                                        }} />
-                                    </IconButton>
-                                    <IconButton aria-label="delete" size="large">
-                                        <SettingsApplicationsIcon
-                                            // onClick={() => {
-                                            //     rendrUserDetails(item.id)
-                                            // }}
-                                            onClick={() => {
-                                                togglePopup(item.id)
-                                            }} />
-                                    </IconButton>
-                                </TableCell>
+            {isOpen ?
+                <UserDetails idUser={idUser} handleClose={togglePopup} />
+                :
+                <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >
+                    <Table className={classes.table} aria-label="simple table">
+                        <TableHead>
+                            <TableRow >
+                                <TableCell className={classes.tableCellTitle}>User</TableCell>
+                                <TableCell align="center" className={classes.tableCellTitle}>Email</TableCell>
+                                <TableCell align="center" className={classes.tableCellTitle}>Role</TableCell>
+                                <TableCell align="center" className={classes.tableCellTitle}>Gender</TableCell>
+                                <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                    <TableFooter>
-                        <TableRow>
-                            <TablePagination
-                                rowsPerPageOptions={[5, 10, 25, 100]}
-                                component="div"
-                                count={count}
-                                rowsPerPage={rowsPerPage}
-                                page={page}
-                                onPageChange={handleChangePage}
-                                onRowsPerPageChange={handleChangeRowsPerPage}
-                            />
-                        </TableRow>
-                    </TableFooter>
-                </Table>
-            </TableContainer>
+                        </TableHead>
+                        <TableBody>
+                            {users.map((item) => (
+                                <TableRow key={item.email} >
+                                    <TableCell component="th" scope="row">
+                                        {item.firstName}    {item.lastName}
+                                    </TableCell>
+                                    <TableCell align="center">{item.email}</TableCell>
+                                    <TableCell align="center">{item.role}</TableCell>
+                                    <TableCell align="center">{item.gender}</TableCell>
+                                    <TableCell align="center">
+                                        <IconButton aria-label="delete" size="large">
+                                            <DeleteIcon onClick={() => {
+                                                deleteFromList(item.id)
+                                            }} />
+                                        </IconButton>
+                                        <IconButton aria-label="delete" size="large">
+                                            <SettingsApplicationsIcon
+                                                // onClick={() => {
+                                                //     rendrUserDetails(item.id)
+                                                // }}
+                                                onClick={() => {
+                                                    togglePopup(item.id)
+                                                }} />
+                                        </IconButton>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                        <TableFooter>
+                            <TableRow>
+                                <TablePagination
+                                    rowsPerPageOptions={[5, 10, 25, 100]}
+                                    component="div"
+                                    count={count}
+                                    rowsPerPage={rowsPerPage}
+                                    page={page}
+                                    onPageChange={handleChangePage}
+                                    onRowsPerPageChange={handleChangeRowsPerPage}
+                                />
+                            </TableRow>
+                        </TableFooter>
+                    </Table>
+                </TableContainer>
+            }
+
         </div >
     );
 };
