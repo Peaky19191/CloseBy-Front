@@ -15,3 +15,6 @@ export const RESET_PASSW_SUCCESS = "RESET_PASSW_SUCCESS";
 
 export const NEW_PASSW_FAIL = "NEW_PASSW_FAIL";
 export const NEW_PASSW_SUCCESS = "NEW_PASSW_SUCCESS";
+
+export const SET_USER_ID = "SET_USER_ID";
+export const CLEAR_USER_ID = "CLEAR_USER_ID";

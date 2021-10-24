@@ -14,16 +14,18 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Link } from 'react-router-dom'
+import { setUserId } from "../../../../actions/Profiles/user";
+import { useDispatch } from "react-redux";
 
 const UsersList = () => {
     const classes = useStyles();
+    const dispatch = useDispatch();
+
     const [users, setUsers] = useState([]);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [count, setCount] = useState(0);
-
-    const [idUser, setIdUser] = useState('');
 
     const getList = () => {
         User.getUsersList(page, rowsPerPage)
@@ -40,6 +42,12 @@ const UsersList = () => {
     };
 
     useEffect(getList, [page, rowsPerPage]);
+
+
+    const setIdUser = (id) => {
+        console.log(id)
+        dispatch(setUserId(id))
+    }
 
     const deleteFromList = async (id) => {
         await User.deleteUser(id);
@@ -81,7 +89,7 @@ const UsersList = () => {
                                     <IconButton aria-label="delete" size="large" onClick={() => { deleteFromList(item.id) }} >
                                         <DeleteIcon />
                                     </IconButton>
-                                    <IconButton component={Link} to="/userDetails" onClick={() => { }} aria-label="edit" size="large" >
+                                    <IconButton component={Link} to="/userDetails" onClick={() => { setIdUser(item.id) }} aria-label="edit" size="large" >
                                         <SettingsApplicationsIcon />
                                     </IconButton>
                                 </TableCell>

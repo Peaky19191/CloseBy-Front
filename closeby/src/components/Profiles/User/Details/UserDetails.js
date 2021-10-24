@@ -3,13 +3,13 @@ import useStyles from './styles';
 import User from '../../../../api/user'
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import { useLocation } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { useSelector } from "react-redux";
 
 const UserDetails = () => {
     const classes = useStyles();
-    const location = useLocation()
-    const userId = location.state
+    const userId = useSelector(state => state.profiles.id);
+
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -30,7 +30,7 @@ const UserDetails = () => {
         setEmail(email);
     };
 
-    const [userData, setUserData] = useState([]);
+    // const [userData, setUserData] = useState([]);
 
     const dataTem = {
         "id": "94496023-f25d-4e90-9f34-35c59ef57ab5",
@@ -70,7 +70,7 @@ const UserDetails = () => {
                 setEmail(dataTem.email);
             });
     }
-    useEffect(getUserDetails, [userId]);
+    useEffect(getUserDetails, []);
 
 
     return (

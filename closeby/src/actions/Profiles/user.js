@@ -2,6 +2,7 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
     SET_MESSAGE,
+    SET_USER_ID,
 } from "../../constants/actionTypes";
 
 import AuthService from "../../services/Profiles/user.service";
@@ -40,4 +41,15 @@ export const registerUser = (firstName, lastName, gender, email, password) => (d
             return Promise.reject();
         }
     );
+};
+
+export const setUserId = (idToPass) => (dispatch) => {
+    console.log(idToPass)
+    const id = idToPass;
+    console.log("id " + id)
+
+    dispatch({
+        type: SET_USER_ID,
+        payload: id,
+    });
 };
