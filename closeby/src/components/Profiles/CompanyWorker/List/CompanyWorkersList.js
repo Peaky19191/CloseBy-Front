@@ -30,22 +30,22 @@ const CompanyWorkersList = () => {
 
     const [companyId, setCompanyId] = useState();
 
-    const getList = async () => {
+    const getCompanyId = () => {
+        CompAdmin.getCompanyAdminId(currentProfile.id)
+            .then((response) => {
+                const compId = response.data.company.id;
 
-        // await CompAdmin.getCompanyAdminId(currentProfile.id)
-        //     .then((response) => {
-        //         const compId = response.data.company.id;
-
-        //         setCompanyId(compId);
-        //     })
-        //     .catch((e) => {
-        //         console.log(e);
-        //     });
+                setCompanyId(compId);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
 
         console.log(companyId);
+    }
+    useEffect(getCompanyId, [companyId]);
 
-
-
+    const getList = () => {
         CompWorker.getCompanyWorkersList(page, rowsPerPage, companyId)
             .then((response) => {
                 const compWorkers = response.data.items;
@@ -64,19 +64,6 @@ const CompanyWorkersList = () => {
     const deleteFromList = async (id, companyId) => {
         await CompWorker.deleteCompanyWorker(id, companyId);
         getList();
-    }
-
-    const compWorkerDetails = async (id) => {
-        await CompWorker.getCompanyWorkerId(id)
-            .then((response) => {
-                const users = response.data.items;
-                console.log(users)
-
-                // setUsers(users);
-            })
-            .catch((e) => {
-                console.log(e);
-            });
     }
 
     const handleChangePage = (event, newPage) => {
@@ -118,7 +105,7 @@ const CompanyWorkersList = () => {
                                 </IconButton>
                                 <IconButton aria-label="delete" size="large">
                                     <SettingsApplicationsIcon onClick={() => {
-                                        compWorkerDetails(item.id)
+
                                     }} />
                                 </IconButton>
                             </TableCell>

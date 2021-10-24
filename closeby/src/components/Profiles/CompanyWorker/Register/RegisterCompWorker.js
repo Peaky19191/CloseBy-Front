@@ -55,10 +55,6 @@ const RegCompWorker = () => {
         const email = e.target.value;
         setEmail(email);
     };
-    // const onChangeCompanyId = (e) => {
-    //     const companyId = e.target.value;
-    //     setCompanyId(companyId);
-    // };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -91,7 +87,6 @@ const RegCompWorker = () => {
         lastName.length > 0 &&
         email.length > 0 &&
         gender.length > 0;
-    // companyId.length > 0;
 
     return (
         <Container component="main" maxWidth="xs">
@@ -133,9 +128,6 @@ const RegCompWorker = () => {
                                 <MenuItem value={"Female"} >Female</MenuItem>
                             </TextField>
                         </Grid>
-                        {/* <Grid item xs={12} >
-                            <TextField label="Company Id" name="companyId" htmlFor="companyId" variant="outlined" type="text" value={companyId} onChange={onChangeCompanyId} fullWidth />
-                        </Grid> */}
                     </Grid>
                     <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>
                         Register Company Worker

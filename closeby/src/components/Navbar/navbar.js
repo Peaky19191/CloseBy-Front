@@ -11,6 +11,8 @@ const Navbar = () => {
     const classes = useStyles();
     const [showGlobalAdminBoard, setShowGlobalAdminBoard] = useState(false);
     const [showCompanyAdminBoard, setShowCompanyAdminBoard] = useState(false);
+    const [showCompanyWorkerBoard, setShowCompanyWorkerBoard] = useState(false);
+    const [showUserBoard, setShowUserBoard] = useState(false);
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
@@ -23,8 +25,9 @@ const Navbar = () => {
 
     useEffect(() => {
         if (currentProfile && currentProfile.role) {
+            setShowUserBoard(currentProfile.role.includes("User"));
+            setShowCompanyWorkerBoard(currentProfile.role.includes("CompanyWorker"));
             setShowCompanyAdminBoard(currentProfile.role.includes("CompanyAdmin"));
-
             setShowGlobalAdminBoard(currentProfile.role.includes("GlobalAdmin"));
         }
     }, [currentProfile]);
@@ -39,8 +42,19 @@ const Navbar = () => {
                 <a href="/"><img className={classes.image} src="https://i.imgur.com/Tngx1R2.png" alt="logo" /></a>
             </Grid>
             <Toolbar className={classes.toolbar}>
+                {currentProfile && showUserBoard && (
+                    <Grid>
+                        <Button className={classes.button} component={Link} to="/user" variant="contained" color="primary">Main</Button>
+                    </Grid>
+                )}
+                {currentProfile && showCompanyWorkerBoard && (
+                    <Grid>
+                        <Button className={classes.button} component={Link} to="/compWork" variant="contained" color="primary">Main</Button>
+                    </Grid>
+                )}
                 {currentProfile && showCompanyAdminBoard && (
                     <Grid>
+                        <Button className={classes.button} component={Link} to="/compAdmin" variant="contained" color="primary">Main</Button>
                         <Button className={classes.button} component={Link} to="/compWorkerList" variant="contained" color="primary">Company Worksers List</Button>
                         <Button className={classes.button} component={Link} to="/registerCompWorker" variant="contained" color="primary">Register Company Worker</Button>
                     </Grid>

@@ -14,6 +14,7 @@ import { history } from "./helpers/history";
 import Navbar from './components/Navbar/Navbar';
 import User from './components/Profiles/User/User';
 import CompanyWorker from './components/Profiles/CompanyWorker/CompanyWorker';
+import CompanyAdmin from './components/Profiles/CompanyAdmin/CompanyAdmin';
 import GlobalAdmin from './components/Profiles/GlobalAdmin/GlobalAdmin';
 import RegCompAdmin from './components/Profiles/CompanyAdmin/Register/RegisterCompAdmin';
 import CompanyAdminList from './components/Profiles/CompanyAdmin/List/CompAdminsList';
@@ -54,6 +55,7 @@ const App = () => {
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/user" component={User} />
           <Route exact path="/compWork" component={CompanyWorker} />
+          <Route exact path="/compAdmin" component={CompanyAdmin} />
           <Route exact path="/globAdmin" component={GlobalAdmin} />
           <Route exact path="/registerCompAdmin" component={RegCompAdmin} />
           <Route exact path="/compAdminList" component={CompanyAdminList} />
