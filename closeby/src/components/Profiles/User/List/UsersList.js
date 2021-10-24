@@ -52,8 +52,6 @@ const UsersList = () => {
         getList();
     }
 
-
-
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -96,9 +94,6 @@ const UsersList = () => {
                                         </IconButton>
                                         <IconButton aria-label="delete" size="large">
                                             <SettingsApplicationsIcon
-                                                // onClick={() => {
-                                                //     rendrUserDetails(item.id)
-                                                // }}
                                                 onClick={() => {
                                                     togglePopup(item.id)
                                                 }} />
@@ -123,7 +118,6 @@ const UsersList = () => {
                     </Table>
                 </TableContainer>
             }
-
         </div >
     );
 };
