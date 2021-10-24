@@ -15,10 +15,10 @@ export default makeStyles((theme) => ({
         alignItems: 'center',
         padding: theme.spacing(2),
         position: "center",
-        width: "50%",
+        width: "30%",
         height: "auto",
         marginTop: "18vh",
-        marginLeft: "50vh",
+        marginLeft: "70vh",
         background: '#fff',
         borderRadius: "4px",
         overflow: "auto",
@@ -35,7 +35,34 @@ export default makeStyles((theme) => ({
     form: {
         marginTop: theme.spacing(3),
     },
-    booton: {
-        margin: theme.spacing(3, 0, 2),
+    buttonEditSave: {
+        margin: theme.spacing(3, 0, 0),
+        width: '70%',
+        marginLeft: "9vh",
+        backgroundColor: '#00b300',
+        color: "#ffffff",
+        '&:hover': {
+            backgroundColor: '#006600',
+            color: '#ffffff',
+        },
+
     },
+    buttonEditStop: {
+        margin: theme.spacing(2, 0, 0),
+        width: '70%',
+        marginLeft: "9vh",
+
+    },
+    buttonEditStart: {
+        margin: theme.spacing(3, 0, 0),
+        width: '70%',
+        marginLeft: "9vh",
+
+    },
+    buttonClose: {
+        margin: theme.spacing(2, 0, 1),
+        width: '70%',
+        marginLeft: "9vh",
+    },
+
 }));

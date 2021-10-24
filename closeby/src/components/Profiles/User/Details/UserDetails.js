@@ -9,6 +9,9 @@ const UserDetails = ({ idUser, handleClose }) => {
     const classes = useStyles();
     const userId = idUser;
 
+    const [disaled, setDisabled] = useState(true);
+    const [editMode, setEditMode] = useState(false);
+
     const [userData, setUserData] = useState([]);
 
     const dataTem = {
@@ -19,6 +22,16 @@ const UserDetails = ({ idUser, handleClose }) => {
         "firstName": "Aaron",
         "lastName": "Cannon",
     };
+
+    const startEditing = () => {
+        setDisabled(false);
+        setEditMode(true);
+    }
+
+    const stopEditing = () => {
+        setDisabled(true);
+        setEditMode(false);
+    }
 
     const getUserDetails = () => {
         console.log(userId)
@@ -42,20 +55,34 @@ const UserDetails = ({ idUser, handleClose }) => {
                     <Avatar className={classes.avatar}>
                         <SupervisorAccountIcon />
                     </Avatar>
-                    <Typography component="h1" variant="h5">Details of User</Typography>
+                    <Typography component="h1" variant="h5">Details of the User</Typography>
                     <form className={classes.form}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} >
-                                <TextField value={dataTem.firstName} name="firstName" htmlFor="firstName" variant="outlined" type="text" fullWidth autoFocus />
+                                <TextField value={dataTem.firstName} disabled={disaled} name="firstName" htmlFor="firstName" variant="outlined" fullWidth />
                             </Grid>
                             <Grid item xs={12} >
-                                <TextField value={dataTem.lastName} name="lastName" htmlFor="lastName" variant="outlined" type="text" fullWidth />
+                                <TextField value={dataTem.lastName} disabled={disaled} name="lastName" htmlFor="lastName" variant="outlined" fullWidth />
                             </Grid>
                             <Grid item xs={12} >
-                                <TextField value={dataTem.email} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
+                                <TextField value={dataTem.email} disabled={disaled} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
                             </Grid>
                         </Grid>
-                        <Button className={classes.booton} onClick={handleClose} fullWidth variant="contained" color="primary" >
+                        {editMode ?
+                            <>
+                                <Button className={classes.buttonEditSave} onClick={() => { }} fullWidth variant="contained"  >
+                                    Save
+                                </Button>
+                                <Button className={classes.buttonEditStop} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >
+                                    Stop Editinig
+                                </Button>
+                            </>
+                            :
+                            <Button className={classes.buttonEditStart} onClick={() => { startEditing() }} fullWidth variant="contained" color="primary" >
+                                Edit
+                            </Button>
+                        }
+                        <Button className={classes.buttonClose} onClick={handleClose} fullWidth variant="contained" color="secondary" >
                             Close
                         </Button>
                     </form>
