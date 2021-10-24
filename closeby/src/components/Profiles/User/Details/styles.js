@@ -9,33 +9,33 @@ export default makeStyles((theme) => ({
         top: 0,
         left: 0,
     },
-
-    box: {
-        position: "relative",
-        width: "70%",
-        margin: 0,
+    paper: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: theme.spacing(2),
+        position: "center",
+        width: "50%",
         height: "auto",
-        maxHeight: "70vh",
-        marginTop: "15vh",
-        marginLeft: "25vh",
+        marginTop: "18vh",
+        marginLeft: "50vh",
         background: '#fff',
         borderRadius: "4px",
-        padding: "20px",
         overflow: "auto",
     },
-
-    closeIcon: {
-        cursor: "pointer",
-        position: "fixed",
-        right: "31vh",
-        top: "16vh",
-        background: '#ededed',
-        width: "25px",
-        height: "25px",
-        borderRadius: "50%",
-        lineHeight: "20px",
-        textAlign: "center",
-        border: "1px",
-        fontSize: "20px",
+    root: {
+        '& .MuiTextField-root': {
+            margin: theme.spacing(1),
+        },
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+        marginTop: theme.spacing(3),
+    },
+    booton: {
+        margin: theme.spacing(3, 0, 2),
     },
 }));
