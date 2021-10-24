@@ -14,6 +14,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import UserDetails from "../Details/UserDetails";
+import { Link } from 'react-router-dom'
 
 const UsersList = () => {
     const classes = useStyles();
@@ -87,16 +88,11 @@ const UsersList = () => {
                                     <TableCell align="center">{item.role}</TableCell>
                                     <TableCell align="center">{item.gender}</TableCell>
                                     <TableCell align="center">
-                                        <IconButton aria-label="delete" size="large">
-                                            <DeleteIcon onClick={() => {
-                                                deleteFromList(item.id)
-                                            }} />
+                                        <IconButton aria-label="delete" size="large" onClick={() => { deleteFromList(item.id) }} >
+                                            <DeleteIcon />
                                         </IconButton>
-                                        <IconButton aria-label="delete" size="large">
-                                            <SettingsApplicationsIcon
-                                                onClick={() => {
-                                                    togglePopup(item.id)
-                                                }} />
+                                        <IconButton component={Link} to="/userDetails" state={{ userId: item.id }} aria-label="edit" size="large" >
+                                            <SettingsApplicationsIcon />
                                         </IconButton>
                                     </TableCell>
                                 </TableRow>

@@ -3,11 +3,14 @@ import useStyles from './styles';
 import User from '../../../../api/user'
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import { useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
-const UserDetails = ({ idUser, handleClose }) => {
+const UserDetails = (props) => {
     const classes = useStyles();
-    const userId = idUser;
+    const location = useLocation()
+    const userId = props.location.state
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -104,7 +107,7 @@ const UserDetails = ({ idUser, handleClose }) => {
                                 Edit
                             </Button>
                         }
-                        <Button className={classes.buttonClose} onClick={handleClose} fullWidth variant="contained" color="secondary" >
+                        <Button className={classes.buttonClose} component={Link} to="/userList" fullWidth variant="contained" color="secondary" >
                             Close
                         </Button>
                     </form>

@@ -23,9 +23,21 @@ import RegCompWorker from './components/Profiles/CompanyWorker/Register/Register
 import NewPassword from './components/Auth/NewPassword/NewPassword';
 import CompanyList from './components/Company/List/CompanyList';
 import RegCompany from './components/Company/Register/RegisterCompany';
+import UserDetails from './components/Profiles/User/Details/UserDetails';
+import { useEffect } from 'react';
+import { logout } from "./actions/auth";
+import { clearMessage } from "./actions/message";
+import { useDispatch } from 'react-redux';
 
 const App = () => {
   const classes = useStyles();
+
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(logout());
+  //   dispatch(clearMessage());
+  // }, []);
 
   return (
     <Router history={history}>
@@ -51,6 +63,8 @@ const App = () => {
           <Route exact path="/password-reset/:token" component={NewPassword} />
           <Route exact path="/companyList" component={CompanyList} />
           <Route exact path="/registerCompany" component={RegCompany} />
+          <Route exact path="/userDetails" component={UserDetails} />
+
         </Switch>
       </div>
     </Router>
