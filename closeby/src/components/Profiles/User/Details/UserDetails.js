@@ -6,11 +6,10 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { useLocation } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
-
-const UserDetails = (props) => {
+const UserDetails = () => {
     const classes = useStyles();
     const location = useLocation()
-    const userId = props.location.state
+    const userId = location.state
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -73,6 +72,7 @@ const UserDetails = (props) => {
     }
     useEffect(getUserDetails, [userId]);
 
+
     return (
         <Container component="main" maxWidth="xs">
             <div className={classes.popupBox} >
@@ -107,7 +107,7 @@ const UserDetails = (props) => {
                                 Edit
                             </Button>
                         }
-                        <Button className={classes.buttonClose} component={Link} to="/userList" fullWidth variant="contained" color="secondary" >
+                        <Button className={classes.buttonClose} component={Link} to="/usersList" fullWidth variant="contained" color="secondary" >
                             Close
                         </Button>
                     </form>

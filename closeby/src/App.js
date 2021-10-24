@@ -11,7 +11,7 @@ import { Register } from './components/Profiles/User/Register/RegisterUser'
 import { ResetPassword } from './components/Auth/ResetPassword/ResetPassword'
 import Profile from './components/Profiles/Profile'
 import { history } from "./helpers/history";
-import Navbar from './components/Navbar/navbar';
+import Navbar from './components/Navbar/Navbar';
 import User from './components/Profiles/User/User';
 import CompanyWorker from './components/Profiles/CompanyWorker/CompanyWorker';
 import GlobalAdmin from './components/Profiles/GlobalAdmin/GlobalAdmin';
@@ -32,7 +32,7 @@ import { useDispatch } from 'react-redux';
 const App = () => {
   const classes = useStyles();
 
-  // const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
   // useEffect(() => {
   //   dispatch(logout());
@@ -64,7 +64,6 @@ const App = () => {
           <Route exact path="/companyList" component={CompanyList} />
           <Route exact path="/registerCompany" component={RegCompany} />
           <Route exact path="/userDetails" component={UserDetails} />
-
         </Switch>
       </div>
     </Router>

@@ -17,7 +17,7 @@ const Navbar = () => {
 
     useEffect(() => {
         history.listen((location) => {
-            dispatch(clearMessage()); // clear message when changing location
+            dispatch(clearMessage());
         });
     }, [dispatch]);
 
