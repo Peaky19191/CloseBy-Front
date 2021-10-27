@@ -71,7 +71,7 @@ const CompanyWorkersList = () => {
     return (
         <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >
             <Table className={classes.table} aria-label="simple table">
-                <TableHead>
+                <TableHead >
                     <TableRow >
                         <TableCell className={classes.tableCellTitle}>User</TableCell>
                         <TableCell align="center" className={classes.tableCellTitle}>Email</TableCell>

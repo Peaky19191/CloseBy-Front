@@ -2,11 +2,15 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
     tableContainer: {
-        maxWidth: "99%",
-        margin: theme.spacing(0, 0, 0, 1),
+        position: "absolute",
+        maxWidth: "95vw",
+        marginTop: "3vh",
+        marginBottom: "3vh",
+        marginLeft: "5vh",
+        borderRadius: "10px",
     },
     tableCellTitle: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: theme.palette.primary.dark,
         color: theme.palette.common.white,
         fontSize: 14,
     },

@@ -64,8 +64,8 @@ const UsersList = () => {
 
     return (
         <div>
-            <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >
-                <Table className={classes.table} aria-label="simple table">
+            <TableContainer className={classes.tableContainer} component={Paper} elevation={3}  >
+                <Table aria-label="simple table">
                     <TableHead>
                         <TableRow >
                             <TableCell className={classes.tableCellTitle}>User</TableCell>

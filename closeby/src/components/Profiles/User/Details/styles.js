@@ -20,7 +20,7 @@ export default makeStyles((theme) => ({
         marginTop: "18vh",
         marginLeft: "70vh",
         background: '#fff',
-        borderRadius: "4px",
+        borderRadius: "10px",
         overflow: "auto",
     },
     root: {
