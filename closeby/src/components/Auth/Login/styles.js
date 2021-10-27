@@ -24,10 +24,10 @@ export default makeStyles((theme) => ({
     },
     form: {
         width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(3),
+        marginTop: theme.spacing(4),
     },
     submit: {
-        margin: theme.spacing("2vh", "15vh"),
+        margin: theme.spacing("3vh", "15vh", "1vh", "15vh"),
         width: "20vh",
     },
     bottomButton: {
