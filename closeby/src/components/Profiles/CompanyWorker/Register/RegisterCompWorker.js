@@ -31,13 +31,12 @@ const RegCompWorker = () => {
         CompAdmin.getCompanyAdminId(currentProfile.id)
             .then((response) => {
                 const compId = response.data.company.id;
-
                 setCompanyId(compId);
             })
             .catch((e) => {
                 console.log(e);
             });
-    }, [companyId])
+    }, [])
 
     const onChangeFirstName = (e) => {
         const firstName = e.target.value;
