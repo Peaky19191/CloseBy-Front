@@ -27,20 +27,6 @@ const CompanyWorkersList = () => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [count, setCount] = useState(0);
 
-    const getCompWorkersListId = (companyId) => {
-        CompWorker.getCompanyWorkersList(page, rowsPerPage, companyId)
-            .then((response) => {
-                const compWorkers = response.data.items;
-                const totalPages = response.data.count;
-
-                setCompWorkers(compWorkers);
-                setCount(totalPages);
-            })
-            .catch((e) => {
-                console.log(e);
-            });
-    }
-
     const getList = () => {
         CompAdmin.getCompanyAdminId(currentProfile.id)
             .then((response) => {
@@ -54,6 +40,20 @@ const CompanyWorkersList = () => {
     };
 
     useEffect(getList, [page, rowsPerPage]);
+
+    const getCompWorkersListId = (companyId) => {
+        CompWorker.getCompanyWorkersList(page, rowsPerPage, companyId)
+            .then((response) => {
+                const compWorkers = response.data.items;
+                const totalPages = response.data.count;
+
+                setCompWorkers(compWorkers);
+                setCount(totalPages);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }
 
     const deleteFromList = async (id, companyId) => {
         await CompWorker.deleteCompanyWorker(id, companyId);
