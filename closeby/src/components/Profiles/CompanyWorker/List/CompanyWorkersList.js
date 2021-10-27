@@ -20,7 +20,6 @@ const CompanyWorkersList = () => {
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
 
-
     const classes = useStyles();
     const [compWorkers, setCompWorkers] = useState([]);
 
@@ -28,31 +27,26 @@ const CompanyWorkersList = () => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [count, setCount] = useState(0);
 
-    const [companyId, setCompanyId] = useState();
-
-    const getCompanyId = () => {
-        CompAdmin.getCompanyAdminId(currentProfile.id)
-            .then((response) => {
-                const compId = response.data.company.id;
-
-                setCompanyId(compId);
-            })
-            .catch((e) => {
-                console.log(e);
-            });
-
-        console.log(companyId);
-    }
-    useEffect(getCompanyId, [companyId]);
-
-    const getList = () => {
-        CompWorker.getCompanyWorkersList(page, rowsPerPage, companyId)
+    const getCompWorkersListId = (id) => {
+        CompWorker.getCompanyWorkersList(page, rowsPerPage, id)
             .then((response) => {
                 const compWorkers = response.data.items;
                 const totalPages = response.data.count;
 
                 setCompWorkers(compWorkers);
                 setCount(totalPages);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }
+
+    const getList = () => {
+        CompAdmin.getCompanyAdminId(currentProfile.id)
+            .then((response) => {
+                const compId = response.data.company.id;
+
+                getCompWorkersListId(compId);
             })
             .catch((e) => {
                 console.log(e);
