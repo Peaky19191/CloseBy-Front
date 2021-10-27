@@ -81,13 +81,13 @@ const UserDetails = () => {
                 <form className={classes.form}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
-                            <TextField label="First Name" value={firstName} onChange={onChangeFirstName} disabled={disaled} name="firstName" htmlFor="firstName" variant="outlined" fullWidth />
+                            <TextField label="First Name" value={firstName} onChange={onChangeFirstName} InputProps={{ readOnly: disaled }} name="firstName" htmlFor="firstName" variant="outlined" fullWidth />
                         </Grid>
                         <Grid item xs={12} >
-                            <TextField label="Last Name" value={lastName} onChange={onChangeLastName} disabled={disaled} name="lastName" htmlFor="lastName" variant="outlined" fullWidth />
+                            <TextField label="Last Name" value={lastName} onChange={onChangeLastName} InputProps={{ readOnly: disaled }} name="lastName" htmlFor="lastName" variant="outlined" fullWidth />
                         </Grid>
                         <Grid item xs={12} >
-                            <TextField label="Email Address" value={email} onChange={onChangeEmail} disabled={disaled} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
+                            <TextField label="Email Address" value={email} onChange={onChangeEmail} InputProps={{ readOnly: disaled }} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
                         </Grid>
                     </Grid>
                     {editMode ?
