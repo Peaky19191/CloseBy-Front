@@ -59,7 +59,7 @@ const Login = (props) => {
     };
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container className={classes.container} component="main" maxWidth="xs">
             <Paper className={classes.paper} elevation={3}>
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
@@ -91,22 +91,26 @@ const Login = (props) => {
                                 name="password" htmlFor="password" type="password" label="Password" value={password} onChange={onChangePassword} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} fullWidth variant="outlined" half item />
                         </Grid>
                     </Grid>
-                    <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit} disabled={loading}>
+                    <Button fullWidth type="submit" variant="contained" color="primary" className={classes.submit} disabled={loading}>
                         {loading && (
-                            <CircularProgress />
+                            <CircularProgress size="20px" />
                         )}
                         Login
                     </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
-                            <Button component={Link} to="/register">
-                                Don't have an account? Register
-                            </Button>
+                            <Typography variant="button" display="block">Don't have an account?
+                                <Button component={Link} to="/register" className={classes.bottomButton}>
+                                    Register
+                                </Button>
+                            </Typography>
                         </Grid>
                         <Grid item>
-                            <Button component={Link} to="/resetPassword">
-                                Forgot the password? Click Here
-                            </Button>
+                            <Typography variant="button" display="block">Forgot the password?
+                                <Button component={Link} to="/resetPassword" className={classes.bottomButton}>
+                                    Click Here
+                                </Button>
+                            </Typography>
                         </Grid>
                     </Grid>
                 </Form>

@@ -2,11 +2,16 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
     paper: {
-        //marginTop: theme.spacing(8),
+        marginTop: theme.spacing(8),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         padding: theme.spacing(2),
+    },
+    container: {
+        position: "absolute",
+        maxWidth: "30vw",
+        margin: theme.spacing("2vw", "35vw"),
     },
     root: {
         '& .MuiTextField-root': {
@@ -22,6 +27,8 @@ export default makeStyles((theme) => ({
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
+        justifContent: "center",
+        alignItems: "center"
     },
     alert: {
         margin: theme.spacing(1),

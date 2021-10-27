@@ -2,11 +2,15 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
     paper: {
-        //marginTop: theme.spacing(8),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         padding: theme.spacing(2),
+    },
+    container: {
+        position: "absolute",
+        maxWidth: "30vw",
+        margin: theme.spacing("5vw", "35vw"),
     },
     root: {
         '& .MuiTextField-root': {
@@ -22,9 +26,16 @@ export default makeStyles((theme) => ({
         marginTop: theme.spacing(3),
     },
     submit: {
-        margin: theme.spacing(3, 0, 2),
+        margin: theme.spacing("2vh", "15vh"),
+        width: "20vh",
     },
-    googleButton: {
-        marginBottom: theme.spacing(2),
+    bottomButton: {
+        margin: theme.spacing(1),
+        variant: "contained",
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.common.white,
+        '&:hover': {
+            backgroundColor: theme.palette.primary.dark,
+        },
     },
 }));
