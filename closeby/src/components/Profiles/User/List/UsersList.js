@@ -40,9 +40,7 @@ const UsersList = () => {
                 console.log(e);
             });
     };
-
     useEffect(getList, [page, rowsPerPage]);
-
 
     const setIdUser = (id) => {
         dispatch(setUserId(id))
@@ -64,7 +62,7 @@ const UsersList = () => {
 
     return (
         <div>
-            <TableContainer className={classes.tableContainer} component={Paper} elevation={3}  >
+            <TableContainer className={classes.tableContainer} component={Paper} elevation={3} autof >
                 <Table aria-label="simple table">
                     <TableHead>
                         <TableRow >
@@ -85,18 +83,18 @@ const UsersList = () => {
                                 <TableCell align="center">{item.role}</TableCell>
                                 <TableCell align="center">{item.gender}</TableCell>
                                 <TableCell align="center">
-                                    <IconButton aria-label="delete" size="large" onClick={() => { deleteFromList(item.id) }} >
-                                        <DeleteIcon />
-                                    </IconButton>
                                     <IconButton component={Link} to="/userDetails" onClick={() => { setIdUser(item.id) }} aria-label="edit" size="large" >
                                         <SettingsApplicationsIcon />
+                                    </IconButton>
+                                    <IconButton aria-label="delete" size="large" onClick={() => { deleteFromList(item.id) }} >
+                                        <DeleteIcon />
                                     </IconButton>
                                 </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                     <TableFooter>
-                        <TableRow>
+                        <TableRow >
                             <TablePagination
                                 rowsPerPageOptions={[5, 10, 25, 100]}
                                 component="div"

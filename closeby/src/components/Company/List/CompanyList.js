@@ -12,6 +12,8 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableFooter from '@material-ui/core/TableFooter';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
+import { Link } from 'react-router-dom'
+import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 
 const CompanyList = () => {
     const classes = useStyles();
@@ -68,10 +70,11 @@ const CompanyList = () => {
                             <TableCell component="th" scope="row">{item.name}</TableCell>
                             <TableCell align="center">{item.createdAt}</TableCell>
                             <TableCell align="center">
-                                <IconButton aria-label="delete" size="large">
-                                    <DeleteIcon onClick={() => {
-                                        deleteFromList(item.id)
-                                    }} />
+                                <IconButton component={Link} to="/userDetails" onClick={() => { }} aria-label="edit" size="large" >
+                                    <SettingsApplicationsIcon />
+                                </IconButton>
+                                <IconButton onClick={() => { deleteFromList(item.id) }} aria-label="delete" size="large">
+                                    <DeleteIcon />
                                 </IconButton>
                             </TableCell>
                         </TableRow>
