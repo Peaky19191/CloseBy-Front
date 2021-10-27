@@ -27,8 +27,8 @@ export default makeStyles((theme) => ({
         marginTop: theme.spacing(4),
     },
     submit: {
-        margin: theme.spacing("3vh", "35%", "1vh", "35%"),
-        width: "30%",
+        margin: theme.spacing("3vh", "30%", "1vh", "30%"),
+        width: "40%",
     },
     bottomButton: {
         margin: theme.spacing(1),
