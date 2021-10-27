@@ -8,13 +8,14 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableFooter from '@material-ui/core/TableFooter';
 import { useSelector } from "react-redux";
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
+import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
+import { Link } from 'react-router-dom'
 
 const CompanyWorkersList = () => {
 
@@ -108,15 +109,24 @@ const CompanyWorkersList = () => {
                 </TableBody>
                 <TableFooter>
                     <TableRow>
-                        <TablePagination
-                            rowsPerPageOptions={[5, 10, 25, 100]}
-                            component="div"
-                            count={count}
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            onPageChange={handleChangePage}
-                            onRowsPerPageChange={handleChangeRowsPerPage}
-                        />
+                        <Grid container justify="flex-end">
+                            <Grid item>
+                                <TablePagination
+                                    rowsPerPageOptions={[5, 10, 25, 100]}
+                                    component="div"
+                                    count={count}
+                                    rowsPerPage={rowsPerPage}
+                                    page={page}
+                                    onPageChange={handleChangePage}
+                                    onRowsPerPageChange={handleChangeRowsPerPage}
+                                />
+                            </Grid>
+                            <Grid item >
+                                <Button component={Link} to="/registerCompWorker" className={classes.bottomButton}>
+                                    Register new worker
+                                </Button>
+                            </Grid>
+                        </Grid>
                     </TableRow>
                 </TableFooter>
             </Table>
