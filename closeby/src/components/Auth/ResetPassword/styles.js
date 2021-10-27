@@ -39,5 +39,14 @@ export default makeStyles((theme) => ({
     },
     select: {
         margin: 8,
-    }
+    },
+    bottomButton: {
+        margin: theme.spacing(1),
+        variant: "contained",
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.common.white,
+        '&:hover': {
+            backgroundColor: theme.palette.primary.dark,
+        },
+    },
 }));

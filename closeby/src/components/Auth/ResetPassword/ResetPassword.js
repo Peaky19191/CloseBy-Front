@@ -70,9 +70,11 @@ export const ResetPassword = () => {
                     </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
-                            <Button component={Link} to="/login">
-                                Return to the login
-                            </Button>
+                            <Typography variant="button" display="block">Return to the
+                                <Button component={Link} to="/login" className={classes.bottomButton}>
+                                    login
+                                </Button>
+                            </Typography>
                         </Grid>
                     </Grid>
                 </form>
