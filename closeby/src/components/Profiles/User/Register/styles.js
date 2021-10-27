@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
     paper: {
-        //marginTop: theme.spacing(8),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -32,5 +31,19 @@ export default makeStyles((theme) => ({
     },
     select: {
         margin: 8,
-    }
+    },
+    container: {
+        position: "absolute",
+        maxWidth: "28vw",
+        margin: theme.spacing("2vw", "36vw"),
+    },
+    bottomButton: {
+        margin: theme.spacing(1),
+        variant: "contained",
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.common.white,
+        '&:hover': {
+            backgroundColor: theme.palette.primary.dark,
+        },
+    },
 }));

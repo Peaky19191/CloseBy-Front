@@ -85,7 +85,7 @@ export const Register = () => {
     }
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container className={classes.container} component="main" maxWidth="xs">
             <Paper className={classes.paper} elevation={3}>
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
@@ -146,9 +146,11 @@ export const Register = () => {
                     </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
-                            <Button component={Link} to="/login">
-                                Already have an account? Login
-                            </Button>
+                            <Typography variant="button" display="block"> Already have an account?
+                                <Button component={Link} to="/login" className={classes.bottomButton}>
+                                    Login
+                                </Button>
+                            </Typography>
                         </Grid>
                     </Grid>
                 </form>
