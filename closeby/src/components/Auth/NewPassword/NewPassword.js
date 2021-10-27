@@ -30,7 +30,7 @@ export const NewPassword = () => {
         e.preventDefault();
         setSuccessful(false);
         console.log(token);
-        dispatch(setNewPassword(password, token))  
+        dispatch(setNewPassword(password, token))
             .then(() => {
                 setSuccessful(true);
             })
@@ -40,7 +40,7 @@ export const NewPassword = () => {
     };
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container className={classes.container} component="main" maxWidth="xs">
             <Paper className={classes.paper} elevation={3}>
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
