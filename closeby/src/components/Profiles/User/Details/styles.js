@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
     container: {
-        position: "fixed",
+        position: "absolute",
         maxWidth: "28vw",
         margin: theme.spacing("2vw", "36vw"),
     },
