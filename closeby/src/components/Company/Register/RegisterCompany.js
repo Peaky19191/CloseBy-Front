@@ -49,7 +49,7 @@ const RegCompany = () => {
     const enabled = name.length > 0
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container className={classes.container} component="main" maxWidth="xs">
             <Paper className={classes.paper} elevation={3}>
                 <Avatar className={classes.avatar}>
                     <SupervisorAccountIcon />
@@ -77,7 +77,7 @@ const RegCompany = () => {
                         </Grid>
                     </Grid>
                     <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>
-                        Register Company
+                        Register
                     </Button>
                 </form>
             </Paper>

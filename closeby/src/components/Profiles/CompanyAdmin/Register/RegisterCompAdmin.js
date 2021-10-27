@@ -99,7 +99,7 @@ const RegCompAdmin = () => {
         companyId.length > 0;
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container className={classes.container} component="main" maxWidth="xs">
             <Paper className={classes.paper} elevation={3}>
                 <Avatar className={classes.avatar}>
                     <SupervisorAccountIcon />
@@ -146,7 +146,7 @@ const RegCompAdmin = () => {
                         </Grid>
                     </Grid>
                     <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>
-                        Register Company Admin
+                        Register
                     </Button>
                 </form>
             </Paper>

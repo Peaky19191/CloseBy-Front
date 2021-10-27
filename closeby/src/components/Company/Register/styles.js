@@ -7,6 +7,11 @@ export default makeStyles((theme) => ({
         alignItems: 'center',
         padding: theme.spacing(2),
     },
+    container: {
+        position: "absolute",
+        maxWidth: "28vw",
+        margin: theme.spacing("2vw", "36vw"),
+    },
     root: {
         '& .MuiTextField-root': {
             margin: theme.spacing(1),
