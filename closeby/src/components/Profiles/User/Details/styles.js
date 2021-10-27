@@ -1,13 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
-    popupBox: {
+    container: {
         position: "fixed",
-        background: '#00000050',
-        width: "100%",
-        height: "100vh",
-        top: 0,
-        left: 0,
+        maxWidth: "28vw",
+        margin: theme.spacing("2vw", "36vw"),
     },
     paper: {
         display: 'flex',
@@ -15,10 +12,6 @@ export default makeStyles((theme) => ({
         alignItems: 'center',
         padding: theme.spacing(2),
         position: "center",
-        width: "30%",
-        height: "auto",
-        marginTop: "18vh",
-        marginLeft: "70vh",
         background: '#fff',
         borderRadius: "10px",
         overflow: "auto",
@@ -36,9 +29,9 @@ export default makeStyles((theme) => ({
         marginTop: theme.spacing(3),
     },
     buttonEditSave: {
-        margin: theme.spacing(3, 0, 0),
+        margin: theme.spacing(2, 0, 0),
         width: '70%',
-        marginLeft: "9vh",
+        marginLeft: "8vh",
         backgroundColor: '#00b300',
         color: "#ffffff",
         '&:hover': {
@@ -50,19 +43,18 @@ export default makeStyles((theme) => ({
     buttonEditStop: {
         margin: theme.spacing(2, 0, 0),
         width: '70%',
-        marginLeft: "9vh",
+        marginLeft: "8vh",
 
     },
     buttonEditStart: {
         margin: theme.spacing(3, 0, 0),
         width: '70%',
-        marginLeft: "9vh",
+        marginLeft: "8vh",
 
     },
     buttonClose: {
         margin: theme.spacing(2, 0, 1),
         width: '70%',
-        marginLeft: "9vh",
+        marginLeft: "8vh",
     },
-
 }));

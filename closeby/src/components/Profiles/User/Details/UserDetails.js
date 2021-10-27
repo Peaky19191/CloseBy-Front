@@ -72,45 +72,43 @@ const UserDetails = () => {
 
 
     return (
-        <Container component="main" maxWidth="xs">
-            <div className={classes.popupBox} >
-                <Paper className={classes.paper} elevation={3}>
-                    <Avatar className={classes.avatar}>
-                        <SupervisorAccountIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">Details of the User</Typography>
-                    <form className={classes.form}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} >
-                                <TextField value={firstName} onChange={onChangeFirstName} disabled={disaled} name="firstName" htmlFor="firstName" variant="outlined" fullWidth />
-                            </Grid>
-                            <Grid item xs={12} >
-                                <TextField value={lastName} onChange={onChangeLastName} disabled={disaled} name="lastName" htmlFor="lastName" variant="outlined" fullWidth />
-                            </Grid>
-                            <Grid item xs={12} >
-                                <TextField value={email} onChange={onChangeEmail} disabled={disaled} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
-                            </Grid>
+        <Container className={classes.container} component="main" maxWidth="xs">
+            <Paper className={classes.paper} elevation={3}>
+                <Avatar className={classes.avatar}>
+                    <SupervisorAccountIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">Details of the User</Typography>
+                <form className={classes.form}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} >
+                            <TextField label="First Name" value={firstName} onChange={onChangeFirstName} disabled={disaled} name="firstName" htmlFor="firstName" variant="outlined" fullWidth />
                         </Grid>
-                        {editMode ?
-                            <>
-                                <Button className={classes.buttonEditSave} onClick={() => { }} fullWidth variant="contained"  >
-                                    Save
-                                </Button>
-                                <Button className={classes.buttonEditStop} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >
-                                    Stop Editinig
-                                </Button>
-                            </>
-                            :
-                            <Button className={classes.buttonEditStart} onClick={() => { startEditing() }} fullWidth variant="contained" color="primary" >
-                                Edit
+                        <Grid item xs={12} >
+                            <TextField label="Last Name" value={lastName} onChange={onChangeLastName} disabled={disaled} name="lastName" htmlFor="lastName" variant="outlined" fullWidth />
+                        </Grid>
+                        <Grid item xs={12} >
+                            <TextField label="Email Address" value={email} onChange={onChangeEmail} disabled={disaled} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
+                        </Grid>
+                    </Grid>
+                    {editMode ?
+                        <>
+                            <Button className={classes.buttonEditSave} onClick={() => { }} fullWidth variant="contained"  >
+                                Save
                             </Button>
-                        }
-                        <Button className={classes.buttonClose} component={Link} to="/usersList" fullWidth variant="contained" color="secondary" >
-                            Close
+                            <Button className={classes.buttonEditStop} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >
+                                Stop Editinig
+                            </Button>
+                        </>
+                        :
+                        <Button className={classes.buttonEditStart} onClick={() => { startEditing() }} fullWidth variant="contained" color="primary" >
+                            Edit
                         </Button>
-                    </form>
-                </Paper>
-            </div>
+                    }
+                    <Button className={classes.buttonClose} component={Link} to="/usersList" fullWidth variant="contained" color="secondary" >
+                        Close
+                    </Button>
+                </form>
+            </Paper>
         </Container>
     );
 };
