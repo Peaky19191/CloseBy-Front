@@ -37,7 +37,6 @@ export default makeStyles((theme) => ({
             backgroundColor: '#006600',
             color: '#ffffff',
         },
-
     },
     buttonEditStop: {
         margin: theme.spacing(2, 0, 0),

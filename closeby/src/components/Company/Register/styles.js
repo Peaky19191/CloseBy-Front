@@ -7,7 +7,6 @@ export default makeStyles((theme) => ({
         alignItems: 'center',
         padding: theme.spacing(2),
         borderRadius: "10px",
-
     },
     container: {
         position: "absolute",

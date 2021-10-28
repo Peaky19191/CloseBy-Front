@@ -70,7 +70,6 @@ const UserDetails = () => {
     }
     useEffect(getUserDetails, []);
 
-
     return (
         <Container className={classes.container} component="main" maxWidth="xs">
             <Paper className={classes.paper} elevation={3}>

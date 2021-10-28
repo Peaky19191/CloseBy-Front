@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom'
 import { setUserId } from "../../../../actions/Profiles/user";
 import { useDispatch } from "react-redux";
 import { Paper } from '@material-ui/core';
+import PopupDelete from '../../../Popup/PopupDelete/PopupDelete';
 
 const UsersList = () => {
     const classes = useStyles();
@@ -26,6 +27,8 @@ const UsersList = () => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [count, setCount] = useState(0);
+
+    const [isOpen, setIsOpen] = useState(false);
 
     const getList = () => {
         User.getUsersList(page, rowsPerPage)
@@ -46,8 +49,20 @@ const UsersList = () => {
         dispatch(setUserId(id))
     }
 
-    const deleteFromList = async (id) => {
-        await User.deleteUser(id);
+    const [idUserDelete, setIdUserDelete] = useState();
+
+    const prepareDelete = (id) => {
+        setIdUserDelete(id);
+        showPopup();
+    }
+
+    const showPopup = () => {
+        setIsOpen(!isOpen);
+    }
+
+    const deleteFromList = async () => {
+        await User.deleteUser(idUserDelete);
+        showPopup();
         getList();
     }
 
@@ -86,7 +101,7 @@ const UsersList = () => {
                                     <IconButton component={Link} to="/userDetails" onClick={() => { setIdUser(item.id) }} aria-label="edit" size="large" >
                                         <SettingsApplicationsIcon className={classes.settingICon} />
                                     </IconButton>
-                                    <IconButton aria-label="delete" size="large" onClick={() => { deleteFromList(item.id) }} >
+                                    <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id) }} >
                                         <DeleteIcon className={classes.deleteICon} />
                                     </IconButton>
                                 </TableCell>
@@ -108,6 +123,7 @@ const UsersList = () => {
                     </TableFooter>
                 </Table>
             </TableContainer>
+            {isOpen && <PopupDelete handleClose={showPopup} handleDelete={deleteFromList} />}
         </div >
     );
 };
