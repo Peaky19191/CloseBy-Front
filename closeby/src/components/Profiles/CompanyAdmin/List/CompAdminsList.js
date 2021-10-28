@@ -90,11 +90,11 @@ const CompanyAdminsList = () => {
                             <TableCell align="center">{item.company.name}</TableCell>
                             <TableCell align="center">{item.gender}</TableCell>
                             <TableCell align="center">
-                                <IconButton aria-label="delete" size="large" onClick={() => { }}>
-                                    <SettingsApplicationsIcon className={classes.settingICon} />
+                                <IconButton aria-label="edit" size="large" onClick={() => { }}>
+                                    <SettingsApplicationsIcon />
                                 </IconButton>
-                                <IconButton aria-label="delete" size="large" onClick={() => { compAdminDetails(item.id) }}>
-                                    <DeleteIcon className={classes.deleteICon} />
+                                <IconButton aria-label="delete" size="large" onClick={() => { deleteFromList(item.id, item.company.id) }}>
+                                    <DeleteIcon />
                                 </IconButton>
                             </TableCell>
                         </TableRow>

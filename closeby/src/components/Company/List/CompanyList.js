@@ -70,10 +70,10 @@ const CompanyList = () => {
                             <TableCell component="th" scope="row">{item.name}</TableCell>
                             <TableCell align="center">{item.createdAt}</TableCell>
                             <TableCell align="center">
-                                <IconButton component={Link} to="/userDetails" onClick={() => { }} aria-label="edit" size="large" >
+                                <IconButton onClick={() => { }} aria-label="edit" size="large" >
                                     <SettingsApplicationsIcon className={classes.settingICon} />
                                 </IconButton>
-                                <IconButton onClick={() => { deleteFromList(item.id) }} aria-label="delete" size="large">
+                                <IconButton aria-label="delete" size="large" onClick={() => { deleteFromList(item.id) }} >
                                     <DeleteIcon className={classes.deleteICon} />
                                 </IconButton>
                             </TableCell>
