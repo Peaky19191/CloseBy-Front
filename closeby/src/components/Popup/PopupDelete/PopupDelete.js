@@ -1,7 +1,7 @@
 import React from "react";
 import useStyles from './styles';
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 const PopupDelete = (props) => {
     const classes = useStyles();
@@ -11,7 +11,7 @@ const PopupDelete = (props) => {
             <Container className={classes.container} component="main" maxWidth="xs">
                 <Paper className={classes.paper} elevation={3}>
                     <Avatar className={classes.avatar}>
-                        <HighlightOffIcon className={classes.icon} />
+                        <DeleteForeverIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         Do you want to delete this user?
