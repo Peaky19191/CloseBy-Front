@@ -19,14 +19,15 @@ const PopupDelete = (props) => {
                         Do you want to delete this {props.handleData[0]}?
                     </Typography>
                     <Grid container className={classes.containerData} spacing={3}>
-                        {props.handleData[0] !== "Company" &&
-                            <Grid item xs={12} >
-                                <TextField value={props.handleData[1]} label="First Name" InputProps={{ readOnly: true }} variant="outlined" fullWidth />
-                            </Grid>}
-                        {props.handleData[0] === "Company" &&
+                        {(props.handleData[0] === "Company") ?
                             <Grid item xs={12} >
                                 <TextField value={props.handleData[1]} label="Company" InputProps={{ readOnly: true }} variant="outlined" fullWidth />
-                            </Grid>}
+                            </Grid>
+                            :
+                            <Grid item xs={12} >
+                                <TextField value={props.handleData[1]} label="First Name" InputProps={{ readOnly: true }} variant="outlined" fullWidth />
+                            </Grid>
+                        }
                         {props.handleData[2] &&
                             <Grid item xs={12} >
                                 <TextField value={props.handleData[2]} label="Last Name" InputProps={{ readOnly: true }} variant="outlined" fullWidth />
