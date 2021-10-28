@@ -28,6 +28,8 @@ export default makeStyles((theme) => ({
     },
     button: {
         margin: theme.spacing(4),
+        width: 100,
+        height: 40,
     },
     containerButton: {
         display: 'flex',
