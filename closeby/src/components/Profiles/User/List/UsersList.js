@@ -28,7 +28,6 @@ const UsersList = () => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [count, setCount] = useState(0);
 
-    const [isOpen, setIsOpen] = useState(false);
 
     const getList = () => {
         User.getUsersList(page, rowsPerPage)
@@ -48,6 +47,8 @@ const UsersList = () => {
     const setIdUser = (id) => {
         dispatch(setUserId(id))
     }
+
+    const [isOpen, setIsOpen] = useState(false);
 
     const [idUserDelete, setIdUserDelete] = useState();
     const [firstNameDelete, setFirstNameDelete] = useState();
@@ -84,7 +85,7 @@ const UsersList = () => {
     };
 
     return (
-        <div>
+        <>
             <TableContainer className={classes.tableContainer} component={Paper} elevation={3} autof >
                 <Table aria-label="simple table">
                     <TableHead>
@@ -131,8 +132,8 @@ const UsersList = () => {
                     </TableFooter>
                 </Table>
             </TableContainer>
-            {isOpen && <PopupDelete handleClose={showPopup} handleDelete={deleteFromList} handleData={["user", firstNameDelete, lastNameDelete, emailDelete]} />}
-        </div >
+            {isOpen && <PopupDelete handleClose={showPopup} handleDelete={deleteFromList} handleData={["User", firstNameDelete, lastNameDelete, emailDelete]} />}
+        </>
     );
 };
 

@@ -10,9 +10,8 @@ export default makeStyles((theme) => ({
         left: 0,
     },
     container: {
-        position: "fixed",
         maxWidth: "30vw",
-        margin: theme.spacing("10vw", "35vw"),
+        margin: theme.spacing("5vw", "35vw"),
     },
     paper: {
         display: 'flex',
@@ -26,8 +25,8 @@ export default makeStyles((theme) => ({
         backgroundColor: theme.palette.secondary.main,
     },
     button: {
-        margin: theme.spacing(4),
-        width: 100,
+        margin: theme.spacing(2, 7, 2, 7),
+        width: 140,
         height: 40,
     },
     containerButton: {
@@ -35,6 +34,9 @@ export default makeStyles((theme) => ({
         alignItems: 'center',
         width: 'auto',
         justifyContent: 'center',
+    },
+    containerData: {
+        margin: theme.spacing(3, 1, 1, 1),
     },
     icon: {
         width: 70,

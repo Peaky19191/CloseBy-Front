@@ -5,7 +5,7 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 const PopupDelete = (props) => {
     const classes = useStyles();
-
+    console.log(props.handleData);
     return (
         <div className={classes.popupBox} >
             <Container className={classes.container} component="main" maxWidth="xs">
@@ -14,14 +14,23 @@ const PopupDelete = (props) => {
                         <DeleteForeverIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Are you sure you want to delete this {props.handleData[0]}?
+                        Do you want to delete this {props.handleData[0]}?
                     </Typography>
-                    <Typography component="h1" variant="h6">
-                        {props.handleData[1]}   {props.handleData[2]}
-                    </Typography>
-                    <Typography component="h1" variant="h6">
-                        {props.handleData[3]}
-                    </Typography>
+                    <Grid container className={classes.containerData} spacing={3}>
+                        <Grid item xs={12} >
+                            <TextField value={props.handleData[1]} label="First Name" InputProps={{ readOnly: true }} variant="outlined" fullWidth />
+                        </Grid>
+                        <Grid item xs={12} >
+                            <TextField value={props.handleData[2]} label="Last Name" InputProps={{ readOnly: true }} variant="outlined" fullWidth />
+                        </Grid>
+                        <Grid item xs={12} >
+                            <TextField value={props.handleData[3]} label="Email Address" InputProps={{ readOnly: true }} variant="outlined" type="email" fullWidth />
+                        </Grid>
+                        {props.handleData[4] &&
+                            <Grid item xs={12} >
+                                <TextField label="Company" value={props.handleData[4]} InputProps={{ readOnly: true }} variant="outlined" fullWidth />
+                            </Grid>}
+                    </Grid>
                     <Grid className={classes.containerButton} container spacing={2}>
                         <Button onClick={props.handleClose} className={classes.button} variant="contained" color="primary">
                             close
