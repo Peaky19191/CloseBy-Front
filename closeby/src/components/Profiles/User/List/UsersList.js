@@ -84,10 +84,10 @@ const UsersList = () => {
                                 <TableCell align="center">{item.gender}</TableCell>
                                 <TableCell align="center">
                                     <IconButton component={Link} to="/userDetails" onClick={() => { setIdUser(item.id) }} aria-label="edit" size="large" >
-                                        <SettingsApplicationsIcon />
+                                        <SettingsApplicationsIcon className={classes.settingICon} />
                                     </IconButton>
                                     <IconButton aria-label="delete" size="large" onClick={() => { deleteFromList(item.id) }} >
-                                        <DeleteIcon />
+                                        <DeleteIcon className={classes.deleteICon} />
                                     </IconButton>
                                 </TableCell>
                             </TableRow>

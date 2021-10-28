@@ -21,4 +21,14 @@ export default makeStyles((theme) => ({
             backgroundColor: theme.palette.primary.dark,
         },
     },
+    deleteICon: {
+        '&:hover': {
+            color: theme.palette.error.main,
+        },
+    },
+    settingICon: {
+        '&:hover': {
+            color: theme.palette.primary.main,
+        },
+    },
 }));

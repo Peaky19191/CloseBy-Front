@@ -93,15 +93,11 @@ const CompanyWorkersList = () => {
                             <TableCell align="center">{item.company.name}</TableCell>
                             <TableCell align="center">{item.gender}</TableCell>
                             <TableCell align="center">
-                                <IconButton aria-label="delete" size="large">
-                                    <DeleteIcon onClick={() => {
-                                        deleteFromList(item.id, item.company.id)
-                                    }} />
+                                <IconButton aria-label="delete" size="large" onClick={() => { }}>
+                                    <SettingsApplicationsIcon className={classes.settingICon} />
                                 </IconButton>
-                                <IconButton aria-label="delete" size="large">
-                                    <SettingsApplicationsIcon onClick={() => {
-
-                                    }} />
+                                <IconButton aria-label="delete" size="large" onClick={() => { deleteFromList(item.id, item.company.id) }}>
+                                    <DeleteIcon className={classes.deleteICon} />
                                 </IconButton>
                             </TableCell>
                         </TableRow>
