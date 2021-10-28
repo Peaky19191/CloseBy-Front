@@ -15,7 +15,7 @@ import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Link } from 'react-router-dom'
 import { setUserId } from "../../../../actions/Profiles/user";
 import { useDispatch } from "react-redux";
-import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 
 const UsersList = () => {
     const classes = useStyles();
@@ -95,24 +95,15 @@ const UsersList = () => {
                     </TableBody>
                     <TableFooter>
                         <TableRow >
-                            <Grid container justify="flex-end">
-                                <Grid item>
-                                    <TablePagination
-                                        rowsPerPageOptions={[5, 10, 25, 100]}
-                                        component="div"
-                                        count={count}
-                                        rowsPerPage={rowsPerPage}
-                                        page={page}
-                                        onPageChange={handleChangePage}
-                                        onRowsPerPageChange={handleChangeRowsPerPage}
-                                    />
-                                </Grid>
-                                <Grid item >
-                                    <Button component={Link} to="/register" className={classes.bottomButton}>
-                                        Register new user
-                                    </Button>
-                                </Grid>
-                            </Grid>
+                            <TablePagination
+                                rowsPerPageOptions={[5, 10, 25, 100]}
+                                component="div"
+                                count={count}
+                                rowsPerPage={rowsPerPage}
+                                page={page}
+                                onPageChange={handleChangePage}
+                                onRowsPerPageChange={handleChangeRowsPerPage}
+                            />
                         </TableRow>
                     </TableFooter>
                 </Table>
