@@ -131,7 +131,7 @@ const UsersList = () => {
                     </TableFooter>
                 </Table>
             </TableContainer>
-            {isOpen && <PopupDelete handleClose={showPopup} handleDelete={deleteFromList} handleData={[firstNameDelete, lastNameDelete, emailDelete]} />}
+            {isOpen && <PopupDelete handleClose={showPopup} handleDelete={deleteFromList} handleData={["user", firstNameDelete, lastNameDelete, emailDelete]} />}
         </div >
     );
 };
