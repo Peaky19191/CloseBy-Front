@@ -14,6 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { Link } from 'react-router-dom'
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
+import PopupDelete from '../../Popup/PopupDelete/PopupDelete';
 
 const CompanyList = () => {
     const classes = useStyles();
@@ -40,8 +41,26 @@ const CompanyList = () => {
 
     useEffect(getList, [page, rowsPerPage]);
 
-    const deleteFromList = async (id) => {
-        await Company.deleteCompany(id);
+    const [isOpen, setIsOpen] = useState(false);
+
+    const [idCompanyDelete, setIdCompanyDelete] = useState();
+    const [companyNameDelete, setCompanyNameDelete] = useState();
+
+
+    const prepareDelete = (idComp, compName) => {
+        setIdCompanyDelete(idComp);
+        setCompanyNameDelete(compName);
+
+        showPopup();
+    }
+
+    const showPopup = () => {
+        setIsOpen(!isOpen);
+    }
+
+    const deleteFromList = async () => {
+        await Company.deleteCompany(idCompanyDelete);
+        showPopup();
         getList();
     }
 
@@ -54,56 +73,59 @@ const CompanyList = () => {
         setPage(0);
     };
     return (
-        <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >
-            <Table className={classes.table} aria-label="simple table">
-                <TableHead>
-                    <TableRow >
-                        <TableCell className={classes.tableCellTitle}>Company Name</TableCell>
-                        <TableCell align="center" className={classes.tableCellTitle}>Created At</TableCell>
-                        <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
+        <>
+            <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >
+                <Table className={classes.table} aria-label="simple table">
+                    <TableHead>
+                        <TableRow >
+                            <TableCell className={classes.tableCellTitle}>Company Name</TableCell>
+                            <TableCell align="center" className={classes.tableCellTitle}>Created At</TableCell>
+                            <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
 
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {company.map((item) => (
-                        <TableRow key={item.id} >
-                            <TableCell component="th" scope="row">{item.name}</TableCell>
-                            <TableCell align="center">{item.createdAt}</TableCell>
-                            <TableCell align="center">
-                                <IconButton onClick={() => { }} aria-label="edit" size="large" >
-                                    <SettingsApplicationsIcon className={classes.settingICon} />
-                                </IconButton>
-                                <IconButton aria-label="delete" size="large" onClick={() => { deleteFromList(item.id) }} >
-                                    <DeleteIcon className={classes.deleteICon} />
-                                </IconButton>
-                            </TableCell>
                         </TableRow>
-                    ))}
-                </TableBody>
-                <TableFooter>
-                    <TableRow>
-                        <Grid container justify="flex-end">
-                            <Grid item>
-                                <TablePagination
-                                    rowsPerPageOptions={[5, 10, 25, 100]}
-                                    component="div"
-                                    count={count}
-                                    rowsPerPage={rowsPerPage}
-                                    page={page}
-                                    onPageChange={handleChangePage}
-                                    onRowsPerPageChange={handleChangeRowsPerPage}
-                                />
+                    </TableHead>
+                    <TableBody>
+                        {company.map((item) => (
+                            <TableRow key={item.id} >
+                                <TableCell component="th" scope="row">{item.name}</TableCell>
+                                <TableCell align="center">{item.createdAt}</TableCell>
+                                <TableCell align="center">
+                                    <IconButton onClick={() => { }} aria-label="edit" size="large" >
+                                        <SettingsApplicationsIcon className={classes.settingICon} />
+                                    </IconButton>
+                                    <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.name) }} >
+                                        <DeleteIcon className={classes.deleteICon} />
+                                    </IconButton>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                    <TableFooter>
+                        <TableRow>
+                            <Grid container justify="flex-end">
+                                <Grid item>
+                                    <TablePagination
+                                        rowsPerPageOptions={[5, 10, 25, 100]}
+                                        component="div"
+                                        count={count}
+                                        rowsPerPage={rowsPerPage}
+                                        page={page}
+                                        onPageChange={handleChangePage}
+                                        onRowsPerPageChange={handleChangeRowsPerPage}
+                                    />
+                                </Grid>
+                                <Grid item >
+                                    <Button component={Link} to="/registerCompany" className={classes.bottomButton}>
+                                        Register new company
+                                    </Button>
+                                </Grid>
                             </Grid>
-                            <Grid item >
-                                <Button component={Link} to="/registerCompany" className={classes.bottomButton}>
-                                    Register new company
-                                </Button>
-                            </Grid>
-                        </Grid>
-                    </TableRow>
-                </TableFooter>
-            </Table>
-        </TableContainer>
+                        </TableRow>
+                    </TableFooter>
+                </Table>
+            </TableContainer>
+            {isOpen && <PopupDelete handleClose={showPopup} handleDelete={deleteFromList} handleData={["Company", companyNameDelete]} />}
+        </>
     );
 };
 
