@@ -5,7 +5,7 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 const PopupDelete = (props) => {
     const classes = useStyles();
-
+    console.log(props);
     return (
         <div className={classes.popupBox} >
             <Container className={classes.container} component="main" maxWidth="xs">
@@ -14,7 +14,13 @@ const PopupDelete = (props) => {
                         <DeleteForeverIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Do you want to delete this user?
+                        Are you sure you want to delete this user?
+                    </Typography>
+                    <Typography component="h1" variant="h6">
+                        {props.handleData[0]}   {props.handleData[1]}
+                    </Typography>
+                    <Typography component="h1" variant="h6">
+                        {props.handleData[2]}
                     </Typography>
                     <Grid className={classes.containerButton} container spacing={2}>
                         <Button onClick={props.handleClose} className={classes.button} variant="contained" color="primary">

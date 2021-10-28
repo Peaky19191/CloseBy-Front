@@ -11,8 +11,8 @@ export default makeStyles((theme) => ({
     },
     container: {
         position: "fixed",
-        maxWidth: "24vw",
-        margin: theme.spacing("10vw", "38vw"),
+        maxWidth: "30vw",
+        margin: theme.spacing("10vw", "35vw"),
     },
     paper: {
         display: 'flex',
@@ -20,7 +20,6 @@ export default makeStyles((theme) => ({
         alignItems: 'center',
         padding: theme.spacing(2),
         borderRadius: "10px",
-
     },
     avatar: {
         margin: theme.spacing(2),

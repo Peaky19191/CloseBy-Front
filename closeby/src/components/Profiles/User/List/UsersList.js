@@ -50,9 +50,17 @@ const UsersList = () => {
     }
 
     const [idUserDelete, setIdUserDelete] = useState();
+    const [firstNameDelete, setFirstNameDelete] = useState();
+    const [lastNameDelete, setLastNameDelete] = useState();
+    const [emailDelete, setEmailDelete] = useState();
 
-    const prepareDelete = (id) => {
+
+    const prepareDelete = (id, firstName, lastName, email) => {
         setIdUserDelete(id);
+        setFirstNameDelete(firstName);
+        setLastNameDelete(lastName);
+        setEmailDelete(email);
+
         showPopup();
     }
 
@@ -101,7 +109,7 @@ const UsersList = () => {
                                     <IconButton component={Link} to="/userDetails" onClick={() => { setIdUser(item.id) }} aria-label="edit" size="large" >
                                         <SettingsApplicationsIcon className={classes.settingICon} />
                                     </IconButton>
-                                    <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id) }} >
+                                    <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.firstName, item.lastName, item.email) }} >
                                         <DeleteIcon className={classes.deleteICon} />
                                     </IconButton>
                                 </TableCell>
@@ -123,7 +131,7 @@ const UsersList = () => {
                     </TableFooter>
                 </Table>
             </TableContainer>
-            {isOpen && <PopupDelete handleClose={showPopup} handleDelete={deleteFromList} />}
+            {isOpen && <PopupDelete handleClose={showPopup} handleDelete={deleteFromList} handleData={[firstNameDelete, lastNameDelete, emailDelete]} />}
         </div >
     );
 };
