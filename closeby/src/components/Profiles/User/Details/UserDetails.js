@@ -5,6 +5,7 @@ import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField }
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { Link } from 'react-router-dom'
 import { useSelector } from "react-redux";
+import MenuItem from '@material-ui/core/MenuItem';
 
 const UserDetails = () => {
     const classes = useStyles();
@@ -13,6 +14,7 @@ const UserDetails = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
+    const [gender, setGender] = useState("");
 
     const onChangeFirstName = (e) => {
         const firstName = e.target.value;
@@ -27,6 +29,11 @@ const UserDetails = () => {
     const onChangeEmail = (e) => {
         const email = e.target.value;
         setEmail(email);
+    };
+
+    const onChangeGender = (e) => {
+        const gender = e.target.value;
+        setGender(gender);
     };
 
     // const [userData, setUserData] = useState([]);
@@ -66,6 +73,7 @@ const UserDetails = () => {
                 setFirstName(dataTem.firstName);
                 setLastName(dataTem.lastName);
                 setEmail(dataTem.email);
+                setGender(dataTem.gender);
             });
     }
     useEffect(getUserDetails, []);
@@ -87,6 +95,12 @@ const UserDetails = () => {
                         </Grid>
                         <Grid item xs={12} >
                             <TextField label="Email Address" value={email} onChange={onChangeEmail} InputProps={{ readOnly: disaled }} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
+                        </Grid>
+                        <Grid item xs={12} >
+                            <TextField label="Gender" name="gender" htmlFor="gender" variant="outlined" InputProps={{ readOnly: disaled }} fullWidth value={gender} onChange={onChangeGender} type="text" select label="Gender">
+                                <MenuItem value={"Male"} >Male</MenuItem>
+                                <MenuItem value={"Female"} >Female</MenuItem>
+                            </TextField>
                         </Grid>
                     </Grid>
                     <Grid className={classes.buttonsContainer} container spacing={2}>
