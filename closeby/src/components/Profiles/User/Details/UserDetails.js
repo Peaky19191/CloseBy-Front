@@ -90,23 +90,26 @@ const UserDetails = () => {
                             <TextField label="Email Address" value={email} onChange={onChangeEmail} InputProps={{ readOnly: disaled }} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
                         </Grid>
                     </Grid>
-                    {editMode ?
-                        <>
-                            <Button className={classes.buttonEditSave} onClick={() => { }} fullWidth variant="contained"  >
-                                Save
+                    <Grid className={classes.buttonsContainer} container spacing={2}>
+                        {editMode ?
+                            <>
+                                <Button className={classes.buttonEditSave} onClick={() => { }} fullWidth variant="contained"  >
+                                    Save
+                                </Button>
+
+                                <Button className={classes.buttonEditStop} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >
+                                    Stop Editinig
+                                </Button>
+                            </>
+                            :
+                            <Button className={classes.buttonEditStart} onClick={() => { startEditing() }} fullWidth variant="contained" color="primary" >
+                                Edit
                             </Button>
-                            <Button className={classes.buttonEditStop} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >
-                                Stop Editinig
-                            </Button>
-                        </>
-                        :
-                        <Button className={classes.buttonEditStart} onClick={() => { startEditing() }} fullWidth variant="contained" color="primary" >
-                            Edit
+                        }
+                        <Button className={classes.buttonClose} component={Link} to="/usersList" fullWidth variant="contained" color="secondary" >
+                            Close
                         </Button>
-                    }
-                    <Button className={classes.buttonClose} component={Link} to="/usersList" fullWidth variant="contained" color="secondary" >
-                        Close
-                    </Button>
+                    </Grid>
                 </form>
             </Paper>
         </Container>
