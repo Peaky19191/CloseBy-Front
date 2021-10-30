@@ -1,3 +1,34 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@kkopec11 
+kkopec11
+/
+CloseBy.Frontend
+Public
+1
+00
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+CloseBy.Frontend/closeby/.gitignore
+@kkopec11
+kkopec11 inicial
+Latest commit 1e4a907 on 27 Feb
+ History
+ 1 contributor
+23 lines (18 sloc)  310 Bytes
+   
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
@@ -21,3 +52,16 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+© 2021 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete
