@@ -1,4 +1,4 @@
-import { SET_USER_ID, CLEAR_USER_ID, SET_COMP_ADMIN_ID, CLEAR_COMP_ADMIN_ID } from "../Constants/actionTypes";
+import { SET_USER_ID, CLEAR_USER_ID, SET_COMP_ADMIN_ID, CLEAR_COMP_ADMIN_ID, SET_COMPANY_ID, CLEAR_COMPANY_ID } from "../Constants/actionTypes";
 
 
 const initialState = {};
@@ -18,6 +18,12 @@ export default function (state = initialState, action) {
 
         case CLEAR_COMP_ADMIN_ID:
             return { id_comp_admin: "" };
+
+        case SET_COMPANY_ID:
+            return { id_company: payload };
+
+        case CLEAR_COMPANY_ID:
+            return { id_company: "" };
 
         default:
             return state;

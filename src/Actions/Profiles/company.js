@@ -2,6 +2,7 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
     SET_MESSAGE,
+    SET_COMPANY_ID,
 } from "../../Constants/actionTypes";
 
 import CompanyService from "../../Services/Profiles/company.service";
@@ -40,4 +41,11 @@ export const regCompany = (name) => (dispatch) => {
             return Promise.reject();
         }
     );
+};
+
+export const setCompanyId = (idToPass) => (dispatch) => {
+    dispatch({
+        type: SET_COMPANY_ID,
+        payload: idToPass,
+    });
 };

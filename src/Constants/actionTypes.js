@@ -21,3 +21,6 @@ export const CLEAR_USER_ID = "CLEAR_USER_ID";
 
 export const SET_COMP_ADMIN_ID = "SET_COMP_ADMIN_ID";
 export const CLEAR_COMP_ADMIN_ID = "CLEAR_COMP_ADMIN_ID";
+
+export const SET_COMPANY_ID = "SET_COMPANY_ID";
+export const CLEAR_COMPANY_ID = "CLEAR_COMPANY_ID";

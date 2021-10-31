@@ -23,11 +23,10 @@ const deleteCompany = (id) => {
                 id: id
             }
         },
-
     );
 };
 
-const infoCompany = (id) => {
+const getCompanyId = (id) => {
     return axios.get(API_URL + id,
         {
             headers: authHeader(),
@@ -35,8 +34,9 @@ const infoCompany = (id) => {
     );
 };
 
+
 export default {
     getCompanyList,
     deleteCompany,
-    infoCompany
+    getCompanyId
 };

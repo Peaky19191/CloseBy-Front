@@ -26,6 +26,7 @@ import CompanyList from './Components/Company/List/CompanyList';
 import RegCompany from './Components/Company/Register/RegisterCompany';
 import UserDetails from './Components/Profiles/User/Details/UserDetails';
 import CompAdminDetails from './Components/Profiles/CompanyAdmin/Details/CompAdminDetails';
+import CompanyDetails from './Components/Company/Details/CompanyDetails';
 
 import { useEffect } from 'react';
 import { logout } from "./Actions/auth";
@@ -69,6 +70,7 @@ const App = () => {
           <Route exact path="/registerCompany" component={RegCompany} />
           <Route exact path="/userDetails" component={UserDetails} />
           <Route exact path="/compAdminDetails" component={CompAdminDetails} />
+          <Route exact path="/companyDetails" component={CompanyDetails} />
 
         </Switch>
       </div>

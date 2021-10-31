@@ -15,6 +15,8 @@ import { Link } from 'react-router-dom'
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
 import PopupDelete from '../../Popup/PopupDelete/PopupDelete';
+import { setCompanyId } from "../../../Actions/Profiles/company";
+import { useDispatch } from "react-redux";
 
 const CompanyList = () => {
     const classes = useStyles();
@@ -40,6 +42,11 @@ const CompanyList = () => {
     };
 
     useEffect(getList, [page, rowsPerPage]);
+
+    const dispatch = useDispatch();
+    const setIdCompany = (id) => {
+        dispatch(setCompanyId(id))
+    }
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -90,7 +97,7 @@ const CompanyList = () => {
                                 <TableCell component="th" scope="row">{item.name}</TableCell>
                                 <TableCell align="center">{item.createdAt}</TableCell>
                                 <TableCell align="center">
-                                    <IconButton onClick={() => { }} aria-label="edit" size="large" >
+                                    <IconButton component={Link} to="/companyDetails" onClick={() => { setIdCompany(item.id) }} aria-label="edit" size="large" >
                                         <SettingsApplicationsIcon className={classes.settingICon} />
                                     </IconButton>
                                     <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.name) }} >
