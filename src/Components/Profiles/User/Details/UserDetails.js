@@ -36,17 +36,6 @@ const UserDetails = () => {
         setGender(gender);
     };
 
-    // const [userData, setUserData] = useState([]);
-
-    const dataTem = {
-        "id": "94496023-f25d-4e90-9f34-35c59ef57ab5",
-        "email": "user@cb.com",
-        "role": "User",
-        "gender": "Male",
-        "firstName": "Aaron",
-        "lastName": "Cannon",
-    };
-
     const [disaled, setDisabled] = useState(true);
     const [editMode, setEditMode] = useState(false);
 
@@ -63,17 +52,15 @@ const UserDetails = () => {
     const getUserDetails = () => {
         User.getUserId(userId)
             .then((response) => {
-                const user = response.data.items;
-                console.log(user)
+                const user = response.data;
 
-                //setUserData(user);
+                setFirstName(user.firstName);
+                setLastName(user.lastName);
+                setEmail(user.email);
+                setGender(user.gender);
             })
             .catch((e) => {
                 console.log(e);
-                setFirstName(dataTem.firstName);
-                setLastName(dataTem.lastName);
-                setEmail(dataTem.email);
-                setGender(dataTem.gender);
             });
     }
     useEffect(getUserDetails, []);
@@ -88,16 +75,16 @@ const UserDetails = () => {
                 <form className={classes.form}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
-                            <TextField label="First Name" value={firstName} onChange={onChangeFirstName} InputProps={{ readOnly: disaled }} name="firstName" htmlFor="firstName" variant="outlined" fullWidth />
+                            <TextField value={firstName} label="First Name" onChange={onChangeFirstName} InputProps={{ readOnly: disaled }} name="firstName" htmlFor="firstName" variant="outlined" fullWidth />
                         </Grid>
                         <Grid item xs={12} >
-                            <TextField label="Last Name" value={lastName} onChange={onChangeLastName} InputProps={{ readOnly: disaled }} name="lastName" htmlFor="lastName" variant="outlined" fullWidth />
+                            <TextField value={lastName} onChange={onChangeLastName} InputProps={{ readOnly: disaled }} name="lastName" htmlFor="lastName" variant="outlined" fullWidth label="Last Name" />
                         </Grid>
                         <Grid item xs={12} >
-                            <TextField label="Email Address" value={email} onChange={onChangeEmail} InputProps={{ readOnly: disaled }} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
+                            <TextField value={email} label="Email Address" onChange={onChangeEmail} InputProps={{ readOnly: disaled }} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
                         </Grid>
                         <Grid item xs={12} >
-                            <TextField label="Gender" name="gender" htmlFor="gender" variant="outlined" InputProps={{ readOnly: disaled }} fullWidth value={gender} onChange={onChangeGender} type="text" select label="Gender">
+                            <TextField value={gender} htmlFor="gender" variant="outlined" InputProps={{ readOnly: disaled }} fullWidth onChange={onChangeGender} type="text" select label="Gender">
                                 <MenuItem value={"Male"} >Male</MenuItem>
                                 <MenuItem value={"Female"} >Female</MenuItem>
                             </TextField>
@@ -109,7 +96,6 @@ const UserDetails = () => {
                                 <Button className={classes.buttonEditSave} onClick={() => { }} fullWidth variant="contained"  >
                                     Save
                                 </Button>
-
                                 <Button className={classes.buttonEditStop} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >
                                     Stop Editinig
                                 </Button>
