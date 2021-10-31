@@ -25,6 +25,8 @@ import NewPassword from './Components/Auth/NewPassword/NewPassword';
 import CompanyList from './Components/Company/List/CompanyList';
 import RegCompany from './Components/Company/Register/RegisterCompany';
 import UserDetails from './Components/Profiles/User/Details/UserDetails';
+import CompAdminDetails from './Components/Profiles/CompanyAdmin/Details/CompAdminDetails';
+
 import { useEffect } from 'react';
 import { logout } from "./Actions/auth";
 import { clearMessage } from "./Actions/message";
@@ -66,6 +68,8 @@ const App = () => {
           <Route exact path="/companyList" component={CompanyList} />
           <Route exact path="/registerCompany" component={RegCompany} />
           <Route exact path="/userDetails" component={UserDetails} />
+          <Route exact path="/compAdminDetails" component={CompAdminDetails} />
+
         </Switch>
       </div>
     </Router>

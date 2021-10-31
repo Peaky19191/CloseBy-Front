@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import useStyles from './styles';
-import User from '../../../../Api/user'
+import CompAdmin from '../../../../Api/companyAdmin'
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { Link } from 'react-router-dom'
 import { useSelector } from "react-redux";
 import MenuItem from '@material-ui/core/MenuItem';
 
-const UserDetails = () => {
+const CompAdminDetails = () => {
     const classes = useStyles();
-    const userId = useSelector(state => state.profiles.id_user);
+    const compAdminId = useSelector(state => state.profiles.id_comp_admin);
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
+    const [company, setCompany] = useState("");
     const [gender, setGender] = useState("");
 
     const onChangeFirstName = (e) => {
@@ -29,6 +30,11 @@ const UserDetails = () => {
     const onChangeEmail = (e) => {
         const email = e.target.value;
         setEmail(email);
+    };
+
+    const onChangeCompany = (e) => {
+        const company = e.target.value;
+        setCompany(company);
     };
 
     const onChangeGender = (e) => {
@@ -49,22 +55,21 @@ const UserDetails = () => {
         setEditMode(false);
     }
 
-    const getUserDetails = () => {
-        if (userId !== undefined)
-            User.getUserId(userId)
-                .then((response) => {
-                    const user = response.data;
+    const getCompAdminDetails = () => {
+        CompAdmin.getCompanyAdminId(compAdminId)
+            .then((response) => {
+                const compAdmin = response.data;
 
-                    setFirstName(user.firstName);
-                    setLastName(user.lastName);
-                    setEmail(user.email);
-                    setGender(user.gender);
-                })
-                .catch((e) => {
-                    console.log(e);
-                });
+                setFirstName(compAdmin.firstName);
+                setLastName(compAdmin.lastName);
+                setEmail(compAdmin.email);
+                setGender(compAdmin.gender);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
     }
-    useEffect(getUserDetails, [userId]);
+    useEffect(getCompAdminDetails, [compAdminId]);
 
     return (
         <Container className={classes.container} component="main" maxWidth="xs">
@@ -72,7 +77,7 @@ const UserDetails = () => {
                 <Avatar className={classes.avatar}>
                     <SupervisorAccountIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">Details of the User</Typography>
+                <Typography component="h1" variant="h5">Details of the Company Admin</Typography>
                 <form className={classes.form}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
@@ -83,6 +88,9 @@ const UserDetails = () => {
                         </Grid>
                         <Grid item xs={12} >
                             <TextField value={email} label="Email Address" onChange={onChangeEmail} InputProps={{ readOnly: disaled }} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
+                        </Grid>
+                        <Grid item xs={12} >
+                            <TextField value={company} label="Company" onChange={onChangeCompany} InputProps={{ readOnly: disaled }} name="company" htmlFor="company" variant="outlined" type="text" fullWidth />
                         </Grid>
                         <Grid item xs={12} >
                             <TextField value={gender} htmlFor="gender" variant="outlined" InputProps={{ readOnly: disaled }} fullWidth onChange={onChangeGender} type="text" select label="Gender">
@@ -106,7 +114,7 @@ const UserDetails = () => {
                                 Edit
                             </Button>
                         }
-                        <Button className={classes.buttonClose} component={Link} to="/usersList" fullWidth variant="contained" color="secondary" >
+                        <Button className={classes.buttonClose} component={Link} to="/compAdminList" fullWidth variant="contained" color="secondary" >
                             Close
                         </Button>
                     </Grid>
@@ -116,6 +124,6 @@ const UserDetails = () => {
     );
 };
 
-export default UserDetails;
+export default CompAdminDetails;
 
 

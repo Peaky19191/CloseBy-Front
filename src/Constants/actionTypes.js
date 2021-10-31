@@ -18,3 +18,6 @@ export const NEW_PASSW_SUCCESS = "NEW_PASSW_SUCCESS";
 
 export const SET_USER_ID = "SET_USER_ID";
 export const CLEAR_USER_ID = "CLEAR_USER_ID";
+
+export const SET_COMP_ADMIN_ID = "SET_COMP_ADMIN_ID";
+export const CLEAR_COMP_ADMIN_ID = "CLEAR_COMP_ADMIN_ID";

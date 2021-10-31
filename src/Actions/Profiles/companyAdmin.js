@@ -2,6 +2,7 @@ import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
     SET_MESSAGE,
+    SET_COMP_ADMIN_ID,
 } from "../../Constants/actionTypes";
 
 import CompanyAdminService from "../../Services/Profiles/companyAdmin.service";
@@ -40,4 +41,11 @@ export const regCompAdmin = (firstName, lastName, gender, email, companyId) => (
             return Promise.reject();
         }
     );
+};
+
+export const setCompAdminId = (idToPass) => (dispatch) => {
+    dispatch({
+        type: SET_COMP_ADMIN_ID,
+        payload: idToPass,
+    });
 };

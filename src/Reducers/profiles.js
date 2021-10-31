@@ -1,4 +1,4 @@
-import { SET_USER_ID, CLEAR_USER_ID } from "../Constants/actionTypes";
+import { SET_USER_ID, CLEAR_USER_ID, SET_COMP_ADMIN_ID, CLEAR_COMP_ADMIN_ID } from "../Constants/actionTypes";
 
 
 const initialState = {};
@@ -8,10 +8,16 @@ export default function (state = initialState, action) {
 
     switch (type) {
         case SET_USER_ID:
-            return { id: payload };
+            return { id_user: payload };
 
         case CLEAR_USER_ID:
-            return { id: "" };
+            return { id_user: "" };
+
+        case SET_COMP_ADMIN_ID:
+            return { id_comp_admin: payload };
+
+        case CLEAR_COMP_ADMIN_ID:
+            return { id_comp_admin: "" };
 
         default:
             return state;

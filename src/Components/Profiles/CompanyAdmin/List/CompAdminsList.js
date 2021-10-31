@@ -15,6 +15,8 @@ import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom'
 import PopupDelete from '../../../Popup/PopupDelete/PopupDelete';
+import { setCompAdminId } from "../../../../Actions/Profiles/companyAdmin";
+import { useDispatch } from "react-redux";
 
 const CompanyAdminsList = () => {
     const classes = useStyles();
@@ -40,6 +42,12 @@ const CompanyAdminsList = () => {
     };
 
     useEffect(getList, [page, rowsPerPage]);
+
+    const dispatch = useDispatch();
+
+    const setIdCompAdmin = (id) => {
+        dispatch(setCompAdminId(id))
+    }
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -106,8 +114,8 @@ const CompanyAdminsList = () => {
                                 <TableCell align="center">{item.company.name}</TableCell>
                                 <TableCell align="center">{item.gender}</TableCell>
                                 <TableCell align="center">
-                                    <IconButton aria-label="edit" size="large" onClick={() => { }}>
-                                        <SettingsApplicationsIcon />
+                                    <IconButton component={Link} to="/compAdminDetails" onClick={() => { setIdCompAdmin(item.id) }} aria-label="edit" size="large" >
+                                        <SettingsApplicationsIcon className={classes.settingICon} />
                                     </IconButton>
                                     <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.company.id, item.firstName, item.lastName, item.email, item.company.name) }} >
                                         <DeleteIcon className={classes.deleteICon} />
