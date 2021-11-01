@@ -24,9 +24,15 @@ export default makeStyles((theme) => ({
     },
     logout: {
         backgroundColor: theme.palette.secondary.main,
+        '&:hover': {
+            backgroundColor: theme.palette.secondary.dark,
+        },
     },
     main: {
         backgroundColor: theme.palette.primary.main,
+        '&:hover': {
+            backgroundColor: theme.palette.primary.dark,
+        },
     },
     button: {
         margin: theme.spacing(1),

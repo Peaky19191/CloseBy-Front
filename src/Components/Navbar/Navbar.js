@@ -114,32 +114,34 @@ const Navbar = () => {
                         <>
                             <MenuItem onClick={handleClose} component={Link} to="/compAdmin" variant="contained" >Main</MenuItem>
                             <Divider />
-                            <MenuItem onClick={handleClose} component={Link} to="/compWorkerList" variant="contained" >Company Worksers List</MenuItem>
-                            <MenuItem onClick={handleClose} component={Link} to="/registerCompWorker" variant="contained" >Register Company Worker</MenuItem>
+                            <MenuItem onClick={handleClose} component={Link} to="/compWorkerList" variant="contained" >List</MenuItem>
+                            <MenuItem onClick={handleClose} component={Link} to="/registerCompWorker" variant="contained" >Register new Worker</MenuItem>
                         </>
                     )}
                     {currentProfile && showGlobalAdminBoard && (
                         <>
                             <MenuItem onClick={handleClose} component={Link} to="/globAdmin" variant="contained" >Main</MenuItem>
                             <Divider />
-                            <MenuItem onClick={handleClose} component={Link} to="/registerCompAdmin" variant="contained" >Register Company Admin</MenuItem>
-                            <MenuItem onClick={handleClose} component={Link} to="/compAdminList" variant="contained" >Company Admins List</MenuItem>
-                            <MenuItem onClick={handleClose} component={Link} to="/registerCompany" variant="contained" >Register Company</MenuItem>
-                            <MenuItem onClick={handleClose} component={Link} to="/companyList" variant="contained" >Company List</MenuItem>
-                            <MenuItem onClick={handleClose} component={Link} to="/usersList" variant="contained" >Users List</MenuItem>
+                            {/* <MenuItem onClick={handleClose} component={Link} to="/registerCompAdmin" variant="contained" >Register Company Admin</MenuItem> */}
+                            <MenuItem onClick={handleClose} component={Link} to="/compAdminList" variant="contained" >Admins</MenuItem>
+                            {/* <MenuItem onClick={handleClose} component={Link} to="/registerCompany" variant="contained" >Register Company</MenuItem> */}
+                            <MenuItem onClick={handleClose} component={Link} to="/companyList" variant="contained" >Companies</MenuItem>
+                            <MenuItem onClick={handleClose} component={Link} to="/usersList" variant="contained" >Users</MenuItem>
                         </>
                     )}
                     {currentProfile ? (
                         <>
                             <Divider />
-                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/about" variant="contained" >About</MenuItem>
-                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/contact" variant="contained" >Contact</MenuItem>
-                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/events" variant="contained" >Events</MenuItem>
-                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/profile" variant="contained" >Profile</MenuItem>
+                            <MenuItem onClick={handleClose} component={Link} to="/events" variant="contained" >Events</MenuItem>
+                            <MenuItem onClick={handleClose} component={Link} to="/profile" variant="contained" >Profile</MenuItem>
                             <MenuItem className={classes.logout} onClick={handleClose} component={Link} to="/" variant="contained" onClick={logOut}>Logout</MenuItem>
                         </>
                     ) : (
-                        <MenuItem onClick={handleClose} component={Link} to="/login" variant="contained" >Login</MenuItem>
+                        <>
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/about" variant="contained" >About</MenuItem>
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/contact" variant="contained" >Contact</MenuItem>
+                            <MenuItem onClick={handleClose} component={Link} to="/login" variant="contained" >Login</MenuItem>
+                        </>
                     )}
                 </Menu>
             </Grid>

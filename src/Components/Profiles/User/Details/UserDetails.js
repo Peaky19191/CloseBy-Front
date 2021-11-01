@@ -92,7 +92,7 @@ const UserDetails = () => {
                         </Grid>
                     </Grid>
                     <Grid className={classes.buttonsContainer} container spacing={2}>
-                        {editMode ?
+                        {/* {editMode ?
                             <>
                                 <Button className={classes.buttonEditSave} onClick={() => { }} fullWidth variant="contained"  >
                                     Save
@@ -105,7 +105,7 @@ const UserDetails = () => {
                             <Button className={classes.buttonEditStart} onClick={() => { startEditing() }} fullWidth variant="contained" color="primary" >
                                 Edit
                             </Button>
-                        }
+                        } */}
                         <Button className={classes.buttonClose} component={Link} to="/usersList" fullWidth variant="contained" color="secondary" >
                             Close
                         </Button>

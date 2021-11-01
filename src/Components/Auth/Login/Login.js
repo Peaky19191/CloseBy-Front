@@ -73,29 +73,26 @@ const Login = (props) => {
                 )}
                 <Form className={classes.form} onSubmit={handleSubmit} >
                     <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6}>
-                            <TextField label="Email"
-                                name="email" htmlFor="email" type="email" variant="outlined" fullWidth onChange={onChangeEmail} value={email} autoFocus half item />
+                        <Grid item xs={12} >
+                            <TextField label="Email" name="email" htmlFor="email" type="email" variant="outlined" fullWidth onChange={onChangeEmail} value={email} autoFocus item />
                         </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                InputProps={{
-                                    endAdornment: (
-                                        <InputAdornment position="end">
-                                            <IconButton onClick={handleShowPassword}>
-                                                {!showPassword ? <Visibility /> : <VisibilityOff />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    )
-                                }}
-                                name="password" htmlFor="password" type="password" label="Password" value={password} onChange={onChangePassword} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} fullWidth variant="outlined" half item />
+                        <Grid item xs={12} >
+                            <TextField InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton onClick={handleShowPassword}>
+                                            {!showPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                )
+                            }}
+                                fullWidth name="password" htmlFor="password" type="password" label="Password" value={password} onChange={onChangePassword} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} variant="outlined" item />
                         </Grid>
                     </Grid>
                     <Button fullWidth type="submit" variant="contained" color="primary" className={classes.submit} disabled={loading}>
-                        {loading && (
+                        {loading ? (
                             <CircularProgress size="20px" />
-                        )}
-                        Login
+                        ) : "Login"}
                     </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
