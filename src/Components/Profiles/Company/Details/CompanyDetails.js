@@ -94,7 +94,7 @@ const CompanyDetails = () => {
                     <Grid className={classes.buttonsContainer} container spacing={2}>
                         {editMode ?
                             <>
-                                <Button type="submit" className={classes.buttonEditSave} onClick={() => { }} fullWidth variant="contained"  >
+                                <Button type="submit" className={classes.buttonEditSave} fullWidth variant="contained"  >
                                     Save
                                 </Button>
                                 <Button className={classes.buttonEditStop} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >

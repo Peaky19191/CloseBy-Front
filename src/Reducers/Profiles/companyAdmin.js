@@ -2,7 +2,9 @@ import {
     REGISTER_COMP_ADMIN_SUCCESS,
     REGISTER_COMP_ADMIN_FAIL,
     SET_COMP_ADMIN_ID,
-    CLEAR_COMP_ADMIN_ID
+    CLEAR_COMP_ADMIN_ID,
+    EDIT_COMP_ADMIN_SUCCESS,
+    EDIT_COMP_ADMIN_FAIL,
 } from "../../Constants/actionTypes";
 
 const initialState = {};
@@ -17,6 +19,16 @@ export default function (state = initialState, action) {
                 isLoggedIn: true,
             };
         case REGISTER_COMP_ADMIN_FAIL:
+            return {
+                ...state,
+                isLoggedIn: true,
+            };
+        case EDIT_COMP_ADMIN_SUCCESS:
+            return {
+                ...state,
+                isLoggedIn: true,
+            };
+        case EDIT_COMP_ADMIN_FAIL:
             return {
                 ...state,
                 isLoggedIn: true,
