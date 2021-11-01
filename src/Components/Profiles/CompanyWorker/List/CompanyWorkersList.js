@@ -17,6 +17,8 @@ import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom'
 import PopupDelete from '../../../Popup/PopupDelete/PopupDelete';
+import { setCompWorkerId } from "../../../../Actions/Profiles/companyWorker";
+import { useDispatch } from "react-redux";
 
 const CompanyWorkersList = () => {
 
@@ -55,6 +57,12 @@ const CompanyWorkersList = () => {
             .catch((e) => {
                 console.log(e);
             });
+    }
+
+    const dispatch = useDispatch();
+
+    const setIdCompAdmin = (id) => {
+        dispatch(setCompWorkerId(id))
     }
 
     const [isOpen, setIsOpen] = useState(false);
@@ -122,7 +130,7 @@ const CompanyWorkersList = () => {
                                 <TableCell align="center">{item.company.name}</TableCell>
                                 <TableCell align="center">{item.gender}</TableCell>
                                 <TableCell align="center">
-                                    <IconButton aria-label="delete" size="large" onClick={() => { }}>
+                                    <IconButton component={Link} to="/compWorkerDetails" onClick={() => { setIdCompAdmin(item.id) }} aria-label="edit" size="large" >
                                         <SettingsApplicationsIcon className={classes.settingICon} />
                                     </IconButton>
                                     <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.company.id, item.firstName, item.lastName, item.email, item.company.name) }} >
