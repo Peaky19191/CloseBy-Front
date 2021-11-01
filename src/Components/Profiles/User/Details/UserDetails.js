@@ -10,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 const UserDetails = () => {
     const classes = useStyles();
     const userId = useSelector(state => state.user.id_user);
+    const state = useSelector(state => state);
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -50,19 +51,18 @@ const UserDetails = () => {
     }
 
     const getUserDetails = () => {
-        if (userId !== undefined)
-            User.getUserId(userId)
-                .then((response) => {
-                    const user = response.data;
+        User.getUserId(userId)
+            .then((response) => {
+                const user = response.data;
 
-                    setFirstName(user.firstName);
-                    setLastName(user.lastName);
-                    setEmail(user.email);
-                    setGender(user.gender);
-                })
-                .catch((e) => {
-                    console.log(e);
-                });
+                setFirstName(user.firstName);
+                setLastName(user.lastName);
+                setEmail(user.email);
+                setGender(user.gender);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
     }
     useEffect(getUserDetails, [userId]);
 

@@ -33,16 +33,15 @@ const CompanyDetails = () => {
     }
 
     const getCompanyDetails = () => {
-        if (companyId !== undefined)
-            Company.getCompanyId(companyId)
-                .then((response) => {
-                    const company = response.data;
+        Company.getCompanyId(companyId)
+            .then((response) => {
+                const company = response.data;
 
-                    setName(company.name);
-                })
-                .catch((e) => {
-                    console.log(e);
-                });
+                setName(company.name);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
     }
     useEffect(getCompanyDetails, [companyId]);
 
