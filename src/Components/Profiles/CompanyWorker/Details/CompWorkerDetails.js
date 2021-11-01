@@ -4,8 +4,10 @@ import CompWorker from '../../../../Api/companyWorker'
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { Link } from 'react-router-dom'
-import { useSelector } from "react-redux";
 import MenuItem from '@material-ui/core/MenuItem';
+import { editCompWorker } from "../../../../Actions/Profiles/companyWorker";
+import { Alert, AlertTitle } from '@material-ui/lab';
+import { useDispatch, useSelector } from "react-redux";
 
 const CompWorkerDetails = () => {
     const classes = useStyles();
@@ -65,6 +67,23 @@ const CompWorkerDetails = () => {
     }
     useEffect(getCompWorkerDetails, [compWorkerId]);
 
+    const [successful, setSuccessful] = useState(false);
+
+    const { message } = useSelector(state => state.message);
+    const dispatch = useDispatch();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setSuccessful(false);
+        dispatch(editCompWorker(compWorkerId, firstName, lastName, gender, email))
+            .then(() => {
+                setSuccessful(true);
+            })
+            .catch(() => {
+                setSuccessful(false);
+            });
+    };
+
     return (
         <Container className={classes.container} component="main" maxWidth="xs">
             <Paper className={classes.paper} elevation={3}>
@@ -72,7 +91,22 @@ const CompWorkerDetails = () => {
                     <SupervisorAccountIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">Details of the Company Worker</Typography>
-                <form className={classes.form}>
+                {successful ?
+                    <Alert className={classes.alert} severity="success">
+                        <AlertTitle>Success</AlertTitle>
+                        <strong>You have successfully edit your company</strong>
+                    </Alert>
+                    :
+                    (message ?
+                        <Alert className={successful ? classes.alert : classes.alert} severity="error">
+                            <AlertTitle>Error</AlertTitle>
+                            <strong>{message}</strong>
+                        </Alert>
+                        :
+                        null
+                    )
+                }
+                <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
                             <TextField value={firstName} label="First Name" onChange={onChangeFirstName} InputProps={{ readOnly: disaled }} name="firstName" htmlFor="firstName" variant="outlined" fullWidth />
@@ -93,7 +127,7 @@ const CompWorkerDetails = () => {
                     <Grid className={classes.buttonsContainer} container spacing={2}>
                         {editMode ?
                             <>
-                                <Button className={classes.buttonEditSave} onClick={() => { }} fullWidth variant="contained"  >
+                                <Button type="submit" className={classes.buttonEditSave} fullWidth variant="contained"  >
                                     Save
                                 </Button>
                                 <Button className={classes.buttonEditStop} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >
