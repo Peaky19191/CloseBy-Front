@@ -4,8 +4,9 @@ import Company from '../../../../Api/company'
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { Link } from 'react-router-dom'
-import { useSelector } from "react-redux";
-import MenuItem from '@material-ui/core/MenuItem';
+import { editCompany } from "../../../../Actions/Profiles/company";
+import { Alert, AlertTitle } from '@material-ui/lab';
+import { useDispatch, useSelector } from "react-redux";
 
 const CompanyDetails = () => {
     const classes = useStyles();
@@ -45,14 +46,46 @@ const CompanyDetails = () => {
     }
     useEffect(getCompanyDetails, [companyId]);
 
+    const [successful, setSuccessful] = useState(false);
+
+    const { message } = useSelector(state => state.message);
+    const dispatch = useDispatch();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setSuccessful(false);
+        dispatch(editCompany(companyId, name))
+            .then(() => {
+                setSuccessful(true);
+            })
+            .catch(() => {
+                setSuccessful(false);
+            });
+    };
+
     return (
         <Container className={classes.container} component="main" maxWidth="xs">
             <Paper className={classes.paper} elevation={3}>
                 <Avatar className={classes.avatar}>
                     <SupervisorAccountIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">Details of the Company {name}</Typography>
-                <form className={classes.form}>
+                <Typography component="h1" variant="h5">Details of the Company</Typography>
+                {successful ?
+                    <Alert className={classes.alert} severity="success">
+                        <AlertTitle>Success</AlertTitle>
+                        <strong>You have successfully edit your company</strong>
+                    </Alert>
+                    :
+                    (message ?
+                        <Alert className={successful ? classes.alert : classes.alert} severity="error">
+                            <AlertTitle>Error</AlertTitle>
+                            <strong>{message}</strong>
+                        </Alert>
+                        :
+                        null
+                    )
+                }
+                <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
                             <TextField value={name} label="Company Name" onChange={onChangeName} InputProps={{ readOnly: disaled }} name="name" htmlFor="name" variant="outlined" fullWidth />
@@ -61,7 +94,7 @@ const CompanyDetails = () => {
                     <Grid className={classes.buttonsContainer} container spacing={2}>
                         {editMode ?
                             <>
-                                <Button className={classes.buttonEditSave} onClick={() => { }} fullWidth variant="contained"  >
+                                <Button type="submit" className={classes.buttonEditSave} onClick={() => { }} fullWidth variant="contained"  >
                                     Save
                                 </Button>
                                 <Button className={classes.buttonEditStop} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >

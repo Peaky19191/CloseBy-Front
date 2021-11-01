@@ -6,7 +6,19 @@ const API_URL = "http://localhost:5000/Api/company";
 const registerCompany = (name) => {
     return axios.post(API_URL + "/create",
         {
-            name
+            name: name
+        },
+        {
+            headers: authHeader()
+        }
+    );
+};
+
+const editCompanyAPI = (id, name) => {
+    return axios.put(API_URL + "/update",
+        {
+            id: id,
+            name: name
         },
         {
             headers: authHeader()
@@ -16,4 +28,5 @@ const registerCompany = (name) => {
 
 export default {
     registerCompany,
+    editCompanyAPI
 };

@@ -2,7 +2,9 @@ import {
     REGISTER_COMPANY_SUCCESS,
     REGISTER_COMPANY_FAIL,
     SET_COMPANY_ID,
-    CLEAR_COMPANY_ID
+    CLEAR_COMPANY_ID,
+    EDIT_COMPANY_SUCCESS,
+    EDIT_COMPANY_FAIL,
 } from "../../Constants/actionTypes";
 
 const initialState = {};
@@ -17,6 +19,16 @@ export default function (state = initialState, action) {
                 isLoggedIn: true,
             };
         case REGISTER_COMPANY_FAIL:
+            return {
+                ...state,
+                isLoggedIn: true,
+            };
+        case EDIT_COMPANY_SUCCESS:
+            return {
+                ...state,
+                isLoggedIn: true,
+            };
+        case EDIT_COMPANY_FAIL:
             return {
                 ...state,
                 isLoggedIn: true,
