@@ -18,6 +18,23 @@ const registerCompanyWorker = (firstName, lastName, gender, email, companyId) =>
     );
 };
 
+const editCompanyWorkerAPI = (id, firstName, lastName, gender, email) => {
+    return axios.put(API_URL + "/update",
+        {
+            id: id,
+            firstName: firstName,
+            lastName: lastName,
+            gender: gender,
+            email: email,
+        },
+        {
+            headers: authHeader()
+        }
+    );
+};
+
+
 export default {
     registerCompanyWorker,
+    editCompanyWorkerAPI
 };

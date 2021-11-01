@@ -59,7 +59,6 @@ export const clearCompAdminId = () => (dispatch) => {
     });
 };
 
-
 export const editCompAdmin = (id, firstName, lastName, gender, email, companyId) => (dispatch) => {
     return CompanyAdminService.editCompanyAdminAPI(id, firstName, lastName, gender, email, companyId).then(
         (response) => {

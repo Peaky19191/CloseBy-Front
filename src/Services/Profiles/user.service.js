@@ -17,7 +17,23 @@ const getUserData = (id) => {
     return axios.get(API_URL, { id });
 };
 
+const editUserAPI = (id, firstName, lastName, gender, email) => {
+    return axios.put(API_URL + "/update",
+        {
+            id: id,
+            firstName: firstName,
+            lastName: lastName,
+            gender: gender,
+            email: email,
+        },
+        {
+            headers: authHeader()
+        }
+    );
+};
+
 export default {
     getUserData,
-    registerUser
+    registerUser,
+    editUserAPI,
 };
