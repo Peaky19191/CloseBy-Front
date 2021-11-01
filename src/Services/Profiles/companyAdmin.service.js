@@ -26,12 +26,11 @@ const editCompanyAdminAPI = (id, firstName, lastName, gender, email, companyId) 
             lastName: lastName,
             gender: gender,
             email: email,
-            role: "CompanyAdmin",
-            company: {
-                id: companyId,
-                name: "compName",
-                createdAt: "2021-11-01 11:30:42.795646",
-            }
+            // FOR FUTURE BACKEND UPDATE - EDIT ASSIGNET COMPANY
+            // company: {
+            //     id: companyId,
+            //     name: "compName",
+            // }
         },
         {
             headers: authHeader()

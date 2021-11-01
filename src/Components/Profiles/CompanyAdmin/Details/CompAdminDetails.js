@@ -8,7 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { editCompAdmin } from "../../../../Actions/Profiles/companyAdmin";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useDispatch, useSelector } from "react-redux";
-import Company from '../../../../Api/company'
+// import Company from '../../../../Api/company'    FOR FUTURE BACKEND UPDATE - EDIT ASSIGNET COMPANY
 
 const CompAdminDetails = () => {
     const classes = useStyles();
@@ -18,8 +18,8 @@ const CompAdminDetails = () => {
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [gender, setGender] = useState("");
-    const [companyId, setCompanyId] = useState("");
-    const [companyName, setCompanyName] = useState("");
+    // const [companyId, setCompanyId] = useState("");  FOR FUTURE BACKEND UPDATE - EDIT ASSIGNET COMPANY
+    // const [companyName, setCompanyName] = useState("");
 
 
     const onChangeFirstName = (e) => {
@@ -37,33 +37,33 @@ const CompAdminDetails = () => {
         setEmail(email);
     };
 
-    const onChangeCompanyId = (e) => {
-        const companyId = e.target.value;
-        setCompanyId(companyId);
-    };
+    // const onChangeCompanyId = (e) => {   FOR FUTURE BACKEND UPDATE - EDIT ASSIGNET COMPANY
+    //     const companyId = e.target.value;
+    //     setCompanyId(companyId);
+    // };
 
     const onChangeGender = (e) => {
         const gender = e.target.value;
         setGender(gender);
     };
 
-    const [companyList, setCompanyList] = useState([]);
+    // const [companyList, setCompanyList] = useState([]);  FOR FUTURE BACKEND UPDATE - EDIT ASSIGNET COMPANY
 
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(100);
+    // const [page, setPage] = useState(0);
+    // const [rowsPerPage, setRowsPerPage] = useState(100);
 
-    const getCompanyList = () => {
-        Company.getCompanyList(page, rowsPerPage)
-            .then((response) => {
-                const companysTemp = response.data.items;
+    // const getCompanyList = () => {
+    //     Company.getCompanyList(page, rowsPerPage)
+    //         .then((response) => {
+    //             const companysTemp = response.data.items;
 
-                setCompanyList(companysTemp);
-            })
-            .catch((e) => {
-                console.log(e);
-            });
-    };
-    useEffect(getCompanyList, [page, rowsPerPage]);
+    //             setCompanyList(companysTemp);
+    //         })
+    //         .catch((e) => {
+    //             console.log(e);
+    //         });
+    // };
+    // useEffect(getCompanyList, [page, rowsPerPage]);
 
     const [disaled, setDisabled] = useState(true);
     const [editMode, setEditMode] = useState(false);
@@ -88,8 +88,8 @@ const CompAdminDetails = () => {
                 setLastName(compAdmin.lastName);
                 setEmail(compAdmin.email);
                 setGender(compAdmin.gender);
-                setCompanyId(compAdmin.company.id);
-                setCompanyName(compAdmin.company.name);
+                // setCompanyId(compAdmin.company.id);  FOR FUTURE BACKEND UPDATE - EDIT ASSIGNET COMPANY
+                // setCompanyName(compAdmin.company.name);
             })
             .catch((e) => {
                 console.log(e);
@@ -105,7 +105,8 @@ const CompAdminDetails = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
-        dispatch(editCompAdmin(compAdminId, firstName, lastName, gender, email, companyId))
+        // dispatch(editCompAdmin(compAdminId, firstName, lastName, gender, email, companyId))  FOR FUTURE BACKEND UPDATE - EDIT ASSIGNET COMPANY
+        dispatch(editCompAdmin(compAdminId, firstName, lastName, gender, email))
             .then(() => {
                 setSuccessful(true);
             })
@@ -147,6 +148,7 @@ const CompAdminDetails = () => {
                         <Grid item xs={12} >
                             <TextField value={email} label="Email Address" onChange={onChangeEmail} InputProps={{ readOnly: disaled }} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
                         </Grid>
+                        {/* FOR FUTURE BACKEND UPDATE - EDIT ASSIGNET COMPANY
                         <Grid item xs={12} >
                             {editMode ?
                                 <TextField value={companyId} label="Company" htmlFor="companyId" variant="outlined" InputProps={{ readOnly: disaled }} type="text" onChange={onChangeCompanyId} fullWidth select >
@@ -157,7 +159,7 @@ const CompAdminDetails = () => {
                                 :
                                 <TextField value={companyName} label="Company" htmlFor="companyId" variant="outlined" InputProps={{ readOnly: disaled }} type="text" onChange={onChangeCompanyId} fullWidth />
                             }
-                        </Grid>
+                        </Grid> */}
                         <Grid item xs={12} >
                             <TextField value={gender} htmlFor="gender" variant="outlined" InputProps={{ readOnly: disaled }} fullWidth onChange={onChangeGender} type="text" select={disaled ? false : true} label="Gender">
                                 <MenuItem value={"Male"} >Male</MenuItem>
