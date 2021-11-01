@@ -1,0 +1,33 @@
+import {
+    REGISTER_COMP_ADMIN_SUCCESS,
+    REGISTER_COMP_ADMIN_FAIL,
+    SET_COMP_ADMIN_ID,
+    CLEAR_COMP_ADMIN_ID
+} from "../../Constants/actionTypes";
+
+const initialState = {};
+
+export default function (state = initialState, action) {
+    const { type, payload } = action;
+
+    switch (type) {
+        case REGISTER_COMP_ADMIN_SUCCESS:
+            return {
+                ...state,
+                isLoggedIn: true,
+            };
+        case REGISTER_COMP_ADMIN_FAIL:
+            return {
+                ...state,
+                isLoggedIn: true,
+            };
+        case SET_COMP_ADMIN_ID:
+            return { id_comp_admin: payload };
+
+        case CLEAR_COMP_ADMIN_ID:
+            return { id_comp_admin: "" };
+
+        default:
+            return state;
+    }
+}

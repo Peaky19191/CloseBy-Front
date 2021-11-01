@@ -36,6 +36,18 @@ const getUserId = (id) => {
     );
 };
 
+const updateUser = (id) => {
+    return axios.put(API_URL + "/update",
+        {
+            headers: authHeader(),
+            data: {
+                id: id
+            }
+        },
+
+    );
+};
+
 export default {
     getUsersList,
     deleteUser,

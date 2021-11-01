@@ -28,6 +28,7 @@ const RegCompWorker = () => {
 
     const [companyId, setCompanyId] = useState("");
     useEffect(() => {
+        console.log(currentProfile);
         CompAdmin.getCompanyAdminId(currentProfile.id)
             .then((response) => {
                 const compId = response.data.company.id;

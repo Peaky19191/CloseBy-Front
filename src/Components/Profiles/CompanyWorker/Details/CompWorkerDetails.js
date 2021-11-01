@@ -9,7 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 const CompWorkerDetails = () => {
     const classes = useStyles();
-    const compWorkerId = useSelector(state => state.profiles.id_comp_worker);
+    const compWorkerId = useSelector(state => state.companyWorker.id_comp_worker);
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");

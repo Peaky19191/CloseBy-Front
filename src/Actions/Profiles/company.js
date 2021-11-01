@@ -1,8 +1,9 @@
 import {
-    REGISTER_SUCCESS,
-    REGISTER_FAIL,
+    REGISTER_COMPANY_SUCCESS,
+    REGISTER_COMPANY_FAIL,
     SET_MESSAGE,
     SET_COMPANY_ID,
+    CLEAR_COMPANY_ID,
 } from "../../Constants/actionTypes";
 
 import CompanyService from "../../Services/Profiles/company.service";
@@ -11,7 +12,7 @@ export const regCompany = (name) => (dispatch) => {
     return CompanyService.registerCompany(name).then(
         (response) => {
             dispatch({
-                type: REGISTER_SUCCESS,
+                type: REGISTER_COMPANY_SUCCESS,
             });
 
             dispatch({
@@ -30,7 +31,7 @@ export const regCompany = (name) => (dispatch) => {
                 error.toString();
 
             dispatch({
-                type: REGISTER_FAIL,
+                type: REGISTER_COMPANY_FAIL,
             });
 
             dispatch({
@@ -47,5 +48,11 @@ export const setCompanyId = (idToPass) => (dispatch) => {
     dispatch({
         type: SET_COMPANY_ID,
         payload: idToPass,
+    });
+};
+
+export const clearCompanyId = () => (dispatch) => {
+    dispatch({
+        type: CLEAR_COMPANY_ID,
     });
 };

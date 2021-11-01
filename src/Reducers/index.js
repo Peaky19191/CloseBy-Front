@@ -1,10 +1,17 @@
 import { combineReducers } from "redux";
 import auth from "./auth";
 import message from "./message";
-import profiles from "./profiles";
+import company from "./Profiles/company";
+import companyAdmin from "./Profiles/companyAdmin";
+import companyWorker from "./Profiles/companyWorker";
+import user from "./Profiles/user";
+
 
 export default combineReducers({
     auth,
     message,
-    profiles
+    company,
+    companyAdmin,
+    companyWorker,
+    user,
 });

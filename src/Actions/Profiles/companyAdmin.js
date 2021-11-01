@@ -1,8 +1,9 @@
 import {
-    REGISTER_SUCCESS,
-    REGISTER_FAIL,
+    REGISTER_COMP_ADMIN_SUCCESS,
+    REGISTER_COMP_ADMIN_FAIL,
     SET_MESSAGE,
     SET_COMP_ADMIN_ID,
+    CLEAR_COMP_ADMIN_ID
 } from "../../Constants/actionTypes";
 
 import CompanyAdminService from "../../Services/Profiles/companyAdmin.service";
@@ -11,7 +12,7 @@ export const regCompAdmin = (firstName, lastName, gender, email, companyId) => (
     return CompanyAdminService.registerCompanyAdmin(firstName, lastName, gender, email, companyId).then(
         (response) => {
             dispatch({
-                type: REGISTER_SUCCESS,
+                type: REGISTER_COMP_ADMIN_SUCCESS,
             });
 
             dispatch({
@@ -30,7 +31,7 @@ export const regCompAdmin = (firstName, lastName, gender, email, companyId) => (
                 error.toString();
 
             dispatch({
-                type: REGISTER_FAIL,
+                type: REGISTER_COMP_ADMIN_FAIL,
             });
 
             dispatch({
@@ -47,5 +48,11 @@ export const setCompAdminId = (idToPass) => (dispatch) => {
     dispatch({
         type: SET_COMP_ADMIN_ID,
         payload: idToPass,
+    });
+};
+
+export const clearCompAdminId = () => (dispatch) => {
+    dispatch({
+        type: CLEAR_COMP_ADMIN_ID,
     });
 };
