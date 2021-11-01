@@ -46,8 +46,8 @@ const App = () => {
 
   return (
     <Router history={history}>
-      <Navbar />
       <div className={classes.root}>
+        <Navbar />
         <Switch>
           <Route exact path="/" exact component={Home} />
           <Route exact path="/about" exact component={About} />
@@ -73,7 +73,6 @@ const App = () => {
           <Route exact path="/compAdminDetails" component={CompAdminDetails} />
           <Route exact path="/companyDetails" component={CompanyDetails} />
           <Route exact path="/compWorkerDetails" component={CompWorkerDetails} />
-
         </Switch>
       </div>
     </Router>
