@@ -61,7 +61,7 @@ const CompanyWorkersList = () => {
 
     const dispatch = useDispatch();
 
-    const setIdCompAdmin = (id) => {
+    const setIdCompWorker = (id) => {
         dispatch(setCompWorkerId(id))
     }
 
@@ -130,7 +130,7 @@ const CompanyWorkersList = () => {
                                 <TableCell align="center">{item.company.name}</TableCell>
                                 <TableCell align="center">{item.gender}</TableCell>
                                 <TableCell align="center">
-                                    <IconButton component={Link} to="/compWorkerDetails" onClick={() => { setIdCompAdmin(item.id) }} aria-label="edit" size="large" >
+                                    <IconButton component={Link} to="/compWorkerDetails" onClick={() => { setIdCompWorker(item.id) }} aria-label="edit" size="large" >
                                         <SettingsApplicationsIcon className={classes.settingICon} />
                                     </IconButton>
                                     <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.company.id, item.firstName, item.lastName, item.email, item.company.name) }} >
