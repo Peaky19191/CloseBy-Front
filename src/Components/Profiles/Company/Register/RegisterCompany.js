@@ -4,7 +4,7 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import useStyles from './styles';
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, AlertTitle } from '@material-ui/lab';
-import { regCompany } from "../../../Actions/Profiles/company";
+import { regCompany } from "../../../../Actions/Profiles/company";
 
 const RegCompany = () => {
     const classes = useStyles();

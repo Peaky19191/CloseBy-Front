@@ -22,11 +22,11 @@ import UsersList from './Components/Profiles/User/List/UsersList';
 import CompanyWorkerList from './Components/Profiles/CompanyWorker/List/CompanyWorkersList';
 import RegCompWorker from './Components/Profiles/CompanyWorker/Register/RegisterCompWorker';
 import NewPassword from './Components/Auth/NewPassword/NewPassword';
-import CompanyList from './Components/Company/List/CompanyList';
-import RegCompany from './Components/Company/Register/RegisterCompany';
+import CompanyList from './Components/Profiles/Company/List/CompanyList';
+import RegCompany from './Components/Profiles/Company/Register/RegisterCompany';
 import UserDetails from './Components/Profiles/User/Details/UserDetails';
 import CompAdminDetails from './Components/Profiles/CompanyAdmin/Details/CompAdminDetails';
-import CompanyDetails from './Components/Company/Details/CompanyDetails';
+import CompanyDetails from './Components/Profiles/Company/Details/CompanyDetails';
 import CompWorkerDetails from './Components/Profiles/CompanyWorker/Details/CompWorkerDetails';
 
 import { useEffect } from 'react';
