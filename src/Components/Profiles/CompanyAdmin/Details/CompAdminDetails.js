@@ -64,6 +64,7 @@ const CompAdminDetails = () => {
                 setLastName(compAdmin.lastName);
                 setEmail(compAdmin.email);
                 setGender(compAdmin.gender);
+                setCompany(compAdmin.company.name);
             })
             .catch((e) => {
                 console.log(e);
