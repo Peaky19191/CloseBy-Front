@@ -35,6 +35,7 @@ const Navbar = () => {
     }, [currentProfile]);
 
     const logOut = () => {
+        setAnchorEl(null);
         dispatch(logout());
     };
 
@@ -134,7 +135,7 @@ const Navbar = () => {
                             <Divider />
                             <MenuItem onClick={handleClose} component={Link} to="/events" variant="contained" >Events</MenuItem>
                             <MenuItem onClick={handleClose} component={Link} to="/profile" variant="contained" >Profile</MenuItem>
-                            <MenuItem className={classes.logout} onClick={handleClose} component={Link} to="/" variant="contained" onClick={logOut}>Logout</MenuItem>
+                            <MenuItem onClick={logOut} className={classes.logout} component={Link} to="/" variant="contained" >Logout</MenuItem>
                         </>
                     ) : (
                         <>
