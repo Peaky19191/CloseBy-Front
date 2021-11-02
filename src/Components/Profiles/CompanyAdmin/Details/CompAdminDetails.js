@@ -18,9 +18,15 @@ const CompAdminDetails = () => {
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [gender, setGender] = useState("");
+    const [errors, setErrors] = useState({});
     // const [companyId, setCompanyId] = useState("");  FOR FUTURE BACKEND UPDATE - EDIT ASSIGNET COMPANY
     // const [companyName, setCompanyName] = useState("");
 
+    const enabled =
+        firstName.length > 0 &&
+        lastName.length > 0 &&
+        email.length > 0 &&
+        gender.length > 0;
 
     const onChangeFirstName = (e) => {
         const firstName = e.target.value;
@@ -106,14 +112,29 @@ const CompAdminDetails = () => {
         e.preventDefault();
         setSuccessful(false);
         // dispatch(editCompAdmin(compAdminId, firstName, lastName, gender, email, companyId))  FOR FUTURE BACKEND UPDATE - EDIT ASSIGNET COMPANY
-        dispatch(editCompAdmin(compAdminId, firstName, lastName, gender, email))
-            .then(() => {
-                setSuccessful(true);
-            })
-            .catch(() => {
-                setSuccessful(false);
-            });
+
+        if (validate())
+            dispatch(editCompAdmin(compAdminId, firstName, lastName, gender, email))
+                .then(() => {
+                    setSuccessful(true);
+                })
+                .catch(() => {
+                    setSuccessful(false);
+                });
     };
+
+    const validate = () => {
+        let temp = {}
+        temp.firstName = (/^[A-Za-z]+$/).test(firstName) ? "" : "Numbers and whitespaces are not allowed"
+        temp.lastName = (/^[A-Za-z]+$/).test(lastName) ? "" : "Numbers and whitespaces are not allowed"
+        temp.email = (/$^|.+@.+..+/).test(email) ? "" : "Email is not valid"
+        temp.gender = gender.length != 0 ? "" : "This field is required (gender)"
+        setErrors({
+            ...temp
+        })
+        console.log(Object.values(temp).every(x => x == ""));
+        return Object.values(temp).every(x => x == "");
+    }
 
     return (
         <Container className={classes.container} component="main" maxWidth="xs">
@@ -140,13 +161,13 @@ const CompAdminDetails = () => {
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
-                            <TextField value={firstName} label="First Name" onChange={onChangeFirstName} InputProps={{ readOnly: disaled }} name="firstName" htmlFor="firstName" variant="outlined" fullWidth />
+                            <TextField value={firstName} error={errors.firstName} helperText={(errors.firstName)} label="First Name" onChange={onChangeFirstName} InputProps={{ readOnly: disaled }} name="firstName" htmlFor="firstName" variant="outlined" fullWidth />
                         </Grid>
                         <Grid item xs={12} >
-                            <TextField value={lastName} onChange={onChangeLastName} InputProps={{ readOnly: disaled }} name="lastName" htmlFor="lastName" variant="outlined" fullWidth label="Last Name" />
+                            <TextField value={lastName} error={errors.lastName} helperText={(errors.lastName)} onChange={onChangeLastName} InputProps={{ readOnly: disaled }} name="lastName" htmlFor="lastName" variant="outlined" fullWidth label="Last Name" />
                         </Grid>
                         <Grid item xs={12} >
-                            <TextField value={email} label="Email Address" onChange={onChangeEmail} InputProps={{ readOnly: disaled }} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
+                            <TextField value={email} error={errors.email} helperText={(errors.email)} label="Email Address" onChange={onChangeEmail} InputProps={{ readOnly: disaled }} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
                         </Grid>
                         {/* FOR FUTURE BACKEND UPDATE - EDIT ASSIGNET COMPANY
                         <Grid item xs={12} >
@@ -161,7 +182,7 @@ const CompAdminDetails = () => {
                             }
                         </Grid> */}
                         <Grid item xs={12} >
-                            <TextField value={gender} htmlFor="gender" variant="outlined" InputProps={{ readOnly: disaled }} fullWidth onChange={onChangeGender} type="text" select={disaled ? false : true} label="Gender">
+                            <TextField error={errors.gender} helperText={(errors.gender)} value={gender} htmlFor="gender" variant="outlined" InputProps={{ readOnly: disaled }} fullWidth onChange={onChangeGender} type="text" select={disaled ? false : true} label="Gender">
                                 <MenuItem value={"Male"} >Male</MenuItem>
                                 <MenuItem value={"Female"} >Female</MenuItem>
                             </TextField>
@@ -170,7 +191,7 @@ const CompAdminDetails = () => {
                     <Grid className={classes.buttonsContainer} container spacing={2}>
                         {editMode ?
                             <>
-                                <Button type="submit" className={classes.buttonEditSave} fullWidth variant="contained"  >
+                                <Button disabled={!enabled} type="submit" className={classes.buttonEditSave} fullWidth variant="contained"  >
                                     Save
                                 </Button>
                                 <Button className={classes.buttonEditStop} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >

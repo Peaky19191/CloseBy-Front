@@ -38,7 +38,7 @@ const RegCompany = () => {
 
     const validate = () => {
         let temp = {}
-        temp.name = name ? "" : "This field is required (Name)"
+        temp.name = (/^[A-Za-z0-9]+$/).test(name) ? "" : "Numbers and whitespaces are not allowed"
         setErrors({
             ...temp
         })

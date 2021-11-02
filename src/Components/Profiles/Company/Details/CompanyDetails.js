@@ -13,12 +13,14 @@ const CompanyDetails = () => {
     const companyId = useSelector(state => state.company.id_company);
 
     const [name, setName] = useState("");
+    const [errors, setErrors] = useState({});
 
     const onChangeName = (e) => {
         const name = e.target.value;
         setName(name);
     };
 
+    const enabled = name.length > 0;
 
     const [disaled, setDisabled] = useState(true);
     const [editMode, setEditMode] = useState(false);
@@ -54,14 +56,25 @@ const CompanyDetails = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
-        dispatch(editCompany(companyId, name))
-            .then(() => {
-                setSuccessful(true);
-            })
-            .catch(() => {
-                setSuccessful(false);
-            });
+        if (validate())
+            dispatch(editCompany(companyId, name))
+                .then(() => {
+                    setSuccessful(true);
+                })
+                .catch(() => {
+                    setSuccessful(false);
+                });
     };
+
+    const validate = () => {
+        let temp = {}
+        temp.name = (/^[A-Za-z0-9]+$/).test(name) ? "" : "Whitespaces are not allowed"
+        setErrors({
+            ...temp
+        })
+        //console.log(Object.values(temp).every(x => x == ""));
+        return Object.values(temp).every(x => x == "");
+    }
 
     return (
         <Container className={classes.container} component="main" maxWidth="xs">
@@ -88,13 +101,13 @@ const CompanyDetails = () => {
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
-                            <TextField value={name} label="Company Name" onChange={onChangeName} InputProps={{ readOnly: disaled }} name="name" htmlFor="name" variant="outlined" fullWidth />
+                            <TextField value={name} error={errors.name} helperText={(errors.name)} label="Company Name" onChange={onChangeName} InputProps={{ readOnly: disaled }} name="name" htmlFor="name" variant="outlined" fullWidth />
                         </Grid>
                     </Grid>
                     <Grid className={classes.buttonsContainer} container spacing={2}>
                         {editMode ?
                             <>
-                                <Button type="submit" className={classes.buttonEditSave} fullWidth variant="contained"  >
+                                <Button disabled={!enabled} type="submit" className={classes.buttonEditSave} fullWidth variant="contained"  >
                                     Save
                                 </Button>
                                 <Button className={classes.buttonEditStop} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >
