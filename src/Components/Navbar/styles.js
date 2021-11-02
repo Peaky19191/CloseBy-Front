@@ -2,14 +2,15 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
     list: {
-        padding: '0'
+        padding: '0',
     },
     container: {
         display: 'flex',
         justifyContent: 'space-between',
+
     },
     menuContainer: {
-        margin: theme.spacing(1, 2, 0, 0),
+        margin: theme.spacing(3, 5, 0, 0),
     },
     logo: {
         width: '100px',
@@ -19,19 +20,19 @@ export default makeStyles((theme) => ({
     },
     icon: {
         color: '#A8E0EE',
-        width: '36px',
-        height: '48px',
+        width: '45px',
+        height: '60px',
     },
     logout: {
-        backgroundColor: theme.palette.secondary.main,
+        // backgroundColor: theme.palette.secondary.main,
         '&:hover': {
-            backgroundColor: theme.palette.secondary.dark,
+            backgroundColor: theme.palette.secondary.main,
         },
     },
     main: {
-        backgroundColor: theme.palette.primary.main,
+        // backgroundColor: theme.palette.primary.main,
         '&:hover': {
-            backgroundColor: theme.palette.primary.dark,
+            backgroundColor: '#A8E0EE',
         },
     },
     button: {

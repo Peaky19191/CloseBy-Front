@@ -22,7 +22,7 @@ export default makeStyles((theme) => ({
         marginTop: theme.spacing(3),
     },
     submit: {
-        margin: theme.spacing(3, 0, 2),
+        margin: theme.spacing("2vh", 0, "1.5vh", 0),
     },
     alert: {
         margin: theme.spacing(1),
@@ -35,9 +35,9 @@ export default makeStyles((theme) => ({
         margin: 8,
     },
     container: {
-        position: "absolute",
-        maxWidth: "28vw",
-        margin: theme.spacing("2vw", "36vw"),
+        // position: "absolute",
+        // maxWidth: "28vw",
+        // margin: theme.spacing("1vw", "36vw"),
     },
     bottomButton: {
         margin: theme.spacing(1),

@@ -61,20 +61,17 @@ export const ResetPassword = () => {
                 <form className={classes.form} onSubmit={handleSubmit} >
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
-                            <TextField label="Email Address"
-                                name="email" htmlFor="email" type="email" variant="outlined" fullWidth value={email} onChange={onChangeEmail} type="email" />
+                            <TextField label="Email Address" name="email" htmlFor="email" type="email" variant="outlined" fullWidth value={email} onChange={onChangeEmail} type="email" />
                         </Grid>
                     </Grid>
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                         Reset
                     </Button>
-                    <Grid container justify="flex-end">
+                    <Grid container justifyContent="flex-end">
                         <Grid item>
-                            <Typography variant="button" display="block">Return to the
-                                <Button component={Link} to="/login" className={classes.bottomButton}>
-                                    login
-                                </Button>
-                            </Typography>
+                            <Link to="/login" variant="body2">
+                                Return to the login
+                            </Link>
                         </Grid>
                     </Grid>
                 </form>

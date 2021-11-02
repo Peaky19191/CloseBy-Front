@@ -65,18 +65,17 @@ export const NewPassword = () => {
                 <form className={classes.form} onSubmit={handleSubmit} >
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
-                            <TextField label="Password"
-                                name="password" htmlFor="password" type="text" variant="outlined" fullWidth value={password} onChange={onChangePassword} />
+                            <TextField label="Password" name="password" htmlFor="password" type="text" variant="outlined" fullWidth value={password} onChange={onChangePassword} />
                         </Grid>
                     </Grid>
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                         Set new password
                     </Button>
-                    <Grid container justify="flex-end">
+                    <Grid container justifyContent="flex-end">
                         <Grid item>
-                            <Button component={Link} to="/login">
+                            <Link to="/login" variant="body2">
                                 Return to the login
-                            </Button>
+                            </Link>
                         </Grid>
                     </Grid>
                 </form>

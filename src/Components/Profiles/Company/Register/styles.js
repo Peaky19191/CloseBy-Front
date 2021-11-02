@@ -9,9 +9,9 @@ export default makeStyles((theme) => ({
         borderRadius: "10px",
     },
     container: {
-        position: "absolute",
-        maxWidth: "28vw",
-        margin: theme.spacing("2vw", "36vw"),
+        // position: "absolute",
+        // maxWidth: "28vw",
+        // margin: theme.spacing("2vw", "36vw"),
     },
     root: {
         '& .MuiTextField-root': {
@@ -23,7 +23,8 @@ export default makeStyles((theme) => ({
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
-        marginTop: theme.spacing(3),
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(4),
     },
     submit: {
         margin: theme.spacing(3, 0, 2),

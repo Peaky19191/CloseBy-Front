@@ -10,9 +10,9 @@ export default makeStyles((theme) => ({
 
     },
     container: {
-        position: "absolute",
-        maxWidth: "28vw",
-        margin: theme.spacing("2vw", "36vw"),
+        // position: "absolute",
+        // maxWidth: "28vw",
+        // margin: theme.spacing("2vw", "36vw"),
     },
     root: {
         '& .MuiTextField-root': {

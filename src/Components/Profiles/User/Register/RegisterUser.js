@@ -144,13 +144,11 @@ export const Register = () => {
                     <Button disabled={!enabled} type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                         Register
                     </Button>
-                    <Grid container justify="flex-end">
+                    <Grid container justifyContent="flex-end">
                         <Grid item>
-                            <Typography variant="button" display="block"> Already have an account?
-                                <Button component={Link} to="/login" className={classes.bottomButton}>
-                                    Login
-                                </Button>
-                            </Typography>
+                            <Link to="/login" variant="body2">
+                                Already have an account? Login
+                            </Link>
                         </Grid>
                     </Grid>
                 </form>

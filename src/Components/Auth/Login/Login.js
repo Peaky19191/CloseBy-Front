@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from 'react-router-dom';
 import { login } from "../../../Actions/auth";
-import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
+import { Avatar, Button, Paper, Grid, Typography, Container, TextField, Box, FormControlLabel, CssBaseline } from '@material-ui/core';
 import useStyles from './styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Link } from 'react-router-dom'
@@ -23,6 +23,7 @@ const Login = (props) => {
     const [showPassword, setShowPassword] = useState(false);
 
     const { isLoggedIn } = useSelector(state => state.auth);
+
     const { message } = useSelector(state => state.message);
 
     const dispatch = useDispatch();
@@ -46,7 +47,7 @@ const Login = (props) => {
 
         dispatch(login(email, password))
             .then(() => {
-                props.history.push("/profile");
+                props.history.push("/events");
                 window.location.reload();
             })
             .catch(() => {
@@ -55,11 +56,26 @@ const Login = (props) => {
     };
 
     if (isLoggedIn) {
-        return <Redirect to="/profile" />;
-    };
+        console.log(message);
+        return <Redirect to="/MAIN wszystkie 4 prfile jako oddzielne komponenty w jednym pliku podzielone switchem na role" />;
+        // switch (role) {
+        //     case 'CompanyAdmin':
+        //         return <Redirect to="/compAdmin" />;
+        //     case 'GlobalAdmin':
+        //         return <Redirect to="/globAdmin" />;
+        //     case 'CompanyWorker':
+        //         return <Redirect to="/compWork" />;
+        //     case 'User':
+        //         return <Redirect to="/user" />;
+        // };
+    }
+    // if (isLoggedIn) {
+    //     return <Redirect to="/events" />;
+    // };
 
     return (
         <Container className={classes.container} component="main" maxWidth="xs">
+            <CssBaseline />
             <Paper className={classes.paper} elevation={3}>
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
@@ -73,10 +89,10 @@ const Login = (props) => {
                 )}
                 <Form className={classes.form} onSubmit={handleSubmit} >
                     <Grid container spacing={2}>
-                        <Grid item xs={12} >
+                        <Grid className={classes.textField} item xs={12} >
                             <TextField label="Email" name="email" htmlFor="email" type="email" variant="outlined" fullWidth onChange={onChangeEmail} value={email} autoFocus item />
                         </Grid>
-                        <Grid item xs={12} >
+                        <Grid className={classes.textField} item xs={12} >
                             <TextField InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
@@ -94,23 +110,19 @@ const Login = (props) => {
                             <CircularProgress size="20px" />
                         ) : "Login"}
                     </Button>
-                    <Grid container justify="flex-end">
-                        <Grid item>
-                            <Typography variant="button" display="block">Don't have an account?
-                                <Button component={Link} to="/register" className={classes.bottomButton}>
-                                    Register
-                                </Button>
-                            </Typography>
-                        </Grid>
-                        <Grid item>
-                            <Typography variant="button" display="block">Forgot the password?
-                                <Button component={Link} to="/resetPassword" className={classes.bottomButton}>
-                                    Click Here
-                                </Button>
-                            </Typography>
-                        </Grid>
-                    </Grid>
                 </Form>
+                <Grid container>
+                    <Grid item xs>
+                        <Link to="/resetPassword" variant="body2">
+                            Forgot password?
+                        </Link>
+                    </Grid>
+                    <Grid item>
+                        <Link to="/register" variant="body2">
+                            {"Don't have an account? Register"}
+                        </Link>
+                    </Grid>
+                </Grid>
             </Paper>
         </Container>
     );

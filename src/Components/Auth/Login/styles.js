@@ -9,9 +9,9 @@ export default makeStyles((theme) => ({
         borderRadius: "10px",
     },
     container: {
-        position: "absolute",
-        maxWidth: "30vw",
-        margin: theme.spacing("5vw", "35vw"),
+        // position: "absolute",
+        // maxWidth: "30vw",
+        // margin: theme.spacing("5vw", "35vw"),
     },
     root: {
         '& .MuiTextField-root': {
@@ -27,9 +27,7 @@ export default makeStyles((theme) => ({
         marginTop: theme.spacing(4),
     },
     submit: {
-        margin: theme.spacing("3vh", "10%", "1vh", "10%"),
-
-        width: "80%",
+        margin: theme.spacing("3vh", 0, "1.5vh", 0),
     },
     bottomButton: {
         margin: theme.spacing(1),

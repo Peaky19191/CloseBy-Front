@@ -8,6 +8,10 @@ import { logout } from "../../Actions/auth";
 import { clearMessage } from "../../Actions/message";
 import MenuIcon from '@material-ui/icons/Menu';
 import Logo from '../../Images/logo2.jpg'
+import PersonAdd from '@material-ui/icons/PersonAdd';
+import SettingsIcon from '@material-ui/icons/Settings';
+
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 
 const Navbar = () => {
     const classes = useStyles();
@@ -95,58 +99,74 @@ const Navbar = () => {
         //         )}
         //     </Toolbar>
         // </AppBar>
-        <Grid className={classes.container}>
+        <Grid className={classes.container} >
             <Grid >
                 <a href="/"><img className={classes.logo} src={Logo} alt="website logo"></img></a>
-                {/* <a href="/"><img className={classes.image} src="https://i.imgur.com/Tngx1R2.png" alt="logo" /></a> */}
             </Grid>
             <Grid className={classes.menuContainer}>
                 <IconButton onClick={handleClick} >
                     <MenuIcon className={classes.icon} />
                 </IconButton>
-                <Menu classes={{ list: classes.list }} anchorEl={anchorEl} open={open} onClose={handleClose} >
+                <Menu anchorEl={anchorEl}
+                    open={open}
+                    onClick={handleClose}
+                    transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                    anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
+                    classes={{ list: classes.list }}
+                >
                     {currentProfile && showUserBoard && (
-                        <MenuItem onClick={handleClose} component={Link} to="/user" variant="contained" >Main</MenuItem>
+                        <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/user" variant="contained" >Main</MenuItem>
                     )}
                     {currentProfile && showCompanyWorkerBoard && (
-                        <MenuItem onClick={handleClose} component={Link} to="/compWork" variant="contained" >Main</MenuItem>
+                        <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/compWork" variant="contained" >Main</MenuItem>
                     )}
                     {currentProfile && showCompanyAdminBoard && (
                         <>
-                            <MenuItem onClick={handleClose} component={Link} to="/compAdmin" variant="contained" >Main</MenuItem>
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/compAdmin" variant="contained" >Main</MenuItem>
                             <Divider />
-                            <MenuItem onClick={handleClose} component={Link} to="/compWorkerList" variant="contained" >List</MenuItem>
-                            <MenuItem onClick={handleClose} component={Link} to="/registerCompWorker" variant="contained" >Register new Worker</MenuItem>
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/compWorkerList" variant="contained" >List</MenuItem>
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/registerCompWorker" variant="contained" >
+                                <ListItemIcon>
+                                    <PersonAdd fontSize="small" />
+                                </ListItemIcon>Register new Worker</MenuItem>
                         </>
                     )}
                     {currentProfile && showGlobalAdminBoard && (
                         <>
-                            <MenuItem onClick={handleClose} component={Link} to="/globAdmin" variant="contained" >Main</MenuItem>
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/globAdmin" variant="contained" >Main</MenuItem>
                             <Divider />
                             {/* <MenuItem onClick={handleClose} component={Link} to="/registerCompAdmin" variant="contained" >Register Company Admin</MenuItem> */}
-                            <MenuItem onClick={handleClose} component={Link} to="/compAdminList" variant="contained" >Admins</MenuItem>
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/compAdminList" variant="contained" >Admins</MenuItem>
                             {/* <MenuItem onClick={handleClose} component={Link} to="/registerCompany" variant="contained" >Register Company</MenuItem> */}
-                            <MenuItem onClick={handleClose} component={Link} to="/companyList" variant="contained" >Companies</MenuItem>
-                            <MenuItem onClick={handleClose} component={Link} to="/usersList" variant="contained" >Users</MenuItem>
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/companyList" variant="contained" >Companies</MenuItem>
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/usersList" variant="contained" >Users</MenuItem>
                         </>
                     )}
                     {currentProfile ? (
                         <>
                             <Divider />
-                            <MenuItem onClick={handleClose} component={Link} to="/events" variant="contained" >Events</MenuItem>
-                            <MenuItem onClick={handleClose} component={Link} to="/profile" variant="contained" >Profile</MenuItem>
-                            <MenuItem onClick={logOut} className={classes.logout} component={Link} to="/" variant="contained" >Logout</MenuItem>
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/events" variant="contained" >Events</MenuItem>
+                            <Divider />
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/profile" variant="contained" >
+                                <ListItemIcon>
+                                    <SettingsIcon />
+                                </ListItemIcon>Settings</MenuItem>
+                            <MenuItem onClick={logOut} className={classes.logout} component={Link} to="/" variant="contained" >
+                                <ListItemIcon>
+                                    {/* <Logout fontSize="small" /> */}
+                                </ListItemIcon>Logout</MenuItem>
                         </>
                     ) : (
                         <>
                             <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/about" variant="contained" >About</MenuItem>
                             <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/contact" variant="contained" >Contact</MenuItem>
-                            <MenuItem onClick={handleClose} component={Link} to="/login" variant="contained" >Login</MenuItem>
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/login" variant="contained" >Login</MenuItem>
                         </>
                     )}
                 </Menu>
+
             </Grid>
-        </Grid>
+        </Grid >
     );
 }
 
