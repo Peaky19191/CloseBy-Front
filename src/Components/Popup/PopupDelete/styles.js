@@ -10,8 +10,8 @@ export default makeStyles((theme) => ({
         left: 0,
     },
     container: {
-        maxWidth: "30vw",
-        margin: theme.spacing("5vw", "35vw"),
+        // maxWidth: "30vw",
+        marginTop: theme.spacing(15),
     },
     paper: {
         display: 'flex',
