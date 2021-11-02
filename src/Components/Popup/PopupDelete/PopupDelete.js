@@ -16,7 +16,7 @@ const PopupDelete = (props) => {
                         <DeleteForeverIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Do you want to delete this {props.handleData[0]}?
+                        Do you want to delete: {props.handleData[0]}?
                     </Typography>
                     <Grid container className={classes.containerData} spacing={3}>
                         {(props.handleData[0] === "Company") ?
