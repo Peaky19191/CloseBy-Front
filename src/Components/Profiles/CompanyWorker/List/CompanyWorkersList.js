@@ -164,7 +164,7 @@ const CompanyWorkersList = () => {
                     </TableFooter>
                 </Table>
             </TableContainer >
-            {isOpen && <PopupDelete handleClose={showPopup} handleDelete={deleteFromList} handleData={["Company Worker", firstNameDelete, lastNameDelete, emailDelete, compNameDelete]} />}
+            {isOpen && <PopupDelete handleClose={showPopup} handleDelete={deleteFromList} handleData={["Worker", firstNameDelete, lastNameDelete, emailDelete, compNameDelete]} />}
         </>
     );
 };
