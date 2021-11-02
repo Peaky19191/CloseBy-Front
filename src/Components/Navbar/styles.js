@@ -25,12 +25,14 @@ export default makeStyles((theme) => ({
     },
     logout: {
         // backgroundColor: theme.palette.secondary.main,
+        fontSize: "20px",
         '&:hover': {
-            backgroundColor: theme.palette.secondary.main,
+            backgroundColor: '#EE515A',
         },
     },
     main: {
         // backgroundColor: theme.palette.primary.main,
+        fontSize: "20px",
         '&:hover': {
             backgroundColor: '#A8E0EE',
         },

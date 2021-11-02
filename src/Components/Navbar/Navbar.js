@@ -77,6 +77,11 @@ const Navbar = () => {
                     transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                     anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
                     classes={{ list: classes.list }}
+                // PaperProps={{
+                //     style: {
+                //         width: 200,
+                //     },
+                // }}
                 >
                     {currentProfile && showUserBoard && (
                         <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/user" variant="contained" >
@@ -92,24 +97,24 @@ const Navbar = () => {
                     )}
                     {currentProfile && showCompanyAdminBoard && (
                         <>
-                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/compAdmin" variant="contained" >
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/compAdmin" variant="contained"  >
                                 <ListItemIcon>
                                     <StarIcon />
                                 </ListItemIcon>Main</MenuItem>
                             <Divider />
                             <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/compWorkerList" variant="contained" >
                                 <ListItemIcon>
-                                    <PeopleAltIcon fontSize="small" />
+                                    <PeopleAltIcon />
                                 </ListItemIcon>List</MenuItem>
                             <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/registerCompWorker" variant="contained" >
                                 <ListItemIcon>
-                                    <PersonAdd fontSize="small" />
+                                    <PersonAdd />
                                 </ListItemIcon>Add Worker</MenuItem>
                         </>
                     )}
                     {currentProfile && showGlobalAdminBoard && (
                         <>
-                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/globAdmin" variant="contained" >
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/globAdmin" variant="contained">
                                 <ListItemIcon>
                                     <StarIcon />
                                 </ListItemIcon>Main</MenuItem>
