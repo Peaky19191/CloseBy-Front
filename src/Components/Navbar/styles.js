@@ -20,8 +20,8 @@ export default makeStyles((theme) => ({
     },
     icon: {
         color: '#A8E0EE',
-        width: '45px',
-        height: '60px',
+        width: '50px',
+        height: '50px',
     },
     logout: {
         // backgroundColor: theme.palette.secondary.main,
