@@ -28,11 +28,13 @@ import UserDetails from './Components/Profiles/User/Details/UserDetails';
 import CompAdminDetails from './Components/Profiles/CompanyAdmin/Details/CompAdminDetails';
 import CompanyDetails from './Components/Profiles/Company/Details/CompanyDetails';
 import CompWorkerDetails from './Components/Profiles/CompanyWorker/Details/CompWorkerDetails';
+import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
 
 import { useEffect } from 'react';
 import { logout } from "./Actions/auth";
 import { clearMessage } from "./Actions/message";
 import { useDispatch } from 'react-redux';
+const theme = createMuiTheme();
 
 const App = () => {
   const classes = useStyles();
