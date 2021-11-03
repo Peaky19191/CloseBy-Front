@@ -84,20 +84,20 @@ const Navbar = () => {
                 // }}
                 >
                     {currentProfile && showUserBoard && (
-                        <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/user" variant="contained" >
+                        <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/main" variant="contained" >
                             <ListItemIcon>
                                 <StarIcon />
                             </ListItemIcon>Main</MenuItem>
                     )}
                     {currentProfile && showCompanyWorkerBoard && (
-                        <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/compWork" variant="contained" >
+                        <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/main" variant="contained" >
                             <ListItemIcon>
                                 <StarIcon />
                             </ListItemIcon>Main</MenuItem>
                     )}
                     {currentProfile && showCompanyAdminBoard && (
                         <>
-                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/compAdmin" variant="contained"  >
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/main" variant="contained"  >
                                 <ListItemIcon>
                                     <StarIcon />
                                 </ListItemIcon>Main</MenuItem>
@@ -114,7 +114,7 @@ const Navbar = () => {
                     )}
                     {currentProfile && showGlobalAdminBoard && (
                         <>
-                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/globAdmin" variant="contained">
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/main" variant="contained">
                                 <ListItemIcon>
                                     <StarIcon />
                                 </ListItemIcon>Main</MenuItem>

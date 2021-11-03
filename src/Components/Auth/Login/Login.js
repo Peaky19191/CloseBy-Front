@@ -56,22 +56,8 @@ const Login = (props) => {
     };
 
     if (isLoggedIn) {
-        console.log(message);
-        return <Redirect to="/MAIN wszystkie 4 prfile jako oddzielne komponenty w jednym pliku podzielone switchem na role" />;
-        // switch (role) {
-        //     case 'CompanyAdmin':
-        //         return <Redirect to="/compAdmin" />;
-        //     case 'GlobalAdmin':
-        //         return <Redirect to="/globAdmin" />;
-        //     case 'CompanyWorker':
-        //         return <Redirect to="/compWork" />;
-        //     case 'User':
-        //         return <Redirect to="/user" />;
-        // };
+        return <Redirect to="/main" />;
     }
-    // if (isLoggedIn) {
-    //     return <Redirect to="/events" />;
-    // };
 
     return (
         <Container className={classes.container} component="main" maxWidth="xs">

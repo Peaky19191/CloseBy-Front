@@ -29,6 +29,7 @@ import CompAdminDetails from './Components/Profiles/CompanyAdmin/Details/CompAdm
 import CompanyDetails from './Components/Profiles/Company/Details/CompanyDetails';
 import CompWorkerDetails from './Components/Profiles/CompanyWorker/Details/CompWorkerDetails';
 import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import Main from './Components/Main/Main';
 
 import { useEffect } from 'react';
 import { logout } from "./Actions/auth";
@@ -75,6 +76,8 @@ const App = () => {
           <Route exact path="/compAdminDetails" component={CompAdminDetails} />
           <Route exact path="/companyDetails" component={CompanyDetails} />
           <Route exact path="/compWorkerDetails" component={CompWorkerDetails} />
+          <Route exact path="/main" component={Main} />
+
         </Switch>
       </div>
     </Router>
