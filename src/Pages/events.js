@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Card, CardActions, CardContent, CardMedia, Grid, Container, Button  } from '@material-ui/core';
+import { Typography, Card, CardActions, CardContent, CardMedia, Grid, Container, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -29,44 +29,44 @@ export const Events = () => {
 
     return (
         <>
-            
+
             <main>
                 <div className={classes.container}>
-                    <Container maxWidth="md" style={{ marginTop: '100px'}}>
-                        <Typography variant="h3" align="center" color="textPrimary" gutterBottom>
+                    <Container maxWidth="md" style={{ marginTop: '100px' }}>
+                        <Typography variant="h3" align="center" color="white" gutterBottom>
                             Sprawdź dostępne wydarzenia
                         </Typography>
-                        <Typography variant="h6" align="center" color="textSecondary" paragraph>
+                        <Typography variant="h6" align="center" color="white" paragraph>
                             Przeglądaj pośród dziesiątek nadchodzących wydarzeń i sprawdź szczegóły tych, które Cię interesują!
-                             Nie przegap okazji na zakup biletów!
+                            Nie przegap okazji na zakup biletów!
                         </Typography>
                     </Container>
                 </div>
                 <Container className={classes.cardGrid} maxWidth="md">
                     <Grid container spacing={4}>
-                        {cards.map((card)=>(
+                        {cards.map((card) => (
                             <Grid item key={card} xs={12} sm={6} md={4} >
-                            <Card className={classes.card}>
-                                <CardMedia
-                                    className={classes.cardMedia}
-                                    image="https://source.unsplash.com/random"
-                                    title="Event name"
-                                />
-                                <CardContent className={classes.cardContent}>
-                                    <Typography gutterBottom variant="h5">
-                                       Event name
-                                    </Typography>
-                                    <Typography>
-                                        Place for short event description.
-                                    </Typography>
-                                </CardContent>
-                                <CardActions>
-                                    <Button size="small" color="primary">Wyświetl</Button>
-                                </CardActions>
-                            </Card>
-                        </Grid>
+                                <Card className={classes.card}>
+                                    <CardMedia
+                                        className={classes.cardMedia}
+                                        image="https://source.unsplash.com/random"
+                                        title="Event name"
+                                    />
+                                    <CardContent className={classes.cardContent}>
+                                        <Typography gutterBottom variant="h5">
+                                            Event name
+                                        </Typography>
+                                        <Typography>
+                                            Place for short event description.
+                                        </Typography>
+                                    </CardContent>
+                                    <CardActions>
+                                        <Button size="small" color="primary">Wyświetl</Button>
+                                    </CardActions>
+                                </Card>
+                            </Grid>
                         ))}
-                        
+
                     </Grid>
                 </Container>
             </main>

@@ -115,7 +115,7 @@ const CompWorkerDetails = () => {
                 {successful ?
                     <Alert className={classes.alert} severity="success">
                         <AlertTitle>Success</AlertTitle>
-                        <strong>You have successfully edit your company</strong>
+                        <strong>You have successfully edit your Company Worker</strong>
                     </Alert>
                     :
                     (message ?
