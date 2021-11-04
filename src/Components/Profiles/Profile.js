@@ -2,25 +2,29 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from 'react-router-dom';
 import useStyles from './styles';
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
-import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom'
 import MenuItem from '@material-ui/core/MenuItem';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import User from '../../Api/user'
 import CompWorker from '../../Api/companyWorker'
 import CompAdmin from '../../Api/companyAdmin'
+import { Alert, AlertTitle } from '@material-ui/lab';
+import { useDispatch, useSelector } from "react-redux";
+import { editCompAdmin } from "../..//Actions/Profiles/companyAdmin";
+import { editCompWorker } from "../../Actions/Profiles/companyWorker";
+import { editUser } from "../../Actions/Profiles/user";
 
 const Profile = () => {
   const classes = useStyles();
 
-  const profileId = useSelector(state => state.auth.profile.id);
-  const profileRole = useSelector(state => state.auth.profile.role);
+  const { profile: currentProfile } = useSelector((state) => state.auth);
+
+  const { message } = useSelector(state => state.message);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("");
-
 
   const onChangeFirstName = (e) => {
     const firstName = e.target.value;
@@ -42,33 +46,21 @@ const Profile = () => {
     setGender(gender);
   };
 
-  const [disaled, setDisabled] = useState(true);
-  const [editMode, setEditMode] = useState(false);
-
-  const startEditing = () => {
-    setDisabled(false);
-    setEditMode(true);
-  }
-
-  const stopEditing = () => {
-    setDisabled(true);
-    setEditMode(false);
-  }
-
   const getProfileDetails = () => {
-    switch (profileRole) {
-      case "User":
-        getUserDetails();
-      case "CompanyWorker":
-        getCompWorkerDetails();
-      case "CompanyAdmin":
-        getCompAdminDetails();
+    if (currentProfile.role === "User") {
+      getUserDetails();
+    }
+    if (currentProfile.role === "CompanyWorker") {
+      getCompWorkerDetails();
+    }
+    if (currentProfile.role === "CompanyAdmin") {
+      getCompAdminDetails();
     }
   }
-  useEffect(getProfileDetails, [profileId]);
+  useEffect(getProfileDetails, [currentProfile.id]);
 
   const getUserDetails = () => {
-    User.getUserId(profileId).then((response) => {
+    User.getUserId(currentProfile.id).then((response) => {
       const user = response.data;
 
       setFirstName(user.firstName);
@@ -82,7 +74,7 @@ const Profile = () => {
   }
 
   const getCompWorkerDetails = () => {
-    CompWorker.getCompanyWorkerId(profileId)
+    CompWorker.getCompanyWorkerId(currentProfile.id)
       .then((response) => {
         const compWorker = response.data;
 
@@ -97,10 +89,9 @@ const Profile = () => {
   }
 
   const getCompAdminDetails = () => {
-    CompAdmin.getCompanyAdminId(profileId)
+    CompAdmin.getCompanyAdminId(currentProfile.id)
       .then((response) => {
         const compAdmin = response.data;
-        console.log(compAdmin);
 
         setFirstName(compAdmin.firstName);
         setLastName(compAdmin.lastName);
@@ -112,6 +103,54 @@ const Profile = () => {
       });
   }
 
+  const [disaled, setDisabled] = useState(true);
+  const [editMode, setEditMode] = useState(false);
+
+  const startEditing = () => {
+    setDisabled(false);
+    setEditMode(true);
+  }
+
+  const stopEditing = () => {
+    setDisabled(true);
+    setEditMode(false);
+  }
+  const [successful, setSuccessful] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const sendEdited = () => {
+    setSuccessful(false);
+
+    if (currentProfile && (currentProfile.role === "User")) {
+      dispatch(editUser(currentProfile.id, firstName, lastName, gender, email))
+        .then(() => {
+          setSuccessful(true);
+        })
+        .catch(() => {
+          setSuccessful(false);
+        })
+    }
+    if (currentProfile && (currentProfile.role === "CompanyWorker")) {
+      dispatch(editCompWorker(currentProfile.id, firstName, lastName, gender, email))
+        .then(() => {
+          setSuccessful(true);
+        })
+        .catch(() => {
+          setSuccessful(false);
+        });
+    }
+    if (currentProfile && (currentProfile.role === "CompanyAdmin")) {
+      dispatch(editCompAdmin(currentProfile.id, firstName, lastName, gender, email))
+        .then(() => {
+          setSuccessful(true);
+        })
+        .catch(() => {
+          setSuccessful(false);
+        });
+    }
+  };
+
   return (
     <Container className={classes.container} component="main" maxWidth="xs">
       <Paper className={classes.paper} elevation={3}>
@@ -119,6 +158,21 @@ const Profile = () => {
           <SupervisorAccountIcon />
         </Avatar>
         <Typography component="h1" variant="h5">Details of your account</Typography>
+        {successful ?
+          <Alert className={classes.alert} severity="success">
+            <AlertTitle>Success</AlertTitle>
+            <strong>You have successfully edit your Company Admin</strong>
+          </Alert>
+          :
+          (message ?
+            <Alert className={successful ? classes.alert : classes.alert} severity="error">
+              <AlertTitle>Error</AlertTitle>
+              <strong>{message}</strong>
+            </Alert>
+            :
+            null
+          )
+        }
         <form className={classes.form}>
           <Grid container spacing={2}>
             <Grid item xs={12} >
@@ -140,7 +194,7 @@ const Profile = () => {
           <Grid className={classes.buttonsContainer} container spacing={2}>
             {editMode ?
               <>
-                <Button className={classes.buttonEditSave} onClick={() => { }} fullWidth variant="contained"  >
+                <Button onClick={() => { sendEdited() }} className={classes.buttonEditSave} fullWidth variant="contained"  >
                   Save
                 </Button>
                 <Button className={classes.buttonEditStop} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >

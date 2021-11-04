@@ -18,7 +18,7 @@ const getUserData = (id) => {
 };
 
 const editUserAPI = (id, firstName, lastName, gender, email) => {
-    return axios.put(API_URL + "/update",
+    return axios.put(API_URL + "update",
         {
             id: id,
             firstName: firstName,
