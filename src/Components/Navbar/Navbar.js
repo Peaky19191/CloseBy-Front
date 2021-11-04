@@ -141,10 +141,11 @@ const Navbar = () => {
                                     <EventIcon />
                                 </ListItemIcon>Events</MenuItem>
                             <Divider />
-                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/profile" variant="contained" >
-                                <ListItemIcon>
-                                    <SettingsIcon />
-                                </ListItemIcon>Profile</MenuItem>
+                            {currentProfile && !showGlobalAdminBoard && // Global Adin doesnt need to see settings on his own account
+                                (<MenuItem className={classes.main} onClick={handleClose} component={Link} to="/profile" variant="contained" >
+                                    <ListItemIcon>
+                                        <SettingsIcon />
+                                    </ListItemIcon>Profile</MenuItem>)}
                             <MenuItem onClick={logOut} className={classes.logout} component={Link} to="/" variant="contained" >
                                 <ListItemIcon>
                                     <LogoutIcon />

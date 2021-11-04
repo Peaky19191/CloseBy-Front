@@ -6,48 +6,48 @@ import { AppBar, Avatar, Button, Grid, Toolbar, Typography, Menu, MenuItem, Icon
 const Main = () => {
 
     const classes = useStyles();
-    const [showGlobalAdminBoard, setShowGlobalAdminBoard] = useState(false);
-    const [showCompanyAdminBoard, setShowCompanyAdminBoard] = useState(false);
-    const [showCompanyWorkerBoard, setShowCompanyWorkerBoard] = useState(false);
-    const [showUserBoard, setShowUserBoard] = useState(false);
+    const [showGlobalAdminContent, setShowGlobalAdminContent] = useState(false);
+    const [showCompanyAdminContent, setShowCompanyAdminContent] = useState(false);
+    const [showCompanyWorkerContent, setShowCompanyWorkerContent] = useState(false);
+    const [showUserContent, setShowUserContent] = useState(false);
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
 
     useEffect(() => {
         if (currentProfile && currentProfile.role) {
-            setShowUserBoard(currentProfile.role.includes("User"));
-            setShowCompanyWorkerBoard(currentProfile.role.includes("CompanyWorker"));
-            setShowCompanyAdminBoard(currentProfile.role.includes("CompanyAdmin"));
-            setShowGlobalAdminBoard(currentProfile.role.includes("GlobalAdmin"));
+            setShowUserContent(currentProfile.role.includes("User"));
+            setShowCompanyWorkerContent(currentProfile.role.includes("CompanyWorker"));
+            setShowCompanyAdminContent(currentProfile.role.includes("CompanyAdmin"));
+            setShowGlobalAdminContent(currentProfile.role.includes("GlobalAdmin"));
         }
     }, [currentProfile]);
 
     return (
         <Grid  >
             <Grid >
-                {currentProfile && showUserBoard && (
+                {currentProfile && (
+                    <>
+                        Content for All
+                    </>
+                )}
+                {currentProfile && showUserContent && (
                     <>
                         Content for User
                     </>
                 )}
-                {currentProfile && showCompanyWorkerBoard && (
+                {currentProfile && showCompanyWorkerContent && (
                     <>
                         Content for CompanyWorker
                     </>
                 )}
-                {currentProfile && showCompanyAdminBoard && (
+                {currentProfile && showCompanyAdminContent && (
                     <>
                         Content for CompanyAdmin
                     </>
                 )}
-                {currentProfile && showGlobalAdminBoard && (
+                {currentProfile && showGlobalAdminContent && (
                     <>
                         Content for GlobalAdmin
-                    </>
-                )}
-                {currentProfile && (
-                    <>
-                        Content for All
                     </>
                 )}
             </Grid>

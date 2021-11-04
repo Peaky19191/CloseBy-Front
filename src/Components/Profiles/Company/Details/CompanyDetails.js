@@ -101,7 +101,7 @@ const CompanyDetails = () => {
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
-                            <TextField value={name} error={errors.name} helperText={(errors.name)} label="Company Name" onChange={onChangeName} InputProps={{ readOnly: disaled }} name="name" htmlFor="name" variant="outlined" fullWidth />
+                            <TextField value={name} label="Company Name" onChange={onChangeName} InputProps={{ readOnly: disaled }} name="name" htmlFor="name" variant="outlined" fullWidth />
                         </Grid>
                     </Grid>
                     <Grid className={classes.buttonsContainer} container spacing={2}>
