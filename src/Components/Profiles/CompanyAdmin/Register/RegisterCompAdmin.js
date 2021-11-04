@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { regCompAdmin } from "../../../../Actions/Profiles/companyAdmin";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import Company from '../../../../Api/company'
+import { Link } from 'react-router-dom'
 
 const RegCompAdmin = () => {
     const classes = useStyles();
@@ -147,6 +148,9 @@ const RegCompAdmin = () => {
                     </Grid>
                     <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>
                         Register
+                    </Button>
+                    <Button className={classes.buttonClose} component={Link} to="/compAdminList" fullWidth variant="contained" color="secondary" >
+                        Close
                     </Button>
                 </form>
             </Paper>

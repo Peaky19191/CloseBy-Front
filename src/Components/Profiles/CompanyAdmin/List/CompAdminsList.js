@@ -95,7 +95,7 @@ const CompanyAdminsList = () => {
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                         <TableRow >
-                            <TableCell className={classes.tableCellTitle}>User</TableCell>
+                            <TableCell className={classes.tableCellTitle}>Admin</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Email</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Role</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Company</TableCell>

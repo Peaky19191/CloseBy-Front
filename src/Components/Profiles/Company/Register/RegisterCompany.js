@@ -5,6 +5,7 @@ import useStyles from './styles';
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { regCompany } from "../../../../Actions/Profiles/company";
+import { Link } from 'react-router-dom'
 
 const RegCompany = () => {
     const classes = useStyles();
@@ -78,6 +79,9 @@ const RegCompany = () => {
                     </Grid>
                     <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>
                         Register
+                    </Button>
+                    <Button className={classes.buttonClose} component={Link} to="/companyList" fullWidth variant="contained" color="secondary" >
+                        Close
                     </Button>
                 </form>
             </Paper>

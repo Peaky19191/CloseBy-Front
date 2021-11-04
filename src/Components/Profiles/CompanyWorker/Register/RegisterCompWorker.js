@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { regCompWorker } from "../../../../Actions/Profiles/companyWorker";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import CompAdmin from '../../../../Api/companyAdmin'
+import { Link } from 'react-router-dom'
 
 const RegCompWorker = () => {
     const classes = useStyles();
@@ -131,6 +132,9 @@ const RegCompWorker = () => {
                     </Grid>
                     <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>
                         Register
+                    </Button>
+                    <Button className={classes.buttonClose} component={Link} to="/compWorkerList" fullWidth variant="contained" color="secondary" >
+                        Close
                     </Button>
                 </form>
             </Paper>
