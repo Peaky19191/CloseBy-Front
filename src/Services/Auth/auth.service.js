@@ -35,9 +35,16 @@ const setNewUsersPassword = (newPassword, passwordResetToken) => {
   });
 };
 
+const confirmUserEmail = (emailConfirmationToken) => {
+  return axios.put("http://localhost:5000/Api/user/confirm", {
+    emailConfirmationToken
+  });
+};
+
 export default {
   login,
   logout,
   resetUsersPassword,
   setNewUsersPassword,
+  confirmUserEmail
 };
