@@ -138,7 +138,7 @@ export const Register = () => {
                                         </InputAdornment>
                                     )
                                 }}
-                                fullWidth error={errors.password} helperText={(errors.password)} ame="password" htmlFor="password" type="password" label="Password" value={password} onChange={onChangePassword} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} variant="outlined" />
+                                fullWidth error={errors.password} helperText={(errors.password)} name="password" htmlFor="password" type="password" label="Password" value={password} onChange={onChangePassword} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} variant="outlined" />
                         </Grid>
                     </Grid>
                     <Button disabled={!enabled} type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
