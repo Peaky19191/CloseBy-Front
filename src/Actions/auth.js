@@ -7,6 +7,8 @@ import {
     RESET_PASSW_FAIL,
     NEW_PASSW_SUCCESS,
     NEW_PASSW_FAIL,
+    CONFIRM_EMAIL_SUCCESS,
+    CONFIRM_EMAIL_FAIL,
 } from "../Constants/actionTypes";
 
 import AuthService from "../Services/Auth/auth.service";
@@ -104,6 +106,42 @@ export const setNewPassword = (password, token) => (dispatch) => {
 
             dispatch({
                 type: NEW_PASSW_FAIL,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
+export const confirmUserEmail = (token) => (dispatch) => {
+    return AuthService.confirmUserEmail(token).then(
+        (response) => {
+            dispatch({
+                type: CONFIRM_EMAIL_SUCCESS,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: response.data.message,
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: CONFIRM_EMAIL_FAIL,
             });
 
             dispatch({

@@ -28,6 +28,7 @@ import UserDetails from './Components/Profiles/User/Details/UserDetails';
 import CompAdminDetails from './Components/Profiles/CompanyAdmin/Details/CompAdminDetails';
 import CompanyDetails from './Components/Profiles/Company/Details/CompanyDetails';
 import CompWorkerDetails from './Components/Profiles/CompanyWorker/Details/CompWorkerDetails';
+import EmailConfirmation from './Components/Auth/EmailConfirmation/EmailConfirmation';
 import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import Main from './Components/Main/Main';
 
@@ -58,6 +59,7 @@ const App = () => {
           <Route exact path="/events" exact component={Events} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/email-confirmation/:token" component={EmailConfirmation} />
           <Route exact path="/resetPassword" component={ResetPassword} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/user" component={User} />
