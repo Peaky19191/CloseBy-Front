@@ -21,6 +21,7 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import PersonIcon from '@mui/icons-material/Person';
 import StarIcon from '@mui/icons-material/Star';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
 const Navbar = () => {
     const classes = useStyles();
@@ -167,6 +168,10 @@ const Navbar = () => {
                                 <ListItemIcon>
                                     <LoginIcon />
                                 </ListItemIcon> Login</MenuItem>
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/register" variant="contained" >
+                                <ListItemIcon>
+                                    <AccountBoxIcon />
+                                </ListItemIcon> Register</MenuItem>
                         </>
                     )}
                 </Menu>
