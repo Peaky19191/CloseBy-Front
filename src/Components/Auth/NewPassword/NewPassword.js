@@ -59,7 +59,7 @@ export const NewPassword = () => {
 
     const validate = () => {
         let temp = {}
-        temp.password = (/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,50}$/).test(password) ? "" : "At least 6 characters required including one number and one special character"
+        temp.password = (/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*ąćęłńóśźżĄĘŁŃÓŚŹŻ]{6,50}$/).test(password) ? "" : "At least 6 characters required including one number and one special character"
         temp.confirm_password = confirm_password == password ? "" : "Passwords are not the same"
         setErrors({
             ...temp
