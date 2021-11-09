@@ -80,8 +80,8 @@ const RegCompAdmin = () => {
 
     const validate = () => {
         let temp = {}
-        temp.firstName = (/^[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+$/).test(firstName) ? "" : "Numbers and whitespaces are not allowed"
-        temp.lastName = (/^[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+$/).test(lastName) ? "" : "Numbers and whitespaces are not allowed"
+        temp.firstName = (/^[A-Za-z]+$/).test(firstName) ? "" : "Numbers and whitespaces are not allowed"
+        temp.lastName = (/^[A-Za-z]+$/).test(lastName) ? "" : "Numbers and whitespaces are not allowed"
         temp.email = (/$^|.+@.+..+/).test(email) ? "" : "Email is not valid"
         temp.gender = gender.length != 0 ? "" : "This field is required (gender)"
         temp.companyId = gender.length != 0 ? "" : "This field is required (Compnay Name)"

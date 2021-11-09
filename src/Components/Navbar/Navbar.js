@@ -21,7 +21,8 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import PersonIcon from '@mui/icons-material/Person';
 import StarIcon from '@mui/icons-material/Star';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import StorageIcon from '@mui/icons-material/Storage';
 
 const Navbar = () => {
     const classes = useStyles();
@@ -78,30 +79,39 @@ const Navbar = () => {
                     transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                     anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
                     classes={{ list: classes.list }}
-                // PaperProps={{
-                //     style: {
-                //         width: 200,
-                //     },
-                // }}
                 >
-                    {currentProfile && showUserBoard && (
-                        <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/main" variant="contained" >
-                            <ListItemIcon>
-                                <StarIcon />
-                            </ListItemIcon>Main</MenuItem>
-                    )}
-                    {currentProfile && showCompanyWorkerBoard && (
-                        <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/main" variant="contained" >
-                            <ListItemIcon>
-                                <StarIcon />
-                            </ListItemIcon>Main</MenuItem>
-                    )}
-                    {currentProfile && showCompanyAdminBoard && (
+                    {currentProfile && (
                         <>
-                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/main" variant="contained"  >
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/main" variant="contained" >
                                 <ListItemIcon>
                                     <StarIcon />
                                 </ListItemIcon>Main</MenuItem>
+
+                            <Divider />
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/events" variant="contained" >
+                                <ListItemIcon>
+                                    <EventIcon />
+                                </ListItemIcon>Events</MenuItem>
+                        </>
+                    )}
+                    {currentProfile && showUserBoard && (
+                        <>
+                        </>
+                    )}
+                    {currentProfile && showCompanyWorkerBoard && (
+                        <>
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/registerEvent" variant="contained" >
+                                <ListItemIcon>
+                                    <AddCircleOutlineIcon />
+                                </ListItemIcon>Add</MenuItem>
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/eventsList" variant="contained" >
+                                <ListItemIcon>
+                                    <StorageIcon />
+                                </ListItemIcon>List</MenuItem>
+                        </>
+                    )}
+                    {currentProfile && showCompanyAdminBoard && (
+                        <>
                             <Divider />
                             <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/compWorkerList" variant="contained" >
                                 <ListItemIcon>
@@ -115,10 +125,6 @@ const Navbar = () => {
                     )}
                     {currentProfile && showGlobalAdminBoard && (
                         <>
-                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/main" variant="contained">
-                                <ListItemIcon>
-                                    <StarIcon />
-                                </ListItemIcon>Main</MenuItem>
                             <Divider />
                             <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/companyList" variant="contained" >
                                 <ListItemIcon>
@@ -136,11 +142,6 @@ const Navbar = () => {
                     )}
                     {currentProfile ? (
                         <>
-                            <Divider />
-                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/events" variant="contained" >
-                                <ListItemIcon>
-                                    <EventIcon />
-                                </ListItemIcon>Events</MenuItem>
                             <Divider />
                             {currentProfile && !showGlobalAdminBoard && // Global Adin doesnt need to see settings on his own account
                                 (<MenuItem className={classes.main} onClick={handleClose} component={Link} to="/profile" variant="contained" >
@@ -168,10 +169,6 @@ const Navbar = () => {
                                 <ListItemIcon>
                                     <LoginIcon />
                                 </ListItemIcon> Login</MenuItem>
-                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/register" variant="contained" >
-                                <ListItemIcon>
-                                    <AccountBoxIcon />
-                                </ListItemIcon> Register</MenuItem>
                         </>
                     )}
                 </Menu>

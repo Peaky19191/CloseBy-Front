@@ -5,6 +5,7 @@ import company from "./Profiles/company";
 import companyAdmin from "./Profiles/companyAdmin";
 import companyWorker from "./Profiles/companyWorker";
 import user from "./Profiles/user";
+import event from "./Profiles/event";
 
 
 export default combineReducers({
@@ -14,4 +15,5 @@ export default combineReducers({
     companyAdmin,
     companyWorker,
     user,
+    event,
 });

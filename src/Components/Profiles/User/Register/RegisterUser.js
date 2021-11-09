@@ -72,11 +72,11 @@ export const Register = () => {
 
     const validate = () => {
         let temp = {}
-        temp.firstName = (/^[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+$/).test(firstName) ? "" : "Numbers and whitespaces are not allowed"
-        temp.lastName = (/^[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+$/).test(lastName) ? "" : "Numbers and whitespaces are not allowed"
+        temp.firstName = (/^[A-Za-z]+$/).test(firstName) ? "" : "Numbers and whitespaces are not allowed"
+        temp.lastName = (/^[A-Za-z]+$/).test(lastName) ? "" : "Numbers and whitespaces are not allowed"
         temp.email = (/$^|.+@.+..+/).test(email) ? "" : "Email is not valid"
         temp.gender = gender.length != 0 ? "" : "This field is required (gender)"
-        temp.password = (/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*ąćęłńóśźżĄĘŁŃÓŚŹŻ]{6,50}$/).test(password) ? "" : "At least 6 characters required including one number and one special character"
+        temp.password = (/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,50}$/).test(password) ? "" : "At least 6 characters required including one number and one special character"
         setErrors({
             ...temp
         })
@@ -138,7 +138,7 @@ export const Register = () => {
                                         </InputAdornment>
                                     )
                                 }}
-                                fullWidth error={errors.password} helperText={(errors.password)} name="password" htmlFor="password" type="password" label="Password" value={password} onChange={onChangePassword} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} variant="outlined" />
+                                fullWidth error={errors.password} helperText={(errors.password)} ame="password" htmlFor="password" type="password" label="Password" value={password} onChange={onChangePassword} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} variant="outlined" />
                         </Grid>
                     </Grid>
                     <Button disabled={!enabled} type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
