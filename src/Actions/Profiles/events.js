@@ -45,10 +45,10 @@ export const regEvent = (title, companyId, loc_lat, loc_lng, startDate, status, 
     );
 };
 
-export const setEventLoc = (loc) => (dispatch) => {
+export const setEventLoc = (lat, lng) => (dispatch) => {
     dispatch({
         type: SET_EVENT_LOC,
-        payload: loc,
+        payload: { lat: lat, lng: lng },
     });
 };
 

@@ -105,10 +105,8 @@ const RegEvent = () => {
     // const startDate = new Date(2020-01-01T05:30:01);
     // 'YYYY-MM-DDTHH:mm:ss'
 
-    // const [loc_lat, setLoc_lat] = useState();
-    // const [loc_lng, setLoc_lng] = useState();
-    const [loc_lat, setLoc_lat] = useState(52.200802254499074);
-    const [loc_lng, setLoc_lng] = useState(21.016870755386346);
+    const loc_lat = useSelector(state => state.event.event_loc.lat);
+    const loc_lng = useSelector(state => state.event.event_loc.lng);
 
     const status = "Added";
 

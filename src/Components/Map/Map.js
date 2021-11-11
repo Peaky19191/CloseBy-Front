@@ -7,6 +7,8 @@ import "@reach/combobox/styles.css";
 import Search from './Search/Search'
 import Compass from './Compass/Compass';
 import Events from '../../Api/events';
+import { setEventLoc } from "../../Actions/Profiles/events";
+import { useDispatch } from "react-redux";
 
 const options = {
     styles: mapStyles,
@@ -25,10 +27,8 @@ const center = {
     lng: 21.0042,
 }
 
-const Map = (props) => {
-
+const Map = () => {
     const classes = useStyles();
-
 
     const mapRef = React.useRef();
     const onMapLoad = React.useCallback((map) => {
@@ -42,7 +42,6 @@ const Map = (props) => {
     const [newSelected, setNewSelected] = React.useState(null);
     const [newMarker, setNewMarker] = React.useState([]);
 
-
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(100);
 
@@ -52,8 +51,6 @@ const Map = (props) => {
                 const events = response.data.items;
 
                 events.forEach(function (item, index) {
-                    console.log(item);
-
                     setMarkers((event) => [
                         ...event,
                         {
@@ -77,13 +74,9 @@ const Map = (props) => {
             });
     };
 
-    const [lat, setLat] = useState(props.handleLocLat);
-    const [lng, setLng] = useState(props.handleLocLng);
+    const dispatch = useDispatch();
 
     const onMapClick = React.useCallback((event) => {
-        console.log("event")
-
-        console.log(event)
         setSelected(null);
         setNewSelected(null);
         setNewMarker(current => [
@@ -93,11 +86,7 @@ const Map = (props) => {
                 time: new Date(),
             }]
         );
-        setLat(event.latLng.lat())
-        setLng(event.latLng.lng())
-        console.log(lat);
-        console.log(lng);
-
+        dispatch(setEventLoc(event.latLng.lat(), event.latLng.lng()))
     }, []);
 
     const { isLoaded, loadError } = useLoadScript({
@@ -147,8 +136,6 @@ const Map = (props) => {
                             <p>Type:  {selected.type}</p>
                             <p>LAT:  {selected.lat}</p>
                             <p>LNG:  {selected.lng}</p>
-
-
                         </div>
                     </InfoWindow>)
                     : null}
