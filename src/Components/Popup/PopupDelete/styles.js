@@ -25,7 +25,7 @@ export default makeStyles((theme) => ({
         backgroundColor: theme.palette.secondary.main,
     },
     button: {
-        margin: theme.spacing(3),
+        margin: theme.spacing(2),
         // width: 140,
         // height: 40,
 
