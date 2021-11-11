@@ -30,7 +30,6 @@ export default makeStyles((theme) => ({
     },
     buttonEditSave: {
         margin: theme.spacing(2, 0, 0),
-        width: '70%',
         backgroundColor: '#00b300',
         color: "#ffffff",
         '&:hover': {
@@ -40,15 +39,12 @@ export default makeStyles((theme) => ({
     },
     buttonEditStop: {
         margin: theme.spacing(2, 0, 0),
-        width: '70%',
     },
     buttonEditStart: {
         margin: theme.spacing(3, 0, 0),
-        width: '70%',
     },
     buttonClose: {
         margin: theme.spacing(2, 0, 1),
-        width: '70%',
     },
     buttonsContainer: {
         display: 'column',

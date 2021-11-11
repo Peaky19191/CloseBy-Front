@@ -91,7 +91,7 @@ const UserDetails = () => {
                             </TextField>
                         </Grid>
                     </Grid>
-                    <Grid className={classes.buttonsContainer} container spacing={2}>
+                    <Grid className={classes.buttonsContainer} spacing={2}>
                         {/* {editMode ?
                             <>
                                 <Button className={classes.buttonEditSave} onClick={() => { }} fullWidth variant="contained"  >

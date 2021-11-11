@@ -13,14 +13,13 @@ const CompanyDetails = () => {
     const companyId = useSelector(state => state.company.id_company);
 
     const [name, setName] = useState("");
-    const [errors, setErrors] = useState({});
 
     const onChangeName = (e) => {
         const name = e.target.value;
         setName(name);
     };
+    const [dateCreated, setDateCreated] = useState("");
 
-    const enabled = name.length > 0;
 
     const [disaled, setDisabled] = useState(true);
     const [editMode, setEditMode] = useState(false);
@@ -38,9 +37,14 @@ const CompanyDetails = () => {
     const getCompanyDetails = () => {
         Company.getCompanyId(companyId)
             .then((response) => {
+                console.log("response");
+                console.log(response);
+
                 const company = response.data;
 
                 setName(company.name);
+                setDateCreated(company.createdAt);
+
             })
             .catch((e) => {
                 console.log(e);
@@ -65,6 +69,8 @@ const CompanyDetails = () => {
                     setSuccessful(false);
                 });
     };
+    const [errors, setErrors] = useState({});
+    const enabled = name.length > 0;
 
     const validate = () => {
         let temp = {}
@@ -103,8 +109,11 @@ const CompanyDetails = () => {
                         <Grid item xs={12} >
                             <TextField value={name} label="Company Name" onChange={onChangeName} InputProps={{ readOnly: disaled }} name="name" htmlFor="name" variant="outlined" fullWidth />
                         </Grid>
+                        <Grid item xs={12} >
+                            <TextField value={dateCreated} label="Created Date" InputProps={{ readOnly: true, disabled: editMode }} name="date" htmlFor="date" variant="outlined" fullWidth />
+                        </Grid>
                     </Grid>
-                    <Grid className={classes.buttonsContainer} container spacing={2}>
+                    <Grid className={classes.buttonsContainer} spacing={2}>
                         {editMode ?
                             <>
                                 <Button disabled={!enabled} type="submit" className={classes.buttonEditSave} fullWidth variant="contained"  >
