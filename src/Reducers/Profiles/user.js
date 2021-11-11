@@ -26,12 +26,10 @@ export default function (state = initialState, action) {
         case EDIT_USER_SUCCESS:
             return {
                 ...state,
-                isLoggedIn: true,
             };
         case EDIT_USER_FAIL:
             return {
                 ...state,
-                isLoggedIn: true,
             };
         case SET_USER_ID:
             return { id_user: payload };

@@ -104,9 +104,13 @@ const RegEvent = () => {
 
     // const startDate = new Date(2020-01-01T05:30:01);
     // 'YYYY-MM-DDTHH:mm:ss'
+    // const { loc_: loc_lat } = useSelector((state) => state.auth);
 
-    const loc_lat = useSelector(state => state.event.event_loc.lat);
-    const loc_lng = useSelector(state => state.event.event_loc.lng);
+    const loc_lat = useSelector(state => ((state.event.event_loc !== undefined) ? state.event.event_loc.lat : ""));
+    const loc_lng = useSelector(state => ((state.event.event_loc !== undefined) ? state.event.event_loc.lng : ""));
+    // const [loc_lat, setLoc_lat] = useState("");
+    // const [loc_lng, setLoc_lng] = useState("");
+
 
     const status = "Added";
 
@@ -114,7 +118,9 @@ const RegEvent = () => {
         console.log("startDate");
 
         console.log(startDate);
+
         e.preventDefault();
+
         setSuccessful(false);
         dispatch(regEvent(name, companyId, loc_lat, loc_lng, startDate, status, desc, limit, type))
             .then(() => {

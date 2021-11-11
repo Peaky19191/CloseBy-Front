@@ -32,6 +32,7 @@ import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/sty
 import Main from './Components/Main/Main';
 import RegEvent from './Components/Event/Register/RegisterEvent';
 import EventList from './Components/Event/List/EventList';
+import EventDetails from './Components/Event/Details/EventDetails';
 
 import { useEffect } from 'react';
 import { logout } from "./Actions/auth";
@@ -84,6 +85,7 @@ const App = () => {
           <Route exact path="/main" component={Main} />
           <Route exact path="/registerEvent" component={RegEvent} />
           <Route exact path="/eventList" component={EventList} />
+          <Route exact path="/eventDetails" component={EventDetails} />
 
         </Switch>
       </div>

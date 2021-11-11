@@ -16,22 +16,18 @@ export default function (state = initialState, action) {
         case REGISTER_COMP_ADMIN_SUCCESS:
             return {
                 ...state,
-                isLoggedIn: true,
             };
         case REGISTER_COMP_ADMIN_FAIL:
             return {
                 ...state,
-                isLoggedIn: true,
             };
         case EDIT_COMP_ADMIN_SUCCESS:
             return {
                 ...state,
-                isLoggedIn: true,
             };
         case EDIT_COMP_ADMIN_FAIL:
             return {
                 ...state,
-                isLoggedIn: true,
             };
         case SET_COMP_ADMIN_ID:
             return { id_comp_admin: payload };

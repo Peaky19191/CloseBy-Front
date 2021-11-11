@@ -6,6 +6,8 @@ import {
     CLEAR_EVENT_LOC,
     SET_EVENT_ID,
     CLEAR_EVENT_ID,
+    EDIT_EVENT_SUCCESS,
+    EDIT_EVENT_FAIL,
 } from "../../Constants/actionTypes";
 
 import EventService from "../../Services/Profiles/event.service";
@@ -70,4 +72,41 @@ export const clearEventId = () => (dispatch) => {
     dispatch({
         type: CLEAR_EVENT_ID,
     });
+};
+
+
+export const editEvent = (id, title, desc, startDate, type, status, limit) => (dispatch) => {
+    return EventService.editEventAPI(id, title, desc, startDate, type, status, limit).then(
+        (response) => {
+            dispatch({
+                type: EDIT_EVENT_SUCCESS,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: response.data.message,
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: EDIT_EVENT_FAIL,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
 };

@@ -16,22 +16,18 @@ export default function (state = initialState, action) {
         case REGISTER_COMPANY_SUCCESS:
             return {
                 ...state,
-                isLoggedIn: true,
             };
         case REGISTER_COMPANY_FAIL:
             return {
                 ...state,
-                isLoggedIn: true,
             };
         case EDIT_COMPANY_SUCCESS:
             return {
                 ...state,
-                isLoggedIn: true,
             };
         case EDIT_COMPANY_FAIL:
             return {
                 ...state,
-                isLoggedIn: true,
             };
         case SET_COMPANY_ID:
             return { id_company: payload };

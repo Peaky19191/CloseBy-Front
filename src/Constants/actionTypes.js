@@ -54,3 +54,6 @@ export const CLEAR_EVENT_LOC = "CLEAR_EVENT_LOC";
 
 export const SET_EVENT_ID = "SET_EVENT_ID";
 export const CLEAR_EVENT_ID = "CLEAR_EVENT_ID";
+
+export const EDIT_EVENT_SUCCESS = "EDIT_EVENT_SUCCESS";
+export const EDIT_EVENT_FAIL = "EDIT_EVENT_FAIL";

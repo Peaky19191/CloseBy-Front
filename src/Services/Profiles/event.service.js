@@ -29,6 +29,24 @@ const registerEvent = (title, companyId, loc_lat, loc_lng, startDate, status, de
 };
 
 
+const editEventAPI = (id, title, desc, startDate, type, status, limit) => {
+    return axios.put(API_URL + "/update",
+        {
+            id: id,
+            title: title,
+            description: desc,
+            startDate: startDate,
+            type: type,
+            status: status,
+            personLimit: limit,
+        },
+        {
+            headers: authHeader()
+        }
+    );
+};
+
 export default {
     registerEvent,
+    editEventAPI,
 };

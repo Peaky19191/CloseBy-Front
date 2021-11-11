@@ -17,12 +17,10 @@ export default function (state = initialState, action) {
         case REGISTER_EVENT_SUCCESS:
             return {
                 ...state,
-                isLoggedIn: true,
             };
         case REGISTER_EVENT_FAIL:
             return {
                 ...state,
-                isLoggedIn: true,
             };
         case SET_EVENT_LOC:
             return { event_loc: payload };
