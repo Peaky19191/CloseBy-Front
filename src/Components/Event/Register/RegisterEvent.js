@@ -185,10 +185,8 @@ const RegEvent = () => {
                                 <Grid container spacing={2} alignItems="center">
                                     <Grid item xs>
                                         <Slider className={classes.limit}
-                                            value={typeof limit === 'number' ? limit : 0}
+                                            value={limit}
                                             onChange={handleSliderChange}
-                                            aria-labelledby="input-slider"
-                                            color="primary"
                                         />
                                     </Grid>
                                     <Grid item>
