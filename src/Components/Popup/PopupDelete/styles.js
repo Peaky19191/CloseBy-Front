@@ -25,15 +25,17 @@ export default makeStyles((theme) => ({
         backgroundColor: theme.palette.secondary.main,
     },
     button: {
-        margin: theme.spacing(2, 7, 2, 7),
-        width: 140,
-        height: 40,
+        margin: theme.spacing(3),
+        // width: 140,
+        // height: 40,
+
     },
     containerButton: {
         display: 'flex',
-        alignItems: 'center',
-        width: 'auto',
-        justifyContent: 'center',
+        // alignItems: 'center',
+        // width: 'auto',
+        // justifyContent: 'center',
+
     },
     containerData: {
         margin: theme.spacing(3, 1, 1, 1),

@@ -41,11 +41,11 @@ const PopupDelete = (props) => {
                                 <TextField label="Company" value={props.handleData[4]} InputProps={{ readOnly: true }} variant="outlined" fullWidth />
                             </Grid>}
                     </Grid>
-                    <Grid className={classes.containerButton} container spacing={2}>
-                        <Button onClick={props.handleClose} className={classes.button} variant="contained" color="primary">
+                    <Grid className={classes.containerButton} spacing={2}>
+                        <Button onClick={props.handleClose} fullWidth className={classes.button} variant="contained" color="primary">
                             close
                         </Button>
-                        <Button onClick={props.handleDelete} className={classes.button} variant="contained" color="secondary">
+                        <Button onClick={props.handleDelete} fullWidth className={classes.button} variant="contained" color="secondary">
                             delete
                         </Button>
                     </Grid>
