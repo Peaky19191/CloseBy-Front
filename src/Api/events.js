@@ -15,7 +15,27 @@ const getEventsList = (pageNumber, rowsPerPage) => {
     );
 };
 
+const deleteEvent = (id) => {
+    return axios.delete(API_URL + "delete",
+        {
+            headers: authHeader(),
+            data: {
+                id: id
+            }
+        },
+    );
+};
+
+const getEventId = (id) => {
+    return axios.get(API_URL + id,
+        {
+            headers: authHeader(),
+        },
+    );
+};
 
 export default {
     getEventsList,
+    deleteEvent,
+    getEventId,
 };

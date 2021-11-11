@@ -3,6 +3,8 @@ import {
     REGISTER_EVENT_FAIL,
     SET_EVENT_LOC,
     CLEAR_EVENT_LOC,
+    SET_EVENT_ID,
+    CLEAR_EVENT_ID,
 
 } from "../../Constants/actionTypes";
 
@@ -27,6 +29,12 @@ export default function (state = initialState, action) {
 
         case CLEAR_EVENT_LOC:
             return { event_loc: "" };
+
+        case SET_EVENT_ID:
+            return { id_event: payload };
+
+        case CLEAR_EVENT_ID:
+            return { id_event: "" };
 
         default:
             return state;

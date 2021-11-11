@@ -51,3 +51,6 @@ export const REGISTER_EVENT_FAIL = "REGISTER_EVENT_FAIL";
 
 export const SET_EVENT_LOC = "SET_EVENT_LOC";
 export const CLEAR_EVENT_LOC = "CLEAR_EVENT_LOC";
+
+export const SET_EVENT_ID = "SET_EVENT_ID";
+export const CLEAR_EVENT_ID = "CLEAR_EVENT_ID";

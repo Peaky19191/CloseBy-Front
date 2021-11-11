@@ -31,6 +31,7 @@ import CompWorkerDetails from './Components/Profiles/CompanyWorker/Details/CompW
 import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import Main from './Components/Main/Main';
 import RegEvent from './Components/Event/Register/RegisterEvent';
+import EventList from './Components/Event/List/EventList';
 
 import { useEffect } from 'react';
 import { logout } from "./Actions/auth";
@@ -82,6 +83,7 @@ const App = () => {
           <Route exact path="/compWorkerDetails" component={CompWorkerDetails} />
           <Route exact path="/main" component={Main} />
           <Route exact path="/registerEvent" component={RegEvent} />
+          <Route exact path="/eventList" component={EventList} />
 
         </Switch>
       </div>

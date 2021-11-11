@@ -104,7 +104,7 @@ const Navbar = () => {
                                 <ListItemIcon>
                                     <AddCircleOutlineIcon />
                                 </ListItemIcon>Add</MenuItem>
-                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/eventsList" variant="contained" >
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/eventList" variant="contained" >
                                 <ListItemIcon>
                                     <StorageIcon />
                                 </ListItemIcon>List</MenuItem>

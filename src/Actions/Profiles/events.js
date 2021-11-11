@@ -4,7 +4,8 @@ import {
     SET_MESSAGE,
     SET_EVENT_LOC,
     CLEAR_EVENT_LOC,
-
+    SET_EVENT_ID,
+    CLEAR_EVENT_ID,
 } from "../../Constants/actionTypes";
 
 import EventService from "../../Services/Profiles/event.service";
@@ -55,5 +56,18 @@ export const setEventLoc = (lat, lng) => (dispatch) => {
 export const clearEventLoc = () => (dispatch) => {
     dispatch({
         type: CLEAR_EVENT_LOC,
+    });
+};
+
+export const setEventId = (idToPass) => (dispatch) => {
+    dispatch({
+        type: SET_EVENT_ID,
+        payload: idToPass,
+    });
+};
+
+export const clearEventId = () => (dispatch) => {
+    dispatch({
+        type: CLEAR_EVENT_ID,
     });
 };

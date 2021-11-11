@@ -216,7 +216,7 @@ const RegEvent = () => {
                     </Grid>
                     <Grid container className={classes.buttonsContainer}>
                         <Grid item className={classes.buttonClose}>
-                            <Button component={Link} to="/eventsList" fullWidth variant="contained" color="secondary" >
+                            <Button component={Link} to="/eventList" fullWidth variant="contained" color="secondary" >
                                 Close
                             </Button>
                         </Grid>
