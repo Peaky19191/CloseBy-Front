@@ -145,7 +145,7 @@ const CompWorkerDetails = () => {
                             </TextField>
                         </Grid>
                     </Grid>
-                    <Grid className={classes.buttonsContainer} container spacing={2}>
+                    <Grid className={classes.buttonsContainer} >
                         {editMode ?
                             <>
                                 <Button disabled={!enabled} type="submit" className={classes.buttonEditSave} fullWidth variant="contained"  >

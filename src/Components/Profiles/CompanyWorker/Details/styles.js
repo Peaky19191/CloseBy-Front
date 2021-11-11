@@ -16,11 +16,6 @@ export default makeStyles((theme) => ({
         borderRadius: "10px",
         overflow: "auto",
     },
-    root: {
-        '& .MuiTextField-root': {
-            margin: theme.spacing(1),
-        },
-    },
     avatar: {
         margin: theme.spacing(1),
         backgroundColor: theme.palette.secondary.main,
@@ -30,7 +25,7 @@ export default makeStyles((theme) => ({
     },
     buttonEditSave: {
         margin: theme.spacing(2, 0, 0),
-        width: '70%',
+
         backgroundColor: '#00b300',
         color: "#ffffff",
         '&:hover': {
@@ -40,15 +35,15 @@ export default makeStyles((theme) => ({
     },
     buttonEditStop: {
         margin: theme.spacing(2, 0, 0),
-        width: '70%',
+
     },
     buttonEditStart: {
         margin: theme.spacing(3, 0, 0),
-        width: '70%',
+
     },
     buttonClose: {
         margin: theme.spacing(2, 0, 1),
-        width: '70%',
+
     },
     buttonsContainer: {
         display: 'column',
