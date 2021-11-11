@@ -19,6 +19,7 @@ import EventIcon from '@mui/icons-material/Event';
 import BusinessIcon from '@mui/icons-material/Business';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import PersonIcon from '@mui/icons-material/Person';
+import PersonIconEmpty from '@mui/icons-material/PersonOutline';
 import StarIcon from '@mui/icons-material/Star';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -134,9 +135,13 @@ const Navbar = () => {
                                 <ListItemIcon>
                                     <ManageAccountsIcon />
                                 </ListItemIcon>Admins</MenuItem>
-                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/usersList" variant="contained" >
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/compWorkerList" variant="contained" >
                                 <ListItemIcon>
                                     <PersonIcon />
+                                </ListItemIcon>Workers</MenuItem>
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/usersList" variant="contained" >
+                                <ListItemIcon>
+                                    <PersonIconEmpty />
                                 </ListItemIcon>Users</MenuItem>
                         </>
                     )}

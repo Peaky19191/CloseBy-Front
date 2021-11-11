@@ -32,15 +32,20 @@ const CompanyWorkersList = () => {
     const [count, setCount] = useState(0);
 
     const getList = () => {
-        CompAdmin.getCompanyAdminId(currentProfile.id)
-            .then((response) => {
-                const compId = response.data.company.id;
+        if (currentProfile.role === "GlobalAdmin") {
+            getCompWorkersListId();
+        }
+        if (currentProfile.role === "CompanyAdmin") {
+            CompAdmin.getCompanyAdminId(currentProfile.id)
+                .then((response) => {
+                    const compId = response.data.company.id;
 
-                getCompWorkersListId(compId);
-            })
-            .catch((e) => {
-                console.log(e);
-            });
+                    getCompWorkersListId(compId);
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        }
     };
 
     useEffect(getList, [page, rowsPerPage]);
