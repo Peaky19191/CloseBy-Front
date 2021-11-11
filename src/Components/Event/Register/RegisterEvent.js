@@ -86,9 +86,11 @@ const RegEvent = () => {
             });
     }, [])
 
+    // const startDate = new Date(2020-01-01T05:30:01);
+    // 'YYYY-MM-DDTHH:mm:ss'
     // const startDate = new Date();
-    // const startDate = "2021-11-06T12:21:52";
-    const [startDate, setStartDate] = React.useState(new Date('2014-08-18T21:11:54'));
+    const startDate = "2021-11-06T12:21:52";
+    // const [startDate, setStartDate] = React.useState(new Date('2014-08-18T21:11:54'));
     // const [startDate, setStartDate] = React.useState('2021-11-06T12:21:52');
     // const [startDate, setStartDate] = useState("2021-11-06T12:21:52");
     var re = new RegExp('^.{0,24}');
@@ -96,21 +98,14 @@ const RegEvent = () => {
     const onChangeDate = (e) => {
         // console.log("e");
         // console.log(e);
-        const startDate = e;
-        console.log(startDate);
-        setStartDate(e);
+        // const startDate = e;
+        // console.log(startDate);
+        // setStartDate(e);
 
     };
 
-    // const startDate = new Date(2020-01-01T05:30:01);
-    // 'YYYY-MM-DDTHH:mm:ss'
-    // const { loc_: loc_lat } = useSelector((state) => state.auth);
-
     const loc_lat = useSelector(state => ((state.event.event_loc !== undefined) ? state.event.event_loc.lat : ""));
     const loc_lng = useSelector(state => ((state.event.event_loc !== undefined) ? state.event.event_loc.lng : ""));
-    // const [loc_lat, setLoc_lat] = useState("");
-    // const [loc_lng, setLoc_lng] = useState("");
-
 
     const status = "Added";
 
@@ -120,7 +115,6 @@ const RegEvent = () => {
         console.log(startDate);
 
         e.preventDefault();
-
         setSuccessful(false);
         dispatch(regEvent(name, companyId, loc_lat, loc_lng, startDate, status, desc, limit, type))
             .then(() => {
@@ -130,7 +124,6 @@ const RegEvent = () => {
                 setSuccessful(false);
             });
     };
-
 
     return (
         <Container className={classes.container}  >
@@ -166,7 +159,7 @@ const RegEvent = () => {
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                                     <Stack spacing={3}>
                                         <DateTimePicker
-                                            format="yyyy-MM-dd HH:mm:ss"
+                                            // format="yyyy-MM-dd HH:mm:ss"
                                             renderInput={(props) => <TextField {...props} />}
                                             label="Start Date and Hour"
                                             value={startDate}
@@ -196,7 +189,6 @@ const RegEvent = () => {
                                             onChange={handleSliderChange}
                                             aria-labelledby="input-slider"
                                             color="primary"
-
                                         />
                                     </Grid>
                                     <Grid item>
