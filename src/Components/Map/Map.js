@@ -14,6 +14,7 @@ import CompAdmin from '../../Api/companyAdmin'
 import CompWorker from '../../Api/companyWorker'
 import { useSelector } from "react-redux";
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
+import Adress from '../../Api/map'
 
 const options = {
     styles: mapStyles,
@@ -85,20 +86,31 @@ const Map = () => {
             .then((response) => {
                 const events = response.data.items;
                 events.forEach(function (item, index) {
-                    setMarkers((event) => [
-                        ...event,
-                        {
-                            lat: Number(item.localization.latitude),
-                            lng: Number(item.localization.longitude),
-                            time: Date(item.startDateTime),
-                            title: item.title,
-                            desc: item.description,
-                            company: item.company,
-                            personLimit: item.personLimit,
-                            type: item.type,
-                            status: item.status,
-                        }]
-                    );
+
+                    Adress.getAdress(item.localization.latitude, item.localization.longitude)
+                        .then((response) => {
+                            const address = response.data.results[0].formatted_address;
+
+                            setMarkers((event) => [
+                                ...event,
+                                {
+                                    lat: Number(item.localization.latitude),
+                                    lng: Number(item.localization.longitude),
+                                    address: address,
+                                    time: Date(item.startDateTime),
+                                    title: item.title,
+                                    desc: item.description,
+                                    company: item.company,
+                                    personLimit: item.personLimit,
+                                    type: item.type,
+                                    status: item.status,
+                                }]);
+                        })
+                        .catch((e) => {
+                            console.log(e);
+                        });
+
+
                 })
             })
             .catch((e) => {
@@ -106,19 +118,27 @@ const Map = () => {
             });
     }
 
-
     const dispatch = useDispatch();
 
     const onMapClick = React.useCallback((event) => {
         setSelected(null);
         setNewSelected(null);
-        setNewMarker(current => [
-            {
-                lat: event.latLng.lat(),
-                lng: event.latLng.lng(),
-                time: new Date(),
-            }]
-        );
+        Adress.getAdress(event.latLng.lat(), event.latLng.lng())
+            .then((response) => {
+                const address = response.data.results[0].formatted_address;
+
+                setNewMarker(current => [
+                    {
+                        lat: event.latLng.lat(),
+                        lng: event.latLng.lng(),
+                        address: address,
+                        // time: new Date(),
+                    }]);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+
         dispatch(setEventLoc(event.latLng.lat(), event.latLng.lng()))
     }, []);
 
@@ -166,8 +186,9 @@ const Map = () => {
                             {(currentProfile.role === "GlobalAdmin") && <p>Company:  {selected.company}</p>}
                             {/* <p>People Limit:  {selected.personLimit}</p>  */}
                             <p>Type:  {selected.type}</p>
-                            <p>LAT:  {selected.lat}</p>
-                            <p>LNG:  {selected.lng}</p>
+                            <p>Address:  {selected.address}</p>
+                            {/* <p>LAT:  {selected.lat}</p>
+                            <p>LNG:  {selected.lng}</p> */}
                         </div>
                     </InfoWindow>)}
                 {newMarker.map((marker) => (
@@ -189,8 +210,9 @@ const Map = () => {
                     (<InfoWindow position={{ lat: newSelected.lat, lng: newSelected.lng }} onCloseClick={() => { setNewSelected(null) }}>
                         <div>
                             <h2>Event</h2>
-                            <p>LAT:  {newSelected.lat}</p>
-                            <p>LNG:  {newSelected.lng}</p>
+                            <p>Address:  {newSelected.address}</p>
+                            {/* <p>LAT:  {newSelected.lat}</p>
+                            <p>LNG:  {newSelected.lng}</p> */}
 
                         </div>
                     </InfoWindow>)}
