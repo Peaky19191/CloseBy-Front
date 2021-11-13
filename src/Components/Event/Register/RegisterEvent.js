@@ -87,23 +87,11 @@ const RegEvent = () => {
             });
     }, [])
 
-    // const startDate = new Date(2020-01-01T05:30:01);
-    // 'YYYY-MM-DDTHH:mm:ss'
-    // const startDate = new Date();
-    // const startDate = "2021-11-06T12:21:52";
-    // const [startDate, setStartDate] = React.useState(new Date('2014-08-18T21:11:54'));
-    // const [startDate, setStartDate] = React.useState('2021-11-06T12:21:52');
     const [startDate, setStartDate] = useState("2000-01-01T00:00:00");
-    var re = new RegExp('^.{0,24}');
 
     const onChangeDate = (e) => {
-        console.log("e");
-        console.log(e);
-
         const startDate = moment(e).format('yyyy-MM-DDTHH:mm:ss');
-        console.log(startDate);
         setStartDate(startDate);
-
     };
 
     const loc_lat = useSelector(state => ((state.event.event_loc !== undefined) ? state.event.event_loc.lat : ""));
@@ -161,15 +149,10 @@ const RegEvent = () => {
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                                     <Stack spacing={3}>
                                         <DateTimePicker
-                                            // format="yyyy-MM-dd HH:mm:ss"
                                             renderInput={(props) => <TextField {...props} />}
                                             label="Start Date and Hour"
                                             value={startDate}
                                             onChange={(newValue) => {
-                                                console.log("newValue");
-
-                                                console.log(newValue);
-
                                                 onChangeDate(newValue);
                                             }}
                                         />

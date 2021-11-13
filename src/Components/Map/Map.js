@@ -57,8 +57,6 @@ const Map = () => {
                         {
                             lat: Number(item.localization.latitude),
                             lng: Number(item.localization.longitude),
-                            // time: new Date(),
-
                             time: Date(item.startDateTime),
                             title: item.title,
                             desc: item.description,
