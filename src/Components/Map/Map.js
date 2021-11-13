@@ -13,6 +13,7 @@ import moment from 'moment'
 import CompAdmin from '../../Api/companyAdmin'
 import CompWorker from '../../Api/companyWorker'
 import { useSelector } from "react-redux";
+import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
 
 const options = {
     styles: mapStyles,
@@ -95,7 +96,7 @@ const Map = () => {
                             company: item.company,
                             personLimit: item.personLimit,
                             type: item.type,
-
+                            status: item.status,
                         }]
                     );
                 })
@@ -155,21 +156,20 @@ const Map = () => {
                         }}
                     />
                 ))}
-                {selected ?
+                {selected &&
                     (<InfoWindow position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => { setSelected(null) }}>
                         <div>
                             <h2>Event</h2>
                             <p>Title:  {selected.title}</p>
-                            <p>Desc:  {selected.desc}</p>
+                            {/* <p>Desc:  {selected.desc}</p> */}
                             <p>Start Date {moment(selected.time).format('DD/MM/YYYY HH:mm')}</p>
-                            <p>Company:  {selected.company}</p>
-                            <p>People Limit:  {selected.personLimit}</p>
+                            {(currentProfile.role === "GlobalAdmin") && <p>Company:  {selected.company}</p>}
+                            {/* <p>People Limit:  {selected.personLimit}</p>  */}
                             <p>Type:  {selected.type}</p>
                             <p>LAT:  {selected.lat}</p>
                             <p>LNG:  {selected.lng}</p>
                         </div>
-                    </InfoWindow>)
-                    : null}
+                    </InfoWindow>)}
                 {newMarker.map((marker) => (
                     <Marker
                         key={`${marker.lat}-${marker.lng}`}
@@ -185,7 +185,7 @@ const Map = () => {
                         }}
                     />
                 ))}
-                {newSelected ?
+                {newSelected &&
                     (<InfoWindow position={{ lat: newSelected.lat, lng: newSelected.lng }} onCloseClick={() => { setNewSelected(null) }}>
                         <div>
                             <h2>Event</h2>
@@ -193,8 +193,7 @@ const Map = () => {
                             <p>LNG:  {newSelected.lng}</p>
 
                         </div>
-                    </InfoWindow>)
-                    : null}
+                    </InfoWindow>)}
             </GoogleMap>
         </>
     );
