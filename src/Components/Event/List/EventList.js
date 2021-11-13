@@ -120,8 +120,8 @@ const EventList = () => {
                     <TableHead>
                         <TableRow >
                             <TableCell className={classes.tableCellTitle}>Title</TableCell>
-                            <TableCell className={classes.tableCellTitle}>Type</TableCell>
-                            <TableCell className={classes.tableCellTitle}>Status</TableCell>
+                            <TableCell align="center" className={classes.tableCellTitle}>Type</TableCell>
+                            <TableCell align="center" className={classes.tableCellTitle}>Status</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Start At</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
 
@@ -131,8 +131,8 @@ const EventList = () => {
                         {event.map((item) => (
                             <TableRow key={item.id} >
                                 <TableCell component="th" scope="row">{item.title}</TableCell>
-                                <TableCell component="th" scope="row">{item.type}</TableCell>
-                                <TableCell component="th" scope="row">{item.status}</TableCell>
+                                <TableCell align="center" component="th" scope="row">{item.type}</TableCell>
+                                <TableCell align="center" component="th" scope="row">{item.status}</TableCell>
                                 <TableCell align="center">{moment(item.startDateTime).format('DD/MM/YYYY HH:mm')}</TableCell>
                                 <TableCell align="center">
                                     <IconButton component={Link} to="/eventDetails" onClick={() => { setIdEvent(item.id) }} aria-label="edit" size="large" >
