@@ -85,8 +85,8 @@ const Map = () => {
         Events.getEventsList(page, rowsPerPage, companyId)
             .then((response) => {
                 const events = response.data.items;
+
                 events.forEach(function (item, index) {
-                    console.log(item);
                     Adress.getAdress(item.localization.latitude, item.localization.longitude)
                         .then((response) => {
                             const address = response.data.results[0].formatted_address;
@@ -110,8 +110,6 @@ const Map = () => {
                         .catch((e) => {
                             console.log(e);
                         });
-
-
                 })
             })
             .catch((e) => {
