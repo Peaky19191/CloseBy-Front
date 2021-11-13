@@ -104,6 +104,7 @@ const Map = () => {
                                     personLimit: item.personLimit,
                                     type: item.type,
                                     status: item.status,
+                                    id: item.id,
                                 }]);
                         })
                         .catch((e) => {
@@ -163,7 +164,7 @@ const Map = () => {
             <GoogleMap mapContainerStyle={mapContainerStyle} zoom={12} center={center} options={options} onClick={onMapClick} onLoad={onMapLoad}>
                 {markers.map((marker) => (
                     <Marker
-                        key={`${marker.lat}-${marker.lng}`}
+                        key={marker.id}
                         position={{ lat: marker.lat, lng: marker.lng }}
                         icon={{
                             url: `./assets/map.png`,
@@ -193,7 +194,7 @@ const Map = () => {
                     </InfoWindow>)}
                 {newMarker.map((marker) => (
                     <Marker
-                        key={`${marker.lat}-${marker.lng}`}
+                        // key={`${marker.lat}-${marker.lng}`}
                         position={{ lat: marker.lat, lng: marker.lng }}
                         icon={{
                             url: `./assets/map_green.png`,
