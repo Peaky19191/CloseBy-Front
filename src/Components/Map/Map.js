@@ -9,6 +9,7 @@ import Compass from './Compass/Compass';
 import Events from '../../Api/events';
 import { setEventLoc } from "../../Actions/Profiles/events";
 import { useDispatch } from "react-redux";
+import moment from 'moment'
 
 const options = {
     styles: mapStyles,
@@ -129,8 +130,7 @@ const Map = () => {
                             <h2>Event</h2>
                             <p>Title:  {selected.title}</p>
                             <p>Desc:  {selected.desc}</p>
-                            <p>Start Date {selected.time}</p>
-                            {/* <p>Added {formatRelative(selected.time, new Date())}</p> */}
+                            <p>Start Date {moment(selected.time).format('DD/MM/YYYY HH:mm')}</p>
                             <p>Company:  {selected.company}</p>
                             <p>People Limit:  {selected.personLimit}</p>
                             <p>Type:  {selected.type}</p>

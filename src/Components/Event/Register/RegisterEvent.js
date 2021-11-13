@@ -17,6 +17,7 @@ import Stack from '@mui/material/Stack';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
+import moment from 'moment'
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -89,18 +90,19 @@ const RegEvent = () => {
     // const startDate = new Date(2020-01-01T05:30:01);
     // 'YYYY-MM-DDTHH:mm:ss'
     // const startDate = new Date();
-    const startDate = "2021-11-06T12:21:52";
+    // const startDate = "2021-11-06T12:21:52";
     // const [startDate, setStartDate] = React.useState(new Date('2014-08-18T21:11:54'));
     // const [startDate, setStartDate] = React.useState('2021-11-06T12:21:52');
-    // const [startDate, setStartDate] = useState("2021-11-06T12:21:52");
+    const [startDate, setStartDate] = useState("2021-11-06T12:21:52");
     var re = new RegExp('^.{0,24}');
 
     const onChangeDate = (e) => {
-        // console.log("e");
-        // console.log(e);
-        // const startDate = e;
-        // console.log(startDate);
-        // setStartDate(e);
+        console.log("e");
+        console.log(e);
+
+        const startDate = moment(e).format('yyyy-MM-DDTHH:mm:ss');
+        console.log(startDate);
+        setStartDate(startDate);
 
     };
 
@@ -164,7 +166,10 @@ const RegEvent = () => {
                                             label="Start Date and Hour"
                                             value={startDate}
                                             onChange={(newValue) => {
+                                                console.log("newValue");
+
                                                 console.log(newValue);
+
                                                 onChangeDate(newValue);
                                             }}
                                         />

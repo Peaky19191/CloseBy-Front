@@ -20,6 +20,7 @@ import { useDispatch } from "react-redux";
 import CompAdmin from '../../../Api/companyAdmin'
 import CompWorker from '../../../Api/companyWorker'
 import { useSelector } from "react-redux";
+import moment from 'moment'
 
 const EventList = () => {
     const classes = useStyles();
@@ -132,7 +133,7 @@ const EventList = () => {
                                 <TableCell component="th" scope="row">{item.title}</TableCell>
                                 <TableCell component="th" scope="row">{item.type}</TableCell>
                                 <TableCell component="th" scope="row">{item.status}</TableCell>
-                                <TableCell align="center">{item.startDateTime}</TableCell>
+                                <TableCell align="center">{moment(item.startDateTime).format('DD/MM/YYYY HH:mm')}</TableCell>
                                 <TableCell align="center">
                                     <IconButton component={Link} to="/eventDetails" onClick={() => { setIdEvent(item.id) }} aria-label="edit" size="large" >
                                         <SettingsApplicationsIcon className={classes.settingICon} />
