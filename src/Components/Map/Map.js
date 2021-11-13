@@ -10,6 +10,9 @@ import Events from '../../Api/events';
 import { setEventLoc } from "../../Actions/Profiles/events";
 import { useDispatch } from "react-redux";
 import moment from 'moment'
+import CompAdmin from '../../Api/companyAdmin'
+import CompWorker from '../../Api/companyWorker'
+import { useSelector } from "react-redux";
 
 const options = {
     styles: mapStyles,
@@ -31,6 +34,8 @@ const center = {
 const Map = () => {
     const classes = useStyles();
 
+    const { profile: currentProfile } = useSelector((state) => state.auth);
+
     const mapRef = React.useRef();
     const onMapLoad = React.useCallback((map) => {
         mapRef.current = map;
@@ -47,10 +52,37 @@ const Map = () => {
     const [rowsPerPage, setRowsPerPage] = useState(100);
 
     const getList = () => {
-        Events.getEventsList(page, rowsPerPage)
+        if (currentProfile.role === "GlobalAdmin") {
+            getEventListId();
+        }
+        if (currentProfile.role === "CompanyAdmin") {
+            CompAdmin.getCompanyAdminId(currentProfile.id)
+                .then((response) => {
+                    const compId = response.data.company.id;
+
+                    getEventListId(compId);
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        }
+        if (currentProfile.role === "CompanyWorker") {
+            CompWorker.getCompanyWorkerId(currentProfile.id)
+                .then((response) => {
+                    const compId = response.data.company.id;
+
+                    getEventListId(compId);
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        }
+    };
+
+    const getEventListId = (companyId) => {
+        Events.getEventsList(page, rowsPerPage, companyId)
             .then((response) => {
                 const events = response.data.items;
-
                 events.forEach(function (item, index) {
                     setMarkers((event) => [
                         ...event,
@@ -71,7 +103,8 @@ const Map = () => {
             .catch((e) => {
                 console.log(e);
             });
-    };
+    }
+
 
     const dispatch = useDispatch();
 
