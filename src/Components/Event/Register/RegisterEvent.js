@@ -90,8 +90,8 @@ const RegEvent = () => {
     const [startDate, setStartDate] = useState("2000-01-01T00:00:00");
 
     const onChangeDate = (e) => {
-        const startDate = moment(e).format('yyyy-MM-DDTHH:mm:ss');
-        setStartDate(startDate);
+        const dateFormat = moment(e).format('yyyy-MM-DDTHH:mm:ss');
+        setStartDate(dateFormat);
     };
 
     const loc_lat = useSelector(state => ((state.event.event_loc !== undefined) ? state.event.event_loc.lat : ""));
@@ -100,9 +100,6 @@ const RegEvent = () => {
     const status = "Added";
 
     const handleSubmit = (e) => {
-        console.log("startDate");
-
-        console.log(startDate);
 
         e.preventDefault();
         setSuccessful(false);

@@ -86,7 +86,7 @@ const Map = () => {
             .then((response) => {
                 const events = response.data.items;
                 events.forEach(function (item, index) {
-
+                    console.log(item);
                     Adress.getAdress(item.localization.latitude, item.localization.longitude)
                         .then((response) => {
                             const address = response.data.results[0].formatted_address;
@@ -97,7 +97,7 @@ const Map = () => {
                                     lat: Number(item.localization.latitude),
                                     lng: Number(item.localization.longitude),
                                     address: address,
-                                    time: Date(item.startDateTime),
+                                    time: item.startDateTime,
                                     title: item.title,
                                     desc: item.description,
                                     company: item.company,
@@ -210,7 +210,7 @@ const Map = () => {
                     (<InfoWindow position={{ lat: newSelected.lat, lng: newSelected.lng }} onCloseClick={() => { setNewSelected(null) }}>
                         <div>
                             <h2>Event</h2>
-                            <p>Address:  {newSelected.address}</p>
+                            <p>{newSelected.address}</p>
                             {/* <p>LAT:  {newSelected.lat}</p>
                             <p>LNG:  {newSelected.lng}</p> */}
 
