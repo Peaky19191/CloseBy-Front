@@ -93,7 +93,7 @@ const RegEvent = () => {
     // const startDate = "2021-11-06T12:21:52";
     // const [startDate, setStartDate] = React.useState(new Date('2014-08-18T21:11:54'));
     // const [startDate, setStartDate] = React.useState('2021-11-06T12:21:52');
-    const [startDate, setStartDate] = useState("2021-11-06T12:21:52");
+    const [startDate, setStartDate] = useState("2000-01-01T00:00:00");
     var re = new RegExp('^.{0,24}');
 
     const onChangeDate = (e) => {
