@@ -166,7 +166,7 @@ const Map = () => {
                         key={`${marker.lat}-${marker.lng}`}
                         position={{ lat: marker.lat, lng: marker.lng }}
                         icon={{
-                            url: `./assets/logo2.jpg`,
+                            url: `./assets/map.png`,
                             origin: new window.google.maps.Point(0, 0),
                             anchor: new window.google.maps.Point(45, 45),
                             scaledSize: new window.google.maps.Size(90, 90),
@@ -196,7 +196,7 @@ const Map = () => {
                         key={`${marker.lat}-${marker.lng}`}
                         position={{ lat: marker.lat, lng: marker.lng }}
                         icon={{
-                            url: `./assets/logo2.jpg`,
+                            url: `./assets/map_green.png`,
                             origin: new window.google.maps.Point(0, 0),
                             anchor: new window.google.maps.Point(45, 45),
                             scaledSize: new window.google.maps.Size(90, 90),
