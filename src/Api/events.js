@@ -3,11 +3,12 @@ import authHeader from "../Services/Auth/auth-header";
 
 const API_URL = "http://localhost:5000/Api/event/";
 
-const getEventsList = (pageNumber, rowsPerPage) => {
+const getEventsList = (pageNumber, rowsPerPage, companyId) => {
     return axios.post(API_URL + "list",
         {
             page: pageNumber,
-            limit: rowsPerPage
+            limit: rowsPerPage,
+            id: companyId
         },
         {
             headers: authHeader()

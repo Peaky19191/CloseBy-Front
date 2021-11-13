@@ -90,7 +90,7 @@ const Map = () => {
     }, []);
 
     const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: process.env.REACT_APP_API_KEY,
+        googleMapsApiKey: process.env.REACT_APP_API_KEY_2,
         libraries,
     });
 

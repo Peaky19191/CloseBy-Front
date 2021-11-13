@@ -17,9 +17,15 @@ import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@
 import PopupDelete from '../../Popup/PopupDelete/PopupDelete';
 import { setEventId } from "../../../Actions/Profiles/events";
 import { useDispatch } from "react-redux";
+import CompAdmin from '../../../Api/companyAdmin'
+import CompWorker from '../../../Api/companyWorker'
+import { useSelector } from "react-redux";
 
 const EventList = () => {
     const classes = useStyles();
+
+    const { profile: currentProfile } = useSelector((state) => state.auth);
+
     const [event, setEvent] = useState([]);
 
     const [page, setPage] = useState(0);
@@ -27,20 +33,48 @@ const EventList = () => {
     const [count, setCount] = useState(0);
 
     const getList = () => {
-        Event.getEventsList(page, rowsPerPage)
+        if (currentProfile.role === "GlobalAdmin") {
+            getEventListId();
+        }
+        if (currentProfile.role === "CompanyAdmin") {
+            CompAdmin.getCompanyAdminId(currentProfile.id)
+                .then((response) => {
+                    const compId = response.data.company.id;
+
+                    getEventListId(compId);
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        }
+        if (currentProfile.role === "CompanyWorker") {
+            CompWorker.getCompanyWorkerId(currentProfile.id)
+                .then((response) => {
+                    const compId = response.data.company.id;
+
+                    getEventListId(compId);
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        }
+    };
+
+    useEffect(getList, [page, rowsPerPage]);
+
+    const getEventListId = (companyId) => {
+        Event.getEventsList(page, rowsPerPage, companyId)
             .then((response) => {
                 const eventTemp = response.data.items;
                 const totalPages = response.data.count;
-                console.log(eventTemp);
+
                 setEvent(eventTemp);
                 setCount(totalPages);
             })
             .catch((e) => {
                 console.log(e);
             });
-    };
-
-    useEffect(getList, [page, rowsPerPage]);
+    }
 
     const dispatch = useDispatch();
     const setIdEvent = (id) => {
