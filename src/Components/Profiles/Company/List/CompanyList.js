@@ -17,6 +17,7 @@ import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@
 import PopupDelete from '../../../Popup/PopupDelete/PopupDelete';
 import { setCompanyId } from "../../../../Actions/Profiles/company";
 import { useDispatch } from "react-redux";
+import moment from 'moment'
 
 const CompanyList = () => {
     const classes = useStyles();
@@ -95,7 +96,7 @@ const CompanyList = () => {
                         {company.map((item) => (
                             <TableRow key={item.id} >
                                 <TableCell component="th" scope="row">{item.name}</TableCell>
-                                <TableCell align="center">{item.createdAt}</TableCell>
+                                <TableCell align="center">{moment(item.createdAt).format('DD/MM/YYYY HH:mm')}</TableCell>
                                 <TableCell align="center">
                                     <IconButton component={Link} to="/companyDetails" onClick={() => { setIdCompany(item.id) }} aria-label="edit" size="large" >
                                         <SettingsApplicationsIcon className={classes.settingICon} />
