@@ -29,16 +29,21 @@ const registerEvent = (title, companyId, loc_lat, loc_lng, startDate, status, de
 };
 
 
-const editEventAPI = (id, title, desc, startDate, type, status, limit) => {
+const editEventAPI = (eventId, title, companyId, loc_lat, loc_lng, startDate, status, desc, limit, type) => {
     return axios.put(API_URL + "/update",
         {
-            id: id,
+            id: eventId,
             title: title,
             description: desc,
             startDate: startDate,
             type: type,
             status: status,
             personLimit: limit,
+            companyId: companyId,
+            localization: {
+                latitude: loc_lat,
+                longitude: loc_lng
+            },
         },
         {
             headers: authHeader()

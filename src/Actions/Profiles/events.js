@@ -75,8 +75,8 @@ export const clearEventId = () => (dispatch) => {
 };
 
 
-export const editEvent = (id, title, desc, startDate, type, status, limit) => (dispatch) => {
-    return EventService.editEventAPI(id, title, desc, startDate, type, status, limit).then(
+export const editEvent = (eventId, title, companyId, loc_lat, loc_lng, startDate, status, desc, limit, type) => (dispatch) => {
+    return EventService.editEventAPI(eventId, title, companyId, loc_lat, loc_lng, startDate, status, desc, limit, type).then(
         (response) => {
             dispatch({
                 type: EDIT_EVENT_SUCCESS,

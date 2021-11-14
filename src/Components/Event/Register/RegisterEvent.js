@@ -140,7 +140,7 @@ const RegEvent = () => {
                     <Grid container className={classes.formContainer}>
                         <Grid className={classes.fieldsContainer} >
                             <Grid className={classes.gridField} >
-                                <TextField label="Name of the Event" fullWidth name="name" htmlFor="name" variant="outlined" type="text" value={name} onChange={onChangeName} autoFocus />
+                                <TextField label="Title" fullWidth name="name" htmlFor="name" variant="outlined" type="text" value={name} onChange={onChangeName} autoFocus />
                             </Grid>
                             <Grid className={classes.gridField} >
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
