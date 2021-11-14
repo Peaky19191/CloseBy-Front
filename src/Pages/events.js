@@ -34,22 +34,18 @@ export const Events = () => {
                 <div className={classes.container}>
                     <Container maxWidth="md" style={{ marginTop: '100px' }}>
                         <Typography variant="h3" align="center" color="white" gutterBottom>
-                            Sprawdź dostępne wydarzenia
-                        </Typography>
-                        <Typography variant="h6" align="center" color="white" paragraph>
-                            Przeglądaj pośród dziesiątek nadchodzących wydarzeń i sprawdź szczegóły tych, które Cię interesują!
-                            Nie przegap okazji na zakup biletów!
+                            Check out the available Events
                         </Typography>
                     </Container>
                 </div>
-                <Container className={classes.cardGrid} maxWidth="md">
+                <Container className={classes.cardGrid} maxWidth="lg">
                     <Grid container spacing={4}>
                         {cards.map((card) => (
                             <Grid item key={card} xs={12} sm={6} md={4} >
                                 <Card className={classes.card}>
                                     <CardMedia
                                         className={classes.cardMedia}
-                                        image="https://source.unsplash.com/random"
+                                        image="./assets/cover.png"
                                         title="Event name"
                                     />
                                     <CardContent className={classes.cardContent}>

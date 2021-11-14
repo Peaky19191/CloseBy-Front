@@ -208,7 +208,7 @@ const Map = () => {
                 {newSelected &&
                     (<InfoWindow position={{ lat: newSelected.lat, lng: newSelected.lng }} onCloseClick={() => { setNewSelected(null) }}>
                         <div>
-                            <h2>Event</h2>
+                            <h2>Current Event</h2>
                             <p>{newSelected.address}</p>
                             {/* <p>LAT:  {newSelected.lat}</p>
                             <p>LNG:  {newSelected.lng}</p> */}
