@@ -18,7 +18,7 @@ const PopupDelete = (props) => {
                     <Typography component="h1" variant="h5">
                         Do you want to delete: {props.handleData[0]}?
                     </Typography>
-                    <Grid container className={classes.containerData} spacing={3}>
+                    <Grid container className={classes.containerData} spacing={2}>
                         {(props.handleData[0] === "Company") ?
                             <Grid item xs={12} >
                                 <TextField value={props.handleData[1]} label="Company" InputProps={{ readOnly: true }} variant="outlined" fullWidth />
@@ -40,14 +40,14 @@ const PopupDelete = (props) => {
                             <Grid item xs={12} >
                                 <TextField label="Company" value={props.handleData[4]} InputProps={{ readOnly: true }} variant="outlined" fullWidth />
                             </Grid>}
-                    </Grid>
-                    <Grid className={classes.containerButton} spacing={2}>
-                        <Button onClick={props.handleClose} className={classes.button} variant="contained" color="primary">
-                            close
-                        </Button>
-                        <Button onClick={props.handleDelete} className={classes.button} variant="contained" color="secondary">
-                            delete
-                        </Button>
+                        <Grid item xs={12}>
+                            <Button onClick={props.handleDelete} variant="contained" color="secondary" fullWidth>
+                                delete
+                            </Button>
+                            <Button onClick={props.handleClose} className={classes.buttonClose} variant="contained" color="primary" fullWidth>
+                                close
+                            </Button>
+                        </Grid>
                     </Grid>
                 </Paper>
             </Container>

@@ -25,23 +25,26 @@ export default makeStyles((theme) => ({
         backgroundColor: theme.palette.secondary.main,
     },
     button: {
-        margin: theme.spacing(2),
         // width: 140,
         // height: 40,
 
     },
     containerButton: {
-        display: 'flex',
-        // alignItems: 'center',
-        // width: 'auto',
-        // justifyContent: 'center',
+        display: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
 
     },
     containerData: {
-        margin: theme.spacing(3, 1, 1, 1),
+        margin: theme.spacing(3, 1, 0, 1),
     },
     icon: {
         width: 70,
         height: 70,
+    },
+
+
+    buttonClose: {
+        margin: theme.spacing(2, 0, 0),
     },
 }));
