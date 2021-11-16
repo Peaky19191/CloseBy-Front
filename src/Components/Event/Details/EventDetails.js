@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import useStyles from './styles';
 import Event from '../../../Api/events'
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField, MenuItem } from '@material-ui/core';
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { Link } from 'react-router-dom'
 import { editEvent } from "../../../Actions/Profiles/events";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useDispatch, useSelector } from "react-redux";
-import Map from '../../Map/Map'
+import MapDetails from '../../Map/DetailsMap/DetailsMap'
 import EventIcon from '@mui/icons-material/Event';
 import EventTypes from '../../../Static/select'
 import Slider from '@mui/material/Slider';
@@ -20,7 +19,8 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 import moment from 'moment'
-import { setEventLoc } from "../../../Actions/Profiles/events";
+import { setNewEventLoc } from "../../../Actions/Profiles/events";
+import { setCurrentEventLoc } from "../../../Actions/Profiles/events";
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -34,8 +34,8 @@ const EventDetails = () => {
 
     const eventId = useSelector(state => state.event.id_event);
 
-    const loc_lat = useSelector(state => ((state.event.event_loc !== undefined) ? state.event.event_loc.lat : ""));
-    const loc_lng = useSelector(state => ((state.event.event_loc !== undefined) ? state.event.event_loc.lng : ""));
+    const loc_lat = useSelector(state => ((state.event.new_event_loc !== undefined) ? state.event.new_event_loc.lat : ""));
+    const loc_lng = useSelector(state => ((state.event.new_event_loc !== undefined) ? state.event.new_event_loc.lng : ""));
 
     const [eventIdToPass, setEventIdToPass] = useState("");
 
@@ -120,7 +120,7 @@ const EventDetails = () => {
                 setLimit(event.limit);
 
 
-                dispatch(setEventLoc(event.localization.latitude, event.localization.longitude));
+                dispatch(setNewEventLoc(event.localization.latitude, event.localization.longitude));
 
             })
             .catch((e) => {
@@ -165,7 +165,7 @@ const EventDetails = () => {
             <Paper className={classes.paper} elevation={3}>
                 <Grid container className={classes.titleContainer} >
                     <Avatar className={classes.avatar}>
-                        <SupervisorAccountIcon />
+                        <EventIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">Details of the Event</Typography>
                     {successful ?
@@ -243,7 +243,7 @@ const EventDetails = () => {
                         </Grid> */}
                         </Grid>
                         <Grid className={classes.mapContainer}  >
-                            <Map handleLocLat={loc_lat} handleLocLng={loc_lng} />
+                            <MapDetails currentEventId={[eventId]} />
                         </Grid>
                     </Grid>
                     <Grid container className={classes.buttonsContainer}>

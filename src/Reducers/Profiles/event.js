@@ -1,8 +1,10 @@
 import {
     REGISTER_EVENT_SUCCESS,
     REGISTER_EVENT_FAIL,
-    SET_EVENT_LOC,
-    CLEAR_EVENT_LOC,
+    SET_CURRENT_EVENT_LOC,
+    CLEAR_CURRENT_EVENT_LOC,
+    SET_NEW_EVENT_LOC,
+    CLEAR_NEW_EVENT_LOC,
     SET_EVENT_ID,
     CLEAR_EVENT_ID,
 
@@ -22,14 +24,23 @@ export default function (state = initialState, action) {
             return {
                 ...state,
             };
-        case SET_EVENT_LOC:
-            return { event_loc: payload };
+        case SET_CURRENT_EVENT_LOC:
+            return { current_event_loc: payload };
 
-        case CLEAR_EVENT_LOC:
-            return { event_loc: "" };
+        case CLEAR_CURRENT_EVENT_LOC:
+            return { current_event_loc: "" };
+
+        case SET_NEW_EVENT_LOC:
+            return { ...state, new_event_loc: payload };
+
+        case CLEAR_NEW_EVENT_LOC:
+            return { new_event_loc: "" };
 
         case SET_EVENT_ID:
-            return { id_event: payload };
+            return {
+
+                id_event: payload
+            };
 
         case CLEAR_EVENT_ID:
             return { id_event: "" };

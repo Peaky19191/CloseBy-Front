@@ -5,7 +5,7 @@ import useStyles from './styles';
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { Link } from 'react-router-dom'
-import Map from '../../Map/Map'
+import MapRegister from '../../Map/RegisterMap/RegisterMap'
 import EventIcon from '@mui/icons-material/Event';
 import EventTypes from '../../../Static/select'
 import Slider from '@mui/material/Slider';
@@ -94,8 +94,8 @@ const RegEvent = () => {
         setStartDate(dateFormat);
     };
 
-    const loc_lat = useSelector(state => ((state.event.event_loc !== undefined) ? state.event.event_loc.lat : ""));
-    const loc_lng = useSelector(state => ((state.event.event_loc !== undefined) ? state.event.event_loc.lng : ""));
+    const loc_lat = useSelector(state => ((state.event.new_event_loc !== undefined) ? state.event.new_event_loc.lat : ""));
+    const loc_lng = useSelector(state => ((state.event.new_event_loc !== undefined) ? state.event.new_event_loc.lng : ""));
 
     const status = "Added";
 
@@ -192,7 +192,7 @@ const RegEvent = () => {
                             </Grid>
                         </Grid>
                         <Grid className={classes.mapContainer}  >
-                            <Map handleLocLat={loc_lat} handleLocLng={loc_lng} />
+                            <MapRegister />
                         </Grid>
                     </Grid>
                     <Grid container className={classes.buttonsContainer}>

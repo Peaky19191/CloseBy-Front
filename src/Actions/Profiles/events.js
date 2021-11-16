@@ -2,8 +2,10 @@ import {
     REGISTER_EVENT_SUCCESS,
     REGISTER_EVENT_FAIL,
     SET_MESSAGE,
-    SET_EVENT_LOC,
-    CLEAR_EVENT_LOC,
+    SET_NEW_EVENT_LOC,
+    SET_CURRENT_EVENT_LOC,
+    CLEAR_NEW_EVENT_LOC,
+    CLEAR_CURRENT_EVENT_LOC,
     SET_EVENT_ID,
     CLEAR_EVENT_ID,
     EDIT_EVENT_SUCCESS,
@@ -48,16 +50,28 @@ export const regEvent = (title, companyId, loc_lat, loc_lng, startDate, status, 
     );
 };
 
-export const setEventLoc = (lat, lng) => (dispatch) => {
+export const setNewEventLoc = (lat, lng) => (dispatch) => {
     dispatch({
-        type: SET_EVENT_LOC,
+        type: SET_NEW_EVENT_LOC,
         payload: { lat: lat, lng: lng },
     });
 };
 
-export const clearEventLoc = () => (dispatch) => {
+export const setCurrentEventLoc = (lat, lng) => (dispatch) => {
     dispatch({
-        type: CLEAR_EVENT_LOC,
+        type: SET_CURRENT_EVENT_LOC,
+        payload: { lat: lat, lng: lng },
+    });
+};
+
+export const clearNewEventLoc = () => (dispatch) => {
+    dispatch({
+        type: CLEAR_NEW_EVENT_LOC,
+    });
+};
+export const clearCurrentEventLoc = () => (dispatch) => {
+    dispatch({
+        type: CLEAR_CURRENT_EVENT_LOC,
     });
 };
 
