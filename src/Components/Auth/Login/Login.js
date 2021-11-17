@@ -56,7 +56,7 @@ const Login = (props) => {
     };
 
     if (isLoggedIn) {
-        return <Redirect to="/main" />;
+        return <Redirect to="/events" />;
     }
 
     return (

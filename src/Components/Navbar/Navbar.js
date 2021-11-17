@@ -86,7 +86,7 @@ const Navbar = () => {
                             <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/main" variant="contained" >
                                 <ListItemIcon>
                                     <StarIcon />
-                                </ListItemIcon>Main</MenuItem>
+                                </ListItemIcon>Favorites</MenuItem>
 
                             <Divider />
                             <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/events" variant="contained" >

@@ -3,8 +3,8 @@ import useStyles from './styles';
 import Home from './Pages/home';
 import About from './Pages/about';
 import Contact from './Pages/contact';
-import Events from './Pages/events';
-import Login from './Pages/auth';
+import Events from './Components/Event/Events';
+import Login from './Components/Auth/Login/Login';
 import React from "react";
 import { Router, Switch, Route } from "react-router-dom";
 import { Register } from './Components/Profiles/User/Register/RegisterUser'
@@ -28,7 +28,6 @@ import UserDetails from './Components/Profiles/User/Details/UserDetails';
 import CompAdminDetails from './Components/Profiles/CompanyAdmin/Details/CompAdminDetails';
 import CompanyDetails from './Components/Profiles/Company/Details/CompanyDetails';
 import CompWorkerDetails from './Components/Profiles/CompanyWorker/Details/CompWorkerDetails';
-import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import Main from './Components/Main/Main';
 import RegEvent from './Components/Event/Register/RegisterEvent';
 import EventList from './Components/Event/List/EventList';
@@ -38,7 +37,7 @@ import { useEffect } from 'react';
 import { logout } from "./Actions/auth";
 import { clearMessage } from "./Actions/message";
 import { useDispatch } from 'react-redux';
-const theme = createMuiTheme();
+
 
 const App = () => {
   const classes = useStyles();
