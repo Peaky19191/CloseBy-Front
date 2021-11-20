@@ -117,7 +117,7 @@ const EventDetails = () => {
                 setStartDate(event.startDateTime);
                 setType(event.type);
                 setStatus(event.status);
-                setLimit(event.limit);
+                setLimit(event.ticketLimit);
 
 
                 dispatch(setNewEventLoc(event.localization.latitude, event.localization.longitude));

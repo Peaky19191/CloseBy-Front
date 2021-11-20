@@ -19,7 +19,7 @@ const registerEvent = (title, companyId, loc_lat, loc_lng, startDate, status, de
             startDateTime: startDate,
             status: status,
             description: description,
-            personLimit: limit,
+            ticketLimit: limit,
             type: type
         },
         {
@@ -35,10 +35,10 @@ const editEventAPI = (eventId, title, companyId, loc_lat, loc_lng, startDate, st
             id: eventId,
             title: title,
             description: desc,
-            startDate: startDate,
+            startDateTime: startDate,
             type: type,
             status: status,
-            personLimit: limit,
+            ticketLimit: limit,
             companyId: companyId,
             localization: {
                 latitude: loc_lat,

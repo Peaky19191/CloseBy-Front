@@ -1,10 +1,78 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import { Typography, Card, CardActions, CardContent, CardMedia, Grid, Container, Button } from '@material-ui/core';
 import useStyles from './styles';
+import CompAdmin from '../../Api/companyAdmin'
+import CompWorker from '../../Api/companyWorker'
+import { useSelector } from "react-redux";
+import Event from '../../Api/events'
+import moment from 'moment'
 
 export const Events = () => {
     const classes = useStyles();
-    const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+    const { profile: currentProfile } = useSelector((state) => state.auth);
+
+    const [event, setEvent] = useState([]);
+
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(15);
+    const [count, setCount] = useState(0);
+
+    const getList = () => {
+        if (currentProfile.role === "User") {
+            getEventListId();
+        }
+        if (currentProfile.role === "GlobalAdmin") {
+            getEventListId();
+        }
+        if (currentProfile.role === "CompanyAdmin") {
+            CompAdmin.getCompanyAdminId(currentProfile.id)
+                .then((response) => {
+                    const compId = response.data.company.id;
+
+                    getEventListId(compId);
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        }
+        if (currentProfile.role === "CompanyWorker") {
+            CompWorker.getCompanyWorkerId(currentProfile.id)
+                .then((response) => {
+                    const compId = response.data.company.id;
+
+                    getEventListId(compId);
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        }
+    };
+
+    useEffect(getList, [page, rowsPerPage]);
+
+    const getEventListId = (companyId) => {
+        Event.getEventsList(page, rowsPerPage, companyId)
+            .then((response) => {
+                const eventTemp = response.data.items;
+                const totalPages = response.data.count;
+                console.log(eventTemp);
+                setEvent(eventTemp);
+                setCount(totalPages);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
 
     return (
         <>
@@ -19,24 +87,29 @@ export const Events = () => {
                 </div> */}
                 <Container className={classes.cardGrid} maxWidth="lg">
                     <Grid container spacing={4}>
-                        {cards.map((card) => (
-                            <Grid item key={card} xs={12} sm={6} md={4} >
+                        {event.map((event) => (
+                            <Grid item key={event.id} xs={12} sm={6} md={4} >
                                 <Card className={classes.card}>
                                     <CardMedia
                                         className={classes.cardMedia}
                                         image="./assets/cover.png"
-                                        title="Event name"
                                     />
                                     <CardContent className={classes.cardContent}>
                                         <Typography gutterBottom variant="h5">
-                                            Event name
+                                            {event.title}
                                         </Typography>
                                         <Typography>
-                                            Place for short event description.
+                                            {moment(event.startDateTime).format('HH:mm - DD/MM/YYYY ')}
+                                        </Typography>
+                                        <Typography>
+                                            {event.type}
+                                        </Typography>
+                                        <Typography>
+                                            {event.description}
                                         </Typography>
                                     </CardContent>
                                     <CardActions>
-                                        <Button size="small" color="primary">Details</Button>
+                                        <Button color="primary">Details</Button>
                                     </CardActions>
                                 </Card>
                             </Grid>
