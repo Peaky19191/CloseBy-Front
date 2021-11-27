@@ -74,7 +74,6 @@ export default makeStyles((theme) => ({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
-        margin: theme.spacing(0, 0, 1, 0),
 
         // paddingLeft: theme.spacing(2),
         // paddingRight: theme.spacing(2),

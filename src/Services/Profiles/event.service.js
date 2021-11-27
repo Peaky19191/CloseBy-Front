@@ -3,7 +3,9 @@ import authHeader from "../Auth/auth-header";
 
 const API_URL = "http://localhost:5000/Api/event";
 
-const registerEvent = (title, companyId, loc_lat, loc_lng, startDate, status, description, limit, type) => {
+const registerEvent = (title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type) => {
+    console.log(startDate);
+
     return axios.post(API_URL + "/create",
         {
             title: title,
@@ -13,7 +15,7 @@ const registerEvent = (title, companyId, loc_lat, loc_lng, startDate, status, de
                 longitude: loc_lng
             },
             startDateTime: startDate,
-            endDateTime: startDate,
+            endDateTime: endDate,
             status: status,
             description: description,
             ticketLimit: limit,

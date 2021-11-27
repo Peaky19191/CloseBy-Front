@@ -14,8 +14,8 @@ import {
 
 import EventService from "../../Services/Profiles/event.service";
 
-export const regEvent = (title, companyId, loc_lat, loc_lng, startDate, status, description, limit, type) => (dispatch) => {
-    return EventService.registerEvent(title, companyId, loc_lat, loc_lng, startDate, status, description, limit, type).then(
+export const regEvent = (title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type) => (dispatch) => {
+    return EventService.registerEvent(title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type).then(
         (response) => {
             dispatch({
                 type: REGISTER_EVENT_SUCCESS,

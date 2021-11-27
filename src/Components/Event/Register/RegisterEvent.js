@@ -88,10 +88,15 @@ const RegEvent = () => {
     }, [])
 
     const [startDate, setStartDate] = useState("2000-01-01T00:00:00");
-
-    const onChangeDate = (e) => {
+    const onChangeStartDate = (e) => {
         const dateFormat = moment(e).format('yyyy-MM-DDTHH:mm:ss');
         setStartDate(dateFormat);
+    };
+
+    const [endDate, setEndDate] = useState("2000-01-01T00:00:00");
+    const onChangeEndDate = (e) => {
+        const dateFormat = moment(e).format('yyyy-MM-DDTHH:mm:ss');
+        setEndDate(dateFormat);
     };
 
     const loc_lat = useSelector(state => ((state.event.new_event_loc !== undefined) ? state.event.new_event_loc.lat : ""));
@@ -103,7 +108,7 @@ const RegEvent = () => {
 
         e.preventDefault();
         setSuccessful(false);
-        dispatch(regEvent(name, companyId, loc_lat, loc_lng, startDate, status, desc, limit, type))
+        dispatch(regEvent(name, companyId, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type))
             .then(() => {
                 setSuccessful(true);
             })
@@ -143,6 +148,13 @@ const RegEvent = () => {
                                 <TextField label="Title" fullWidth name="name" htmlFor="name" variant="outlined" type="text" value={name} onChange={onChangeName} autoFocus />
                             </Grid>
                             <Grid className={classes.gridField} >
+                                <TextField label="Type of the Event" variant="outlined" fullWidth value={type} onChange={onChangeType} type="text" select >
+                                    {EventTypes.map((EventTypes) => (
+                                        <MenuItem key={EventTypes} value={EventTypes}>{EventTypes}</MenuItem>
+                                    ))}
+                                </TextField>
+                            </Grid>
+                            <Grid className={classes.gridField} >
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                                     <Stack spacing={3}>
                                         <DateTimePicker
@@ -150,18 +162,25 @@ const RegEvent = () => {
                                             label="Start Date and Hour"
                                             value={startDate}
                                             onChange={(newValue) => {
-                                                onChangeDate(newValue);
+                                                onChangeStartDate(newValue);
                                             }}
                                         />
                                     </Stack>
                                 </LocalizationProvider>
                             </Grid>
                             <Grid className={classes.gridField} >
-                                <TextField label="Type of the Event" variant="outlined" fullWidth value={type} onChange={onChangeType} type="text" select >
-                                    {EventTypes.map((EventTypes) => (
-                                        <MenuItem key={EventTypes} value={EventTypes}>{EventTypes}</MenuItem>
-                                    ))}
-                                </TextField>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <Stack spacing={3}>
+                                        <DateTimePicker
+                                            renderInput={(props) => <TextField {...props} />}
+                                            label="End Date and Hour"
+                                            value={endDate}
+                                            onChange={(newValue) => {
+                                                onChangeEndDate(newValue);
+                                            }}
+                                        />
+                                    </Stack>
+                                </LocalizationProvider>
                             </Grid>
                             <Grid className={classes.gridField} >
                                 <Typography id="input-slider" gutterBottom>
@@ -188,7 +207,7 @@ const RegEvent = () => {
                                 </Grid>
                             </Grid>
                             <Grid className={classes.gridField}>
-                                <TextField label="Description" rows={10} multiline fullWidth name="desc" htmlFor="desc" variant="outlined" type="text" value={desc} onChange={onChangeDesc} />
+                                <TextField label="Description" rows={6} multiline fullWidth name="desc" htmlFor="desc" variant="outlined" type="text" value={desc} onChange={onChangeDesc} />
                             </Grid>
                         </Grid>
                         <Grid className={classes.mapContainer}  >

@@ -54,10 +54,15 @@ const EventDetails = () => {
     };
 
     const [startDate, setStartDate] = useState("2000-01-01T00:00:00");
-
-    const onChangeDate = (e) => {
+    const onChangeStartDate = (e) => {
         const dateFormat = moment(e).format('yyyy-MM-DDTHH:mm:ss');
         setStartDate(dateFormat);
+    };
+
+    const [endDate, setEndDate] = useState("2000-01-01T00:00:00");
+    const onChangeEndDate = (e) => {
+        const dateFormat = moment(e).format('yyyy-MM-DDTHH:mm:ss');
+        setEndDate(dateFormat);
     };
 
     const [type, setType] = useState("");
@@ -115,6 +120,7 @@ const EventDetails = () => {
                 setTitle(event.title);
                 setDesc(event.description);
                 setStartDate(event.startDateTime);
+                setEndDate(event.endDateTime);
                 setType(event.type);
                 setStatus(event.status);
                 setLimit(event.ticketLimit);
@@ -167,7 +173,7 @@ const EventDetails = () => {
                     <Avatar className={classes.avatar}>
                         <EventIcon />
                     </Avatar>
-                    <Typography component="h1" variant="h5">Details of the Event</Typography>
+                    <Typography className={classes.title} component="h1" variant="h4">Details of the Event</Typography>
                     {successful ?
                         <Alert className={classes.alert} severity="success">
                             <AlertTitle>Success</AlertTitle>
@@ -191,6 +197,13 @@ const EventDetails = () => {
                                 <TextField value={title} label="Title" onChange={onChangeTitle} InputProps={{ readOnly: disaled }} name="title" htmlFor="title" variant="outlined" fullWidth />
                             </Grid>
                             <Grid className={classes.gridField} >
+                                <TextField label="Type of the Event" variant="outlined" fullWidth value={type} onChange={onChangeType} type="text" select >
+                                    {EventTypes.map((EventTypes) => (
+                                        <MenuItem key={EventTypes} value={EventTypes}>{EventTypes}</MenuItem>
+                                    ))}
+                                </TextField>
+                            </Grid>
+                            <Grid className={classes.gridField} >
                                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                                     <Stack spacing={3}>
                                         <DateTimePicker
@@ -198,18 +211,25 @@ const EventDetails = () => {
                                             label="Start Date and Hour"
                                             value={startDate}
                                             onChange={(newValue) => {
-                                                onChangeDate(newValue);
+                                                onChangeStartDate(newValue);
                                             }}
                                         />
                                     </Stack>
                                 </LocalizationProvider>
                             </Grid>
                             <Grid className={classes.gridField} >
-                                <TextField label="Type of the Event" variant="outlined" fullWidth value={type} onChange={onChangeType} type="text" select >
-                                    {EventTypes.map((EventTypes) => (
-                                        <MenuItem key={EventTypes} value={EventTypes}>{EventTypes}</MenuItem>
-                                    ))}
-                                </TextField>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <Stack spacing={3}>
+                                        <DateTimePicker
+                                            renderInput={(props) => <TextField {...props} />}
+                                            label="End Date and Hour"
+                                            value={endDate}
+                                            onChange={(newValue) => {
+                                                onChangeEndDate(newValue);
+                                            }}
+                                        />
+                                    </Stack>
+                                </LocalizationProvider>
                             </Grid>
                             <Grid className={classes.gridField} >
                                 <Typography id="input-slider" gutterBottom>
@@ -236,7 +256,7 @@ const EventDetails = () => {
                                 </Grid>
                             </Grid>
                             <Grid className={classes.gridField}>
-                                <TextField label="Description" rows={10} multiline fullWidth name="desc" htmlFor="desc" variant="outlined" type="text" value={desc} onChange={onChangeDesc} InputProps={{ readOnly: disaled }} />
+                                <TextField label="Description" rows={6} multiline fullWidth name="desc" htmlFor="desc" variant="outlined" type="text" value={desc} onChange={onChangeDesc} InputProps={{ readOnly: disaled }} />
                             </Grid>
                             {/* <Grid item xs={12} >
                             <TextField value={status} label="Status" onChange={onChangeStatus} InputProps={{ readOnly: disaled }} name="status" htmlFor="status" variant="outlined" fullWidth />
