@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import useStyles from './styles';
-import Event from '../../../Api/events'
+import Event from '../../../Services/Profiles/event.service'
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField, MenuItem } from '@material-ui/core';
 import { Link } from 'react-router-dom'
 import { editEvent } from "../../../Actions/Profiles/events";
@@ -13,7 +13,7 @@ import Slider from '@mui/material/Slider';
 import MuiInput from '@mui/material/Input';
 import { styled } from '@mui/material/styles';
 import { regEvent } from "../../../Actions/Profiles/events";
-import CompWorker from '../../../Api/companyWorker'
+import CompWorker from '../../../Services/Profiles/companyWorker.service'
 import Stack from '@mui/material/Stack';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Event from '../../../Api/events'
+import Event from '../../../Services/Profiles/event.service'
 import useStyles from './styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -17,8 +17,8 @@ import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@
 import PopupDelete from '../../Popup/PopupDelete/PopupDelete';
 import { setEventId } from "../../../Actions/Profiles/events";
 import { useDispatch } from "react-redux";
-import CompAdmin from '../../../Api/companyAdmin'
-import CompWorker from '../../../Api/companyWorker'
+import CompAdmin from '../../../Services/Profiles/companyAdmin.service'
+import CompWorker from '../../../Services/Profiles/companyWorker.service'
 import { useSelector } from "react-redux";
 import moment from 'moment'
 

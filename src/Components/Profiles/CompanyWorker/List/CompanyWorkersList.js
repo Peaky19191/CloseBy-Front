@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import CompWorker from '../../../../Api/companyWorker'
-import CompAdmin from '../../../../Api/companyAdmin'
+import CompWorker from '../../../../Services/Profiles/companyWorker.service'
+import CompAdmin from '../../../../Services/Profiles/companyAdmin.service'
 import useStyles from './styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';

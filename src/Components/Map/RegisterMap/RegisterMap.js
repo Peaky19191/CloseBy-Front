@@ -6,12 +6,12 @@ import { formatRelative } from "date-fns";
 import "@reach/combobox/styles.css";
 import Search from '../Search/Search'
 import Compass from '../Compass/Compass';
-import Events from '../../../Api/events';
+import Events from '../../../Services/Profiles/event.service';
 import { setNewEventLoc } from "../../../Actions/Profiles/events";
 import { useDispatch } from "react-redux";
 import moment from 'moment'
-import CompAdmin from '../../../Api/companyAdmin'
-import CompWorker from '../../../Api/companyWorker'
+import CompAdmin from '../../../Services/Profiles/companyAdmin.service'
+import CompWorker from '../../../Services/Profiles/companyWorker.service'
 import { useSelector } from "react-redux";
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
 import Adress from '../../../Api/map'

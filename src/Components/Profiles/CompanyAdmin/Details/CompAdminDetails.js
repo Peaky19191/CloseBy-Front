@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import useStyles from './styles';
-import CompAdmin from '../../../../Api/companyAdmin'
+import CompAdmin from '../../../../Services/Profiles/companyAdmin.service'
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { Link } from 'react-router-dom'
@@ -8,7 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { editCompAdmin } from "../../../../Actions/Profiles/companyAdmin";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useDispatch, useSelector } from "react-redux";
-// import Company from '../../../../Api/company'    FOR FUTURE BACKEND UPDATE - EDIT ASSIGNET COMPANY
+//  import Company from '../../../../Services/Profiles/company.service'    FOR FUTURE BACKEND UPDATE - EDIT ASSIGNET COMPANY
 
 const CompAdminDetails = () => {
     const classes = useStyles();

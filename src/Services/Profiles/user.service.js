@@ -17,7 +17,7 @@ const getUserData = (id) => {
     return axios.get(API_URL, { id });
 };
 
-const editUserAPI = (id, firstName, lastName, gender, email) => {
+const updateUser = (id, firstName, lastName, gender, email) => {
     return axios.put(API_URL + "update",
         {
             id: id,
@@ -32,8 +32,44 @@ const editUserAPI = (id, firstName, lastName, gender, email) => {
     );
 };
 
+const getUsersList = (pageNumber, rowsPerPage) => {
+    return axios.post(API_URL + "list",
+        {
+            page: pageNumber,
+            limit: rowsPerPage
+        },
+        {
+            headers: authHeader(),
+        }
+    );
+};
+
+const deleteUser = (id) => {
+    return axios.delete(API_URL + "delete",
+        {
+            headers: authHeader(),
+            data: {
+                id: id
+            }
+        },
+
+    );
+};
+
+const getUserId = (id) => {
+    return axios.get(API_URL + id,
+        {
+            headers: authHeader(),
+        },
+
+    );
+};
+
 export default {
     getUserData,
     registerUser,
-    editUserAPI,
+    updateUser,
+    getUsersList,
+    deleteUser,
+    getUserId,
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Company from '../../../../Api/company'
+import Company from '../../../../Services/Profiles/company.service'
 import useStyles from './styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';

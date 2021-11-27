@@ -12,7 +12,7 @@ import Slider from '@mui/material/Slider';
 import MuiInput from '@mui/material/Input';
 import { styled } from '@mui/material/styles';
 import { regEvent } from "../../../Actions/Profiles/events";
-import CompWorker from '../../../Api/companyWorker'
+import CompWorker from '../../../Services/Profiles/companyWorker.service'
 import Stack from '@mui/material/Stack';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';

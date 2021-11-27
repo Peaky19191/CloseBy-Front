@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import useStyles from './styles';
-import User from '../../../../Api/user'
+import User from '../../../../Services/Profiles/user.service'
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { Link } from 'react-router-dom'

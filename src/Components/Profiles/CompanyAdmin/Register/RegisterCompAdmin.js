@@ -6,7 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { useDispatch, useSelector } from "react-redux";
 import { regCompAdmin } from "../../../../Actions/Profiles/companyAdmin";
 import { Alert, AlertTitle } from '@material-ui/lab';
-import Company from '../../../../Api/company'
+import Company from '../../../../Services/Profiles/company.service'
 import { Link } from 'react-router-dom'
 
 const RegCompAdmin = () => {

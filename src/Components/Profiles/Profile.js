@@ -5,9 +5,9 @@ import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField }
 import { Link } from 'react-router-dom'
 import MenuItem from '@material-ui/core/MenuItem';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import User from '../../Api/user'
-import CompWorker from '../../Api/companyWorker'
-import CompAdmin from '../../Api/companyAdmin'
+import User from '../../Services/Profiles/user.service'
+import CompWorker from '../../Services/Profiles/companyWorker.service'
+import CompAdmin from '../../Services/Profiles/companyAdmin.service'
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useDispatch, useSelector } from "react-redux";
 import { editCompAdmin } from "../..//Actions/Profiles/companyAdmin";

@@ -1,12 +1,12 @@
 import axios from "axios";
 import authHeader from "../Auth/auth-header";
 
-const API_URL = "http://localhost:5000/Api/event";
+const API_URL = "http://localhost:5000/Api/event/";
 
 const registerEvent = (title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type) => {
     console.log(startDate);
 
-    return axios.post(API_URL + "/create",
+    return axios.post(API_URL + "create",
         {
             title: title,
             companyId: companyId,
@@ -28,7 +28,7 @@ const registerEvent = (title, companyId, loc_lat, loc_lng, startDate, endDate, s
 };
 
 const editEventAPI = (eventId, title, companyId, loc_lat, loc_lng, startDate, status, desc, limit, type) => {
-    return axios.put(API_URL + "/update",
+    return axios.put(API_URL + "update",
         {
             id: eventId,
             title: title,
@@ -49,7 +49,42 @@ const editEventAPI = (eventId, title, companyId, loc_lat, loc_lng, startDate, st
     );
 };
 
+const getEventsList = (pageNumber, rowsPerPage, companyId) => {
+    return axios.post(API_URL + "list",
+        {
+            page: pageNumber,
+            limit: rowsPerPage,
+            id: companyId
+        },
+        {
+            headers: authHeader()
+        },
+    );
+};
+
+const deleteEvent = (id) => {
+    return axios.delete(API_URL + "delete",
+        {
+            headers: authHeader(),
+            data: {
+                id: id
+            }
+        },
+    );
+};
+
+const getEventId = (id) => {
+    return axios.get(API_URL + id,
+        {
+            headers: authHeader(),
+        },
+    );
+};
+
 export default {
     registerEvent,
     editEventAPI,
+    getEventsList,
+    deleteEvent,
+    getEventId,
 };

@@ -60,7 +60,7 @@ export const clearUserId = () => (dispatch) => {
 };
 
 export const editUser = (id, firstName, lastName, gender, email) => (dispatch) => {
-    return UserService.editUserAPI(id, firstName, lastName, gender, email).then(
+    return UserService.updateUser(id, firstName, lastName, gender, email).then(
         (response) => {
             dispatch({
                 type: EDIT_USER_SUCCESS,

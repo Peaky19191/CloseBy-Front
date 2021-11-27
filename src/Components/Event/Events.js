@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Card, CardActions, CardContent, CardMedia, Grid, Container, Button } from '@material-ui/core';
 import useStyles from './styles';
-import CompAdmin from '../../Api/companyAdmin'
-import CompWorker from '../../Api/companyWorker'
+import CompAdmin from '../../Services/Profiles/companyAdmin.service'
+import CompWorker from '../../Services/Profiles/companyWorker.service'
 import { useSelector } from "react-redux";
-import Event from '../../Api/events'
+import Event from '../../Services/Profiles/event.service'
 import moment from 'moment'
 
 export const Events = () => {
