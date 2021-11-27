@@ -125,15 +125,11 @@ const EventDetails = () => {
                 setStatus(event.status);
                 setLimit(event.ticketLimit);
 
-
                 dispatch(setNewEventLoc(event.localization.latitude, event.localization.longitude));
-
             })
             .catch((e) => {
                 console.log(e);
             });
-
-
     }
     useEffect(getEventDetails, []);
 
@@ -197,7 +193,7 @@ const EventDetails = () => {
                                 <TextField value={title} label="Title" onChange={onChangeTitle} InputProps={{ readOnly: disaled }} name="title" htmlFor="title" variant="outlined" fullWidth />
                             </Grid>
                             <Grid className={classes.gridField} >
-                                <TextField label="Type of the Event" variant="outlined" fullWidth value={type} onChange={onChangeType} type="text" select >
+                                <TextField label="Type of the Event" variant="outlined" fullWidth value={type} onChange={onChangeType} type="text" select InputProps={{ readOnly: disaled }}>
                                     {EventTypes.map((EventTypes) => (
                                         <MenuItem key={EventTypes} value={EventTypes}>{EventTypes}</MenuItem>
                                     ))}
@@ -213,6 +209,7 @@ const EventDetails = () => {
                                             onChange={(newValue) => {
                                                 onChangeStartDate(newValue);
                                             }}
+                                            InputProps={{ readOnly: disaled }}
                                         />
                                     </Stack>
                                 </LocalizationProvider>
@@ -227,6 +224,7 @@ const EventDetails = () => {
                                             onChange={(newValue) => {
                                                 onChangeEndDate(newValue);
                                             }}
+                                            InputProps={{ readOnly: disaled }}
                                         />
                                     </Stack>
                                 </LocalizationProvider>
@@ -243,7 +241,7 @@ const EventDetails = () => {
                                         />
                                     </Grid>
                                     <Grid item>
-                                        <Input name="limit" htmlFor="limit" value={limit} size="small" onChange={handleInputChange} onBlur={handleBlur}
+                                        <Input name="limit" htmlFor="limit" value={limit} size="small" onChange={handleInputChange} onBlur={handleBlur} InputProps={{ readOnly: disaled }}
                                             inputProps={{
                                                 step: 10,
                                                 min: 0,
