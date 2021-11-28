@@ -24,6 +24,7 @@ import StarIcon from '@mui/icons-material/Star';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import StorageIcon from '@mui/icons-material/Storage';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
 const Navbar = () => {
     const classes = useStyles();
@@ -81,56 +82,64 @@ const Navbar = () => {
                     anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
                     classes={{ list: classes.list }}
                 >
-                    {currentProfile && (
+                    {currentProfile && showUserBoard && (
                         <>
-                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/main" variant="contained" >
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/favorites" variant="contained" >
                                 <ListItemIcon>
                                     <StarIcon />
                                 </ListItemIcon>Favorites</MenuItem>
-
                             <Divider />
                             <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/events" variant="contained" >
                                 <ListItemIcon>
                                     <EventIcon />
                                 </ListItemIcon>Events</MenuItem>
-                        </>
-                    )}
-                    {currentProfile && showUserBoard && (
-                        <>
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/tickets" variant="contained" >
+                                <ListItemIcon>
+                                    <LocalOfferIcon />
+                                </ListItemIcon>Tickets</MenuItem>
                         </>
                     )}
                     {currentProfile && showCompanyWorkerBoard && (
                         <>
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/eventList" variant="contained" >
+                                <ListItemIcon>
+                                    <StorageIcon />
+                                </ListItemIcon>Events</MenuItem>
                             <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/registerEvent" variant="contained" >
                                 <ListItemIcon>
                                     <AddCircleOutlineIcon />
                                 </ListItemIcon>Add</MenuItem>
-                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/eventList" variant="contained" >
-                                <ListItemIcon>
-                                    <StorageIcon />
-                                </ListItemIcon>List</MenuItem>
                         </>
                     )}
                     {currentProfile && showCompanyAdminBoard && (
                         <>
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/eventList" variant="contained" >
+                                <ListItemIcon>
+                                    <StorageIcon />
+                                </ListItemIcon>Events</MenuItem>
                             <Divider />
                             <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/compWorkerList" variant="contained" >
                                 <ListItemIcon>
                                     <PeopleAltIcon />
-                                </ListItemIcon>List</MenuItem>
+                                </ListItemIcon>Workers</MenuItem>
                             <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/registerCompWorker" variant="contained" >
                                 <ListItemIcon>
                                     <PersonAdd />
-                                </ListItemIcon>Add Worker</MenuItem>
+                                </ListItemIcon>Add</MenuItem>
                         </>
                     )}
                     {currentProfile && showGlobalAdminBoard && (
                         <>
+                            <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/eventList" variant="contained" >
+                                <ListItemIcon>
+                                    <StorageIcon />
+                                </ListItemIcon>Events</MenuItem>
                             <Divider />
                             <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/companyList" variant="contained" >
                                 <ListItemIcon>
                                     <BusinessIcon />
                                 </ListItemIcon>Companies</MenuItem>
+                            <Divider />
                             <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/compAdminList" variant="contained" >
                                 <ListItemIcon>
                                     <ManageAccountsIcon />
@@ -153,6 +162,7 @@ const Navbar = () => {
                                     <ListItemIcon>
                                         <SettingsIcon />
                                     </ListItemIcon>Profile</MenuItem>)}
+                            <Divider />
                             <MenuItem onClick={logOut} className={classes.logout} component={Link} to="/" variant="contained" >
                                 <ListItemIcon>
                                     <LogoutIcon />

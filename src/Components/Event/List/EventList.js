@@ -161,11 +161,13 @@ const EventList = () => {
                                         onRowsPerPageChange={handleChangeRowsPerPage}
                                     />
                                 </Grid>
-                                <Grid item >
-                                    <Button component={Link} to="/registerEvent" className={classes.bottomButton}>
-                                        Register new event
-                                    </Button>
-                                </Grid>
+                                {(currentProfile.role === "CompanyWorker") &&
+                                    <Grid item >
+                                        <Button component={Link} to="/registerEvent" className={classes.bottomButton}>
+                                            Register new event
+                                        </Button>
+                                    </Grid>
+                                }
                             </Grid>
                         </TableRow>
                     </TableFooter>

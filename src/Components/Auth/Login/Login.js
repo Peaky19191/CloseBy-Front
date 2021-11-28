@@ -16,6 +16,8 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 const Login = (props) => {
     const classes = useStyles();
 
+    const { profile: currentProfile } = useSelector((state) => state.auth);
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -47,7 +49,11 @@ const Login = (props) => {
 
         dispatch(login(email, password))
             .then(() => {
-                props.history.push("/events");
+                if (currentProfile.role === "User") {
+                    props.history.push("/events");
+                }
+                props.history.push("/eventList");
+
                 window.location.reload();
             })
             .catch(() => {
@@ -56,7 +62,10 @@ const Login = (props) => {
     };
 
     if (isLoggedIn) {
-        return <Redirect to="/events" />;
+        if (currentProfile.role === "User") {
+            return <Redirect to="/events" />;
+        }
+        return <Redirect to="/eventList" />;
     }
 
     return (
