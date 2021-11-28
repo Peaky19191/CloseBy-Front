@@ -31,7 +31,8 @@ import CompWorkerDetails from './Components/Profiles/CompanyWorker/Details/CompW
 import Main from './Components/Main/Main';
 import RegEvent from './Components/Event/Register/RegisterEvent';
 import EventList from './Components/Event/List/EventList';
-import EventDetails from './Components/Event/Details/EventDetails';
+import EventDetailsEdit from './Components/Event/Details/Edit/EventDetailsEdit';
+import EventDetailsView from './Components/Event/Details/View/EventDetailsView';
 
 import { useEffect } from 'react';
 import { logout } from "./Actions/auth";
@@ -84,7 +85,8 @@ const App = () => {
           <Route exact path="/main" component={Main} />
           <Route exact path="/registerEvent" component={RegEvent} />
           <Route exact path="/eventList" component={EventList} />
-          <Route exact path="/eventDetails" component={EventDetails} />
+          <Route exact path="/eventDetailsEdit" component={EventDetailsEdit} />
+          <Route exact path="/eventDetailsView" component={EventDetailsView} />
 
         </Switch>
       </div>

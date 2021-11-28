@@ -1,33 +1,33 @@
 import React, { useState, useEffect } from "react";
 import useStyles from './styles';
-import Event from '../../../Services/Profiles/event.service'
+import Event from '../../../../Services/Profiles/event.service'
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField, MenuItem } from '@material-ui/core';
 import { Link } from 'react-router-dom'
-import { editEvent } from "../../../Actions/Profiles/events";
+import { editEvent } from "../../../../Actions/Profiles/events";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useDispatch, useSelector } from "react-redux";
-import MapDetails from '../../Map/DetailsMap/DetailsMap'
+import MapDetailsEdit from '../../../Map/DetailsMap/Edit/DetailsEditMap'
 import EventIcon from '@mui/icons-material/Event';
-import EventTypes from '../../../Static/select'
+import EventTypes from '../../../../Static/select'
 import Slider from '@mui/material/Slider';
 import MuiInput from '@mui/material/Input';
 import { styled } from '@mui/material/styles';
-import { regEvent } from "../../../Actions/Profiles/events";
-import CompWorker from '../../../Services/Profiles/companyWorker.service'
+import { regEvent } from "../../../../Actions/Profiles/events";
+import CompWorker from '../../../../Services/Profiles/companyWorker.service'
 import Stack from '@mui/material/Stack';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 import moment from 'moment'
-import { setNewEventLoc } from "../../../Actions/Profiles/events";
-import { setCurrentEventLoc } from "../../../Actions/Profiles/events";
+import { setNewEventLoc } from "../../../../Actions/Profiles/events";
+import { setCurrentEventLoc } from "../../../../Actions/Profiles/events";
 
 const Input = styled(MuiInput)`
   width: 42px;
 `;
 
 
-const EventDetails = () => {
+const EventDetailsEdit = () => {
     const classes = useStyles();
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
@@ -153,7 +153,7 @@ const EventDetails = () => {
 
     const handleSubmit = () => {
         setSuccessful(false);
-        dispatch(editEvent(eventIdToPass, title, companyId, loc_lat, loc_lng, startDate, status, desc, limit, type))
+        dispatch(editEvent(eventIdToPass, title, companyId, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type))
             .then(() => {
                 setSuccessful(true);
             })
@@ -200,55 +200,70 @@ const EventDetails = () => {
                                 </TextField>
                             </Grid>
                             <Grid className={classes.gridField} >
-                                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <Stack spacing={3}>
-                                        <DateTimePicker
-                                            renderInput={(props) => <TextField {...props} />}
-                                            label="Start Date and Hour"
-                                            value={startDate}
-                                            onChange={(newValue) => {
-                                                onChangeStartDate(newValue);
-                                            }}
-                                            InputProps={{ readOnly: disaled }}
-                                        />
-                                    </Stack>
-                                </LocalizationProvider>
+                                {editMode ?
+                                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                        <Stack spacing={3}>
+                                            <DateTimePicker
+                                                renderInput={(props) => <TextField {...props} />}
+                                                label="Start Date and Hour"
+                                                value={startDate}
+                                                onChange={(newValue) => {
+                                                    onChangeStartDate(newValue);
+                                                }}
+                                                InputProps={{ readOnly: disaled }}
+                                            />
+                                        </Stack>
+                                    </LocalizationProvider>
+                                    :
+                                    <TextField label="Start Date and Hour" value={moment(startDate).format('MM/DD/YYYY HH:mm a')} InputProps={{ readOnly: true }} fullWidth />
+                                }
                             </Grid>
                             <Grid className={classes.gridField} >
-                                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <Stack spacing={3}>
-                                        <DateTimePicker
-                                            renderInput={(props) => <TextField {...props} />}
-                                            label="End Date and Hour"
-                                            value={endDate}
-                                            onChange={(newValue) => {
-                                                onChangeEndDate(newValue);
-                                            }}
-                                            InputProps={{ readOnly: disaled }}
-                                        />
-                                    </Stack>
-                                </LocalizationProvider>
+                                {editMode ?
+                                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                        <Stack spacing={3}>
+                                            <DateTimePicker
+                                                renderInput={(props) => <TextField {...props} />}
+                                                label="End Date and Hour"
+                                                value={endDate}
+                                                onChange={(newValue) => {
+                                                    onChangeEndDate(newValue);
+                                                }}
+                                                InputProps={{ readOnly: disaled }}
+                                            />
+                                        </Stack>
+                                    </LocalizationProvider>
+                                    :
+                                    <TextField label="End Date and Hour" value={moment(endDate).format('MM/DD/YYYY HH:mm a')} InputProps={{ readOnly: true }} fullWidth />
+                                }
                             </Grid>
                             <Grid className={classes.gridField} >
                                 <Typography id="input-slider" gutterBottom>
-                                    People Limit
+                                    Tickets Limit
                                 </Typography>
                                 <Grid container spacing={2} alignItems="center">
                                     <Grid item xs>
                                         <Slider className={classes.limit}
                                             value={limit}
-                                            onChange={handleSliderChange}
+                                            onChange={editMode && handleSliderChange}
                                         />
                                     </Grid>
                                     <Grid item>
-                                        <Input name="limit" htmlFor="limit" value={limit} size="small" onChange={handleInputChange} onBlur={handleBlur} InputProps={{ readOnly: disaled }}
-                                            inputProps={{
-                                                step: 10,
-                                                min: 0,
-                                                max: 100,
-                                                type: 'number',
-                                                'aria-labelledby': 'input-slider',
-                                            }}
+                                        <Input name="limit" htmlFor="limit" value={limit} size="small" onChange={handleInputChange} onBlur={handleBlur}
+                                            inputProps={
+                                                editMode ?
+                                                    {
+                                                        step: 10,
+                                                        min: 0,
+                                                        max: 100,
+                                                        type: 'number',
+                                                        'aria-labelledby': 'input-slider',
+                                                    }
+                                                    :
+                                                    {
+                                                        readOnly: true
+                                                    }
+                                            }
                                         />
                                     </Grid>
                                 </Grid>
@@ -261,7 +276,7 @@ const EventDetails = () => {
                         </Grid> */}
                         </Grid>
                         <Grid className={classes.mapContainer}  >
-                            <MapDetails currentEventId={[eventId]} />
+                            <MapDetailsEdit currentEventId={[eventId]} />
                         </Grid>
                     </Grid>
                     <Grid container className={classes.buttonsContainer}>
@@ -296,6 +311,6 @@ const EventDetails = () => {
     );
 };
 
-export default EventDetails;
+export default EventDetailsEdit;
 
 

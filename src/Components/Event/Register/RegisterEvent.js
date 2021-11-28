@@ -184,7 +184,7 @@ const RegEvent = () => {
                             </Grid>
                             <Grid className={classes.gridField} >
                                 <Typography id="input-slider" gutterBottom>
-                                    People Limit
+                                    Tickets Limit
                                 </Typography>
                                 <Grid container spacing={2} alignItems="center">
                                     <Grid item xs>

@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, useLoadScript, Marker, InfoWindow, } from "@react-google-maps/api";
-import mapStyles from "../mapStyles";
-import useStyles from '../styles';
+import mapStyles from "../../mapStyles";
+import useStyles from '../../styles';
 import { formatRelative } from "date-fns";
 import "@reach/combobox/styles.css";
-import Search from '../Search/Search'
-import Compass from '../Compass/Compass';
-import Events from '../../../Services/Profiles/event.service';
-import { setNewEventLoc } from "../../../Actions/Profiles/events";
-import { setCurrentEventLoc } from "../../../Actions/Profiles/events";
+import Search from '../../Search/Search'
+import Compass from '../../Compass/Compass';
+import Events from '../../../../Services/Profiles/event.service';
+import { setNewEventLoc } from "../../../../Actions/Profiles/events";
+import { setCurrentEventLoc } from "../../../../Actions/Profiles/events";
 import { useDispatch } from "react-redux";
 import moment from 'moment'
-import CompAdmin from '../../../Services/Profiles/companyAdmin.service'
-import CompWorker from '../../../Services/Profiles/companyWorker.service'
+import CompAdmin from '../../../../Services/Profiles/companyAdmin.service'
+import CompWorker from '../../../../Services/Profiles/companyWorker.service'
 import { useSelector } from "react-redux";
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
-import Adress from '../../../Api/map'
-import Event from '../../../Services/Profiles/event.service'
+import Adress from '../../../../Api/map'
+import Event from '../../../../Services/Profiles/event.service'
 
 const options = {
     styles: mapStyles,
@@ -35,7 +35,7 @@ const center = {
     lng: 21.0042,
 }
 
-const MapDetails = (props) => {
+const MapDetailsEdit = (props) => {
     const classes = useStyles();
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
@@ -170,8 +170,9 @@ const MapDetails = (props) => {
 
     const onMapClick = React.useCallback((event) => {
         setSelected(null);
-        setNewSelected(null);
         setCurrenEventSelected(null);
+
+        setNewSelected(null);
 
         Adress.getAdress(event.latLng.lat(), event.latLng.lng())
             .then((response) => {
@@ -189,6 +190,7 @@ const MapDetails = (props) => {
                 console.log(e);
             });
         dispatch(setNewEventLoc(event.latLng.lat(), event.latLng.lng()))
+
     }, []);
 
     const { isLoaded, loadError } = useLoadScript({
@@ -235,9 +237,9 @@ const MapDetails = (props) => {
                             <h2>Event</h2>
                             <p>Title:  {selected.title}</p>
                             <p>Desc:  {selected.desc}</p>
-                            <p>Start Date {moment(selected.time).format('DD/MM/YYYY HH:mm')}</p>
+                            <p>Start Date {moment(selected.time).format('MM/DD/YYYY HH:mm')}</p>
                             {(currentProfile.role === "GlobalAdmin") && <p>Company:  {selected.company}</p>}
-                            <p>People Limit:  {selected.personLimit}</p>
+                            <p>Tickets Limit:  {selected.personLimit}</p>
                             <p>Type:  {selected.type}</p>
                             <p>Address:  {selected.address}</p>
                             {/* <p>LAT:  {selected.lat}</p>
@@ -290,9 +292,9 @@ const MapDetails = (props) => {
                             <h2>Current Event</h2>
                             <p>Title:  {currenEventSelected.title}</p>
                             {/* <p>Desc:  {currenEventSelected.desc}</p> */}
-                            <p>Start Date {moment(currenEventSelected.time).format('DD/MM/YYYY HH:mm')}</p>
+                            <p>Start Date {moment(currenEventSelected.time).format('MM/DD/YYYY HH:mm')}</p>
                             {(currentProfile.role === "GlobalAdmin") && <p>Company:  {currenEventSelected.company}</p>}
-                            {/* <p>People Limit:  {currenEventSelected.personLimit}</p>  */}
+                            {/* <p>Tickets Limit:  {currenEventSelected.personLimit}</p>  */}
                             <p>Type:  {currenEventSelected.type}</p>
                             <p>Address:  {currenEventSelected.address}</p>
                             {/* <p>LAT:  {currenEventSelected.lat}</p>
@@ -305,4 +307,4 @@ const MapDetails = (props) => {
     );
 }
 
-export default MapDetails;
+export default MapDetailsEdit;

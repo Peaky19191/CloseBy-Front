@@ -6,6 +6,9 @@ import CompWorker from '../../Services/Profiles/companyWorker.service'
 import { useSelector } from "react-redux";
 import Event from '../../Services/Profiles/event.service'
 import moment from 'moment'
+import { useDispatch } from "react-redux";
+import { setEventId } from "../../Actions/Profiles/events";
+import { Link } from 'react-router-dom'
 
 export const Events = () => {
     const classes = useStyles();
@@ -56,7 +59,7 @@ export const Events = () => {
             .then((response) => {
                 const eventTemp = response.data.items;
                 const totalPages = response.data.count;
-                console.log(eventTemp);
+
                 setEvent(eventTemp);
                 setCount(totalPages);
             })
@@ -74,9 +77,13 @@ export const Events = () => {
         setPage(0);
     };
 
+    const dispatch = useDispatch();
+    const setIdEvent = (id) => {
+        dispatch(setEventId(id))
+    }
+
     return (
         <>
-
             <main>
                 {/* <div className={classes.container}>
                     <Container maxWidth="md" style={{ marginTop: '100px' }}>
@@ -99,7 +106,7 @@ export const Events = () => {
                                             {event.title}
                                         </Typography>
                                         <Typography>
-                                            {moment(event.startDateTime).format('HH:mm - DD/MM/YYYY ')}
+                                            {moment(event.startDateTime).format('HH:mm - MM/DD/YYYY ')}
                                         </Typography>
                                         <Typography>
                                             {event.type}
@@ -109,16 +116,14 @@ export const Events = () => {
                                         </Typography>
                                     </CardContent>
                                     <CardActions>
-                                        <Button color="primary">Details</Button>
+                                        <Button component={Link} color="primary" to="/eventDetailsView" onClick={() => { setIdEvent(event.id) }}>Details</Button>
                                     </CardActions>
                                 </Card>
                             </Grid>
                         ))}
-
                     </Grid>
                 </Container>
             </main>
-
         </>
     )
 }

@@ -27,13 +27,14 @@ const registerEvent = (title, companyId, loc_lat, loc_lng, startDate, endDate, s
     );
 };
 
-const editEventAPI = (eventId, title, companyId, loc_lat, loc_lng, startDate, status, desc, limit, type) => {
+const editEventAPI = (eventId, title, companyId, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type) => {
     return axios.put(API_URL + "update",
         {
             id: eventId,
             title: title,
             description: desc,
             startDateTime: startDate,
+            endDateTime: endDate,
             type: type,
             status: status,
             ticketLimit: limit,

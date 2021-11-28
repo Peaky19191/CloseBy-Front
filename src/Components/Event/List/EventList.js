@@ -134,10 +134,10 @@ const EventList = () => {
                                 <TableCell component="th" scope="row">{item.title}</TableCell>
                                 <TableCell align="center" component="th" scope="row">{item.type}</TableCell>
                                 <TableCell align="center" component="th" scope="row">{item.status}</TableCell>
-                                <TableCell align="center">{moment(item.startDateTime).format('DD/MM/YYYY HH:mm')}</TableCell>
-                                <TableCell align="center">{moment(item.startEndTime).format('DD/MM/YYYY HH:mm')}</TableCell>
+                                <TableCell align="center">{moment(item.startDateTime).format('MM/DD/YYYY HH:mm')}</TableCell>
+                                <TableCell align="center">{moment(item.startEndTime).format('MM/DD/YYYY HH:mm')}</TableCell>
                                 <TableCell align="center">
-                                    <IconButton component={Link} to="/eventDetails" onClick={() => { setIdEvent(item.id) }} aria-label="edit" size="large" >
+                                    <IconButton component={Link} to="/eventDetailsEdit" onClick={() => { setIdEvent(item.id) }} aria-label="edit" size="large" >
                                         <SettingsApplicationsIcon className={classes.settingICon} />
                                     </IconButton>
                                     <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.title) }} >
