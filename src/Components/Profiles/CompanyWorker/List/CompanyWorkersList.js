@@ -157,13 +157,11 @@ const CompanyWorkersList = () => {
                                         onRowsPerPageChange={handleChangeRowsPerPage}
                                     />
                                 </Grid>
-                                {(currentProfile.role === "CompanyAdmin") &&
-                                    <Grid item >
-                                        <Button component={Link} to="/registerCompWorker" className={classes.bottomButton}>
-                                            Register new worker
-                                        </Button>
-                                    </Grid>
-                                }
+                                <Grid item >
+                                    <Button component={Link} to="/registerCompWorker" className={classes.bottomButton}>
+                                        Register new worker
+                                    </Button>
+                                </Grid>
                             </Grid>
                         </TableRow>
                     </TableFooter>
