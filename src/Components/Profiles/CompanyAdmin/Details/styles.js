@@ -44,7 +44,7 @@ export default makeStyles((theme) => ({
         margin: theme.spacing(2, 0, 0),
     },
     buttonClose: {
-        margin: theme.spacing(2, 0, 1),
+        margin: theme.spacing(2, 0, 0),
     },
     buttonsContainer: {
         display: 'column',

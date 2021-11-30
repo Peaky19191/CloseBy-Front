@@ -29,7 +29,7 @@ export default makeStyles((theme) => ({
         marginTop: theme.spacing(3),
     },
     buttonClose: {
-        margin: theme.spacing(2, 0, 1),
+        margin: theme.spacing(2, 0, 0),
 
     },
     buttonsContainer: {

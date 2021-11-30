@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { editCompAdmin } from "../..//Actions/Profiles/companyAdmin";
 import { editCompWorker } from "../../Actions/Profiles/companyWorker";
 import { editUser } from "../../Actions/Profiles/user";
+import { useHistory } from "react-router-dom";
 
 const Profile = () => {
   const classes = useStyles();
@@ -119,6 +120,11 @@ const Profile = () => {
 
   const dispatch = useDispatch();
 
+  let history = useHistory();
+  const goToPreviousPath = () => {
+    history.goBack()
+  }
+
   const sendEdited = () => {
     setSuccessful(false);
 
@@ -185,13 +191,13 @@ const Profile = () => {
               <TextField value={email} label="Email Address" onChange={onChangeEmail} InputProps={{ readOnly: disaled }} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
             </Grid>
             <Grid item xs={12} >
-              <TextField value={gender} htmlFor="gender" variant="outlined" InputProps={{ readOnly: disaled }} fullWidth onChange={onChangeGender} type="text" select label="Gender">
+              <TextField value={gender} htmlFor="gender" variant="outlined" InputProps={{ readOnly: disaled }} select={disaled ? false : true} fullWidth onChange={onChangeGender} type="text" label="Gender">
                 <MenuItem value={"Male"} >Male</MenuItem>
                 <MenuItem value={"Female"} >Female</MenuItem>
               </TextField>
             </Grid>
           </Grid>
-          <Grid className={classes.buttonsContainer} container spacing={2}>
+          <Grid className={classes.buttonsContainer} spacing={2}>
             {editMode ?
               <>
                 <Button onClick={() => { sendEdited() }} className={classes.buttonEditSave} fullWidth variant="contained"  >
@@ -206,6 +212,9 @@ const Profile = () => {
                 Edit
               </Button>
             }
+            <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
+              Close
+            </Button>
           </Grid>
         </form>
       </Paper>

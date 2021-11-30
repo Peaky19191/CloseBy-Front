@@ -42,7 +42,7 @@ export default makeStyles((theme) => ({
 
     },
     buttonClose: {
-        margin: theme.spacing(2, 0, 1),
+        margin: theme.spacing(2, 0, 0),
 
     },
     buttonsContainer: {
