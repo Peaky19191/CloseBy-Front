@@ -1,10 +1,11 @@
 import axios from "axios";
 import authHeader from "../Auth/auth-header";
+import SERVER_API from "../../Static/serverApi";
 
-const API_URL = "http://localhost:5000/Api/company-admin/";
+const API_URL = "company-admin/";
 
 const registerCompanyAdmin = (firstName, lastName, gender, email, companyId) => {
-    return axios.post(API_URL + "create",
+    return axios.post(SERVER_API + API_URL + "create",
         {
             firstName,
             lastName,
@@ -19,18 +20,13 @@ const registerCompanyAdmin = (firstName, lastName, gender, email, companyId) => 
 };
 
 const editCompanyAdminAPI = (id, firstName, lastName, gender, email, companyId) => {
-    return axios.put(API_URL + "update",
+    return axios.put(SERVER_API + API_URL + "update",
         {
             id: id,
             firstName: firstName,
             lastName: lastName,
             gender: gender,
             email: email,
-            // FOR FUTURE BACKEND UPDATE - EDIT ASSIGNET COMPANY
-            // company: {
-            //     id: companyId,
-            //     name: "compName",
-            // }
         },
         {
             headers: authHeader()
@@ -39,7 +35,7 @@ const editCompanyAdminAPI = (id, firstName, lastName, gender, email, companyId) 
 };
 
 const getCompanyAdminsList = (pageNumber, rowsPerPage) => {
-    return axios.post(API_URL + "list",
+    return axios.post(SERVER_API + API_URL + "list",
         {
             page: pageNumber,
             limit: rowsPerPage
@@ -51,7 +47,7 @@ const getCompanyAdminsList = (pageNumber, rowsPerPage) => {
 };
 
 const deleteCompanyAdmin = (id, companyId) => {
-    return axios.delete(API_URL + "delete",
+    return axios.delete(SERVER_API + API_URL + "delete",
         {
             headers: authHeader(),
             data: {
@@ -64,7 +60,7 @@ const deleteCompanyAdmin = (id, companyId) => {
 };
 
 const getCompanyAdminId = (id) => {
-    return axios.get(API_URL + id,
+    return axios.get(SERVER_API + API_URL + id,
         {
             headers: authHeader(),
         },

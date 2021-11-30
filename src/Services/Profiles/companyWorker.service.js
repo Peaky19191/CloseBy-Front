@@ -1,10 +1,11 @@
 import axios from "axios";
 import authHeader from "../Auth/auth-header";
+import SERVER_API from "../../Static/serverApi";
 
-const API_URL = "http://localhost:5000/Api/company-worker/";
+const API_URL = "company-worker/";
 
 const registerCompanyWorker = (firstName, lastName, gender, email, companyId) => {
-    return axios.post(API_URL + "create",
+    return axios.post(SERVER_API + API_URL + "create",
         {
             firstName,
             lastName,
@@ -19,7 +20,7 @@ const registerCompanyWorker = (firstName, lastName, gender, email, companyId) =>
 };
 
 const editCompanyWorkerAPI = (id, firstName, lastName, gender, email) => {
-    return axios.put(API_URL + "update",
+    return axios.put(SERVER_API + API_URL + "update",
         {
             id: id,
             firstName: firstName,
@@ -34,7 +35,7 @@ const editCompanyWorkerAPI = (id, firstName, lastName, gender, email) => {
 };
 
 const getCompanyWorkersList = (pageNumber, rowsPerPage, companyId) => {
-    return axios.post(API_URL + "list",
+    return axios.post(SERVER_API + API_URL + "list",
         {
             page: pageNumber,
             limit: rowsPerPage,
@@ -47,7 +48,7 @@ const getCompanyWorkersList = (pageNumber, rowsPerPage, companyId) => {
 };
 
 const deleteCompanyWorker = (id, companyId) => {
-    return axios.delete(API_URL + "delete",
+    return axios.delete(SERVER_API + API_URL + "delete",
         {
             headers: authHeader(),
             data: {
@@ -61,7 +62,7 @@ const deleteCompanyWorker = (id, companyId) => {
 
 
 const getCompanyWorkerId = (id) => {
-    return axios.get(API_URL + id,
+    return axios.get(SERVER_API + API_URL + id,
         {
             headers: authHeader(),
         },

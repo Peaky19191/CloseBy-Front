@@ -136,7 +136,7 @@ const EventList = () => {
                                 <TableCell align="center" component="th" scope="row">{item.status}</TableCell>
                                 {(currentProfile.role === "GlobalAdmin") && <TableCell align="center" component="th" scope="row">{item.company.name}</TableCell>}
                                 <TableCell align="center">{moment(item.startDateTime).format('MM/DD/YYYY HH:mm')}</TableCell>
-                                <TableCell align="center">{moment(item.startEndTime).format('MM/DD/YYYY HH:mm')}</TableCell>
+                                <TableCell align="center">{moment(item.endDateTime).format('MM/DD/YYYY HH:mm')}</TableCell>
                                 <TableCell align="center">
                                     <IconButton component={Link} to="/eventDetailsEdit" onClick={() => { setIdEvent(item.id) }} aria-label="edit" size="large" >
                                         <SettingsApplicationsIcon className={classes.settingICon} />

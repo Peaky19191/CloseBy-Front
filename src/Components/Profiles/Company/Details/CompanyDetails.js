@@ -8,10 +8,14 @@ import { editCompany } from "../../../../Actions/Profiles/company";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import CompWorker from '../../../../Services/Profiles/companyWorker.service'
 
 const CompanyDetails = () => {
     const classes = useStyles();
     const companyId = useSelector(state => state.company.id_company);
+
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
 
     const [name, setName] = useState("");
 
@@ -38,20 +42,31 @@ const CompanyDetails = () => {
     const getCompanyDetails = () => {
         Company.getCompanyId(companyId)
             .then((response) => {
-                console.log("response");
-                console.log(response);
-
                 const company = response.data;
 
                 setName(company.name);
                 setDateCreated(company.createdAt);
 
+                selectCompanyWorkersList(company.id);
             })
             .catch((e) => {
                 console.log(e);
             });
     }
     useEffect(getCompanyDetails, [companyId]);
+
+    const selectCompanyWorkersList = (companyId) => {
+        CompWorker.getCompanyWorkersList(page, rowsPerPage, companyId)
+            .then((response) => {
+                const compWorkers = response.data.items;
+                const totalPages = response.data.count;
+                console.log(response);
+                console.log(totalPages);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }
 
     const [successful, setSuccessful] = useState(false);
 
@@ -84,7 +99,6 @@ const CompanyDetails = () => {
         setErrors({
             ...temp
         })
-        //console.log(Object.values(temp).every(x => x == ""));
         return Object.values(temp).every(x => x == "");
     }
 
