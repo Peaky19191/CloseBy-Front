@@ -68,7 +68,7 @@ const EventList = () => {
             .then((response) => {
                 const eventTemp = response.data.items;
                 const totalPages = response.data.count;
-
+                console.log(eventTemp);
                 setEvent(eventTemp);
                 setCount(totalPages);
             })
@@ -122,10 +122,10 @@ const EventList = () => {
                             <TableCell className={classes.tableCellTitle}>Title</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Type</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Status</TableCell>
+                            {(currentProfile.role === "GlobalAdmin") && <TableCell align="center" className={classes.tableCellTitle}>Company</TableCell>}
                             <TableCell align="center" className={classes.tableCellTitle}>Start At</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>End At</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
-
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -134,6 +134,7 @@ const EventList = () => {
                                 <TableCell component="th" scope="row">{item.title}</TableCell>
                                 <TableCell align="center" component="th" scope="row">{item.type}</TableCell>
                                 <TableCell align="center" component="th" scope="row">{item.status}</TableCell>
+                                {(currentProfile.role === "GlobalAdmin") && <TableCell align="center" component="th" scope="row">{item.company.name}</TableCell>}
                                 <TableCell align="center">{moment(item.startDateTime).format('MM/DD/YYYY HH:mm')}</TableCell>
                                 <TableCell align="center">{moment(item.startEndTime).format('MM/DD/YYYY HH:mm')}</TableCell>
                                 <TableCell align="center">

@@ -9,10 +9,18 @@ import { editCompWorker } from "../../../../Actions/Profiles/companyWorker";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { setCompanyId } from "../../../../Actions/Profiles/company";
+import BusinessIcon from '@mui/icons-material/Business';
 
 const CompWorkerDetails = () => {
     const classes = useStyles();
+
     const compWorkerId = useSelector(state => state.companyWorker.id_comp_worker);
+
+    const { profile: currentProfile } = useSelector((state) => state.auth);
+
+    const [compId, setCompId] = useState("");
+    const [compName, setCompName] = useState("");
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -68,6 +76,8 @@ const CompWorkerDetails = () => {
                 setLastName(compWorker.lastName);
                 setEmail(compWorker.email);
                 setGender(compWorker.gender);
+                setCompId(compWorker.company.id);
+                setCompName(compWorker.company.name);
             })
             .catch((e) => {
                 console.log(e);
@@ -79,6 +89,10 @@ const CompWorkerDetails = () => {
 
     const { message } = useSelector(state => state.message);
     const dispatch = useDispatch();
+
+    const setIdCompany = (id) => {
+        dispatch(setCompanyId(id))
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -145,13 +159,17 @@ const CompWorkerDetails = () => {
                             <TextField value={email} error={errors.email} helperText={(errors.email)} label="Email Address" onChange={onChangeEmail} InputProps={{ readOnly: disaled }} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
                         </Grid>
                         <Grid item xs={12} >
-                            <TextField value={gender} error={errors.gender} helperText={(errors.gender)} htmlFor="gender" variant="outlined" InputProps={{ readOnly: disaled }} fullWidth onChange={onChangeGender} type="text" select label="Gender">
+                            <TextField error={errors.gender} helperText={(errors.gender)} value={gender} htmlFor="gender" variant="outlined" InputProps={{ readOnly: disaled }} fullWidth onChange={onChangeGender} type="text" select={disaled ? false : true} label="Gender">
                                 <MenuItem value={"Male"} >Male</MenuItem>
                                 <MenuItem value={"Female"} >Female</MenuItem>
                             </TextField>
                         </Grid>
                     </Grid>
                     <Grid className={classes.buttonsContainer} >
+                        {(currentProfile.role === "GlobalAdmin") && <Button className={classes.buttonCompanyDetails} component={Link} to="/companyDetails" onClick={() => { setIdCompany(compId) }} fullWidth variant="contained" color="primary" >
+                            {/* <BusinessIcon /> */}
+                            Company - {compName}
+                        </Button>}
                         {editMode ?
                             <>
                                 <Button disabled={!enabled} type="submit" className={classes.buttonEditSave} fullWidth variant="contained"  >

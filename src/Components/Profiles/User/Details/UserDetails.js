@@ -91,27 +91,16 @@ const UserDetails = () => {
                             <TextField value={email} label="Email Address" onChange={onChangeEmail} InputProps={{ readOnly: disaled }} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
                         </Grid>
                         <Grid item xs={12} >
-                            <TextField value={gender} htmlFor="gender" variant="outlined" InputProps={{ readOnly: disaled }} fullWidth onChange={onChangeGender} type="text" select label="Gender">
+                            <TextField value={gender} htmlFor="gender" variant="outlined" InputProps={{ readOnly: disaled }} fullWidth onChange={onChangeGender} type="text" select={disaled ? false : true} label="Gender">
                                 <MenuItem value={"Male"} >Male</MenuItem>
                                 <MenuItem value={"Female"} >Female</MenuItem>
                             </TextField>
                         </Grid>
                     </Grid>
                     <Grid className={classes.buttonsContainer} spacing={2}>
-                        {/* {editMode ?
-                            <>
-                                <Button className={classes.buttonEditSave} onClick={() => { }} fullWidth variant="contained"  >
-                                    Save
-                                </Button>
-                                <Button className={classes.buttonEditStop} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >
-                                    Stop Editinig
-                                </Button>
-                            </>
-                            :
-                            <Button className={classes.buttonEditStart} onClick={() => { startEditing() }} fullWidth variant="contained" color="primary" >
-                                Edit
-                            </Button>
-                        } */}
+                        <Button className={classes.buttonCompanyDetails} onClick={() => { }} fullWidth variant="contained" color="primary" >
+                            Tickets
+                        </Button>
                         <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
                             Close
                         </Button>

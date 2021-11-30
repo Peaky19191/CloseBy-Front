@@ -16,10 +16,13 @@ import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@
 import { Link } from 'react-router-dom'
 import PopupDelete from '../../../Popup/PopupDelete/PopupDelete';
 import { setCompAdminId } from "../../../../Actions/Profiles/companyAdmin";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const CompanyAdminsList = () => {
     const classes = useStyles();
+
+    const { profile: currentProfile } = useSelector((state) => state.auth);
+
     const [adminsComp, setAdminsComp] = useState([]);
 
     const [page, setPage] = useState(0);
@@ -98,7 +101,7 @@ const CompanyAdminsList = () => {
                             <TableCell className={classes.tableCellTitle}>Admin</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Email</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Role</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>Company</TableCell>
+                            {(currentProfile.role === "GlobalAdmin") && <TableCell align="center" className={classes.tableCellTitle}>Company</TableCell>}
                             <TableCell align="center" className={classes.tableCellTitle}>Gender</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
                         </TableRow>
@@ -111,7 +114,7 @@ const CompanyAdminsList = () => {
                                 </TableCell>
                                 <TableCell align="center">{item.email}</TableCell>
                                 <TableCell align="center">{item.role}</TableCell>
-                                <TableCell align="center">{item.company.name}</TableCell>
+                                {(currentProfile.role === "GlobalAdmin") && <TableCell align="center">{item.company.name}</TableCell>}
                                 <TableCell align="center">{item.gender}</TableCell>
                                 <TableCell align="center">
                                     <IconButton component={Link} to="/compAdminDetails" onClick={() => { setIdCompAdmin(item.id) }} aria-label="edit" size="large" >

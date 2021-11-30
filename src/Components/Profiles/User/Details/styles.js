@@ -28,24 +28,6 @@ export default makeStyles((theme) => ({
     form: {
         marginTop: theme.spacing(3),
     },
-    buttonEditSave: {
-        margin: theme.spacing(2, 0, 0),
-
-        backgroundColor: '#00b300',
-        color: "#ffffff",
-        '&:hover': {
-            backgroundColor: '#006600',
-            color: '#ffffff',
-        },
-    },
-    buttonEditStop: {
-        margin: theme.spacing(2, 0, 0),
-
-    },
-    buttonEditStart: {
-        margin: theme.spacing(3, 0, 0),
-
-    },
     buttonClose: {
         margin: theme.spacing(2, 0, 1),
 
@@ -54,5 +36,8 @@ export default makeStyles((theme) => ({
         display: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    buttonCompanyDetails: {
+        margin: theme.spacing(2, 0, 0),
     },
 }));

@@ -119,7 +119,7 @@ const CompanyWorkersList = () => {
                             <TableCell className={classes.tableCellTitle}>User</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Email</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Role</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>Company</TableCell>
+                            {(currentProfile.role === "GlobalAdmin") && <TableCell align="center" className={classes.tableCellTitle}>Company</TableCell>}
                             <TableCell align="center" className={classes.tableCellTitle}>Gender</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
                         </TableRow>
@@ -132,7 +132,7 @@ const CompanyWorkersList = () => {
                                 </TableCell>
                                 <TableCell align="center">{item.email}</TableCell>
                                 <TableCell align="center">{item.role}</TableCell>
-                                <TableCell align="center">{item.company.name}</TableCell>
+                                {(currentProfile.role === "GlobalAdmin") && <TableCell align="center">{item.company.name}</TableCell>}
                                 <TableCell align="center">{item.gender}</TableCell>
                                 <TableCell align="center">
                                     <IconButton component={Link} to="/compWorkerDetails" onClick={() => { setIdCompWorker(item.id) }} aria-label="edit" size="large" >

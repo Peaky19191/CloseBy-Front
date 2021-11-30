@@ -22,6 +22,8 @@ import moment from 'moment'
 import { setNewEventLoc } from "../../../../Actions/Profiles/events";
 import { setCurrentEventLoc } from "../../../../Actions/Profiles/events";
 import { useHistory } from "react-router-dom";
+import { setCompanyId } from "../../../../Actions/Profiles/company";
+import BusinessIcon from '@mui/icons-material/Business';
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -97,19 +99,8 @@ const EventDetailsEdit = () => {
         }
     };
 
-    const [companyId, setCompanyId] = useState("");
-
-    const getCompanyId = () => {
-        CompWorker.getCompanyWorkerId(currentProfile.id)
-            .then((response) => {
-                const compId = response.data.company.id;
-                setCompanyId(compId);
-            })
-            .catch((e) => {
-                console.log(e);
-            });
-    }
-    useEffect(getCompanyId, []);
+    const [compId, setCompId] = useState("");
+    const [compName, setCompName] = useState("");
 
     const getEventDetails = () => {
         Event.getEventId(eventId)
@@ -124,6 +115,8 @@ const EventDetailsEdit = () => {
                 setType(event.type);
                 setStatus(event.status);
                 setLimit(event.ticketLimit);
+                setCompId(event.company.id);
+                setCompName(event.company.name);
 
                 dispatch(setNewEventLoc(event.localization.latitude, event.localization.longitude));
             })
@@ -137,6 +130,10 @@ const EventDetailsEdit = () => {
 
     const { message } = useSelector(state => state.message);
     const dispatch = useDispatch();
+
+    const setIdCompany = (id) => {
+        dispatch(setCompanyId(id))
+    }
 
     const [disaled, setDisabled] = useState(true);
     const [editMode, setEditMode] = useState(false);
@@ -153,7 +150,7 @@ const EventDetailsEdit = () => {
 
     const handleSubmit = () => {
         setSuccessful(false);
-        dispatch(editEvent(eventIdToPass, title, companyId, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type))
+        dispatch(editEvent(eventIdToPass, title, compId, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type))
             .then(() => {
                 setSuccessful(true);
             })
@@ -174,7 +171,7 @@ const EventDetailsEdit = () => {
                     <Avatar className={classes.avatar}>
                         <EventIcon />
                     </Avatar>
-                    <Typography className={classes.title} component="h1" variant="h4">Details of the Event</Typography>
+                    <Typography className={classes.title} component="h1" variant="h4">Details of the {title}</Typography>
                     {successful ?
                         <Alert className={classes.alert} severity="success">
                             <AlertTitle>Success</AlertTitle>
@@ -198,7 +195,7 @@ const EventDetailsEdit = () => {
                                 <TextField value={title} label="Title" onChange={onChangeTitle} InputProps={{ readOnly: disaled }} name="title" htmlFor="title" variant="outlined" fullWidth />
                             </Grid>
                             <Grid className={classes.gridField} >
-                                <TextField label="Type of the Event" variant="outlined" fullWidth value={type} onChange={onChangeType} type="text" select InputProps={{ readOnly: disaled }}>
+                                <TextField label="Type of the Event" variant="outlined" fullWidth value={type} onChange={onChangeType} type="text" select InputProps={{ readOnly: disaled }} select={disaled ? false : true}>
                                     {EventTypes.map((EventTypes) => (
                                         <MenuItem key={EventTypes} value={EventTypes}>{EventTypes}</MenuItem>
                                     ))}
@@ -290,6 +287,13 @@ const EventDetailsEdit = () => {
                                 Close
                             </Button>
                         </Grid>
+                        {(currentProfile.role === "GlobalAdmin") &&
+                            <Grid item className={classes.buttonClose}>
+                                <Button component={Link} to="/companyDetails" onClick={() => { setIdCompany(compId) }} fullWidth variant="contained" color="primary" >
+                                    {/* <BusinessIcon /> */}
+                                    Company - {compName}
+                                </Button>
+                            </Grid>}
                         <Grid item className={classes.buttonSubmit}>
                             {editMode ?
                                 <Grid container className={classes.buttonsContainer2}>
