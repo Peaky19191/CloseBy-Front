@@ -92,7 +92,6 @@ const UsersList = () => {
                         <TableRow >
                             <TableCell className={classes.tableCellTitle}>User</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Email</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>Role</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Gender</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
                         </TableRow>
@@ -104,7 +103,6 @@ const UsersList = () => {
                                     {item.firstName}    {item.lastName}
                                 </TableCell>
                                 <TableCell align="center">{item.email}</TableCell>
-                                <TableCell align="center">{item.role}</TableCell>
                                 <TableCell align="center">{item.gender}</TableCell>
                                 <TableCell align="center">
                                     <IconButton component={Link} to="/userDetails" onClick={() => { setIdUser(item.id) }} aria-label="edit" size="large" >

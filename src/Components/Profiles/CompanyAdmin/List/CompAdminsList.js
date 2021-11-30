@@ -100,7 +100,6 @@ const CompanyAdminsList = () => {
                         <TableRow >
                             <TableCell className={classes.tableCellTitle}>Admin</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Email</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>Role</TableCell>
                             {(currentProfile.role === "GlobalAdmin") && <TableCell align="center" className={classes.tableCellTitle}>Company</TableCell>}
                             <TableCell align="center" className={classes.tableCellTitle}>Gender</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
@@ -113,7 +112,6 @@ const CompanyAdminsList = () => {
                                     {item.firstName}    {item.lastName}
                                 </TableCell>
                                 <TableCell align="center">{item.email}</TableCell>
-                                <TableCell align="center">{item.role}</TableCell>
                                 {(currentProfile.role === "GlobalAdmin") && <TableCell align="center">{item.company.name}</TableCell>}
                                 <TableCell align="center">{item.gender}</TableCell>
                                 <TableCell align="center">
