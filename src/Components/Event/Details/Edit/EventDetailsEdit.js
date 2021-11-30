@@ -287,6 +287,11 @@ const EventDetailsEdit = () => {
                                 Close
                             </Button>
                         </Grid>
+                        <Grid item className={classes.buttonClose}>
+                            <Button onClick={() => { }} fullWidth variant="contained" color="primary" >
+                                Tickets
+                            </Button>
+                        </Grid>
                         {(currentProfile.role === "GlobalAdmin") &&
                             <Grid item className={classes.buttonClose}>
                                 <Button component={Link} to="/companyDetails" onClick={() => { setIdCompany(compId) }} fullWidth variant="contained" color="primary" >
