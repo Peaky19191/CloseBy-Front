@@ -21,7 +21,7 @@ export default makeStyles((theme) => ({
         borderRadius: "10px",
     },
     avatar: {
-        margin: theme.spacing(2),
+        margin: theme.spacing(0, 2, 2, 2),
         backgroundColor: theme.palette.secondary.main,
     },
     button: {
@@ -29,22 +29,35 @@ export default makeStyles((theme) => ({
         // height: 40,
 
     },
-    containerButton: {
-        display: 'column',
+    headerContainer: {
+        display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        width: '100%'
 
     },
+    closeIconContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        alignItems: 'flex-end',
+        width: '100%'
+    },
     containerData: {
-        margin: theme.spacing(3, 1, 0, 1),
+        margin: theme.spacing(1, 1, 0, 1),
     },
     icon: {
         width: 70,
         height: 70,
     },
-
-
-    buttonClose: {
+    buttonsContainer: {
+        display: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    buttonDelete: {
         margin: theme.spacing(2, 0, 0),
     },
 }));
