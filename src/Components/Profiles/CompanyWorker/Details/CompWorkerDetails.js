@@ -8,6 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { editCompWorker } from "../../../../Actions/Profiles/companyWorker";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const CompWorkerDetails = () => {
     const classes = useStyles();
@@ -92,6 +93,11 @@ const CompWorkerDetails = () => {
                 });
     };
 
+    let history = useHistory();
+    const goToPreviousPath = () => {
+        history.goBack()
+    }
+
     const validate = () => {
         let temp = {}
         temp.firstName = (/^[A-Za-z]+$/).test(firstName) ? "" : "Numbers and whitespaces are not allowed"
@@ -160,7 +166,7 @@ const CompWorkerDetails = () => {
                                 Edit
                             </Button>
                         }
-                        <Button className={classes.buttonClose} component={Link} to="/compWorkerList" fullWidth variant="contained" color="secondary" >
+                        <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
                             Close
                         </Button>
                     </Grid>

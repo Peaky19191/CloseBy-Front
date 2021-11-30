@@ -5,8 +5,6 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 const PopupDelete = (props) => {
     const classes = useStyles();
-    console.log(props.handleData);
-
 
     return (
         <div className={classes.popupBox} >

@@ -6,6 +6,7 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { Link } from 'react-router-dom'
 import { useSelector } from "react-redux";
 import MenuItem from '@material-ui/core/MenuItem';
+import { useHistory } from "react-router-dom";
 
 const UserDetails = () => {
     const classes = useStyles();
@@ -66,6 +67,11 @@ const UserDetails = () => {
     }
     useEffect(getUserDetails, [userId]);
 
+    let history = useHistory();
+    const goToPreviousPath = () => {
+        history.goBack()
+    }
+
     return (
         <Container className={classes.container} component="main" maxWidth="xs">
             <Paper className={classes.paper} elevation={3}>
@@ -106,7 +112,7 @@ const UserDetails = () => {
                                 Edit
                             </Button>
                         } */}
-                        <Button className={classes.buttonClose} component={Link} to="/usersList" fullWidth variant="contained" color="secondary" >
+                        <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
                             Close
                         </Button>
                     </Grid>

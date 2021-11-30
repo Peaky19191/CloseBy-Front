@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { editCompany } from "../../../../Actions/Profiles/company";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const CompanyDetails = () => {
     const classes = useStyles();
@@ -72,6 +73,11 @@ const CompanyDetails = () => {
     const [errors, setErrors] = useState({});
     const enabled = name.length > 0;
 
+    let history = useHistory();
+    const goToPreviousPath = () => {
+        history.goBack()
+    }
+
     const validate = () => {
         let temp = {}
         temp.name = (/^[A-Za-z0-9]+$/).test(name) ? "" : "Whitespaces are not allowed"
@@ -128,7 +134,7 @@ const CompanyDetails = () => {
                                 Edit
                             </Button>
                         }
-                        <Button className={classes.buttonClose} component={Link} to="/companyList" fullWidth variant="contained" color="secondary" >
+                        <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
                             Close
                         </Button>
                     </Grid>

@@ -21,15 +21,14 @@ import DateTimePicker from '@mui/lab/DateTimePicker';
 import moment from 'moment'
 import { setNewEventLoc } from "../../../../Actions/Profiles/events";
 import { setCurrentEventLoc } from "../../../../Actions/Profiles/events";
+import { useHistory } from "react-router-dom";
 
 const Input = styled(MuiInput)`
   width: 42px;
 `;
 
-
 const EventDetailsView = () => {
     const classes = useStyles();
-
 
     const eventId = useSelector(state => state.event.id_event);
 
@@ -92,6 +91,11 @@ const EventDetailsView = () => {
         //         setSuccessful(false);
         //     });
     };
+
+    let history = useHistory();
+    const goToPreviousPath = () => {
+        history.goBack()
+    }
 
     return (
         <Container className={classes.container} component="main" maxWidth="xs">
@@ -158,7 +162,7 @@ const EventDetailsView = () => {
                     </Grid>
                     <Grid container className={classes.buttonsContainer}>
                         <Grid item className={classes.buttonClose}>
-                            <Button component={Link} to="/events" fullWidth variant="contained" color="secondary" >
+                            <Button onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
                                 Close
                             </Button>
                         </Grid>

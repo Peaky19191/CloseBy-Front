@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { regCompany } from "../../../../Actions/Profiles/company";
 import { Link } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 const RegCompany = () => {
     const classes = useStyles();
@@ -36,6 +37,11 @@ const RegCompany = () => {
                     setSuccessful(false);
                 });
     };
+
+    let history = useHistory();
+    const goToPreviousPath = () => {
+        history.goBack()
+    }
 
     const validate = () => {
         let temp = {}
@@ -80,7 +86,7 @@ const RegCompany = () => {
                     <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>
                         Register
                     </Button>
-                    <Button className={classes.buttonClose} component={Link} to="/companyList" fullWidth variant="contained" color="secondary" >
+                    <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
                         Close
                     </Button>
                 </form>

@@ -9,6 +9,7 @@ import { editCompAdmin } from "../../../../Actions/Profiles/companyAdmin";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useDispatch, useSelector } from "react-redux";
 //  import Company from '../../../../Services/Profiles/company.service'    FOR FUTURE BACKEND UPDATE - EDIT ASSIGNET COMPANY
+import { useHistory } from "react-router-dom";
 
 const CompAdminDetails = () => {
     const classes = useStyles();
@@ -123,6 +124,11 @@ const CompAdminDetails = () => {
                 });
     };
 
+    let history = useHistory();
+    const goToPreviousPath = () => {
+        history.goBack()
+    }
+
     const validate = () => {
         let temp = {}
         temp.firstName = (/^[A-Za-z]+$/).test(firstName) ? "" : "Numbers and whitespaces are not allowed"
@@ -203,7 +209,7 @@ const CompAdminDetails = () => {
                                 Edit
                             </Button>
                         }
-                        <Button className={classes.buttonClose} component={Link} to="/compAdminList" fullWidth variant="contained" color="secondary" >
+                        <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
                             Close
                         </Button>
                     </Grid>

@@ -9,6 +9,7 @@ import { regCompWorker } from "../../../../Actions/Profiles/companyWorker";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import CompAdmin from '../../../../Services/Profiles/companyAdmin.service'
 import { Link } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 const RegCompWorker = () => {
     const classes = useStyles();
@@ -76,6 +77,11 @@ const RegCompWorker = () => {
                 });
     };
 
+    let history = useHistory();
+    const goToPreviousPath = () => {
+        history.goBack()
+    }
+
     const validate = () => {
         let temp = {}
         temp.firstName = (/^[A-Za-z]+$/).test(firstName) ? "" : "Numbers and whitespaces are not allowed"
@@ -133,7 +139,7 @@ const RegCompWorker = () => {
                     <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>
                         Register
                     </Button>
-                    <Button className={classes.buttonClose} component={Link} to="/compWorkerList" fullWidth variant="contained" color="secondary" >
+                    <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
                         Close
                     </Button>
                 </form>

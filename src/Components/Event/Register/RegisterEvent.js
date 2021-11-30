@@ -18,6 +18,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 import moment from 'moment'
+import { useHistory } from "react-router-dom";
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -116,6 +117,11 @@ const RegEvent = () => {
                 setSuccessful(false);
             });
     };
+
+    let history = useHistory();
+    const goToPreviousPath = () => {
+        history.goBack()
+    }
 
     return (
         <Container className={classes.container}  >
@@ -216,7 +222,7 @@ const RegEvent = () => {
                     </Grid>
                     <Grid container className={classes.buttonsContainer}>
                         <Grid item className={classes.buttonClose}>
-                            <Button component={Link} to="/eventList" fullWidth variant="contained" color="secondary" >
+                            <Button onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
                                 Close
                             </Button>
                         </Grid>

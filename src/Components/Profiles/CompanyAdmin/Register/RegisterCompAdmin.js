@@ -8,6 +8,7 @@ import { regCompAdmin } from "../../../../Actions/Profiles/companyAdmin";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import Company from '../../../../Services/Profiles/company.service'
 import { Link } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 const RegCompAdmin = () => {
     const classes = useStyles();
@@ -77,6 +78,11 @@ const RegCompAdmin = () => {
                     setSuccessful(false);
                 });
     };
+
+    let history = useHistory();
+    const goToPreviousPath = () => {
+        history.goBack()
+    }
 
     const validate = () => {
         let temp = {}
@@ -149,7 +155,7 @@ const RegCompAdmin = () => {
                     <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>
                         Register
                     </Button>
-                    <Button className={classes.buttonClose} component={Link} to="/compAdminList" fullWidth variant="contained" color="secondary" >
+                    <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
                         Close
                     </Button>
                 </form>
