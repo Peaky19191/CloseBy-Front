@@ -296,7 +296,7 @@ const EventDetailsEdit = () => {
                             <Grid item className={classes.buttonClose}>
                                 <Button component={Link} to="/companyDetails" onClick={() => { setIdCompany(compId) }} fullWidth variant="contained" color="primary" >
                                     {/* <BusinessIcon /> */}
-                                    Company - {compName}
+                                    Company Details
                                 </Button>
                             </Grid>}
                         <Grid item className={classes.buttonSubmit}>

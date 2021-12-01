@@ -134,7 +134,6 @@ const MapDetailsEdit = (props) => {
                 const events = response.data.items;
 
                 const filteredEvents = events.filter(diffrentThanCurrent)
-
                 filteredEvents.forEach(function (item, index) {
                     Adress.getAdress(item.localization.latitude, item.localization.longitude)
                         .then((response) => {
@@ -149,7 +148,7 @@ const MapDetailsEdit = (props) => {
                                     time: item.startDateTime,
                                     title: item.title,
                                     desc: item.description,
-                                    company: item.company,
+                                    company: item.company.name,
                                     personLimit: item.personLimit,
                                     type: item.type,
                                     status: item.status,
@@ -188,7 +187,7 @@ const MapDetailsEdit = (props) => {
                                 time: curEvent.startDateTime,
                                 title: curEvent.title,
                                 desc: curEvent.description,
-                                company: curEvent.company,
+                                company: curEvent.company.name,
                                 personLimit: curEvent.personLimit,
                                 type: curEvent.type,
                                 status: curEvent.status,
@@ -277,7 +276,7 @@ const MapDetailsEdit = (props) => {
                             <p>Title:  {selected.title}</p>
                             <p>Desc:  {selected.desc}</p>
                             <p>Start Date {moment(selected.time).format('MM/DD/YYYY HH:mm')}</p>
-                            {/* {(currentProfile.role === "GlobalAdmin") && <p>Company:  {selected.company}</p>} */}
+                            {(currentProfile.role === "GlobalAdmin") && <p>Company:  {selected.company}</p>}
                             <p>Tickets Limit:  {selected.personLimit}</p>
                             <p>Type:  {selected.type}</p>
                             <p>Address:  {selected.address}</p>
@@ -332,7 +331,7 @@ const MapDetailsEdit = (props) => {
                             <p>Title:  {currenEventSelected.title}</p>
                             {/* <p>Desc:  {currenEventSelected.desc}</p> */}
                             <p>Start Date {moment(currenEventSelected.time).format('MM/DD/YYYY HH:mm')}</p>
-                            {/* {(currentProfile.role === "GlobalAdmin") && <p>Company:  {currenEventSelected.company}</p>} */}
+                            {(currentProfile.role === "GlobalAdmin") && <p>Company:  {currenEventSelected.company}</p>}
                             {/* <p>Tickets Limit:  {currenEventSelected.personLimit}</p>  */}
                             <p>Type:  {currenEventSelected.type}</p>
                             <p>Address:  {currenEventSelected.address}</p>
