@@ -63,7 +63,7 @@ const MapDetailsEdit = (props) => {
 
     const getList = () => {
         if (currentProfile.role === "GlobalAdmin") {
-            getEventListId();
+            getEventList();
         }
         if (currentProfile.role === "CompanyAdmin") {
             CompAdmin.getCompanyAdminId(currentProfile.id)
@@ -90,7 +90,46 @@ const MapDetailsEdit = (props) => {
     };
 
     const getEventListId = (companyId) => {
-        Events.getEventsList(page, rowsPerPage, companyId)
+        Events.getEventsListId(page, rowsPerPage, companyId)
+            .then((response) => {
+                const events = response.data.items;
+
+                const filteredEvents = events.filter(diffrentThanCurrent)
+
+                filteredEvents.forEach(function (item, index) {
+                    Adress.getAdress(item.localization.latitude, item.localization.longitude)
+                        .then((response) => {
+                            const address = response.data.results[0].formatted_address;
+
+                            setMarkers((event) => [
+                                ...event,
+                                {
+                                    lat: Number(item.localization.latitude),
+                                    lng: Number(item.localization.longitude),
+                                    address: address,
+                                    time: item.startDateTime,
+                                    title: item.title,
+                                    desc: item.description,
+                                    company: item.company,
+                                    personLimit: item.personLimit,
+                                    type: item.type,
+                                    status: item.status,
+                                    id: item.id,
+                                }]);
+
+                        })
+                        .catch((e) => {
+                            console.log(e);
+                        });
+                })
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }
+
+    const getEventList = () => {
+        Events.getEventsListAll(page, rowsPerPage)
             .then((response) => {
                 const events = response.data.items;
 
@@ -238,7 +277,7 @@ const MapDetailsEdit = (props) => {
                             <p>Title:  {selected.title}</p>
                             <p>Desc:  {selected.desc}</p>
                             <p>Start Date {moment(selected.time).format('MM/DD/YYYY HH:mm')}</p>
-                            {(currentProfile.role === "GlobalAdmin") && <p>Company:  {selected.company}</p>}
+                            {/* {(currentProfile.role === "GlobalAdmin") && <p>Company:  {selected.company}</p>} */}
                             <p>Tickets Limit:  {selected.personLimit}</p>
                             <p>Type:  {selected.type}</p>
                             <p>Address:  {selected.address}</p>
@@ -293,7 +332,7 @@ const MapDetailsEdit = (props) => {
                             <p>Title:  {currenEventSelected.title}</p>
                             {/* <p>Desc:  {currenEventSelected.desc}</p> */}
                             <p>Start Date {moment(currenEventSelected.time).format('MM/DD/YYYY HH:mm')}</p>
-                            {(currentProfile.role === "GlobalAdmin") && <p>Company:  {currenEventSelected.company}</p>}
+                            {/* {(currentProfile.role === "GlobalAdmin") && <p>Company:  {currenEventSelected.company}</p>} */}
                             {/* <p>Tickets Limit:  {currenEventSelected.personLimit}</p>  */}
                             <p>Type:  {currenEventSelected.type}</p>
                             <p>Address:  {currenEventSelected.address}</p>

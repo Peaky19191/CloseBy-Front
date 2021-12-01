@@ -23,7 +23,7 @@ export const Events = () => {
 
     const getList = () => {
         if (currentProfile.role === "User") {
-            getEventListId();
+            getEventList();
         }
         if (currentProfile.role === "GlobalAdmin") {
             getEventListId();
@@ -55,7 +55,21 @@ export const Events = () => {
     useEffect(getList, [page, rowsPerPage]);
 
     const getEventListId = (companyId) => {
-        Event.getEventsList(page, rowsPerPage, companyId)
+        Event.getEventsListId(page, rowsPerPage, companyId)
+            .then((response) => {
+                const eventTemp = response.data.items;
+                const totalPages = response.data.count;
+
+                setEvent(eventTemp);
+                setCount(totalPages);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }
+
+    const getEventList = () => {
+        Event.getEventsListAll(page, rowsPerPage)
             .then((response) => {
                 const eventTemp = response.data.items;
                 const totalPages = response.data.count;

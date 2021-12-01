@@ -35,7 +35,7 @@ const EventList = () => {
 
     const getList = () => {
         if (currentProfile.role === "GlobalAdmin") {
-            getEventListId();
+            getEventList();
         }
         if (currentProfile.role === "CompanyAdmin") {
             CompAdmin.getCompanyAdminId(currentProfile.id)
@@ -64,7 +64,21 @@ const EventList = () => {
     useEffect(getList, [page, rowsPerPage]);
 
     const getEventListId = (companyId) => {
-        Event.getEventsList(page, rowsPerPage, companyId)
+        Event.getEventsListId(page, rowsPerPage, companyId)
+            .then((response) => {
+                const eventTemp = response.data.items;
+                const totalPages = response.data.count;
+                console.log(eventTemp);
+                setEvent(eventTemp);
+                setCount(totalPages);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }
+
+    const getEventList = () => {
+        Event.getEventsListAll(page, rowsPerPage)
             .then((response) => {
                 const eventTemp = response.data.items;
                 const totalPages = response.data.count;

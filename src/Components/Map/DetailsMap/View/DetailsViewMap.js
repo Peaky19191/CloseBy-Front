@@ -56,7 +56,7 @@ const MapDetailsView = (props) => {
     });
 
     const getList = () => {
-        Events.getEventsList(page, rowsPerPage)
+        Events.getEventsListAll(page, rowsPerPage)
             .then((response) => {
                 const events = response.data.items;
 

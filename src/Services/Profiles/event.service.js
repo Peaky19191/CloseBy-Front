@@ -5,8 +5,6 @@ import SERVER_API from "../../Static/serverApi";
 const API_URL = "event/";
 
 const registerEvent = (title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type) => {
-    console.log(startDate);
-
     return axios.post(SERVER_API + API_URL + "create",
         {
             title: title,
@@ -20,7 +18,8 @@ const registerEvent = (title, companyId, loc_lat, loc_lng, startDate, endDate, s
             status: status,
             description: description,
             ticketLimit: limit,
-            type: type
+            type: type,
+            ticketPrice: "0,01",
         },
         {
             headers: authHeader()
@@ -51,12 +50,24 @@ const editEventAPI = (eventId, title, companyId, loc_lat, loc_lng, startDate, en
     );
 };
 
-const getEventsList = (pageNumber, rowsPerPage, companyId) => {
+const getEventsListId = (pageNumber, rowsPerPage, companyId) => {
+    return axios.post(SERVER_API + API_URL + "list-worker",
+        {
+            page: pageNumber,
+            limit: rowsPerPage,
+            companyId: companyId
+        },
+        {
+            headers: authHeader()
+        },
+    );
+};
+
+const getEventsListAll = (pageNumber, rowsPerPage) => {
     return axios.post(SERVER_API + API_URL + "list",
         {
             page: pageNumber,
             limit: rowsPerPage,
-            id: companyId
         },
         {
             headers: authHeader()
@@ -86,7 +97,8 @@ const getEventId = (id) => {
 export default {
     registerEvent,
     editEventAPI,
-    getEventsList,
+    getEventsListId,
+    getEventsListAll,
     deleteEvent,
     getEventId,
 };

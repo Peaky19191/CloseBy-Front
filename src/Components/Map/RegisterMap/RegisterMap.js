@@ -82,7 +82,7 @@ const MapRegister = () => {
     };
 
     const getEventListId = (companyId) => {
-        Events.getEventsList(page, rowsPerPage, companyId)
+        Events.getEventsListId(page, rowsPerPage, companyId)
             .then((response) => {
                 const events = response.data.items;
 
