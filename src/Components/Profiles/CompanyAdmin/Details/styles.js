@@ -53,5 +53,11 @@ export default makeStyles((theme) => ({
     },
     buttonCompanyDetails: {
         margin: theme.spacing(2, 0, 0),
+        backgroundColor: '#0099ff',
+        color: "#ffffff",
+        '&:hover': {
+            backgroundColor: '#008ae6',
+            color: '#ffffff',
+        },
     },
 }));

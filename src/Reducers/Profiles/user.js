@@ -32,10 +32,10 @@ export default function (state = initialState, action) {
                 ...state,
             };
         case SET_USER_ID:
-            return { id_user: payload };
+            return { ...state, id_user: payload };
 
         case CLEAR_USER_ID:
-            return { id_user: "" };
+            return { ...state, id_user: "" };
 
         default:
             return state;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CompanyAdmin from '../../../../Services/Profiles/companyAdmin.service'
+import CompanyAdmin from '../../../../../Services/Profiles/companyAdmin.service'
 import useStyles from './styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,8 +14,8 @@ import IconButton from '@material-ui/core/IconButton';
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom'
-import PopupDelete from '../../../Popup/PopupDelete/PopupDelete';
-import { setCompAdminId } from "../../../../Actions/Profiles/companyAdmin";
+import PopupDelete from '../../../../Popup/PopupDelete/PopupDelete';
+import { setCompAdminId } from "../../../../../Actions/Profiles/companyAdmin";
 import { useDispatch, useSelector } from "react-redux";
 
 const CompanyAdminsList = () => {

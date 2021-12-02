@@ -9,6 +9,8 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import CompWorker from '../../../../Services/Profiles/companyWorker.service'
+import CompAdmin from '../../../../Services/Profiles/companyAdmin.service'
+import Events from '../../../../Services/Profiles/event.service'
 
 const CompanyDetails = () => {
     const classes = useStyles();
@@ -24,7 +26,6 @@ const CompanyDetails = () => {
         setName(name);
     };
     const [dateCreated, setDateCreated] = useState("");
-
 
     const [disaled, setDisabled] = useState(true);
     const [editMode, setEditMode] = useState(false);
@@ -46,8 +47,6 @@ const CompanyDetails = () => {
 
                 setName(company.name);
                 setDateCreated(company.createdAt);
-
-                selectCompanyWorkersList(company.id);
             })
             .catch((e) => {
                 console.log(e);
@@ -55,18 +54,50 @@ const CompanyDetails = () => {
     }
     useEffect(getCompanyDetails, [companyId]);
 
-    const selectCompanyWorkersList = (companyId) => {
+    const [compWorkersList, setCompWorkersList] = useState([]);
+
+    const selectCompanyWorkersList = () => {
         CompWorker.getCompanyWorkersList(page, rowsPerPage, companyId)
             .then((response) => {
-                const compWorkers = response.data.items;
-                const totalPages = response.data.count;
-                console.log(response);
-                console.log(totalPages);
+                const compWorkersList = response.data.items;
+
+                setCompWorkersList(compWorkersList);
             })
             .catch((e) => {
                 console.log(e);
             });
     }
+    useEffect(selectCompanyWorkersList, [companyId]);
+
+    const [compAdminsList, setCompAdminsList] = useState([]);
+
+    const selectCompanyAdminsList = () => {
+        CompAdmin.getCompanyAdminsList(page, rowsPerPage, companyId)
+            .then((response) => {
+                const compAdminsList = response.data.items;
+
+                setCompAdminsList(compAdminsList);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }
+    useEffect(selectCompanyAdminsList, [companyId]);
+
+    const [eventsList, setEventList] = useState([]);
+
+    const selectEventsList = () => {
+        Events.getEventsListId(page, rowsPerPage, companyId)
+            .then((response) => {
+                const eventsList = response.data.items;
+
+                setEventList(eventsList);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    }
+    useEffect(selectEventsList, [companyId]);
 
     const [successful, setSuccessful] = useState(false);
 
@@ -134,6 +165,15 @@ const CompanyDetails = () => {
                         </Grid>
                     </Grid>
                     <Grid className={classes.buttonsContainer} spacing={2}>
+                        <Button disabled={(eventsList.length !== 0) ? false : true} className={classes.buttonLink} component={Link} to="/eventListCompanyFilter" fullWidth variant="contained" color="primary" >
+                            {(eventsList.length !== 0) ? "Events" : "No Event"}
+                        </Button>
+                        <Button disabled={(compAdminsList.length !== 0) ? false : true} className={classes.buttonLink} component={Link} to="/adminListCompanyFilter" fullWidth variant="contained" color="primary" >
+                            {(compAdminsList.length !== 0) ? "Admins" : "No Admin"}
+                        </Button>
+                        <Button disabled={(compWorkersList.length !== 0) ? false : true} className={classes.buttonLink} component={Link} to="/workerListCompanyFilter" fullWidth variant="contained" color="primary" >
+                            {(compWorkersList.length !== 0) ? "Workers" : "No Worker"}
+                        </Button>
                         {editMode ?
                             <>
                                 <Button disabled={!enabled} type="submit" className={classes.buttonEditSave} fullWidth variant="contained"  >

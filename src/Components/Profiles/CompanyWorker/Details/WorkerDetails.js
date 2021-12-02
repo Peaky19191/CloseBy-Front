@@ -1,28 +1,32 @@
 import React, { useState, useEffect } from "react";
 import useStyles from './styles';
-import CompAdmin from '../../../../Services/Profiles/companyAdmin.service'
+import CompWorker from '../../../../Services/Profiles/companyWorker.service'
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { Link } from 'react-router-dom'
 import MenuItem from '@material-ui/core/MenuItem';
-import { editCompAdmin } from "../../../../Actions/Profiles/companyAdmin";
+import { editCompWorker } from "../../../../Actions/Profiles/companyWorker";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setCompanyId } from "../../../../Actions/Profiles/company";
 import BusinessIcon from '@mui/icons-material/Business';
 
-const CompAdminDetails = () => {
+const CompWorkerDetails = () => {
     const classes = useStyles();
-    const compAdminId = useSelector(state => state.companyAdmin.id_comp_admin);
+
+    const compWorkerId = useSelector(state => state.companyWorker.id_comp_worker);
+
+    const { profile: currentProfile } = useSelector((state) => state.auth);
+
+    const [compId, setCompId] = useState("");
+    const [compName, setCompName] = useState("");
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [gender, setGender] = useState("");
     const [errors, setErrors] = useState({});
-    const [compId, setCompId] = useState("");
-    const [compName, setCompName] = useState("");
 
     const enabled =
         firstName.length > 0 &&
@@ -63,24 +67,23 @@ const CompAdminDetails = () => {
         setEditMode(false);
     }
 
-    const getCompAdminDetails = () => {
-        CompAdmin.getCompanyAdminId(compAdminId)
+    const getCompWorkerDetails = () => {
+        CompWorker.getCompanyWorkerId(compWorkerId)
             .then((response) => {
-                const compAdmin = response.data;
-                console.log(compAdmin);
+                const compWorker = response.data;
 
-                setFirstName(compAdmin.firstName);
-                setLastName(compAdmin.lastName);
-                setEmail(compAdmin.email);
-                setGender(compAdmin.gender);
-                setCompId(compAdmin.company.id);
-                setCompName(compAdmin.company.name);
+                setFirstName(compWorker.firstName);
+                setLastName(compWorker.lastName);
+                setEmail(compWorker.email);
+                setGender(compWorker.gender);
+                setCompId(compWorker.company.id);
+                setCompName(compWorker.company.name);
             })
             .catch((e) => {
                 console.log(e);
             });
     }
-    useEffect(getCompAdminDetails, [compAdminId]);
+    useEffect(getCompWorkerDetails, [compWorkerId]);
 
     const [successful, setSuccessful] = useState(false);
 
@@ -94,9 +97,8 @@ const CompAdminDetails = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
-
         if (validate())
-            dispatch(editCompAdmin(compAdminId, firstName, lastName, gender, email))
+            dispatch(editCompWorker(compWorkerId, firstName, lastName, gender, email))
                 .then(() => {
                     setSuccessful(true);
                 })
@@ -129,11 +131,11 @@ const CompAdminDetails = () => {
                 <Avatar className={classes.avatar}>
                     <SupervisorAccountIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">Details of the Company Admin</Typography>
+                <Typography component="h1" variant="h5">Details of the Company Worker</Typography>
                 {successful ?
                     <Alert className={classes.alert} severity="success">
                         <AlertTitle>Success</AlertTitle>
-                        <strong>You have successfully edit your Company Admin</strong>
+                        <strong>You have successfully edit your Company Worker</strong>
                     </Alert>
                     :
                     (message ?
@@ -163,11 +165,12 @@ const CompAdminDetails = () => {
                             </TextField>
                         </Grid>
                     </Grid>
-                    <Grid className={classes.buttonsContainer}>
-                        <Button className={classes.buttonCompanyDetails} component={Link} to="/companyDetails" onClick={() => { setIdCompany(compId) }} fullWidth variant="contained" color="primary" >
-                            {/* <BusinessIcon /> */}
-                            Company - {compName}
-                        </Button>
+                    <Grid className={classes.buttonsContainer} >
+                        {(currentProfile.role === "GlobalAdmin") &&
+                            <Button className={classes.buttonCompanyDetails} component={Link} to="/companyDetails" onClick={() => { setIdCompany(compId) }} fullWidth variant="contained" color="primary" >
+                                {/* <BusinessIcon /> */}
+                                Company Details
+                            </Button>}
                         {editMode ?
                             <>
                                 <Button disabled={!enabled} type="submit" className={classes.buttonEditSave} fullWidth variant="contained"  >
@@ -192,6 +195,6 @@ const CompAdminDetails = () => {
     );
 };
 
-export default CompAdminDetails;
+export default CompWorkerDetails;
 
 

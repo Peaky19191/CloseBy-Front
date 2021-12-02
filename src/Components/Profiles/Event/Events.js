@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Card, CardActions, CardContent, CardMedia, Grid, Container, Button } from '@material-ui/core';
 import useStyles from './styles';
-import CompAdmin from '../../Services/Profiles/companyAdmin.service'
-import CompWorker from '../../Services/Profiles/companyWorker.service'
+import CompAdmin from '../../../Services/Profiles/companyAdmin.service'
+import CompWorker from '../../../Services/Profiles/companyWorker.service'
 import { useSelector } from "react-redux";
-import Event from '../../Services/Profiles/event.service'
+import Event from '../../../Services/Profiles/event.service'
 import moment from 'moment'
 import { useDispatch } from "react-redux";
-import { setEventId } from "../../Actions/Profiles/events";
+import { setEventId } from "../../../Actions/Profiles/events";
 import { Link } from 'react-router-dom'
 
 export const Events = () => {

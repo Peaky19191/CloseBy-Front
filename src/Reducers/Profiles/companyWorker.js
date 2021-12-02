@@ -30,10 +30,10 @@ export default function (state = initialState, action) {
                 ...state,
             };
         case SET_COMP_WORKER_ID:
-            return { id_comp_worker: payload };
+            return { ...state, id_comp_worker: payload };
 
         case CLEAR_COMP_WORKER_ID:
-            return { id_comp_worker: "" };
+            return { ...state, id_comp_worker: "" };
 
         default:
             return state;

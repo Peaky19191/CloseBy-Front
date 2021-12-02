@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Event from '../../../Services/Profiles/event.service'
+import Event from '../../../../../Services/Profiles/event.service'
 import useStyles from './styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,11 +14,11 @@ import IconButton from '@material-ui/core/IconButton';
 import { Link } from 'react-router-dom'
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
-import PopupDelete from '../../Popup/PopupDelete/PopupDelete';
-import { setEventId } from "../../../Actions/Profiles/events";
+import PopupDelete from '../../../../Popup/PopupDelete/PopupDelete';
+import { setEventId } from "../../../../../Actions/Profiles/events";
 import { useDispatch } from "react-redux";
-import CompAdmin from '../../../Services/Profiles/companyAdmin.service'
-import CompWorker from '../../../Services/Profiles/companyWorker.service'
+import CompAdmin from '../../../../../Services/Profiles/companyAdmin.service'
+import CompWorker from '../../../../../Services/Profiles/companyWorker.service'
 import { useSelector } from "react-redux";
 import moment from 'moment'
 

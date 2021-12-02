@@ -34,11 +34,12 @@ const editCompanyAdminAPI = (id, firstName, lastName, gender, email, companyId) 
     );
 };
 
-const getCompanyAdminsList = (pageNumber, rowsPerPage) => {
+const getCompanyAdminsList = (pageNumber, rowsPerPage, companyId) => {
     return axios.post(SERVER_API + API_URL + "list",
         {
             page: pageNumber,
-            limit: rowsPerPage
+            limit: rowsPerPage,
+            id: companyId
         },
         {
             headers: authHeader()

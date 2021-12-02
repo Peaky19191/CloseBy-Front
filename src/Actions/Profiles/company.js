@@ -4,6 +4,8 @@ import {
     SET_MESSAGE,
     SET_COMPANY_ID,
     CLEAR_COMPANY_ID,
+    SET_COMPANY_NAME,
+    CLEAR_COMPANY_NAME,
     EDIT_COMPANY_SUCCESS,
     EDIT_COMPANY_FAIL,
 } from "../../Constants/actionTypes";
@@ -58,6 +60,20 @@ export const clearCompanyId = () => (dispatch) => {
         type: CLEAR_COMPANY_ID,
     });
 };
+
+export const setCompanyName = (name) => (dispatch) => {
+    dispatch({
+        type: SET_COMPANY_NAME,
+        payload: name,
+    });
+};
+
+export const clearCompanyName = () => (dispatch) => {
+    dispatch({
+        type: CLEAR_COMPANY_NAME,
+    });
+};
+
 
 export const editCompany = (id, name) => (dispatch) => {
     return CompanyService.editCompanyAPI(id, name).then(

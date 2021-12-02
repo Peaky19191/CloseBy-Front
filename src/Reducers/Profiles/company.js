@@ -3,6 +3,8 @@ import {
     REGISTER_COMPANY_FAIL,
     SET_COMPANY_ID,
     CLEAR_COMPANY_ID,
+    SET_COMPANY_NAME,
+    CLEAR_COMPANY_NAME,
     EDIT_COMPANY_SUCCESS,
     EDIT_COMPANY_FAIL,
 } from "../../Constants/actionTypes";
@@ -30,11 +32,16 @@ export default function (state = initialState, action) {
                 ...state,
             };
         case SET_COMPANY_ID:
-            return { id_company: payload };
+            return { ...state, id_company: payload };
 
         case CLEAR_COMPANY_ID:
-            return { id_company: "" };
+            return { ...state, id_company: "" };
 
+        case SET_COMPANY_NAME:
+            return { ...state, name_company: payload };
+
+        case CLEAR_COMPANY_NAME:
+            return { ...state, name_company: "" };
         default:
             return state;
     }

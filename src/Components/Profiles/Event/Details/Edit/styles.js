@@ -111,4 +111,12 @@ export default makeStyles((theme) => ({
             color: '#ffffff',
         },
     },
+    buttonLink: {
+        backgroundColor: '#0099ff',
+        color: "#ffffff",
+        '&:hover': {
+            backgroundColor: '#008ae6',
+            color: '#ffffff',
+        },
+    },
 }));

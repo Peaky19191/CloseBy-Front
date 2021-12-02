@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from "react";
 import useStyles from './styles';
-import Event from '../../../../Services/Profiles/event.service'
+import Event from '../../../../../Services/Profiles/event.service'
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField, MenuItem } from '@material-ui/core';
 import { Link } from 'react-router-dom'
-import { editEvent } from "../../../../Actions/Profiles/events";
+import { editEvent } from "../../../../../Actions/Profiles/events";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useDispatch, useSelector } from "react-redux";
-import MapDetailsEdit from '../../../Map/DetailsMap/Edit/DetailsEditMap'
+import MapDetailsEdit from '../../../../Map/DetailsMap/Edit/DetailsEditMap'
 import EventIcon from '@mui/icons-material/Event';
-import EventTypes from '../../../../Static/select'
+import EventTypes from '../../../../../Static/select'
 import Slider from '@mui/material/Slider';
 import MuiInput from '@mui/material/Input';
 import { styled } from '@mui/material/styles';
-import { regEvent } from "../../../../Actions/Profiles/events";
-import CompWorker from '../../../../Services/Profiles/companyWorker.service'
+import { regEvent } from "../../../../../Actions/Profiles/events";
+import CompWorker from '../../../../../Services/Profiles/companyWorker.service'
 import Stack from '@mui/material/Stack';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 import moment from 'moment'
-import { setNewEventLoc } from "../../../../Actions/Profiles/events";
-import { setCurrentEventLoc } from "../../../../Actions/Profiles/events";
+import { setNewEventLoc } from "../../../../../Actions/Profiles/events";
+import { setCurrentEventLoc } from "../../../../../Actions/Profiles/events";
 import { useHistory } from "react-router-dom";
-import { setCompanyId } from "../../../../Actions/Profiles/company";
+import { setCompanyId } from "../../../../../Actions/Profiles/company";
 import BusinessIcon from '@mui/icons-material/Business';
 
 const Input = styled(MuiInput)`
@@ -288,13 +288,13 @@ const EventDetailsEdit = () => {
                             </Button>
                         </Grid>
                         <Grid item className={classes.buttonClose}>
-                            <Button onClick={() => { }} fullWidth variant="contained" color="primary" >
+                            <Button onClick={() => { }} className={classes.buttonLink} fullWidth variant="contained" >
                                 Tickets
                             </Button>
                         </Grid>
                         {(currentProfile.role === "GlobalAdmin") &&
                             <Grid item className={classes.buttonClose}>
-                                <Button component={Link} to="/companyDetails" onClick={() => { setIdCompany(compId) }} fullWidth variant="contained" color="primary" >
+                                <Button component={Link} to="/companyDetails" onClick={() => { setIdCompany(compId) }} className={classes.buttonLink} fullWidth variant="contained" >
                                     {/* <BusinessIcon /> */}
                                     Company Details
                                 </Button>

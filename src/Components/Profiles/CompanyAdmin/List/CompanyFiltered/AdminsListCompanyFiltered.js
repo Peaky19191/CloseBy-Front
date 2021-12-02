@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CompWorker from '../../../../Services/Profiles/companyWorker.service'
-import CompAdmin from '../../../../Services/Profiles/companyAdmin.service'
+import CompanyAdmin from '../../../../../Services/Profiles/companyAdmin.service'
 import useStyles from './styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,64 +9,48 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableFooter from '@material-ui/core/TableFooter';
-import { useSelector } from "react-redux";
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom'
-import PopupDelete from '../../../Popup/PopupDelete/PopupDelete';
-import { setCompWorkerId } from "../../../../Actions/Profiles/companyWorker";
-import { useDispatch } from "react-redux";
+import PopupDelete from '../../../../Popup/PopupDelete/PopupDelete';
+import { setCompAdminId } from "../../../../../Actions/Profiles/companyAdmin";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-const CompanyWorkersList = () => {
+const CompanyAdminsList = () => {
+    const classes = useStyles();
 
+    const { company: currentCompany } = useSelector((state) => state);
     const { profile: currentProfile } = useSelector((state) => state.auth);
 
-    const classes = useStyles();
-    const [compWorkers, setCompWorkers] = useState([]);
+    const [adminsComp, setAdminsComp] = useState([]);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [count, setCount] = useState(0);
 
     const getList = () => {
-        if (currentProfile.role === "GlobalAdmin") {
-            getCompWorkersListId();
-        }
-        if (currentProfile.role === "CompanyAdmin") {
-            CompAdmin.getCompanyAdminId(currentProfile.id)
-                .then((response) => {
-                    const compId = response.data.company.id;
-
-                    getCompWorkersListId(compId);
-                })
-                .catch((e) => {
-                    console.log(e);
-                });
-        }
-    };
-
-    useEffect(getList, [page, rowsPerPage]);
-
-    const getCompWorkersListId = (companyId) => {
-        CompWorker.getCompanyWorkersList(page, rowsPerPage, companyId)
+        CompanyAdmin.getCompanyAdminsList(page, rowsPerPage, currentCompany.id_company)
             .then((response) => {
-                const compWorkers = response.data.items;
+                const adminsComp = response.data.items;
                 const totalPages = response.data.count;
 
-                setCompWorkers(compWorkers);
+                setAdminsComp(adminsComp);
                 setCount(totalPages);
             })
             .catch((e) => {
                 console.log(e);
             });
-    }
+    };
+
+    useEffect(getList, [page, rowsPerPage]);
 
     const dispatch = useDispatch();
 
-    const setIdCompWorker = (id) => {
-        dispatch(setCompWorkerId(id))
+    const setIdCompAdmin = (id) => {
+        dispatch(setCompAdminId(id))
     }
 
     const [isOpen, setIsOpen] = useState(false);
@@ -97,7 +80,7 @@ const CompanyWorkersList = () => {
 
 
     const deleteFromList = async () => {
-        await CompWorker.deleteCompanyWorker(idUserDelete, idCompanyDelete);
+        await CompanyAdmin.deleteCompanyAdmin(idUserDelete, idCompanyDelete);
         showPopup();
         getList();
     }
@@ -110,13 +93,24 @@ const CompanyWorkersList = () => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+
+    let history = useHistory();
+    const goToPreviousPath = () => {
+        history.goBack()
+    }
+
     return (
         <>
+            <Container className={classes.container}>
+                <Paper className={classes.paper} >
+                    <Typography component="h1" variant="h4">Admins of the Company - {currentCompany.name_company} </Typography>
+                </Paper>
+            </Container>
             <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >
                 <Table className={classes.table} aria-label="simple table">
-                    <TableHead >
+                    <TableHead>
                         <TableRow >
-                            <TableCell className={classes.tableCellTitle}>User</TableCell>
+                            <TableCell className={classes.tableCellTitle}>Admin</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Email</TableCell>
                             {(currentProfile.role === "GlobalAdmin") && <TableCell align="center" className={classes.tableCellTitle}>Company</TableCell>}
                             <TableCell align="center" className={classes.tableCellTitle}>Gender</TableCell>
@@ -124,7 +118,7 @@ const CompanyWorkersList = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {compWorkers.map((item) => (
+                        {adminsComp.map((item) => (
                             <TableRow key={item.email} >
                                 <TableCell component="th" scope="row">
                                     {item.firstName}    {item.lastName}
@@ -133,7 +127,7 @@ const CompanyWorkersList = () => {
                                 {(currentProfile.role === "GlobalAdmin") && <TableCell align="center">{item.company.name}</TableCell>}
                                 <TableCell align="center">{item.gender}</TableCell>
                                 <TableCell align="center">
-                                    <IconButton component={Link} to="/compWorkerDetails" onClick={() => { setIdCompWorker(item.id) }} aria-label="edit" size="large" >
+                                    <IconButton component={Link} to="/compAdminDetails" onClick={() => { setIdCompAdmin(item.id) }} aria-label="edit" size="large" >
                                         <SettingsApplicationsIcon className={classes.settingICon} />
                                     </IconButton>
                                     <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.company.id, item.firstName, item.lastName, item.email, item.company.name) }} >
@@ -158,18 +152,23 @@ const CompanyWorkersList = () => {
                                     />
                                 </Grid>
                                 <Grid item >
-                                    <Button component={Link} to="/registerCompWorker" className={classes.bottomButton}>
-                                        Register new worker
+                                    <Button onClick={goToPreviousPath} className={classes.bottomButtonClose}>
+                                        Close
+                                    </Button>
+                                </Grid>
+                                <Grid item >
+                                    <Button component={Link} to="/registerCompAdmin" className={classes.bottomButtonRegister}>
+                                        Register new admin
                                     </Button>
                                 </Grid>
                             </Grid>
                         </TableRow>
                     </TableFooter>
                 </Table>
-            </TableContainer >
-            {isOpen && <PopupDelete handleClose={showPopup} handleDelete={deleteFromList} handleData={["Worker", firstNameDelete, lastNameDelete, emailDelete, compNameDelete]} />}
+            </TableContainer>
+            {isOpen && <PopupDelete handleClose={showPopup} handleDelete={deleteFromList} handleData={["Admin", firstNameDelete, lastNameDelete, emailDelete, compNameDelete]} />}
         </>
     );
 };
 
-export default CompanyWorkersList;
+export default CompanyAdminsList;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Company from '../../../../Services/Profiles/company.service'
+import Event from '../../../../../Services/Profiles/event.service'
 import useStyles from './styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,29 +14,33 @@ import IconButton from '@material-ui/core/IconButton';
 import { Link } from 'react-router-dom'
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
-import PopupDelete from '../../../Popup/PopupDelete/PopupDelete';
-import { setCompanyId } from "../../../../Actions/Profiles/company";
-import { setCompanyName } from "../../../../Actions/Profiles/company";
-
+import PopupDelete from '../../../../Popup/PopupDelete/PopupDelete';
+import { setEventId } from "../../../../../Actions/Profiles/events";
 import { useDispatch } from "react-redux";
+import CompAdmin from '../../../../../Services/Profiles/companyAdmin.service'
+import CompWorker from '../../../../../Services/Profiles/companyWorker.service'
+import { useSelector } from "react-redux";
 import moment from 'moment'
+import { useHistory } from "react-router-dom";
 
-const CompanyList = () => {
+const EventList = () => {
     const classes = useStyles();
-    const [company, setCompany] = useState([]);
+
+    const { company: currentCompany } = useSelector((state) => state);
+
+    const [event, setEvent] = useState([]);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [count, setCount] = useState(0);
 
-
     const getList = () => {
-        Company.getCompanyList(page, rowsPerPage)
+        Event.getEventsListId(page, rowsPerPage, currentCompany.id_company)
             .then((response) => {
-                const companysTemp = response.data.items;
+                const eventTemp = response.data.items;
                 const totalPages = response.data.count;
 
-                setCompany(companysTemp);
+                setEvent(eventTemp);
                 setCount(totalPages);
             })
             .catch((e) => {
@@ -47,21 +51,19 @@ const CompanyList = () => {
     useEffect(getList, [page, rowsPerPage]);
 
     const dispatch = useDispatch();
-
-    const setCompanyDispatch = (idComp, compName) => {
-        dispatch(setCompanyId(idComp))
-        dispatch(setCompanyName(compName))
+    const setIdEvent = (id) => {
+        dispatch(setEventId(id))
     }
 
     const [isOpen, setIsOpen] = useState(false);
 
-    const [idCompanyDelete, setIdCompanyDelete] = useState();
-    const [companyNameDelete, setCompanyNameDelete] = useState();
+    const [idEventDelete, setIdEventDelete] = useState();
+    const [eventTitleDelete, setEventTitleDelete] = useState();
 
 
-    const prepareDelete = (idComp, compName) => {
-        setIdCompanyDelete(idComp);
-        setCompanyNameDelete(compName);
+    const prepareDelete = (idEvent, eventTitle) => {
+        setIdEventDelete(idEvent);
+        setEventTitleDelete(eventTitle);
 
         showPopup();
     }
@@ -71,7 +73,7 @@ const CompanyList = () => {
     }
 
     const deleteFromList = async () => {
-        await Company.deleteCompany(idCompanyDelete);
+        await Event.deleteEvent(idEventDelete);
         showPopup();
         getList();
     }
@@ -84,28 +86,44 @@ const CompanyList = () => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+
+    let history = useHistory();
+    const goToPreviousPath = () => {
+        history.goBack()
+    }
+
     return (
         <>
+            <Container className={classes.container}>
+                <Paper className={classes.paper} >
+                    <Typography component="h1" variant="h4">Events of the Company - {currentCompany.name_company} </Typography>
+                </Paper>
+            </Container>
             <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >
                 <Table className={classes.table} aria-label="simple table">
                     <TableHead>
                         <TableRow >
-                            <TableCell className={classes.tableCellTitle}>Company Name</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>Created At</TableCell>
+                            <TableCell className={classes.tableCellTitle}>Title</TableCell>
+                            <TableCell align="center" className={classes.tableCellTitle}>Type</TableCell>
+                            <TableCell align="center" className={classes.tableCellTitle}>Status</TableCell>
+                            <TableCell align="center" className={classes.tableCellTitle}>Start At</TableCell>
+                            <TableCell align="center" className={classes.tableCellTitle}>End At</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
-
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {company.map((item) => (
+                        {event.map((item) => (
                             <TableRow key={item.id} >
-                                <TableCell component="th" scope="row">{item.name}</TableCell>
-                                <TableCell align="center">{moment(item.createdAt).format('MM/DD/YYYY HH:mm')}</TableCell>
+                                <TableCell component="th" scope="row">{item.title}</TableCell>
+                                <TableCell align="center" component="th" scope="row">{item.type}</TableCell>
+                                <TableCell align="center" component="th" scope="row">{item.status}</TableCell>
+                                <TableCell align="center">{moment(item.startDateTime).format('MM/DD/YYYY HH:mm')}</TableCell>
+                                <TableCell align="center">{moment(item.endDateTime).format('MM/DD/YYYY HH:mm')}</TableCell>
                                 <TableCell align="center">
-                                    <IconButton component={Link} to="/companyDetails" onClick={() => { setCompanyDispatch(item.id, item.name) }} aria-label="edit" size="large" >
+                                    <IconButton component={Link} to="/eventDetailsEdit" onClick={() => { setIdEvent(item.id) }} aria-label="edit" size="large" >
                                         <SettingsApplicationsIcon className={classes.settingICon} />
                                     </IconButton>
-                                    <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.name) }} >
+                                    <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.title) }} >
                                         <DeleteIcon className={classes.deleteICon} />
                                     </IconButton>
                                 </TableCell>
@@ -127,8 +145,8 @@ const CompanyList = () => {
                                     />
                                 </Grid>
                                 <Grid item >
-                                    <Button component={Link} to="/registerCompany" className={classes.bottomButton}>
-                                        Register new company
+                                    <Button onClick={goToPreviousPath} className={classes.bottomButtonClose}>
+                                        Close
                                     </Button>
                                 </Grid>
                             </Grid>
@@ -136,9 +154,9 @@ const CompanyList = () => {
                     </TableFooter>
                 </Table>
             </TableContainer>
-            {isOpen && <PopupDelete handleClose={showPopup} handleDelete={deleteFromList} handleData={["Company", companyNameDelete]} />}
+            {isOpen && <PopupDelete handleClose={showPopup} handleDelete={deleteFromList} handleData={["Event", eventTitleDelete]} />}
         </>
     );
 };
 
-export default CompanyList;
+export default EventList;

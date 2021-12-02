@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Company from '../../../../Services/Profiles/company.service'
+import CompWorker from '../../../../../Services/Profiles/companyWorker.service'
+import CompAdmin from '../../../../../Services/Profiles/companyAdmin.service'
 import useStyles from './styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,34 +10,35 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableFooter from '@material-ui/core/TableFooter';
+import { useSelector } from "react-redux";
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
-import { Link } from 'react-router-dom'
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
-import PopupDelete from '../../../Popup/PopupDelete/PopupDelete';
-import { setCompanyId } from "../../../../Actions/Profiles/company";
-import { setCompanyName } from "../../../../Actions/Profiles/company";
-
+import { Link } from 'react-router-dom'
+import PopupDelete from '../../../../Popup/PopupDelete/PopupDelete';
+import { setCompWorkerId } from "../../../../../Actions/Profiles/companyWorker";
 import { useDispatch } from "react-redux";
-import moment from 'moment'
+import { useHistory } from "react-router-dom";
 
-const CompanyList = () => {
+const CompanyWorkersList = () => {
     const classes = useStyles();
-    const [company, setCompany] = useState([]);
+
+    const { company: currentCompany } = useSelector((state) => state);
+
+    const [compWorkers, setCompWorkers] = useState([]);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [count, setCount] = useState(0);
 
-
     const getList = () => {
-        Company.getCompanyList(page, rowsPerPage)
+        CompWorker.getCompanyWorkersList(page, rowsPerPage, currentCompany.id_company)
             .then((response) => {
-                const companysTemp = response.data.items;
+                const compWorkers = response.data.items;
                 const totalPages = response.data.count;
 
-                setCompany(companysTemp);
+                setCompWorkers(compWorkers);
                 setCount(totalPages);
             })
             .catch((e) => {
@@ -46,22 +48,30 @@ const CompanyList = () => {
 
     useEffect(getList, [page, rowsPerPage]);
 
+
     const dispatch = useDispatch();
 
-    const setCompanyDispatch = (idComp, compName) => {
-        dispatch(setCompanyId(idComp))
-        dispatch(setCompanyName(compName))
+    const setIdCompWorker = (id) => {
+        dispatch(setCompWorkerId(id))
     }
 
     const [isOpen, setIsOpen] = useState(false);
 
+    const [idUserDelete, setIdUserDelete] = useState();
     const [idCompanyDelete, setIdCompanyDelete] = useState();
-    const [companyNameDelete, setCompanyNameDelete] = useState();
+    const [firstNameDelete, setFirstNameDelete] = useState();
+    const [lastNameDelete, setLastNameDelete] = useState();
+    const [emailDelete, setEmailDelete] = useState();
+    const [compNameDelete, setCompNameDelete] = useState();
 
 
-    const prepareDelete = (idComp, compName) => {
+    const prepareDelete = (id, idComp, firstName, lastName, email, compName) => {
+        setIdUserDelete(id);
         setIdCompanyDelete(idComp);
-        setCompanyNameDelete(compName);
+        setFirstNameDelete(firstName);
+        setLastNameDelete(lastName);
+        setEmailDelete(email);
+        setCompNameDelete(compName);
 
         showPopup();
     }
@@ -70,8 +80,9 @@ const CompanyList = () => {
         setIsOpen(!isOpen);
     }
 
+
     const deleteFromList = async () => {
-        await Company.deleteCompany(idCompanyDelete);
+        await CompWorker.deleteCompanyWorker(idUserDelete, idCompanyDelete);
         showPopup();
         getList();
     }
@@ -84,28 +95,42 @@ const CompanyList = () => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+
+    let history = useHistory();
+    const goToPreviousPath = () => {
+        history.goBack()
+    }
+
     return (
         <>
+            <Container className={classes.container}>
+                <Paper className={classes.paper} >
+                    <Typography component="h1" variant="h4">Workers of the Company - {currentCompany.name_company} </Typography>
+                </Paper>
+            </Container>
             <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >
                 <Table className={classes.table} aria-label="simple table">
-                    <TableHead>
+                    <TableHead >
                         <TableRow >
-                            <TableCell className={classes.tableCellTitle}>Company Name</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>Created At</TableCell>
+                            <TableCell className={classes.tableCellTitle}>User</TableCell>
+                            <TableCell align="center" className={classes.tableCellTitle}>Email</TableCell>
+                            <TableCell align="center" className={classes.tableCellTitle}>Gender</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
-
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {company.map((item) => (
-                            <TableRow key={item.id} >
-                                <TableCell component="th" scope="row">{item.name}</TableCell>
-                                <TableCell align="center">{moment(item.createdAt).format('MM/DD/YYYY HH:mm')}</TableCell>
+                        {compWorkers.map((item) => (
+                            <TableRow key={item.email} >
+                                <TableCell component="th" scope="row">
+                                    {item.firstName}    {item.lastName}
+                                </TableCell>
+                                <TableCell align="center">{item.email}</TableCell>
+                                <TableCell align="center">{item.gender}</TableCell>
                                 <TableCell align="center">
-                                    <IconButton component={Link} to="/companyDetails" onClick={() => { setCompanyDispatch(item.id, item.name) }} aria-label="edit" size="large" >
+                                    <IconButton component={Link} to="/compWorkerDetails" onClick={() => { setIdCompWorker(item.id) }} aria-label="edit" size="large" >
                                         <SettingsApplicationsIcon className={classes.settingICon} />
                                     </IconButton>
-                                    <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.name) }} >
+                                    <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.company.id, item.firstName, item.lastName, item.email, item.company.name) }} >
                                         <DeleteIcon className={classes.deleteICon} />
                                     </IconButton>
                                 </TableCell>
@@ -127,18 +152,18 @@ const CompanyList = () => {
                                     />
                                 </Grid>
                                 <Grid item >
-                                    <Button component={Link} to="/registerCompany" className={classes.bottomButton}>
-                                        Register new company
+                                    <Button onClick={goToPreviousPath} className={classes.bottomButtonClose}>
+                                        Close
                                     </Button>
                                 </Grid>
                             </Grid>
                         </TableRow>
                     </TableFooter>
                 </Table>
-            </TableContainer>
-            {isOpen && <PopupDelete handleClose={showPopup} handleDelete={deleteFromList} handleData={["Company", companyNameDelete]} />}
+            </TableContainer >
+            {isOpen && <PopupDelete handleClose={showPopup} handleDelete={deleteFromList} handleData={["Worker", firstNameDelete, lastNameDelete, emailDelete, compNameDelete]} />}
         </>
     );
 };
 
-export default CompanyList;
+export default CompanyWorkersList;

@@ -12,13 +12,22 @@ export default makeStyles((theme) => ({
         color: theme.palette.common.white,
         fontSize: 14,
     },
-    bottomButton: {
+    bottomButtonRegister: {
         margin: theme.spacing(1),
         variant: "contained",
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.common.white,
         '&:hover': {
             backgroundColor: theme.palette.primary.dark,
+        },
+    },
+    bottomButtonClose: {
+        margin: theme.spacing(1),
+        variant: "contained",
+        backgroundColor: theme.palette.secondary.main,
+        color: theme.palette.common.white,
+        '&:hover': {
+            backgroundColor: theme.palette.secondary.dark,
         },
     },
     deleteICon: {

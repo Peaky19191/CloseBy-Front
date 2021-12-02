@@ -41,7 +41,7 @@ export default makeStyles((theme) => ({
         margin: theme.spacing(2, 0, 0),
     },
     buttonEditStart: {
-        margin: theme.spacing(3, 0, 0),
+        margin: theme.spacing(2, 0, 0),
     },
     buttonClose: {
         margin: theme.spacing(2, 0, 0),
@@ -50,5 +50,14 @@ export default makeStyles((theme) => ({
         display: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    buttonLink: {
+        margin: theme.spacing(2, 0, 0),
+        backgroundColor: '#0099ff',
+        color: "#ffffff",
+        '&:hover': {
+            backgroundColor: '#008ae6',
+            color: '#ffffff',
+        },
     },
 }));

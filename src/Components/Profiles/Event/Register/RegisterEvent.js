@@ -5,14 +5,14 @@ import useStyles from './styles';
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { Link } from 'react-router-dom'
-import MapRegister from '../../Map/RegisterMap/RegisterMap'
+import MapRegister from '../../../Map/RegisterMap/RegisterMap'
 import EventIcon from '@mui/icons-material/Event';
-import EventTypes from '../../../Static/select'
+import EventTypes from '../../../../Static/select'
 import Slider from '@mui/material/Slider';
 import MuiInput from '@mui/material/Input';
 import { styled } from '@mui/material/styles';
-import { regEvent } from "../../../Actions/Profiles/events";
-import CompWorker from '../../../Services/Profiles/companyWorker.service'
+import { regEvent } from "../../../../Actions/Profiles/events";
+import CompWorker from '../../../../Services/Profiles/companyWorker.service'
 import Stack from '@mui/material/Stack';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
