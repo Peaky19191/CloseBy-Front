@@ -14,7 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { Link } from 'react-router-dom'
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
-import PopupDelete from '../../../../Popup/PopupDelete/PopupDelete';
+import PopupDeleteEvent from '../../../../Popup/PopupDelete/Event/PopupDeleteEvent';
 import { setEventId } from "../../../../../Actions/Profiles/events";
 import { useDispatch } from "react-redux";
 import CompAdmin from '../../../../../Services/Profiles/companyAdmin.service'
@@ -100,11 +100,15 @@ const EventList = () => {
 
     const [idEventDelete, setIdEventDelete] = useState();
     const [eventTitleDelete, setEventTitleDelete] = useState();
+    const [eventCompanyDelete, setEventCompanyDelete] = useState();
+    const [eventStatusDelete, setEventStatusDelete] = useState();
 
 
-    const prepareDelete = (idEvent, eventTitle) => {
+    const prepareDelete = (idEvent, eventTitle, companyName, status) => {
         setIdEventDelete(idEvent);
         setEventTitleDelete(eventTitle);
+        setEventCompanyDelete(companyName);
+        setEventStatusDelete(status);
 
         showPopup();
     }
@@ -155,7 +159,7 @@ const EventList = () => {
                                     <IconButton component={Link} to="/eventDetailsEdit" onClick={() => { setIdEvent(item.id) }} aria-label="edit" size="large" >
                                         <SettingsApplicationsIcon className={classes.settingICon} />
                                     </IconButton>
-                                    <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.title) }} >
+                                    <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.title, item.company.name, item.status) }} >
                                         <DeleteIcon className={classes.deleteICon} />
                                     </IconButton>
                                 </TableCell>
@@ -188,7 +192,7 @@ const EventList = () => {
                     </TableFooter>
                 </Table>
             </TableContainer>
-            {isOpen && <PopupDelete handleClose={showPopup} handleDelete={deleteFromList} handleData={["Event", eventTitleDelete]} />}
+            {isOpen && <PopupDeleteEvent handleClose={showPopup} handleDelete={deleteFromList} handleData={["Event", eventTitleDelete, eventCompanyDelete, eventStatusDelete]} />}
         </>
     );
 };

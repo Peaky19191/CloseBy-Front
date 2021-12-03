@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom'
 import { setUserId } from "../../../../Actions/Profiles/user";
 import { useDispatch } from "react-redux";
 import { Paper } from '@material-ui/core';
-import PopupDelete from '../../../Popup/PopupDelete/PopupDelete';
+import PopupDeleteProfile from '../../../Popup/PopupDelete/Profile/PopupDeleteProfile';
 
 const UsersList = () => {
     const classes = useStyles();
@@ -130,7 +130,7 @@ const UsersList = () => {
                     </TableFooter>
                 </Table>
             </TableContainer>
-            {isOpen && <PopupDelete handleClose={showPopup} handleDelete={deleteFromList} handleData={["User", firstNameDelete, lastNameDelete, emailDelete]} />}
+            {isOpen && <PopupDeleteProfile handleClose={showPopup} handleDelete={deleteFromList} handleData={["User", firstNameDelete, lastNameDelete, emailDelete]} />}
         </>
     );
 };

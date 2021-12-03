@@ -14,7 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { Link } from 'react-router-dom'
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
-import PopupDelete from '../../../Popup/PopupDelete/PopupDelete';
+import PopupDeleteCompany from '../../../Popup/PopupDelete/Company/PopupDeleteCompany';
 import { setCompanyId } from "../../../../Actions/Profiles/company";
 import { setCompanyName } from "../../../../Actions/Profiles/company";
 
@@ -60,6 +60,8 @@ const CompanyList = () => {
 
 
     const prepareDelete = (idComp, compName) => {
+        dispatch(setCompanyId(idComp));
+
         setIdCompanyDelete(idComp);
         setCompanyNameDelete(compName);
 
@@ -136,7 +138,7 @@ const CompanyList = () => {
                     </TableFooter>
                 </Table>
             </TableContainer>
-            {isOpen && <PopupDelete handleClose={showPopup} handleDelete={deleteFromList} handleData={["Company", companyNameDelete]} />}
+            {isOpen && <PopupDeleteCompany handleClose={showPopup} handleDelete={deleteFromList} handleData={["Company", companyNameDelete]} />}
         </>
     );
 };

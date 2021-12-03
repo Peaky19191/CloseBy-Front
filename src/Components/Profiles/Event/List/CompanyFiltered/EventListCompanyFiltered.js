@@ -14,7 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { Link } from 'react-router-dom'
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
-import PopupDelete from '../../../../Popup/PopupDelete/PopupDelete';
+import PopupDeleteCompany from '../../../../Popup/PopupDelete/Company/PopupDeleteCompany';
 import { setEventId } from "../../../../../Actions/Profiles/events";
 import { useDispatch } from "react-redux";
 import CompAdmin from '../../../../../Services/Profiles/companyAdmin.service'
@@ -154,7 +154,7 @@ const EventList = () => {
                     </TableFooter>
                 </Table>
             </TableContainer>
-            {isOpen && <PopupDelete handleClose={showPopup} handleDelete={deleteFromList} handleData={["Event", eventTitleDelete]} />}
+            {isOpen && <PopupDeleteCompany handleClose={showPopup} handleDelete={deleteFromList} handleData={["Event", eventTitleDelete]} />}
         </>
     );
 };

@@ -14,7 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom'
-import PopupDelete from '../../../../Popup/PopupDelete/PopupDelete';
+import PopupDeleteProfile from '../../../../Popup/PopupDelete/Profile/PopupDeleteProfile';
 import { setCompAdminId } from "../../../../../Actions/Profiles/companyAdmin";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -166,7 +166,7 @@ const CompanyAdminsList = () => {
                     </TableFooter>
                 </Table>
             </TableContainer>
-            {isOpen && <PopupDelete handleClose={showPopup} handleDelete={deleteFromList} handleData={["Admin", firstNameDelete, lastNameDelete, emailDelete, compNameDelete]} />}
+            {isOpen && <PopupDeleteProfile handleClose={showPopup} handleDelete={deleteFromList} handleData={["Admin", firstNameDelete, lastNameDelete, emailDelete, compNameDelete]} />}
         </>
     );
 };
