@@ -11,9 +11,13 @@ import { useHistory } from "react-router-dom";
 import CompWorker from '../../../../Services/Profiles/companyWorker.service'
 import CompAdmin from '../../../../Services/Profiles/companyAdmin.service'
 import Events from '../../../../Services/Profiles/event.service'
+import { setCompanyName } from "../../../../Actions/Profiles/company";
 
 const CompanyDetails = () => {
     const classes = useStyles();
+
+    const dispatch = useDispatch();
+
     const companyId = useSelector(state => state.company.id_company);
 
     const [page, setPage] = useState(0);
@@ -99,10 +103,13 @@ const CompanyDetails = () => {
     }
     useEffect(selectEventsList, [companyId]);
 
+    const setCompanyDispatch = (compName) => {
+        dispatch(setCompanyName(compName))
+    }
+
     const [successful, setSuccessful] = useState(false);
 
     const { message } = useSelector(state => state.message);
-    const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -165,13 +172,13 @@ const CompanyDetails = () => {
                         </Grid>
                     </Grid>
                     <Grid className={classes.buttonsContainer} spacing={2}>
-                        <Button disabled={(eventsList.length !== 0) ? false : true} className={classes.buttonLink} component={Link} to="/eventListCompanyFilter" fullWidth variant="contained" color="primary" >
+                        <Button onClick={() => { setCompanyDispatch(name) }} disabled={(eventsList.length !== 0) ? false : true} className={classes.buttonLink} component={Link} to="/eventListCompanyFilter" fullWidth variant="contained" color="primary" >
                             {(eventsList.length !== 0) ? "Events" : "No Event"}
                         </Button>
-                        <Button disabled={(compAdminsList.length !== 0) ? false : true} className={classes.buttonLink} component={Link} to="/adminListCompanyFilter" fullWidth variant="contained" color="primary" >
+                        <Button onClick={() => { setCompanyDispatch(name) }} disabled={(compAdminsList.length !== 0) ? false : true} className={classes.buttonLink} component={Link} to="/adminListCompanyFilter" fullWidth variant="contained" color="primary" >
                             {(compAdminsList.length !== 0) ? "Admins" : "No Admin"}
                         </Button>
-                        <Button disabled={(compWorkersList.length !== 0) ? false : true} className={classes.buttonLink} component={Link} to="/workerListCompanyFilter" fullWidth variant="contained" color="primary" >
+                        <Button onClick={() => { setCompanyDispatch(name) }} disabled={(compWorkersList.length !== 0) ? false : true} className={classes.buttonLink} component={Link} to="/workerListCompanyFilter" fullWidth variant="contained" color="primary" >
                             {(compWorkersList.length !== 0) ? "Workers" : "No Worker"}
                         </Button>
                         {editMode ?
