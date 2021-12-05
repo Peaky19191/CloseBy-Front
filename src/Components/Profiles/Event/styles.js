@@ -11,12 +11,17 @@ export default makeStyles((theme) => ({
     card: {
         height: '100%',
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        borderRadius: "10px",
+
     },
     cardMedia: {
         paddingTop: '56.25%'  //16:9
     },
     cardContent: {
         flexGrow: 1,
-    }
+    },
+    buttonPaper: {
+        margin: theme.spacing(2, 0, 0),
+    },
 }));

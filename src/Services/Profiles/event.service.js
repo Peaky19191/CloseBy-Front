@@ -51,7 +51,7 @@ const editEventAPI = (eventId, title, companyId, loc_lat, loc_lng, startDate, en
 };
 
 const getEventsListId = (pageNumber, rowsPerPage, companyId) => {
-    return axios.post(SERVER_API + API_URL + "list-worker",
+    return axios.post(SERVER_API + API_URL + "list-for-worker",
         {
             page: pageNumber,
             limit: rowsPerPage,
