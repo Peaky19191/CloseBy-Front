@@ -299,25 +299,29 @@ const EventDetailsEdit = () => {
                                     Company Details
                                 </Button>
                             </Grid>}
-                        <Grid item className={classes.buttonSubmit}>
-                            {editMode ?
-                                <Grid container className={classes.buttonsContainer2}>
-                                    <Button className={classes.buttonSubmit} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >
-                                        Stop Editinig
-                                    </Button>
+                        {(currentProfile.role === "CompanyWorker") &&
+                            <>
+                                ( <Grid item className={classes.buttonSubmit}>
+                                    {editMode ?
+                                        <Grid container className={classes.buttonsContainer2}>
+                                            <Button className={classes.buttonSubmit} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >
+                                                Stop Editinig
+                                            </Button>
+                                        </Grid>
+                                        :
+                                        <Button onClick={() => { startEditing() }} fullWidth variant="contained" color="primary" >
+                                            Edit
+                                        </Button>
+                                    }
                                 </Grid>
-                                :
-                                <Button onClick={() => { startEditing() }} fullWidth variant="contained" color="primary" >
-                                    Edit
-                                </Button>
-                            }
-                        </Grid>
-                        {editMode &&
-                            <Grid item className={classes.buttonClose}>
-                                <Button onClick={() => { handleSubmit() }} className={classes.buttonEditSave} fullWidth variant="contained"  >
-                                    Save
-                                </Button>
-                            </Grid>}
+                                {editMode &&
+                                    <Grid item className={classes.buttonClose}>
+                                        <Button onClick={() => { handleSubmit() }} className={classes.buttonEditSave} fullWidth variant="contained"  >
+                                            Save
+                                        </Button>
+                                    </Grid>})
+                            </>
+                        }
                     </Grid>
                 </form>
             </Paper>
