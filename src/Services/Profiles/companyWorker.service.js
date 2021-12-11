@@ -39,7 +39,7 @@ const getCompanyWorkersList = (pageNumber, rowsPerPage, companyId) => {
         {
             page: pageNumber,
             limit: rowsPerPage,
-            id: companyId
+            companyId: companyId
         },
         {
             headers: authHeader()

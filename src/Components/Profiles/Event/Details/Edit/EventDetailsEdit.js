@@ -301,7 +301,7 @@ const EventDetailsEdit = () => {
                             </Grid>}
                         {(currentProfile.role === "CompanyWorker") &&
                             <>
-                                ( <Grid item className={classes.buttonSubmit}>
+                                <Grid item className={classes.buttonSubmit}>
                                     {editMode ?
                                         <Grid container className={classes.buttonsContainer2}>
                                             <Button className={classes.buttonSubmit} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >
@@ -319,7 +319,7 @@ const EventDetailsEdit = () => {
                                         <Button onClick={() => { handleSubmit() }} className={classes.buttonEditSave} fullWidth variant="contained"  >
                                             Save
                                         </Button>
-                                    </Grid>})
+                                    </Grid>}
                             </>
                         }
                     </Grid>
