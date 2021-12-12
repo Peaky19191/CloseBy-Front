@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Company from '../../../../Services/Profiles/company.service'
+import { getCompanyListDispatch, deleteCompanyDispatch } from '../../../../Actions/Profiles/company';
 import useStyles from './styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -17,31 +17,35 @@ import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@
 import PopupDeleteCompany from '../../../Popup/PopupDelete/Company/PopupDeleteCompany';
 import { setCompanyId } from "../../../../Actions/Profiles/company";
 import { setCompanyName } from "../../../../Actions/Profiles/company";
+import { useSelector } from "react-redux";
 
 import { useDispatch } from "react-redux";
 import moment from 'moment'
 
 const CompanyList = () => {
     const classes = useStyles();
-    const [company, setCompany] = useState([]);
+    // const [company, setCompany] = useState([]);
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [count, setCount] = useState(0);
+    // const [count, setCount] = useState(0);
 
+    const [listLoaded, setListLoaded] = useState(false);
+    const company = useSelector(state => ((listLoaded === false) ? "" : state.company.company_list.items));
+    const count = useSelector(state => ((listLoaded === false) ? "" : state.company.company_list.count));
 
     const getList = () => {
-        Company.getCompanyList(page, rowsPerPage)
-            .then((response) => {
-                const companysTemp = response.data.items;
-                const totalPages = response.data.count;
-
-                setCompany(companysTemp);
-                setCount(totalPages);
+        dispatch(getCompanyListDispatch(page, rowsPerPage))
+            .then(() => {
+                setListLoaded(true);
+                console.log(company);
             })
-            .catch((e) => {
-                console.log(e);
+            .catch((error) => {
+                // setLoading(false);
+                setListLoaded(false);
+                console.log(error);
             });
+
     };
 
     useEffect(getList, [page, rowsPerPage]);
@@ -72,10 +76,17 @@ const CompanyList = () => {
         setIsOpen(!isOpen);
     }
 
-    const deleteFromList = async () => {
-        await Company.deleteCompany(idCompanyDelete);
-        showPopup();
-        getList();
+    const deleteFromList = () => {
+        dispatch(deleteCompanyDispatch(idCompanyDelete))
+            .then(() => {
+                showPopup();
+                getList();
+            })
+            .catch((error) => {
+                // setLoading(false);
+                setListLoaded(false);
+                console.log(error);
+            });
     }
 
     const handleChangePage = (event, newPage) => {
@@ -95,24 +106,26 @@ const CompanyList = () => {
                             <TableCell className={classes.tableCellTitle}>Company Name</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Created At</TableCell>
                             <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
-
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {company.map((item) => (
-                            <TableRow key={item.id} >
-                                <TableCell component="th" scope="row">{item.name}</TableCell>
-                                <TableCell align="center">{moment(item.createdAt).format('MM/DD/YYYY HH:mm')}</TableCell>
-                                <TableCell align="center">
-                                    <IconButton component={Link} to="/companyDetails" onClick={() => { setCompanyDispatch(item.id, item.name) }} aria-label="edit" size="large" >
-                                        <SettingsApplicationsIcon className={classes.settingICon} />
-                                    </IconButton>
-                                    <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.name) }} >
-                                        <DeleteIcon className={classes.deleteICon} />
-                                    </IconButton>
-                                </TableCell>
-                            </TableRow>
-                        ))}
+                        {(listLoaded === true) &&
+                            <>
+                                {company.map((item) => (
+                                    <TableRow key={item.id} >
+                                        <TableCell component="th" scope="row">{item.name}</TableCell>
+                                        <TableCell align="center">{moment(item.createdAt).format('MM/DD/YYYY HH:mm')}</TableCell>
+                                        <TableCell align="center">
+                                            <IconButton component={Link} to="/companyDetails" onClick={() => { setCompanyDispatch(item.id, item.name) }} aria-label="edit" size="large" >
+                                                <SettingsApplicationsIcon className={classes.settingICon} />
+                                            </IconButton>
+                                            <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.name) }} >
+                                                <DeleteIcon className={classes.deleteICon} />
+                                            </IconButton>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </>}
                     </TableBody>
                     <TableFooter>
                         <TableRow>

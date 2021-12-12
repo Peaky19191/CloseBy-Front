@@ -12,6 +12,7 @@ import CompWorker from '../../../../Services/Profiles/companyWorker.service'
 import CompAdmin from '../../../../Services/Profiles/companyAdmin.service'
 import Events from '../../../../Services/Profiles/event.service'
 import { setCompanyName } from "../../../../Actions/Profiles/company";
+import { getCompanyIdDispatch } from '../../../../Actions/Profiles/company';
 
 const CompanyDetails = () => {
     const classes = useStyles();
@@ -20,6 +21,11 @@ const CompanyDetails = () => {
 
     const companyId = useSelector(state => state.company.id_company);
 
+    const [edited, setEdited] = useState(false);
+    const [listLoaded, setListLoaded] = useState(false);
+    const nameRedux = useSelector(state => ((listLoaded === false) ? "" : state.company.get_company_id.name));
+    const dateCreated = useSelector(state => ((listLoaded === false) ? "" : state.company.get_company_id.createdAt));
+
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -27,9 +33,9 @@ const CompanyDetails = () => {
 
     const onChangeName = (e) => {
         const name = e.target.value;
+        setEdited(true);
         setName(name);
     };
-    const [dateCreated, setDateCreated] = useState("");
 
     const [disaled, setDisabled] = useState(true);
     const [editMode, setEditMode] = useState(false);
@@ -45,12 +51,9 @@ const CompanyDetails = () => {
     }
 
     const getCompanyDetails = () => {
-        Company.getCompanyId(companyId)
-            .then((response) => {
-                const company = response.data;
-
-                setName(company.name);
-                setDateCreated(company.createdAt);
+        dispatch(getCompanyIdDispatch(companyId))
+            .then(() => {
+                setListLoaded(true);
             })
             .catch((e) => {
                 console.log(e);
@@ -115,7 +118,7 @@ const CompanyDetails = () => {
         e.preventDefault();
         setSuccessful(false);
         if (validate())
-            dispatch(editCompany(companyId, name))
+            dispatch(editCompany(companyId, (edited === true ? name : nameRedux)))
                 .then(() => {
                     setSuccessful(true);
                 })
@@ -165,7 +168,7 @@ const CompanyDetails = () => {
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
-                            <TextField value={name} label="Company Name" onChange={onChangeName} InputProps={{ readOnly: disaled }} name="name" htmlFor="name" variant="outlined" fullWidth />
+                            <TextField value={(edited === true ? name : nameRedux)} label="Company Name" onChange={onChangeName} InputProps={{ readOnly: disaled }} name="name" htmlFor="name" variant="outlined" fullWidth />
                         </Grid>
                         <Grid item xs={12} >
                             <TextField value={dateCreated} label="Created Date" InputProps={{ readOnly: true, disabled: editMode }} name="date" htmlFor="date" variant="outlined" fullWidth />

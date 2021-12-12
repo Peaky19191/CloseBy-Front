@@ -32,7 +32,7 @@ const RegCompAdmin = () => {
     const [company, setCompany] = useState([]);
 
     const getList = () => {
-        Company.getCompanyList(page, rowsPerPage)
+        Company.getCompanyListApi(page, rowsPerPage)
             .then((response) => {
                 const companysTemp = response.data.items;
 
