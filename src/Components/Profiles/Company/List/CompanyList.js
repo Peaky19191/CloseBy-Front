@@ -15,8 +15,7 @@ import { Link } from 'react-router-dom'
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
 import PopupDeleteCompany from '../../../Popup/PopupDelete/Company/PopupDeleteCompany';
-import { setCompanyId } from "../../../../Actions/Profiles/company";
-import { setCompanyName } from "../../../../Actions/Profiles/company";
+import { setCompanyDispatch } from "../../../../Actions/Profiles/company";
 import { useSelector } from "react-redux";
 
 import { useDispatch } from "react-redux";
@@ -52,9 +51,8 @@ const CompanyList = () => {
 
     const dispatch = useDispatch();
 
-    const setCompanyDispatch = (idComp, compName) => {
-        dispatch(setCompanyId(idComp))
-        dispatch(setCompanyName(compName))
+    const dispatchCompany = (company) => {
+        dispatch(setCompanyDispatch(company))
     }
 
     const [isOpen, setIsOpen] = useState(false);
@@ -63,11 +61,11 @@ const CompanyList = () => {
     const [companyNameDelete, setCompanyNameDelete] = useState();
 
 
-    const prepareDelete = (idComp, compName) => {
-        dispatch(setCompanyId(idComp));
+    const prepareDelete = (company) => {
+        dispatch(setCompanyDispatch(company));
 
-        setIdCompanyDelete(idComp);
-        setCompanyNameDelete(compName);
+        setIdCompanyDelete(company.id);
+        setCompanyNameDelete(company.name);
 
         showPopup();
     }
@@ -116,10 +114,10 @@ const CompanyList = () => {
                                         <TableCell component="th" scope="row">{item.name}</TableCell>
                                         <TableCell align="center">{moment(item.createdAt).format('MM/DD/YYYY HH:mm')}</TableCell>
                                         <TableCell align="center">
-                                            <IconButton component={Link} to="/companyDetails" onClick={() => { setCompanyDispatch(item.id, item.name) }} aria-label="edit" size="large" >
+                                            <IconButton component={Link} to="/companyDetails" onClick={() => { dispatchCompany(item) }} aria-label="edit" size="large" >
                                                 <SettingsApplicationsIcon className={classes.settingICon} />
                                             </IconButton>
-                                            <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.name) }} >
+                                            <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item) }} >
                                                 <DeleteIcon className={classes.deleteICon} />
                                             </IconButton>
                                         </TableCell>

@@ -22,7 +22,7 @@ import moment from 'moment'
 import { setNewEventLoc } from "../../../../../Actions/Profiles/events";
 import { setCurrentEventLoc } from "../../../../../Actions/Profiles/events";
 import { useHistory } from "react-router-dom";
-import { setCompanyId } from "../../../../../Actions/Profiles/company";
+import { setCompanyDispatch } from "../../../../../Actions/Profiles/company";
 import BusinessIcon from '@mui/icons-material/Business';
 
 const Input = styled(MuiInput)`
@@ -99,8 +99,7 @@ const EventDetailsEdit = () => {
         }
     };
 
-    const [compId, setCompId] = useState("");
-    const [compName, setCompName] = useState("");
+    const [company, setCompany] = useState("");
 
     const getEventDetails = () => {
         Event.getEventId(eventId)
@@ -115,8 +114,7 @@ const EventDetailsEdit = () => {
                 setType(event.type);
                 setStatus(event.status);
                 setLimit(event.ticketLimit);
-                setCompId(event.company.id);
-                setCompName(event.company.name);
+                setCompany(event.company);
 
                 dispatch(setNewEventLoc(event.localization.latitude, event.localization.longitude));
             })
@@ -131,8 +129,8 @@ const EventDetailsEdit = () => {
     const { message } = useSelector(state => state.message);
     const dispatch = useDispatch();
 
-    const setIdCompany = (id) => {
-        dispatch(setCompanyId(id))
+    const dispatchCompany = (company) => {
+        dispatch(setCompanyDispatch(company))
     }
 
     const [disaled, setDisabled] = useState(true);
@@ -150,7 +148,7 @@ const EventDetailsEdit = () => {
 
     const handleSubmit = () => {
         setSuccessful(false);
-        dispatch(editEvent(eventIdToPass, title, compId, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type))
+        dispatch(editEvent(eventIdToPass, title, company.id, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type))
             .then(() => {
                 setSuccessful(true);
             })
@@ -294,7 +292,7 @@ const EventDetailsEdit = () => {
                         </Grid>
                         {(currentProfile.role === "GlobalAdmin") &&
                             <Grid item className={classes.buttonClose}>
-                                <Button component={Link} to="/companyDetails" onClick={() => { setIdCompany(compId) }} className={classes.buttonLink} fullWidth variant="contained" >
+                                <Button component={Link} to="/companyDetails" onClick={() => { dispatchCompany(company) }} className={classes.buttonLink} fullWidth variant="contained" >
                                     {/* <BusinessIcon /> */}
                                     Company Details
                                 </Button>

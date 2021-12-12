@@ -9,7 +9,7 @@ import { editCompAdmin } from "../../../../Actions/Profiles/companyAdmin";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { setCompanyId } from "../../../../Actions/Profiles/company";
+import { setCompanyDispatch } from "../../../../Actions/Profiles/company";
 import BusinessIcon from '@mui/icons-material/Business';
 
 const CompAdminDetails = () => {
@@ -21,8 +21,7 @@ const CompAdminDetails = () => {
     const [email, setEmail] = useState("");
     const [gender, setGender] = useState("");
     const [errors, setErrors] = useState({});
-    const [compId, setCompId] = useState("");
-    const [compName, setCompName] = useState("");
+    const [company, setCompany] = useState("");
 
     const enabled =
         firstName.length > 0 &&
@@ -67,14 +66,12 @@ const CompAdminDetails = () => {
         CompAdmin.getCompanyAdminId(compAdminId)
             .then((response) => {
                 const compAdmin = response.data;
-                console.log(compAdmin);
 
                 setFirstName(compAdmin.firstName);
                 setLastName(compAdmin.lastName);
                 setEmail(compAdmin.email);
                 setGender(compAdmin.gender);
-                setCompId(compAdmin.company.id);
-                setCompName(compAdmin.company.name);
+                setCompany(compAdmin.company);
             })
             .catch((e) => {
                 console.log(e);
@@ -87,8 +84,8 @@ const CompAdminDetails = () => {
     const { message } = useSelector(state => state.message);
     const dispatch = useDispatch();
 
-    const setIdCompany = (id) => {
-        dispatch(setCompanyId(id))
+    const dispatchCompany = (company) => {
+        dispatch(setCompanyDispatch(company))
     }
 
     const handleSubmit = (e) => {
@@ -164,7 +161,7 @@ const CompAdminDetails = () => {
                         </Grid>
                     </Grid>
                     <Grid className={classes.buttonsContainer}>
-                        <Button className={classes.buttonCompanyDetails} component={Link} to="/companyDetails" onClick={() => { setIdCompany(compId) }} fullWidth variant="contained" color="primary" >
+                        <Button className={classes.buttonCompanyDetails} component={Link} to="/companyDetails" onClick={() => { dispatchCompany(company) }} fullWidth variant="contained" color="primary" >
                             {/* <BusinessIcon /> */}
                             Company Details
                         </Button>

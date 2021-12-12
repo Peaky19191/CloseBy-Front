@@ -18,7 +18,7 @@ import Events from '../../../../Services/Profiles/event.service'
 const PopupDeleteCompany = (props) => {
     const classes = useStyles();
 
-    const companyId = useSelector(state => state.company.id_company);
+    const company = useSelector(state => state.company.company);
 
 
     const [page, setPage] = useState(0);
@@ -27,7 +27,7 @@ const PopupDeleteCompany = (props) => {
     const [compWorkersList, setCompWorkersList] = useState([]);
 
     const selectCompanyWorkersList = () => {
-        CompWorker.getCompanyWorkersList(page, rowsPerPage, companyId)
+        CompWorker.getCompanyWorkersList(page, rowsPerPage, company.id)
             .then((response) => {
                 const compWorkersList = response.data.items;
 
@@ -37,12 +37,12 @@ const PopupDeleteCompany = (props) => {
                 console.log(e);
             });
     }
-    useEffect(selectCompanyWorkersList, [companyId]);
+    useEffect(selectCompanyWorkersList, [company.id]);
 
     const [compAdminsList, setCompAdminsList] = useState([]);
 
     const selectCompanyAdminsList = () => {
-        CompAdmin.getCompanyAdminsList(page, rowsPerPage, companyId)
+        CompAdmin.getCompanyAdminsList(page, rowsPerPage, company.id)
             .then((response) => {
                 const compAdminsList = response.data.items;
 
@@ -52,12 +52,12 @@ const PopupDeleteCompany = (props) => {
                 console.log(e);
             });
     }
-    useEffect(selectCompanyAdminsList, [companyId]);
+    useEffect(selectCompanyAdminsList, [company.id]);
 
     const [eventsList, setEventList] = useState([]);
 
     const selectEventsList = () => {
-        Events.getEventsListId(page, rowsPerPage, companyId)
+        Events.getEventsListId(page, rowsPerPage, company.id)
             .then((response) => {
                 const eventsList = response.data.items;
 
@@ -67,7 +67,7 @@ const PopupDeleteCompany = (props) => {
                 console.log(e);
             });
     }
-    useEffect(selectEventsList, [companyId]);
+    useEffect(selectEventsList, [company.id]);
 
     const disable = ((compAdminsList.length !== 0) || (compWorkersList.length !== 0) || (eventsList.length !== 0));
 

@@ -22,7 +22,7 @@ import { useHistory } from "react-router-dom";
 const CompanyAdminsList = () => {
     const classes = useStyles();
 
-    const { company: currentCompany } = useSelector((state) => state);
+    const { company: currentCompany } = useSelector((state) => state.company);
     const { profile: currentProfile } = useSelector((state) => state.auth);
 
     const [adminsComp, setAdminsComp] = useState([]);
@@ -32,7 +32,7 @@ const CompanyAdminsList = () => {
     const [count, setCount] = useState(0);
 
     const getList = () => {
-        CompanyAdmin.getCompanyAdminsList(page, rowsPerPage, currentCompany.id_company)
+        CompanyAdmin.getCompanyAdminsList(page, rowsPerPage, currentCompany.id)
             .then((response) => {
                 const adminsComp = response.data.items;
                 const totalPages = response.data.count;
@@ -103,7 +103,7 @@ const CompanyAdminsList = () => {
         <>
             <Container className={classes.container}>
                 <Paper className={classes.paper} >
-                    <Typography component="h1" variant="h4">Admins of the Company - {currentCompany.name_company} </Typography>
+                    <Typography component="h1" variant="h4">Admins of the Company - {currentCompany.name} </Typography>
                 </Paper>
             </Container>
             <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >

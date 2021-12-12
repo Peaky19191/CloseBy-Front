@@ -2,10 +2,8 @@ import {
     REGISTER_COMPANY_SUCCESS,
     REGISTER_COMPANY_FAIL,
     SET_MESSAGE,
-    SET_COMPANY_ID,
-    CLEAR_COMPANY_ID,
-    SET_COMPANY_NAME,
-    CLEAR_COMPANY_NAME,
+    SET_COMPANY,
+    CLEAR_COMPANY,
     EDIT_COMPANY_SUCCESS,
     EDIT_COMPANY_FAIL,
     GET_COMPANY_LIST_SUCCESS,
@@ -54,29 +52,16 @@ export const regCompany = (name) => (dispatch) => {
     );
 };
 
-export const setCompanyId = (idToPass) => (dispatch) => {
+export const setCompanyDispatch = (company) => (dispatch) => {
     dispatch({
-        type: SET_COMPANY_ID,
-        payload: idToPass,
+        type: SET_COMPANY,
+        payload: company,
     });
 };
 
-export const clearCompanyId = () => (dispatch) => {
+export const clearCompanyDispatch = () => (dispatch) => {
     dispatch({
-        type: CLEAR_COMPANY_ID,
-    });
-};
-
-export const setCompanyName = (name) => (dispatch) => {
-    dispatch({
-        type: SET_COMPANY_NAME,
-        payload: name,
-    });
-};
-
-export const clearCompanyName = () => (dispatch) => {
-    dispatch({
-        type: CLEAR_COMPANY_NAME,
+        type: CLEAR_COMPANY,
     });
 };
 

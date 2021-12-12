@@ -9,7 +9,7 @@ import { editCompWorker } from "../../../../Actions/Profiles/companyWorker";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { setCompanyId } from "../../../../Actions/Profiles/company";
+import { setCompanyDispatch } from "../../../../Actions/Profiles/company";
 import BusinessIcon from '@mui/icons-material/Business';
 
 const CompWorkerDetails = () => {
@@ -19,8 +19,7 @@ const CompWorkerDetails = () => {
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
 
-    const [compId, setCompId] = useState("");
-    const [compName, setCompName] = useState("");
+    const [company, setCompany] = useState("");
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -76,8 +75,7 @@ const CompWorkerDetails = () => {
                 setLastName(compWorker.lastName);
                 setEmail(compWorker.email);
                 setGender(compWorker.gender);
-                setCompId(compWorker.company.id);
-                setCompName(compWorker.company.name);
+                setCompany(compWorker.company);
             })
             .catch((e) => {
                 console.log(e);
@@ -90,8 +88,8 @@ const CompWorkerDetails = () => {
     const { message } = useSelector(state => state.message);
     const dispatch = useDispatch();
 
-    const setIdCompany = (id) => {
-        dispatch(setCompanyId(id))
+    const dispatchCompany = (company) => {
+        dispatch(setCompanyDispatch(company))
     }
 
     const handleSubmit = (e) => {
@@ -167,7 +165,7 @@ const CompWorkerDetails = () => {
                     </Grid>
                     <Grid className={classes.buttonsContainer} >
                         {(currentProfile.role === "GlobalAdmin") &&
-                            <Button className={classes.buttonCompanyDetails} component={Link} to="/companyDetails" onClick={() => { setIdCompany(compId) }} fullWidth variant="contained" color="primary" >
+                            <Button className={classes.buttonCompanyDetails} component={Link} to="/companyDetails" onClick={() => { dispatchCompany(company) }} fullWidth variant="contained" color="primary" >
                                 {/* <BusinessIcon /> */}
                                 Company Details
                             </Button>}

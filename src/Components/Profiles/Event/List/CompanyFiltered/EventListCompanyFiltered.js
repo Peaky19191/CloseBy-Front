@@ -26,7 +26,7 @@ import { useHistory } from "react-router-dom";
 const EventList = () => {
     const classes = useStyles();
 
-    const { company: currentCompany } = useSelector((state) => state);
+    const { company: currentCompany } = useSelector((state) => state.company);
 
     const [event, setEvent] = useState([]);
 
@@ -35,7 +35,7 @@ const EventList = () => {
     const [count, setCount] = useState(0);
 
     const getList = () => {
-        Event.getEventsListId(page, rowsPerPage, currentCompany.id_company)
+        Event.getEventsListId(page, rowsPerPage, currentCompany.id)
             .then((response) => {
                 const eventTemp = response.data.items;
                 const totalPages = response.data.count;
@@ -96,7 +96,7 @@ const EventList = () => {
         <>
             <Container className={classes.container}>
                 <Paper className={classes.paper} >
-                    <Typography component="h1" variant="h4">Events of the Company - {currentCompany.name_company} </Typography>
+                    <Typography component="h1" variant="h4">Events of the Company - {currentCompany.name} </Typography>
                 </Paper>
             </Container>
             <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >

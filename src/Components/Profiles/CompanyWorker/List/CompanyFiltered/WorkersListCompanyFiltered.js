@@ -24,7 +24,7 @@ import { useHistory } from "react-router-dom";
 const CompanyWorkersList = () => {
     const classes = useStyles();
 
-    const { company: currentCompany } = useSelector((state) => state);
+    const { company: currentCompany } = useSelector((state) => state.company);
 
     const [compWorkers, setCompWorkers] = useState([]);
 
@@ -33,7 +33,7 @@ const CompanyWorkersList = () => {
     const [count, setCount] = useState(0);
 
     const getList = () => {
-        CompWorker.getCompanyWorkersList(page, rowsPerPage, currentCompany.id_company)
+        CompWorker.getCompanyWorkersList(page, rowsPerPage, currentCompany.id)
             .then((response) => {
                 const compWorkers = response.data.items;
                 const totalPages = response.data.count;
@@ -105,7 +105,7 @@ const CompanyWorkersList = () => {
         <>
             <Container className={classes.container}>
                 <Paper className={classes.paper} >
-                    <Typography component="h1" variant="h4">Workers of the Company - {currentCompany.name_company} </Typography>
+                    <Typography component="h1" variant="h4">Workers of the Company - {currentCompany.name} </Typography>
                 </Paper>
             </Container>
             <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >

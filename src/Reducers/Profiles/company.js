@@ -1,10 +1,8 @@
 import {
     REGISTER_COMPANY_SUCCESS,
     REGISTER_COMPANY_FAIL,
-    SET_COMPANY_ID,
-    CLEAR_COMPANY_ID,
-    SET_COMPANY_NAME,
-    CLEAR_COMPANY_NAME,
+    SET_COMPANY,
+    CLEAR_COMPANY,
     EDIT_COMPANY_SUCCESS,
     EDIT_COMPANY_FAIL,
     GET_COMPANY_LIST_SUCCESS,
@@ -63,17 +61,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
             };
-        case SET_COMPANY_ID:
-            return { ...state, id_company: payload };
+        case SET_COMPANY:
+            return { ...state, company: payload };
 
-        case CLEAR_COMPANY_ID:
-            return { ...state, id_company: "" };
+        case CLEAR_COMPANY:
+            return { ...state, company: "" };
 
-        case SET_COMPANY_NAME:
-            return { ...state, name_company: payload };
-
-        case CLEAR_COMPANY_NAME:
-            return { ...state, name_company: "" };
         default:
             return state;
     }

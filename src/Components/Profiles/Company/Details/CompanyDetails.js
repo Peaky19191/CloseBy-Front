@@ -11,7 +11,6 @@ import { useHistory } from "react-router-dom";
 import CompWorker from '../../../../Services/Profiles/companyWorker.service'
 import CompAdmin from '../../../../Services/Profiles/companyAdmin.service'
 import Events from '../../../../Services/Profiles/event.service'
-import { setCompanyName } from "../../../../Actions/Profiles/company";
 import { getCompanyIdDispatch } from '../../../../Actions/Profiles/company';
 
 const CompanyDetails = () => {
@@ -19,7 +18,7 @@ const CompanyDetails = () => {
 
     const dispatch = useDispatch();
 
-    const companyId = useSelector(state => state.company.id_company);
+    const company = useSelector(state => state.company.company);
 
     const [edited, setEdited] = useState(false);
     const [listLoaded, setListLoaded] = useState(false);
@@ -51,7 +50,7 @@ const CompanyDetails = () => {
     }
 
     const getCompanyDetails = () => {
-        dispatch(getCompanyIdDispatch(companyId))
+        dispatch(getCompanyIdDispatch(company.id))
             .then(() => {
                 setListLoaded(true);
             })
@@ -59,12 +58,12 @@ const CompanyDetails = () => {
                 console.log(e);
             });
     }
-    useEffect(getCompanyDetails, [companyId]);
+    useEffect(getCompanyDetails, [company.id]);
 
     const [compWorkersList, setCompWorkersList] = useState([]);
 
     const selectCompanyWorkersList = () => {
-        CompWorker.getCompanyWorkersList(page, rowsPerPage, companyId)
+        CompWorker.getCompanyWorkersList(page, rowsPerPage, company.id)
             .then((response) => {
                 const compWorkersList = response.data.items;
 
@@ -74,12 +73,12 @@ const CompanyDetails = () => {
                 console.log(e);
             });
     }
-    useEffect(selectCompanyWorkersList, [companyId]);
+    useEffect(selectCompanyWorkersList, [company.id]);
 
     const [compAdminsList, setCompAdminsList] = useState([]);
 
     const selectCompanyAdminsList = () => {
-        CompAdmin.getCompanyAdminsList(page, rowsPerPage, companyId)
+        CompAdmin.getCompanyAdminsList(page, rowsPerPage, company.id)
             .then((response) => {
                 const compAdminsList = response.data.items;
 
@@ -89,12 +88,12 @@ const CompanyDetails = () => {
                 console.log(e);
             });
     }
-    useEffect(selectCompanyAdminsList, [companyId]);
+    useEffect(selectCompanyAdminsList, [company.id]);
 
     const [eventsList, setEventList] = useState([]);
 
     const selectEventsList = () => {
-        Events.getEventsListId(page, rowsPerPage, companyId)
+        Events.getEventsListId(page, rowsPerPage, company.id)
             .then((response) => {
                 const eventsList = response.data.items;
 
@@ -104,11 +103,7 @@ const CompanyDetails = () => {
                 console.log(e);
             });
     }
-    useEffect(selectEventsList, [companyId]);
-
-    const setCompanyDispatch = (compName) => {
-        dispatch(setCompanyName(compName))
-    }
+    useEffect(selectEventsList, [company.id]);
 
     const [successful, setSuccessful] = useState(false);
 
@@ -118,7 +113,7 @@ const CompanyDetails = () => {
         e.preventDefault();
         setSuccessful(false);
         if (validate())
-            dispatch(editCompany(companyId, (edited === true ? name : nameRedux)))
+            dispatch(editCompany(company.id, (edited === true ? name : nameRedux)))
                 .then(() => {
                     setSuccessful(true);
                 })
@@ -175,13 +170,13 @@ const CompanyDetails = () => {
                         </Grid>
                     </Grid>
                     <Grid className={classes.buttonsContainer} spacing={2}>
-                        <Button onClick={() => { setCompanyDispatch(name) }} disabled={(eventsList.length !== 0) ? false : true} className={classes.buttonLink} component={Link} to="/eventListCompanyFilter" fullWidth variant="contained" color="primary" >
+                        <Button disabled={(eventsList.length !== 0) ? false : true} className={classes.buttonLink} component={Link} to="/eventListCompanyFilter" fullWidth variant="contained" color="primary" >
                             {(eventsList.length !== 0) ? "Events" : "No Event"}
                         </Button>
-                        <Button onClick={() => { setCompanyDispatch(name) }} disabled={(compAdminsList.length !== 0) ? false : true} className={classes.buttonLink} component={Link} to="/adminListCompanyFilter" fullWidth variant="contained" color="primary" >
+                        <Button disabled={(compAdminsList.length !== 0) ? false : true} className={classes.buttonLink} component={Link} to="/adminListCompanyFilter" fullWidth variant="contained" color="primary" >
                             {(compAdminsList.length !== 0) ? "Admins" : "No Admin"}
                         </Button>
-                        <Button onClick={() => { setCompanyDispatch(name) }} disabled={(compWorkersList.length !== 0) ? false : true} className={classes.buttonLink} component={Link} to="/workerListCompanyFilter" fullWidth variant="contained" color="primary" >
+                        <Button disabled={(compWorkersList.length !== 0) ? false : true} className={classes.buttonLink} component={Link} to="/workerListCompanyFilter" fullWidth variant="contained" color="primary" >
                             {(compWorkersList.length !== 0) ? "Workers" : "No Worker"}
                         </Button>
                         {editMode ?
