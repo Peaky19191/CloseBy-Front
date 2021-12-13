@@ -22,6 +22,7 @@ import moment from 'moment'
 import { setNewEventLoc } from "../../../../../Actions/Profiles/events";
 import { setCurrentEventLoc } from "../../../../../Actions/Profiles/events";
 import { useHistory } from "react-router-dom";
+import { createPayment } from "../../../../../Services/Payment/payment.service";
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -31,7 +32,7 @@ const EventDetailsView = () => {
     const classes = useStyles();
 
     const eventId = useSelector(state => state.event.id_event);
-
+    //const userId = useSelector(state => state.user.id_user);
 
     const [title, setTitle] = useState("");
 
@@ -81,9 +82,10 @@ const EventDetailsView = () => {
     const { message } = useSelector(state => state.message);
     const dispatch = useDispatch();
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        // e.preventDefault();
         // setSuccessful(false);
-        // dispatch()
+        // dispatch(createPayment(eventId, userId, 1))
         //     .then(() => {
         //         setSuccessful(true);
         //     })
@@ -96,6 +98,7 @@ const EventDetailsView = () => {
     const goToPreviousPath = () => {
         history.goBack()
     }
+
 
     return (
         <Container className={classes.container} component="main" maxWidth="xs">
@@ -161,13 +164,13 @@ const EventDetailsView = () => {
                         </Grid>
                     </Grid>
                     <Grid container className={classes.buttonsContainer}>
-                        <Grid item className={classes.buttonClose}>
+                        <Grid item className={classes.buttonClose}>                          
                             <Button onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
                                 Close
-                            </Button>
+                            </Button>   
                         </Grid>
                         <Grid item className={classes.buttonSubmit}>
-                            <Button onClick={() => { }} className={classes.buttonEditSave} fullWidth variant="contained"  >
+                            <Button component={Link} to={`/create-payment/${eventId}`} className={classes.buttonEditSave} fullWidth variant="contained"  >
                                 Buy ticket
                             </Button>
                         </Grid>
