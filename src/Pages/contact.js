@@ -1,15 +1,10 @@
 import React from 'react'
+import ContactForm from '../Components/ContactForm/ContactForm'
 
 export const Contact = () => {
     return (
-        <div style={{
-            display: 'flex',
-            justifyContent: 'center', 
-            alignItems: 'center', 
-            height: '90vh'
-            }}
-        >
-            <h1>Contact us</h1>
+        <div>
+            <ContactForm />
         </div>
     )
 }
