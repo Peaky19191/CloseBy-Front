@@ -124,8 +124,8 @@ const PopupDeleteCompany = (props) => {
                             </Grid>
                             {disable ?
                                 <Grid item xs={12}>
-                                    <Button onClick={props.handleDelete} className={classes.buttonForceDel} variant="contained" color="secondary" fullWidth>
-                                        delete with references
+                                    <Button disabled={true} className={classes.buttonForceDel} variant="contained" color="secondary" fullWidth>
+                                        first you need to delete the references
                                     </Button>
                                 </Grid>
                                 :
