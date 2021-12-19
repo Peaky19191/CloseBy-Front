@@ -4,7 +4,7 @@ import SERVER_API from "../../Static/serverApi";
 
 const API_URL = "event/";
 
-const registerEvent = (title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type) => {
+const registerEventAPI = (title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type) => {
     return axios.post(SERVER_API + API_URL + "create",
         {
             title: title,
@@ -50,7 +50,7 @@ const editEventAPI = (eventId, title, companyId, loc_lat, loc_lng, startDate, en
     );
 };
 
-const getEventsListId = (pageNumber, rowsPerPage, companyId) => {
+const registerEventIdAPI = (pageNumber, rowsPerPage, companyId) => {
     return axios.post(SERVER_API + API_URL + "list-by-company",
         {
             page: pageNumber,
@@ -63,11 +63,12 @@ const getEventsListId = (pageNumber, rowsPerPage, companyId) => {
     );
 };
 
-const getEventsListAll = (pageNumber, rowsPerPage) => {
+const getEventListAllApi = (pageNumber, rowsPerPage, companyId) => {
     return axios.post(SERVER_API + API_URL + "list",
         {
             page: pageNumber,
             limit: rowsPerPage,
+            companyId: companyId
         },
         {
             headers: authHeader()
@@ -75,7 +76,7 @@ const getEventsListAll = (pageNumber, rowsPerPage) => {
     );
 };
 
-const deleteEvent = (id) => {
+const deleteEventApi = (id) => {
     return axios.delete(SERVER_API + API_URL + "delete",
         {
             headers: authHeader(),
@@ -86,7 +87,7 @@ const deleteEvent = (id) => {
     );
 };
 
-const getEventId = (id) => {
+const getEventIdApi = (id) => {
     return axios.get(SERVER_API + API_URL + id,
         {
             headers: authHeader(),
@@ -95,10 +96,10 @@ const getEventId = (id) => {
 };
 
 export default {
-    registerEvent,
+    registerEventAPI,
     editEventAPI,
-    getEventsListId,
-    getEventsListAll,
-    deleteEvent,
-    getEventId,
+    registerEventIdAPI,
+    getEventListAllApi,
+    deleteEventApi,
+    getEventIdApi,
 };

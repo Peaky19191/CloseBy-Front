@@ -8,14 +8,16 @@ import Search from '../../Search/Search'
 import Compass from '../../Compass/Compass';
 import Events from '../../../../Services/Profiles/event.service';
 import { setNewEventLoc } from "../../../../Actions/Profiles/events";
-import { setCurrentEventLoc } from "../../../../Actions/Profiles/events";
+import { getAdressDispatch } from "../../../../Actions/Map/map";
+import { getCompAdminIdDispatch } from "../../../../Actions/Profiles/companyAdmin";
+import { getCompWorkerIdDispatch } from "../../../../Actions/Profiles/companyWorker";
+import { getEventListAllDispatch, getEventIdDispatch } from "../../../../Actions/Profiles/events";
 import { useDispatch } from "react-redux";
 import moment from 'moment'
 import CompAdmin from '../../../../Services/Profiles/companyAdmin.service'
 import CompWorker from '../../../../Services/Profiles/companyWorker.service'
 import { useSelector } from "react-redux";
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
-import Adress from '../../../../Api/map'
 import Event from '../../../../Services/Profiles/event.service'
 
 const options = {
@@ -66,7 +68,7 @@ const MapDetailsEdit = (props) => {
             getEventList();
         }
         if (currentProfile.role === "CompanyAdmin") {
-            CompAdmin.getCompanyAdminId(currentProfile.id)
+            dispatch(getCompAdminIdDispatch(currentProfile.id))
                 .then((response) => {
                     const compId = response.data.company.id;
 
@@ -77,7 +79,7 @@ const MapDetailsEdit = (props) => {
                 });
         }
         if (currentProfile.role === "CompanyWorker") {
-            CompWorker.getCompanyWorkerId(currentProfile.id)
+            dispatch(getCompWorkerIdDispatch(currentProfile.id))
                 .then((response) => {
                     const compId = response.data.company.id;
 
@@ -90,14 +92,14 @@ const MapDetailsEdit = (props) => {
     };
 
     const getEventListId = (companyId) => {
-        Events.getEventsListId(page, rowsPerPage, companyId)
+        dispatch(getEventListAllDispatch(page, rowsPerPage, companyId))
             .then((response) => {
                 const events = response.data.items;
 
                 const filteredEvents = events.filter(diffrentThanCurrent)
 
                 filteredEvents.forEach(function (item, index) {
-                    Adress.getAdress(item.localization.latitude, item.localization.longitude)
+                    dispatch(getAdressDispatch(item.localization.latitude, item.localization.longitude))
                         .then((response) => {
                             const address = response.data.results[0].formatted_address;
 
@@ -129,13 +131,13 @@ const MapDetailsEdit = (props) => {
     }
 
     const getEventList = () => {
-        Events.getEventsListAll(page, rowsPerPage)
+        dispatch(getEventListAllDispatch(page, rowsPerPage))
             .then((response) => {
                 const events = response.data.items;
 
                 const filteredEvents = events.filter(diffrentThanCurrent)
                 filteredEvents.forEach(function (item, index) {
-                    Adress.getAdress(item.localization.latitude, item.localization.longitude)
+                    dispatch(getAdressDispatch(item.localization.latitude, item.localization.longitude))
                         .then((response) => {
                             const address = response.data.results[0].formatted_address;
 
@@ -171,11 +173,11 @@ const MapDetailsEdit = (props) => {
     }
 
     const getCurrentEvent = () => {
-        Event.getEventId(props.currentEventId)
+        dispatch(getEventIdDispatch(props.currentEventId))
             .then((response) => {
                 const curEvent = response.data;
 
-                Adress.getAdress(curEvent.localization.latitude, curEvent.localization.longitude)
+                dispatch(getAdressDispatch(curEvent.localization.latitude, curEvent.localization.longitude))
                     .then((response) => {
                         const address = response.data.results[0].formatted_address;
 
@@ -207,28 +209,30 @@ const MapDetailsEdit = (props) => {
     const dispatch = useDispatch();
 
     const onMapClick = React.useCallback((event) => {
+
         setSelected(null);
         setCurrenEventSelected(null);
 
         setNewSelected(null);
+        if (currentProfile.role === "CompanyWorker") {
 
-        Adress.getAdress(event.latLng.lat(), event.latLng.lng())
-            .then((response) => {
-                const address = response.data.results[0].formatted_address;
+            dispatch(getAdressDispatch(event.latLng.lat(), event.latLng.lng()))
+                .then((response) => {
+                    const address = response.data.results[0].formatted_address;
 
-                setNewMarker(current => [
-                    {
-                        lat: event.latLng.lat(),
-                        lng: event.latLng.lng(),
-                        address: address,
-                        // time: new Date(),
-                    }]);
-            })
-            .catch((e) => {
-                console.log(e);
-            });
-        dispatch(setNewEventLoc(event.latLng.lat(), event.latLng.lng()))
-
+                    setNewMarker(current => [
+                        {
+                            lat: event.latLng.lat(),
+                            lng: event.latLng.lng(),
+                            address: address,
+                            // time: new Date(),
+                        }]);
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+            dispatch(setNewEventLoc(event.latLng.lat(), event.latLng.lng()))
+        }
     }, []);
 
     const { isLoaded, loadError } = useLoadScript({

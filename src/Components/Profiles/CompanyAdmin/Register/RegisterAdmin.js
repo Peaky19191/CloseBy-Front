@@ -5,10 +5,12 @@ import useStyles from './styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import { useDispatch, useSelector } from "react-redux";
 import { regCompAdmin } from "../../../../Actions/Profiles/companyAdmin";
+import { getCompanyListDispatch } from "../../../../Actions/Profiles/company";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import Company from '../../../../Services/Profiles/company.service'
 import { Link } from 'react-router-dom'
 import { useHistory } from "react-router-dom";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const RegCompAdmin = () => {
     const classes = useStyles();
@@ -29,14 +31,16 @@ const RegCompAdmin = () => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(100);
 
+    const [listLoaded, setListLoaded] = useState(false);
     const [company, setCompany] = useState([]);
 
     const getList = () => {
-        Company.getCompanyListApi(page, rowsPerPage)
+        dispatch(getCompanyListDispatch(page, rowsPerPage))
             .then((response) => {
                 const companysTemp = response.data.items;
 
                 setCompany(companysTemp);
+                setListLoaded(true);
             })
             .catch((e) => {
                 console.log(e);
@@ -106,61 +110,66 @@ const RegCompAdmin = () => {
         companyId.length > 0;
 
     return (
-        <Container className={classes.container} component="main" maxWidth="xs">
-            <Paper className={classes.paper} elevation={3}>
-                <Avatar className={classes.avatar}>
-                    <SupervisorAccountIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">Register Company Admin</Typography>
-                {successful ?
-                    <Alert className={classes.alert} severity="success">
-                        <AlertTitle>Success</AlertTitle>
-                        <strong>You have successfully registered your account</strong>
-                    </Alert>
-                    :
-                    (message ?
-                        <Alert className={successful ? classes.alert : classes.alert} severity="error">
-                            <AlertTitle>Error</AlertTitle>
-                            <strong> {message}</strong>
-                        </Alert>
-                        :
-                        null
-                    )
-                }
-                <form className={classes.form} onSubmit={handleSubmit}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} >
-                            <TextField label="First Name" error={errors.firstName} helperText={(errors.firstName)} name="firstName" htmlFor="firstName" variant="outlined" type="text" value={firstName} onChange={onChangeFirstName} fullWidth autoFocus />
-                        </Grid>
-                        <Grid item xs={12} >
-                            <TextField label="Last Name" error={errors.lastName} helperText={(errors.lastName)} name="lastName" htmlFor="lastName" variant="outlined" type="text" value={lastName} onChange={onChangeLastName} fullWidth />
-                        </Grid>
-                        <Grid item xs={12} >
-                            <TextField label="Email Address" error={errors.email} helperText={(errors.email)} name="email" htmlFor="email" variant="outlined" type="email" value={email} onChange={onChangeEmail} fullWidth />
-                        </Grid>
-                        <Grid item xs={12} >
-                            <TextField label="Gender" error={errors.gender} helperText={(errors.gender)} name="gender" htmlFor="gender" variant="outlined" fullWidth value={gender} onChange={onChangeGender} type="text" select label="Gender">
-                                <MenuItem value={"Male"} >Male</MenuItem>
-                                <MenuItem value={"Female"} >Female</MenuItem>
-                            </TextField>
-                        </Grid>
-                        <Grid item xs={12} >
-                            <TextField label="Company" error={errors.companyId} helperText={(errors.companyId)} name="companyId" htmlFor="companyId" variant="outlined" type="text" value={companyId} onChange={onChangeCompanyId} fullWidth select >
-                                {company.map((item) => (
-                                    <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
-                                ))}
-                            </TextField>
-                        </Grid>
-                    </Grid>
-                    <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>
-                        Register
-                    </Button>
-                    <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
-                        Close
-                    </Button>
-                </form>
-            </Paper>
-        </Container>
+        (listLoaded !== true) ?
+            <CircularProgress />
+            :
+            <>
+                <Container className={classes.container} component="main" maxWidth="xs">
+                    <Paper className={classes.paper} elevation={3}>
+                        <Avatar className={classes.avatar}>
+                            <SupervisorAccountIcon />
+                        </Avatar>
+                        <Typography component="h1" variant="h5">Register Company Admin</Typography>
+                        {successful ?
+                            <Alert className={classes.alert} severity="success">
+                                <AlertTitle>Success</AlertTitle>
+                                <strong>You have successfully registered your account</strong>
+                            </Alert>
+                            :
+                            (message ?
+                                <Alert className={successful ? classes.alert : classes.alert} severity="error">
+                                    <AlertTitle>Error</AlertTitle>
+                                    <strong> {message}</strong>
+                                </Alert>
+                                :
+                                null
+                            )
+                        }
+                        <form className={classes.form} onSubmit={handleSubmit}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} >
+                                    <TextField label="First Name" error={errors.firstName} helperText={(errors.firstName)} name="firstName" htmlFor="firstName" variant="outlined" type="text" value={firstName} onChange={onChangeFirstName} fullWidth autoFocus />
+                                </Grid>
+                                <Grid item xs={12} >
+                                    <TextField label="Last Name" error={errors.lastName} helperText={(errors.lastName)} name="lastName" htmlFor="lastName" variant="outlined" type="text" value={lastName} onChange={onChangeLastName} fullWidth />
+                                </Grid>
+                                <Grid item xs={12} >
+                                    <TextField label="Email Address" error={errors.email} helperText={(errors.email)} name="email" htmlFor="email" variant="outlined" type="email" value={email} onChange={onChangeEmail} fullWidth />
+                                </Grid>
+                                <Grid item xs={12} >
+                                    <TextField label="Gender" error={errors.gender} helperText={(errors.gender)} name="gender" htmlFor="gender" variant="outlined" fullWidth value={gender} onChange={onChangeGender} type="text" select label="Gender">
+                                        <MenuItem value={"Male"} >Male</MenuItem>
+                                        <MenuItem value={"Female"} >Female</MenuItem>
+                                    </TextField>
+                                </Grid>
+                                <Grid item xs={12} >
+                                    <TextField label="Company" error={errors.companyId} helperText={(errors.companyId)} name="companyId" htmlFor="companyId" variant="outlined" type="text" value={companyId} onChange={onChangeCompanyId} fullWidth select >
+                                        {company.map((item) => (
+                                            <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
+                                        ))}
+                                    </TextField>
+                                </Grid>
+                            </Grid>
+                            <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>
+                                Register
+                            </Button>
+                            <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
+                                Close
+                            </Button>
+                        </form>
+                    </Paper>
+                </Container>
+            </>
     );
 };
 

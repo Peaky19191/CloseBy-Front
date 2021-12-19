@@ -7,14 +7,16 @@ import "@reach/combobox/styles.css";
 import Search from '../Search/Search'
 import Compass from '../Compass/Compass';
 import Events from '../../../Services/Profiles/event.service';
-import { setNewEventLoc } from "../../../Actions/Profiles/events";
+import { setNewEventLoc, getEventListAllDispatch } from "../../../Actions/Profiles/events";
+import { getCompAdminIdDispatch } from "../../../Actions/Profiles/companyAdmin";
+import { getCompWorkerIdDispatch } from "../../../Actions/Profiles/companyWorker";
 import { useDispatch } from "react-redux";
 import moment from 'moment'
 import CompAdmin from '../../../Services/Profiles/companyAdmin.service'
 import CompWorker from '../../../Services/Profiles/companyWorker.service'
 import { useSelector } from "react-redux";
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
-import Adress from '../../../Api/map'
+import { getAdressDispatch } from '../../../Actions/Map/map'
 
 const options = {
     styles: mapStyles,
@@ -58,7 +60,7 @@ const MapRegister = () => {
             getEventListId();
         }
         if (currentProfile.role === "CompanyAdmin") {
-            CompAdmin.getCompanyAdminId(currentProfile.id)
+            dispatch(getCompAdminIdDispatch(currentProfile.id))
                 .then((response) => {
                     const compId = response.data.company.id;
 
@@ -69,7 +71,7 @@ const MapRegister = () => {
                 });
         }
         if (currentProfile.role === "CompanyWorker") {
-            CompWorker.getCompanyWorkerId(currentProfile.id)
+            dispatch(getCompWorkerIdDispatch(currentProfile.id))
                 .then((response) => {
                     const compId = response.data.company.id;
 
@@ -82,12 +84,12 @@ const MapRegister = () => {
     };
 
     const getEventListId = (companyId) => {
-        Events.getEventsListId(page, rowsPerPage, companyId)
+        dispatch(getEventListAllDispatch(page, rowsPerPage, companyId))
             .then((response) => {
                 const events = response.data.items;
 
                 events.forEach(function (item, index) {
-                    Adress.getAdress(item.localization.latitude, item.localization.longitude)
+                    dispatch(getAdressDispatch(item.localization.latitude, item.localization.longitude))
                         .then((response) => {
                             const address = response.data.results[0].formatted_address;
 
@@ -122,7 +124,7 @@ const MapRegister = () => {
     const onMapClick = React.useCallback((event) => {
         setSelected(null);
         setNewSelected(null);
-        Adress.getAdress(event.latLng.lat(), event.latLng.lng())
+        dispatch(getAdressDispatch(event.latLng.lat(), event.latLng.lng()))
             .then((response) => {
                 const address = response.data.results[0].formatted_address;
 

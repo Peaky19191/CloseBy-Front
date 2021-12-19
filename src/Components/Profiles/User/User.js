@@ -6,7 +6,7 @@ const User = () => {
     const [content, setContent] = useState("");
 
     useEffect(() => {
-        UserService.getUserData().then(
+        UserService.getUserDataAPI().then(
             (response) => {
                 setContent(response.data);
             },

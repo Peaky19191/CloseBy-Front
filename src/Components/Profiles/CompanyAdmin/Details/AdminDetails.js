@@ -5,7 +5,7 @@ import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField }
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { Link } from 'react-router-dom'
 import MenuItem from '@material-ui/core/MenuItem';
-import { editCompAdmin } from "../../../../Actions/Profiles/companyAdmin";
+import { editCompAdmin, getCompAdminIdDispatch } from "../../../../Actions/Profiles/companyAdmin";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -14,14 +14,13 @@ import BusinessIcon from '@mui/icons-material/Business';
 
 const CompAdminDetails = () => {
     const classes = useStyles();
-    const compAdminId = useSelector(state => state.companyAdmin.id_comp_admin);
+    const compAdmin = useSelector(state => state.companyAdmin.comp_admin);
 
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [gender, setGender] = useState("");
+    const [firstName, setFirstName] = useState(compAdmin.firstName);
+    const [lastName, setLastName] = useState(compAdmin.lastName);
+    const [email, setEmail] = useState(compAdmin.email);
+    const [gender, setGender] = useState(compAdmin.gender);
     const [errors, setErrors] = useState({});
-    const [company, setCompany] = useState("");
 
     const enabled =
         firstName.length > 0 &&
@@ -62,44 +61,24 @@ const CompAdminDetails = () => {
         setEditMode(false);
     }
 
-    const getCompAdminDetails = () => {
-        CompAdmin.getCompanyAdminId(compAdminId)
-            .then((response) => {
-                const compAdmin = response.data;
-
-                setFirstName(compAdmin.firstName);
-                setLastName(compAdmin.lastName);
-                setEmail(compAdmin.email);
-                setGender(compAdmin.gender);
-                setCompany(compAdmin.company);
-            })
-            .catch((e) => {
-                console.log(e);
-            });
-    }
-    useEffect(getCompAdminDetails, [compAdminId]);
 
     const [successful, setSuccessful] = useState(false);
 
     const { message } = useSelector(state => state.message);
     const dispatch = useDispatch();
 
-    const dispatchCompany = (company) => {
-        dispatch(setCompanyDispatch(company))
-    }
-
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
 
-        if (validate())
-            dispatch(editCompAdmin(compAdminId, firstName, lastName, gender, email))
-                .then(() => {
-                    setSuccessful(true);
-                })
-                .catch(() => {
-                    setSuccessful(false);
-                });
+        // if (validate())
+        dispatch(editCompAdmin(compAdmin.id, firstName, lastName, gender, email))
+            .then(() => {
+                setSuccessful(true);
+            })
+            .catch(() => {
+                setSuccessful(false);
+            });
     };
 
     let history = useHistory();
@@ -161,8 +140,7 @@ const CompAdminDetails = () => {
                         </Grid>
                     </Grid>
                     <Grid className={classes.buttonsContainer}>
-                        <Button className={classes.buttonCompanyDetails} component={Link} to="/companyDetails" onClick={() => { dispatchCompany(company) }} fullWidth variant="contained" color="primary" >
-                            {/* <BusinessIcon /> */}
+                        <Button className={classes.buttonCompanyDetails} component={Link} to="/companyDetails" fullWidth variant="contained" color="primary" >
                             Company Details
                         </Button>
                         {editMode ?

@@ -13,30 +13,32 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Link } from 'react-router-dom'
-import { setUserId } from "../../../../Actions/Profiles/user";
-import { useDispatch } from "react-redux";
+import { deleteUserDispatch, setUser, getUserListDispatch } from "../../../../Actions/Profiles/user";
 import { Paper } from '@material-ui/core';
 import PopupDeleteProfile from '../../../Popup/PopupDelete/Profile/PopupDeleteProfile';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { useDispatch, useSelector } from "react-redux";
 
 const UsersList = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
+    const [listLoaded, setListLoaded] = useState(false);
     const [users, setUsers] = useState([]);
 
+    const [count, setCount] = useState(0);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [count, setCount] = useState(0);
-
 
     const getList = () => {
-        User.getUsersList(page, rowsPerPage)
+        dispatch(getUserListDispatch(page, rowsPerPage))
             .then((response) => {
                 const users = response.data.items;
                 const totalPages = response.data.count;
 
                 setUsers(users);
                 setCount(totalPages);
+                setListLoaded(true);
             })
             .catch((e) => {
                 console.log(e);
@@ -44,8 +46,8 @@ const UsersList = () => {
     };
     useEffect(getList, [page, rowsPerPage]);
 
-    const setIdUser = (id) => {
-        dispatch(setUserId(id))
+    const dispatchUser = (user) => {
+        dispatch(setUser(user))
     }
 
     const [isOpen, setIsOpen] = useState(false);
@@ -69,10 +71,15 @@ const UsersList = () => {
         setIsOpen(!isOpen);
     }
 
-    const deleteFromList = async () => {
-        await User.deleteUser(idUserDelete);
-        showPopup();
-        getList();
+    const deleteFromList = () => {
+        dispatch(deleteUserDispatch(idUserDelete))
+            .then(() => {
+                showPopup();
+                getList();
+            })
+            .catch((e) => {
+                console.log(e);
+            });
     }
 
     const handleChangePage = (event, newPage) => {
@@ -85,53 +92,56 @@ const UsersList = () => {
     };
 
     return (
-        <>
-            <TableContainer className={classes.tableContainer} component={Paper} elevation={3} autof >
-                <Table aria-label="simple table">
-                    <TableHead>
-                        <TableRow >
-                            <TableCell className={classes.tableCellTitle}>User</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>Email</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>Gender</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {users.map((item) => (
-                            <TableRow key={item.email} >
-                                <TableCell component="th" scope="row">
-                                    {item.firstName}    {item.lastName}
-                                </TableCell>
-                                <TableCell align="center">{item.email}</TableCell>
-                                <TableCell align="center">{item.gender}</TableCell>
-                                <TableCell align="center">
-                                    <IconButton component={Link} to="/userDetails" onClick={() => { setIdUser(item.id) }} aria-label="edit" size="large" >
-                                        <SettingsApplicationsIcon className={classes.settingICon} />
-                                    </IconButton>
-                                    <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.firstName, item.lastName, item.email) }} >
-                                        <DeleteIcon className={classes.deleteICon} />
-                                    </IconButton>
-                                </TableCell>
+        (listLoaded !== true) ?
+            <CircularProgress />
+            :
+            <>
+                <TableContainer className={classes.tableContainer} component={Paper} elevation={3} autof >
+                    <Table aria-label="simple table">
+                        <TableHead>
+                            <TableRow >
+                                <TableCell className={classes.tableCellTitle}>User</TableCell>
+                                <TableCell align="center" className={classes.tableCellTitle}>Email</TableCell>
+                                <TableCell align="center" className={classes.tableCellTitle}>Gender</TableCell>
+                                <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                    <TableFooter>
-                        <TableRow >
-                            <TablePagination
-                                rowsPerPageOptions={[5, 10, 25, 100]}
-                                component="div"
-                                count={count}
-                                rowsPerPage={rowsPerPage}
-                                page={page}
-                                onPageChange={handleChangePage}
-                                onRowsPerPageChange={handleChangeRowsPerPage}
-                            />
-                        </TableRow>
-                    </TableFooter>
-                </Table>
-            </TableContainer>
-            {isOpen && <PopupDeleteProfile handleClose={showPopup} handleDelete={deleteFromList} handleData={["User", firstNameDelete, lastNameDelete, emailDelete]} />}
-        </>
+                        </TableHead>
+                        <TableBody>
+                            {users.map((item) => (
+                                <TableRow key={item.id} >
+                                    <TableCell component="th" scope="row">
+                                        {item.firstName}    {item.lastName}
+                                    </TableCell>
+                                    <TableCell align="center">{item.email}</TableCell>
+                                    <TableCell align="center">{item.gender}</TableCell>
+                                    <TableCell align="center">
+                                        <IconButton component={Link} to="/userDetails" onClick={() => { dispatchUser(item) }} aria-label="edit" size="large" >
+                                            <SettingsApplicationsIcon className={classes.settingICon} />
+                                        </IconButton>
+                                        <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.firstName, item.lastName, item.email) }} >
+                                            <DeleteIcon className={classes.deleteICon} />
+                                        </IconButton>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                        <TableFooter>
+                            <TableRow >
+                                <TablePagination
+                                    rowsPerPageOptions={[5, 10, 25, 100]}
+                                    component="div"
+                                    count={count}
+                                    rowsPerPage={rowsPerPage}
+                                    page={page}
+                                    onPageChange={handleChangePage}
+                                    onRowsPerPageChange={handleChangeRowsPerPage}
+                                />
+                            </TableRow>
+                        </TableFooter>
+                    </Table>
+                </TableContainer>
+                {isOpen && <PopupDeleteProfile handleClose={showPopup} handleDelete={deleteFromList} handleData={["User", firstNameDelete, lastNameDelete, emailDelete]} />}
+            </>
     );
 };
 

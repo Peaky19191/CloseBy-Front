@@ -15,15 +15,20 @@ import { Link } from 'react-router-dom'
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
 import PopupDeleteEvent from '../../../../Popup/PopupDelete/Event/PopupDeleteEvent';
-import { setEventId } from "../../../../../Actions/Profiles/events";
+import { setEventId, getEventListAllDispatch, deleteEventDispatch } from "../../../../../Actions/Profiles/events";
 import { useDispatch } from "react-redux";
 import CompAdmin from '../../../../../Services/Profiles/companyAdmin.service'
 import CompWorker from '../../../../../Services/Profiles/companyWorker.service'
 import { useSelector } from "react-redux";
 import moment from 'moment'
+import { getCompAdminIdDispatch } from "../../../../../Actions/Profiles/companyAdmin";
+import { getCompWorkerIdDispatch } from "../../../../../Actions/Profiles/companyWorker";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const EventList = () => {
     const classes = useStyles();
+    const [listLoaded, setListLoaded] = useState(false);
+    const [companyLoaded, setCompanyLoaded] = useState(false);
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
 
@@ -38,7 +43,7 @@ const EventList = () => {
             getEventList();
         }
         if (currentProfile.role === "CompanyAdmin") {
-            CompAdmin.getCompanyAdminId(currentProfile.id)
+            dispatch(getCompAdminIdDispatch(currentProfile.id))
                 .then((response) => {
                     const compId = response.data.company.id;
 
@@ -49,7 +54,7 @@ const EventList = () => {
                 });
         }
         if (currentProfile.role === "CompanyWorker") {
-            CompWorker.getCompanyWorkerId(currentProfile.id)
+            dispatch(getCompWorkerIdDispatch(currentProfile.id))
                 .then((response) => {
                     const compId = response.data.company.id;
 
@@ -64,13 +69,14 @@ const EventList = () => {
     useEffect(getList, [page, rowsPerPage]);
 
     const getEventListId = (companyId) => {
-        Event.getEventsListId(page, rowsPerPage, companyId)
+        dispatch(getEventListAllDispatch(page, rowsPerPage, companyId))
             .then((response) => {
                 const eventTemp = response.data.items;
                 const totalPages = response.data.count;
-                console.log(eventTemp);
+
                 setEvent(eventTemp);
                 setCount(totalPages);
+                setListLoaded(true);
             })
             .catch((e) => {
                 console.log(e);
@@ -78,13 +84,14 @@ const EventList = () => {
     }
 
     const getEventList = () => {
-        Event.getEventsListAll(page, rowsPerPage)
+        dispatch(getEventListAllDispatch(page, rowsPerPage))
             .then((response) => {
                 const eventTemp = response.data.items;
                 const totalPages = response.data.count;
-                console.log(eventTemp);
+
                 setEvent(eventTemp);
                 setCount(totalPages);
+                setListLoaded(true);
             })
             .catch((e) => {
                 console.log(e);
@@ -117,10 +124,16 @@ const EventList = () => {
         setIsOpen(!isOpen);
     }
 
-    const deleteFromList = async () => {
-        await Event.deleteEvent(idEventDelete);
-        showPopup();
-        getList();
+    const deleteFromList = () => {
+        console.log(idEventDelete);
+        dispatch(deleteEventDispatch(idEventDelete))
+            .then(() => {
+                showPopup();
+                getList();
+            })
+            .catch((e) => {
+                console.log(e);
+            });
     }
 
     const handleChangePage = (event, newPage) => {
@@ -132,68 +145,71 @@ const EventList = () => {
         setPage(0);
     };
     return (
-        <>
-            <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >
-                <Table className={classes.table} aria-label="simple table">
-                    <TableHead>
-                        <TableRow >
-                            <TableCell className={classes.tableCellTitle}>Title</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>Type</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>Status</TableCell>
-                            {(currentProfile.role === "GlobalAdmin") && <TableCell align="center" className={classes.tableCellTitle}>Company</TableCell>}
-                            <TableCell align="center" className={classes.tableCellTitle}>Start At</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>End At</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {event.map((item) => (
-                            <TableRow key={item.id} >
-                                <TableCell component="th" scope="row">{item.title}</TableCell>
-                                <TableCell align="center" component="th" scope="row">{item.type}</TableCell>
-                                <TableCell align="center" component="th" scope="row">{item.status}</TableCell>
-                                {(currentProfile.role === "GlobalAdmin") && <TableCell align="center" component="th" scope="row">{item.company.name}</TableCell>}
-                                <TableCell align="center">{moment(item.startDateTime).format('MM/DD/YYYY HH:mm')}</TableCell>
-                                <TableCell align="center">{moment(item.endDateTime).format('MM/DD/YYYY HH:mm')}</TableCell>
-                                <TableCell align="center">
-                                    <IconButton component={Link} to="/eventDetailsEdit" onClick={() => { setIdEvent(item.id) }} aria-label="edit" size="large" >
-                                        <SettingsApplicationsIcon className={classes.settingICon} />
-                                    </IconButton>
-                                    <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.title, item.company.name, item.status) }} >
-                                        <DeleteIcon className={classes.deleteICon} />
-                                    </IconButton>
-                                </TableCell>
+        (listLoaded !== true) ?
+            <CircularProgress />
+            :
+            <>
+                <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >
+                    <Table className={classes.table} aria-label="simple table">
+                        <TableHead>
+                            <TableRow >
+                                <TableCell className={classes.tableCellTitle}>Title</TableCell>
+                                <TableCell align="center" className={classes.tableCellTitle}>Type</TableCell>
+                                <TableCell align="center" className={classes.tableCellTitle}>Status</TableCell>
+                                {(currentProfile.role === "GlobalAdmin") && <TableCell align="center" className={classes.tableCellTitle}>Company</TableCell>}
+                                <TableCell align="center" className={classes.tableCellTitle}>Start At</TableCell>
+                                <TableCell align="center" className={classes.tableCellTitle}>End At</TableCell>
+                                <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                    <TableFooter>
-                        <TableRow>
-                            <Grid container justify="flex-end">
-                                <Grid item>
-                                    <TablePagination
-                                        rowsPerPageOptions={[5, 10, 25, 100]}
-                                        component="div"
-                                        count={count}
-                                        rowsPerPage={rowsPerPage}
-                                        page={page}
-                                        onPageChange={handleChangePage}
-                                        onRowsPerPageChange={handleChangeRowsPerPage}
-                                    />
-                                </Grid>
-                                {(currentProfile.role === "CompanyWorker") &&
-                                    <Grid item >
-                                        <Button component={Link} to="/registerEvent" className={classes.bottomButton}>
-                                            Register new event
-                                        </Button>
+                        </TableHead>
+                        <TableBody>
+                            {event.map((item) => (
+                                <TableRow key={item.id} >
+                                    <TableCell component="th" scope="row">{item.title}</TableCell>
+                                    <TableCell align="center" component="th" scope="row">{item.type}</TableCell>
+                                    <TableCell align="center" component="th" scope="row">{item.status}</TableCell>
+                                    {(currentProfile.role === "GlobalAdmin") && <TableCell align="center" component="th" scope="row">{item.company.name}</TableCell>}
+                                    <TableCell align="center">{moment(item.startDateTime).format('MM/DD/YYYY HH:mm')}</TableCell>
+                                    <TableCell align="center">{moment(item.endDateTime).format('MM/DD/YYYY HH:mm')}</TableCell>
+                                    <TableCell align="center">
+                                        <IconButton component={Link} to="/eventDetailsEdit" onClick={() => { setIdEvent(item.id) }} aria-label="edit" size="large" >
+                                            <SettingsApplicationsIcon className={classes.settingICon} />
+                                        </IconButton>
+                                        <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.title, item.company.name, item.status) }} >
+                                            <DeleteIcon className={classes.deleteICon} />
+                                        </IconButton>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                        <TableFooter>
+                            <TableRow>
+                                <Grid container justify="flex-end">
+                                    <Grid item>
+                                        <TablePagination
+                                            rowsPerPageOptions={[5, 10, 25, 100]}
+                                            component="div"
+                                            count={count}
+                                            rowsPerPage={rowsPerPage}
+                                            page={page}
+                                            onPageChange={handleChangePage}
+                                            onRowsPerPageChange={handleChangeRowsPerPage}
+                                        />
                                     </Grid>
-                                }
-                            </Grid>
-                        </TableRow>
-                    </TableFooter>
-                </Table>
-            </TableContainer>
-            {isOpen && <PopupDeleteEvent handleClose={showPopup} handleDelete={deleteFromList} handleData={["Event", eventTitleDelete, eventCompanyDelete, eventStatusDelete]} />}
-        </>
+                                    {(currentProfile.role === "CompanyWorker") &&
+                                        <Grid item >
+                                            <Button component={Link} to="/registerEvent" className={classes.bottomButton}>
+                                                Register new event
+                                            </Button>
+                                        </Grid>
+                                    }
+                                </Grid>
+                            </TableRow>
+                        </TableFooter>
+                    </Table>
+                </TableContainer>
+                {isOpen && <PopupDeleteEvent handleClose={showPopup} handleDelete={deleteFromList} handleData={["Event", eventTitleDelete, eventCompanyDelete, eventStatusDelete]} />}
+            </>
     );
 };
 

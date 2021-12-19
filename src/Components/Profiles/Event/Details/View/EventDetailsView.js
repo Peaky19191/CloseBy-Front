@@ -12,7 +12,7 @@ import EventTypes from '../../../../../Static/select'
 import Slider from '@mui/material/Slider';
 import MuiInput from '@mui/material/Input';
 import { styled } from '@mui/material/styles';
-import { regEvent } from "../../../../../Actions/Profiles/events";
+import { registerEventDispatch } from "../../../../../Actions/Profiles/events";
 import CompWorker from '../../../../../Services/Profiles/companyWorker.service'
 import Stack from '@mui/material/Stack';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -20,7 +20,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 import moment from 'moment'
 import { setNewEventLoc } from "../../../../../Actions/Profiles/events";
-import { setCurrentEventLoc } from "../../../../../Actions/Profiles/events";
+import { setCurrentEventLoc, getEventIdDispatch } from "../../../../../Actions/Profiles/events";
 import { useHistory } from "react-router-dom";
 import { createPayment } from "../../../../../Services/Payment/payment.service";
 
@@ -59,7 +59,7 @@ const EventDetailsView = () => {
     };
 
     const getEventDetails = () => {
-        Event.getEventId(eventId)
+        dispatch(getEventIdDispatch(eventId))
             .then((response) => {
                 const event = response.data;
 

@@ -4,7 +4,7 @@ import SERVER_API from "../../Static/serverApi";
 
 const API_URL = "company-worker/";
 
-const registerCompanyWorker = (firstName, lastName, gender, email, companyId) => {
+const registerCompanyWorkerAPI = (firstName, lastName, gender, email, companyId) => {
     return axios.post(SERVER_API + API_URL + "create",
         {
             firstName,
@@ -34,7 +34,7 @@ const editCompanyWorkerAPI = (id, firstName, lastName, gender, email) => {
     );
 };
 
-const getCompanyWorkersList = (pageNumber, rowsPerPage, companyId) => {
+const getCompWorkerListAPI = (pageNumber, rowsPerPage, companyId) => {
     return axios.post(SERVER_API + API_URL + "list",
         {
             page: pageNumber,
@@ -47,7 +47,7 @@ const getCompanyWorkersList = (pageNumber, rowsPerPage, companyId) => {
     );
 };
 
-const deleteCompanyWorker = (id, companyId) => {
+const deleteCompWorkerAPI = (id, companyId) => {
     return axios.delete(SERVER_API + API_URL + "delete",
         {
             headers: authHeader(),
@@ -61,7 +61,7 @@ const deleteCompanyWorker = (id, companyId) => {
 };
 
 
-const getCompanyWorkerId = (id) => {
+const getCompWorkerIdAPI = (id) => {
     return axios.get(SERVER_API + API_URL + id,
         {
             headers: authHeader(),
@@ -71,9 +71,9 @@ const getCompanyWorkerId = (id) => {
 };
 
 export default {
-    registerCompanyWorker,
+    registerCompanyWorkerAPI,
     editCompanyWorkerAPI,
-    getCompanyWorkersList,
-    deleteCompanyWorker,
-    getCompanyWorkerId,
+    getCompWorkerListAPI,
+    deleteCompWorkerAPI,
+    getCompWorkerIdAPI,
 };

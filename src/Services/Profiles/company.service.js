@@ -4,7 +4,7 @@ import SERVER_API from "../../Static/serverApi";
 
 const API_URL = "company/";
 
-const registerCompanyApi = (name) => {
+const registerCompanyAPI = (name) => {
     return axios.post(SERVER_API + API_URL + "create",
         {
             name: name
@@ -15,7 +15,7 @@ const registerCompanyApi = (name) => {
     );
 };
 
-const editCompanyApi = (id, name) => {
+const editCompanyAPI = (id, name) => {
     return axios.put(SERVER_API + API_URL + "update",
         {
             id: id,
@@ -27,7 +27,7 @@ const editCompanyApi = (id, name) => {
     );
 };
 
-const getCompanyListApi = (pageNumber, rowsPerPage) => {
+const getCompanyListAPI = (pageNumber, rowsPerPage) => {
     return axios.post(SERVER_API + API_URL + "list",
         {
             page: pageNumber,
@@ -39,7 +39,7 @@ const getCompanyListApi = (pageNumber, rowsPerPage) => {
     );
 };
 
-const deleteCompanyApi = (id) => {
+const deleteCompanyAPI = (id) => {
     return axios.delete(SERVER_API + API_URL + "delete",
         {
             headers: authHeader(),
@@ -50,7 +50,7 @@ const deleteCompanyApi = (id) => {
     );
 };
 
-const getCompanyIdApi = (id) => {
+const getCompanyIdAPI = (id) => {
     return axios.get(SERVER_API + API_URL + id,
         {
             headers: authHeader(),
@@ -59,9 +59,9 @@ const getCompanyIdApi = (id) => {
 };
 
 export default {
-    registerCompanyApi,
-    editCompanyApi,
-    getCompanyListApi,
-    deleteCompanyApi,
-    getCompanyIdApi,
+    registerCompanyAPI,
+    editCompanyAPI,
+    getCompanyListAPI,
+    deleteCompanyAPI,
+    getCompanyIdAPI,
 };
