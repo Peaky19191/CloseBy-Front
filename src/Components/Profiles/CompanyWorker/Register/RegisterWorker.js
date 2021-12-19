@@ -10,11 +10,16 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 import CompAdmin from '../../../../Services/Profiles/companyAdmin.service'
 import { Link } from 'react-router-dom'
 import { useHistory } from "react-router-dom";
+import { getCompAdminIdDispatch } from "../../../../Actions/Profiles/companyAdmin";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const RegCompWorker = () => {
     const classes = useStyles();
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
+    const company = useSelector(state => (state.companyAdmin.get_comp_admin_id.company.id));
+
+    const [companyLoaded, setCompanyLoaded] = useState(false);
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -34,13 +39,10 @@ const RegCompWorker = () => {
         email.length > 0 &&
         gender.length > 0;
 
-    const [companyId, setCompanyId] = useState("");
     useEffect(() => {
-        console.log(currentProfile);
-        CompAdmin.getCompanyAdminId(currentProfile.id)
-            .then((response) => {
-                const compId = response.data.company.id;
-                setCompanyId(compId);
+        dispatch(getCompAdminIdDispatch(currentProfile.id))
+            .then(() => {
+                setCompanyLoaded(true)
             })
             .catch((e) => {
                 console.log(e);
@@ -68,7 +70,7 @@ const RegCompWorker = () => {
         e.preventDefault();
         setSuccessful(false);
         if (validate())
-            dispatch(regCompWorker(firstName, lastName, gender, email, companyId))
+            dispatch(regCompWorker(firstName, lastName, gender, email, company))
                 .then(() => {
                     setSuccessful(true);
                 })
@@ -96,55 +98,60 @@ const RegCompWorker = () => {
     }
 
     return (
-        <Container className={classes.container} component="main" maxWidth="xs">
-            <Paper className={classes.paper} elevation={3}>
-                <Avatar className={classes.avatar}>
-                    <SupervisorAccountIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">Register Company Worker</Typography>
-                {successful ?
-                    <Alert className={classes.alert} severity="success">
-                        <AlertTitle>Success</AlertTitle>
-                        <strong>You have successfully registered your Company Worker account</strong>
-                    </Alert>
-                    :
-                    (message ?
-                        <Alert className={successful ? classes.alert : classes.alert} severity="error">
-                            <AlertTitle>Error</AlertTitle>
-                            <strong> {message}</strong>
-                        </Alert>
-                        :
-                        null
-                    )
-                }
-                <form className={classes.form} onSubmit={handleSubmit}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} >
-                            <TextField label="First Name" error={errors.firstName} helperText={(errors.firstName)} name="firstName" htmlFor="firstName" variant="outlined" type="text" value={firstName} onChange={onChangeFirstName} fullWidth autoFocus />
-                        </Grid>
-                        <Grid item xs={12} >
-                            <TextField label="Last Name" error={errors.lastName} helperText={(errors.lastName)} name="lastName" htmlFor="lastName" variant="outlined" type="text" value={lastName} onChange={onChangeLastName} fullWidth />
-                        </Grid>
-                        <Grid item xs={12} >
-                            <TextField label="Email Address" error={errors.email} helperText={(errors.email)} name="email" htmlFor="email" variant="outlined" type="email" value={email} onChange={onChangeEmail} fullWidth />
-                        </Grid>
-                        <Grid item xs={12} >
-                            <TextField label="Gender"
-                                error={errors.gender} helperText={(errors.gender)} name="gender" htmlFor="gender" variant="outlined" fullWidth value={gender} onChange={onChangeGender} type="text" select label="Gender">
-                                <MenuItem value={"Male"} >Male</MenuItem>
-                                <MenuItem value={"Female"} >Female</MenuItem>
-                            </TextField>
-                        </Grid>
-                    </Grid>
-                    <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>
-                        Register
-                    </Button>
-                    <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
-                        Close
-                    </Button>
-                </form>
-            </Paper>
-        </Container>
+        (companyLoaded !== true) ?
+            <CircularProgress />
+            :
+            <>
+                <Container className={classes.container} component="main" maxWidth="xs">
+                    <Paper className={classes.paper} elevation={3}>
+                        <Avatar className={classes.avatar}>
+                            <SupervisorAccountIcon />
+                        </Avatar>
+                        <Typography component="h1" variant="h5">Register Company Worker</Typography>
+                        {successful ?
+                            <Alert className={classes.alert} severity="success">
+                                <AlertTitle>Success</AlertTitle>
+                                <strong>You have successfully registered your Company Worker account</strong>
+                            </Alert>
+                            :
+                            (message ?
+                                <Alert className={successful ? classes.alert : classes.alert} severity="error">
+                                    <AlertTitle>Error</AlertTitle>
+                                    <strong> {message}</strong>
+                                </Alert>
+                                :
+                                null
+                            )
+                        }
+                        <form className={classes.form} onSubmit={handleSubmit}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} >
+                                    <TextField label="First Name" error={errors.firstName} helperText={(errors.firstName)} name="firstName" htmlFor="firstName" variant="outlined" type="text" value={firstName} onChange={onChangeFirstName} fullWidth autoFocus />
+                                </Grid>
+                                <Grid item xs={12} >
+                                    <TextField label="Last Name" error={errors.lastName} helperText={(errors.lastName)} name="lastName" htmlFor="lastName" variant="outlined" type="text" value={lastName} onChange={onChangeLastName} fullWidth />
+                                </Grid>
+                                <Grid item xs={12} >
+                                    <TextField label="Email Address" error={errors.email} helperText={(errors.email)} name="email" htmlFor="email" variant="outlined" type="email" value={email} onChange={onChangeEmail} fullWidth />
+                                </Grid>
+                                <Grid item xs={12} >
+                                    <TextField label="Gender"
+                                        error={errors.gender} helperText={(errors.gender)} name="gender" htmlFor="gender" variant="outlined" fullWidth value={gender} onChange={onChangeGender} type="text" select label="Gender">
+                                        <MenuItem value={"Male"} >Male</MenuItem>
+                                        <MenuItem value={"Female"} >Female</MenuItem>
+                                    </TextField>
+                                </Grid>
+                            </Grid>
+                            <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>
+                                Register
+                            </Button>
+                            <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
+                                Close
+                            </Button>
+                        </form>
+                    </Paper>
+                </Container>
+            </>
     );
 };
 

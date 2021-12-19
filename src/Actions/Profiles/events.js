@@ -10,12 +10,22 @@ import {
     CLEAR_EVENT_ID,
     EDIT_EVENT_SUCCESS,
     EDIT_EVENT_FAIL,
+    GET_EVENT_LIST_SUCCESS,
+    GET_EVENT_LIST_FAIL,
+    GET_EVENT_LIST_ALL_SUCCESS,
+    GET_EVENT_LIST_ALL_FAIL,
+    DELETE_EVENT_SUCCESS,
+    DELETE_EVENT_FAIL,
+    GET_EVENT_ID_SUCCESS,
+    GET_EVENT_ID_FAIL,
+    GET_EVENT_LIST_FOR_USER_SUCCESS,
+    GET_EVENT_LIST_FOR_USER_FAIL,
 } from "../../Constants/actionTypes";
 
 import EventService from "../../Services/Profiles/event.service";
 
-export const regEvent = (title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type) => (dispatch) => {
-    return EventService.registerEvent(title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type).then(
+export const registerEventDispatch = (title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type) => (dispatch) => {
+    return EventService.registerEventAPI(title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type).then(
         (response) => {
             dispatch({
                 type: REGISTER_EVENT_SUCCESS,
@@ -113,6 +123,155 @@ export const editEvent = (eventId, title, companyId, loc_lat, loc_lng, startDate
 
             dispatch({
                 type: EDIT_EVENT_FAIL,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
+export const getEventListDispatch = (pageNumber, rowsPerPage, companyId) => (dispatch) => {
+    return EventService.registerEventIdAPI(pageNumber, rowsPerPage, companyId).then(
+        (response) => {
+            dispatch({
+                type: GET_EVENT_LIST_SUCCESS,
+                payload: response.data,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: response.data.message,
+            });
+
+            return Promise.resolve(response);
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: GET_EVENT_LIST_FAIL,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
+export const getEventListAllDispatch = (pageNumber, rowsPerPage, companyId) => (dispatch) => {
+    return EventService.getEventListAllApi(pageNumber, rowsPerPage, companyId).then(
+        (response) => {
+            dispatch({
+                type: GET_EVENT_LIST_ALL_SUCCESS,
+                payload: response.data.items,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: response.data.message,
+            });
+
+            return Promise.resolve(response);
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: GET_EVENT_LIST_ALL_FAIL,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
+
+
+export const deleteEventDispatch = (id) => (dispatch) => {
+    return EventService.deleteEventApi(id).then(
+        (response) => {
+            dispatch({
+                type: DELETE_EVENT_SUCCESS,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: response.data.message,
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: DELETE_EVENT_FAIL,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
+export const getEventIdDispatch = (id) => (dispatch) => {
+    return EventService.getEventIdApi(id).then(
+        (response) => {
+            dispatch({
+                type: GET_EVENT_ID_SUCCESS,
+                payload: response.data,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: response.data.message,
+            });
+
+            return Promise.resolve(response);
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: GET_EVENT_ID_FAIL,
             });
 
             dispatch({

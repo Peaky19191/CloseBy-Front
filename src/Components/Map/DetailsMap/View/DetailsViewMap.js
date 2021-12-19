@@ -11,8 +11,9 @@ import { useDispatch } from "react-redux";
 import moment from 'moment'
 import { useSelector } from "react-redux";
 import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
-import Adress from '../../../../Api/map'
 import Event from '../../../../Services/Profiles/event.service'
+import { getEventListAllDispatch, getEventIdDispatch } from '../../../../Actions/Profiles/events'
+import { getAdressDispatch } from '../../../../Actions/Map/map'
 
 const options = {
     styles: mapStyles,
@@ -33,6 +34,7 @@ const center = {
 
 const MapDetailsView = (props) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
     const { event: currentEventRedux } = useSelector((state) => state);
@@ -56,14 +58,14 @@ const MapDetailsView = (props) => {
     });
 
     const getList = () => {
-        Events.getEventsListAll(page, rowsPerPage)
+        dispatch(getEventListAllDispatch(page, rowsPerPage))
             .then((response) => {
                 const events = response.data.items;
 
                 const filteredEvents = events.filter(diffrentThanCurrent)
 
                 filteredEvents.forEach(function (item, index) {
-                    Adress.getAdress(item.localization.latitude, item.localization.longitude)
+                    dispatch(getAdressDispatch(item.localization.latitude, item.localization.longitude))
                         .then((response) => {
                             const address = response.data.results[0].formatted_address;
 
@@ -100,11 +102,11 @@ const MapDetailsView = (props) => {
     }
 
     const getCurrentEvent = () => {
-        Event.getEventId(props.currentEventId)
+        dispatch(getEventIdDispatch(props.currentEventId))
             .then((response) => {
                 const curEvent = response.data;
 
-                Adress.getAdress(curEvent.localization.latitude, curEvent.localization.longitude)
+                dispatch(getAdressDispatch(curEvent.localization.latitude, curEvent.localization.longitude))
                     .then((response) => {
                         const address = response.data.results[0].formatted_address;
 

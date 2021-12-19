@@ -17,7 +17,7 @@ import {
 import CompanyService from "../../Services/Profiles/company.service";
 
 export const regCompany = (name) => (dispatch) => {
-    return CompanyService.registerCompanyApi(name).then(
+    return CompanyService.registerCompanyAPI(name).then(
         (response) => {
             dispatch({
                 type: REGISTER_COMPANY_SUCCESS,
@@ -66,7 +66,7 @@ export const clearCompanyDispatch = () => (dispatch) => {
 };
 
 export const editCompany = (id, name) => (dispatch) => {
-    return CompanyService.editCompanyApi(id, name).then(
+    return CompanyService.editCompanyAPI(id, name).then(
         (response) => {
             dispatch({
                 type: EDIT_COMPANY_SUCCESS,
@@ -102,7 +102,7 @@ export const editCompany = (id, name) => (dispatch) => {
 };
 
 export const getCompanyListDispatch = (pageNumber, rowsPerPage) => (dispatch) => {
-    return CompanyService.getCompanyListApi(pageNumber, rowsPerPage).then(
+    return CompanyService.getCompanyListAPI(pageNumber, rowsPerPage).then(
         (response) => {
             dispatch({
                 type: GET_COMPANY_LIST_SUCCESS,
@@ -114,7 +114,7 @@ export const getCompanyListDispatch = (pageNumber, rowsPerPage) => (dispatch) =>
                 payload: response.data.message,
             });
 
-            return Promise.resolve();
+            return Promise.resolve(response);
         },
         (error) => {
             const message =
@@ -139,7 +139,7 @@ export const getCompanyListDispatch = (pageNumber, rowsPerPage) => (dispatch) =>
 };
 
 export const deleteCompanyDispatch = (id) => (dispatch) => {
-    return CompanyService.deleteCompanyApi(id).then(
+    return CompanyService.deleteCompanyAPI(id).then(
         (response) => {
             dispatch({
                 type: DELETE_COMPANY_SUCCESS,
@@ -175,7 +175,7 @@ export const deleteCompanyDispatch = (id) => (dispatch) => {
 };
 
 export const getCompanyIdDispatch = (id) => (dispatch) => {
-    return CompanyService.getCompanyIdApi(id).then(
+    return CompanyService.getCompanyIdAPI(id).then(
         (response) => {
             dispatch({
                 type: GET_COMPANY_ID_SUCCESS,

@@ -4,9 +4,11 @@ import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField }
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@material-ui/core/IconButton';
+import { useSelector } from "react-redux";
 
 const PopupDeleteEvent = (props) => {
     const classes = useStyles();
+    const { profile: currentProfile } = useSelector((state) => state.auth);
 
     return (
         <div className={classes.popupBox} >
@@ -29,9 +31,10 @@ const PopupDeleteEvent = (props) => {
                         <Grid item xs={12} >
                             <TextField value={props.handleData[1]} label="Title" InputProps={{ readOnly: true }} variant="outlined" fullWidth />
                         </Grid>
-                        <Grid item xs={12} >
-                            <TextField value={props.handleData[2]} label="Company" InputProps={{ readOnly: true }} variant="outlined" fullWidth />
-                        </Grid>
+                        {(currentProfile.role === "GlobalAdmin") &&
+                            <Grid item xs={12} >
+                                <TextField value={props.handleData[2]} label="Company" InputProps={{ readOnly: true }} variant="outlined" fullWidth />
+                            </Grid>}
                         <Grid item xs={12} >
                             <TextField value={props.handleData[3]} label="Status" InputProps={{ readOnly: true }} variant="outlined" fullWidth />
                         </Grid>

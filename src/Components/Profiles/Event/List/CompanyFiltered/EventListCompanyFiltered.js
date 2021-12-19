@@ -15,18 +15,20 @@ import { Link } from 'react-router-dom'
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
 import PopupDeleteEvent from '../../../../Popup/PopupDelete/Event/PopupDeleteEvent';
-import { setEventId } from "../../../../../Actions/Profiles/events";
+import { setEventId, getEventListAllDispatch, deleteEventDispatch } from "../../../../../Actions/Profiles/events";
 import { useDispatch } from "react-redux";
 import CompAdmin from '../../../../../Services/Profiles/companyAdmin.service'
 import CompWorker from '../../../../../Services/Profiles/companyWorker.service'
 import { useSelector } from "react-redux";
 import moment from 'moment'
 import { useHistory } from "react-router-dom";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const EventList = () => {
     const classes = useStyles();
 
     const { company: currentCompany } = useSelector((state) => state.company);
+    const [listLoaded, setListLoaded] = useState(false);
 
     const [event, setEvent] = useState([]);
 
@@ -35,13 +37,19 @@ const EventList = () => {
     const [count, setCount] = useState(0);
 
     const getList = () => {
-        Event.getEventsListId(page, rowsPerPage, currentCompany.id)
+        dispatch(getEventListAllDispatch(page, rowsPerPage, currentCompany.id))
             .then((response) => {
                 const eventTemp = response.data.items;
                 const totalPages = response.data.count;
 
                 setEvent(eventTemp);
                 setCount(totalPages);
+                // const eventTemp = response.data.items;
+                // const totalPages = response.data.count;
+                setListLoaded(true);
+
+                // setEvent(eventTemp);
+                // setCount(totalPages);
             })
             .catch((e) => {
                 console.log(e);
@@ -72,10 +80,15 @@ const EventList = () => {
         setIsOpen(!isOpen);
     }
 
-    const deleteFromList = async () => {
-        await Event.deleteEvent(idEventDelete);
-        showPopup();
-        getList();
+    const deleteFromList = () => {
+        deleteEventDispatch(idEventDelete)
+            .then(() => {
+                showPopup();
+                getList();
+            })
+            .catch((e) => {
+                console.log(e);
+            });
     }
 
     const handleChangePage = (event, newPage) => {
@@ -93,69 +106,72 @@ const EventList = () => {
     }
 
     return (
-        <>
-            <Container className={classes.container}>
-                <Paper className={classes.paper} >
-                    <Typography component="h1" variant="h4">Events of the Company - {currentCompany.name} </Typography>
-                </Paper>
-            </Container>
-            <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >
-                <Table className={classes.table} aria-label="simple table">
-                    <TableHead>
-                        <TableRow >
-                            <TableCell className={classes.tableCellTitle}>Title</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>Type</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>Status</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>Start At</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>End At</TableCell>
-                            <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {event.map((item) => (
-                            <TableRow key={item.id} >
-                                <TableCell component="th" scope="row">{item.title}</TableCell>
-                                <TableCell align="center" component="th" scope="row">{item.type}</TableCell>
-                                <TableCell align="center" component="th" scope="row">{item.status}</TableCell>
-                                <TableCell align="center">{moment(item.startDateTime).format('MM/DD/YYYY HH:mm')}</TableCell>
-                                <TableCell align="center">{moment(item.endDateTime).format('MM/DD/YYYY HH:mm')}</TableCell>
-                                <TableCell align="center">
-                                    <IconButton component={Link} to="/eventDetailsEdit" onClick={() => { setIdEvent(item.id) }} aria-label="edit" size="large" >
-                                        <SettingsApplicationsIcon className={classes.settingICon} />
-                                    </IconButton>
-                                    <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.title) }} >
-                                        <DeleteIcon className={classes.deleteICon} />
-                                    </IconButton>
-                                </TableCell>
+        (listLoaded !== true) ?
+            <CircularProgress />
+            :
+            <>
+                <Container className={classes.container}>
+                    <Paper className={classes.paper} >
+                        <Typography component="h1" variant="h4">Events of the Company - {currentCompany.name} </Typography>
+                    </Paper>
+                </Container>
+                <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >
+                    <Table className={classes.table} aria-label="simple table">
+                        <TableHead>
+                            <TableRow >
+                                <TableCell className={classes.tableCellTitle}>Title</TableCell>
+                                <TableCell align="center" className={classes.tableCellTitle}>Type</TableCell>
+                                <TableCell align="center" className={classes.tableCellTitle}>Status</TableCell>
+                                <TableCell align="center" className={classes.tableCellTitle}>Start At</TableCell>
+                                <TableCell align="center" className={classes.tableCellTitle}>End At</TableCell>
+                                <TableCell align="center" className={classes.tableCellTitle}>Actions</TableCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                    <TableFooter>
-                        <TableRow>
-                            <Grid container justify="flex-end">
-                                <Grid item>
-                                    <TablePagination
-                                        rowsPerPageOptions={[5, 10, 25, 100]}
-                                        component="div"
-                                        count={count}
-                                        rowsPerPage={rowsPerPage}
-                                        page={page}
-                                        onPageChange={handleChangePage}
-                                        onRowsPerPageChange={handleChangeRowsPerPage}
-                                    />
+                        </TableHead>
+                        <TableBody>
+                            {event.map((item) => (
+                                <TableRow key={item.id} >
+                                    <TableCell component="th" scope="row">{item.title}</TableCell>
+                                    <TableCell align="center" component="th" scope="row">{item.type}</TableCell>
+                                    <TableCell align="center" component="th" scope="row">{item.status}</TableCell>
+                                    <TableCell align="center">{moment(item.startDateTime).format('MM/DD/YYYY HH:mm')}</TableCell>
+                                    <TableCell align="center">{moment(item.endDateTime).format('MM/DD/YYYY HH:mm')}</TableCell>
+                                    <TableCell align="center">
+                                        <IconButton component={Link} to="/eventDetailsEdit" onClick={() => { setIdEvent(item.id) }} aria-label="edit" size="large" >
+                                            <SettingsApplicationsIcon className={classes.settingICon} />
+                                        </IconButton>
+                                        <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.title) }} >
+                                            <DeleteIcon className={classes.deleteICon} />
+                                        </IconButton>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                        <TableFooter>
+                            <TableRow>
+                                <Grid container justify="flex-end">
+                                    <Grid item>
+                                        <TablePagination
+                                            rowsPerPageOptions={[5, 10, 25, 100]}
+                                            component="div"
+                                            count={count}
+                                            rowsPerPage={rowsPerPage}
+                                            page={page}
+                                            onPageChange={handleChangePage}
+                                            onRowsPerPageChange={handleChangeRowsPerPage}
+                                        />
+                                    </Grid>
+                                    <Grid item >
+                                        <Button onClick={goToPreviousPath} className={classes.bottomButtonClose}>
+                                            Close
+                                        </Button>
+                                    </Grid>
                                 </Grid>
-                                <Grid item >
-                                    <Button onClick={goToPreviousPath} className={classes.bottomButtonClose}>
-                                        Close
-                                    </Button>
-                                </Grid>
-                            </Grid>
-                        </TableRow>
-                    </TableFooter>
-                </Table>
-            </TableContainer>
-            {isOpen && <PopupDeleteEvent handleClose={showPopup} handleDelete={deleteFromList} handleData={["Event", eventTitleDelete]} />}
-        </>
+                            </TableRow>
+                        </TableFooter>
+                    </Table>
+                </TableContainer>
+                {isOpen && <PopupDeleteEvent handleClose={showPopup} handleDelete={deleteFromList} handleData={["Event", eventTitleDelete]} />}
+            </>
     );
 };
 

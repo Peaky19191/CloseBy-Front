@@ -4,7 +4,7 @@ import SERVER_API from "../../Static/serverApi";
 
 const API_URL = "user/";
 
-const registerUser = (firstName, lastName, gender, email, password) => {
+const registerUserAPI = (firstName, lastName, gender, email, password) => {
     return axios.post(SERVER_API + API_URL + "register", {
         firstName,
         lastName,
@@ -14,11 +14,11 @@ const registerUser = (firstName, lastName, gender, email, password) => {
     });
 };
 
-const getUserData = (id) => {
+const getUserDataAPI = (id) => {
     return axios.get(SERVER_API + API_URL, { id });
 };
 
-const updateUser = (id, firstName, lastName, gender, email) => {
+const updateUserAPI = (id, firstName, lastName, gender, email) => {
     return axios.put(SERVER_API + API_URL + "update",
         {
             id: id,
@@ -33,7 +33,7 @@ const updateUser = (id, firstName, lastName, gender, email) => {
     );
 };
 
-const getUsersList = (pageNumber, rowsPerPage) => {
+const getUserListAPI = (pageNumber, rowsPerPage) => {
     return axios.post(SERVER_API + API_URL + "list",
         {
             page: pageNumber,
@@ -45,7 +45,7 @@ const getUsersList = (pageNumber, rowsPerPage) => {
     );
 };
 
-const deleteUser = (id) => {
+const deleteUserAPI = (id) => {
     return axios.delete(SERVER_API + API_URL + "delete",
         {
             headers: authHeader(),
@@ -57,7 +57,7 @@ const deleteUser = (id) => {
     );
 };
 
-const getUserId = (id) => {
+const getUserIdAPI = (id) => {
     return axios.get(SERVER_API + API_URL + id,
         {
             headers: authHeader(),
@@ -67,10 +67,10 @@ const getUserId = (id) => {
 };
 
 export default {
-    getUserData,
-    registerUser,
-    updateUser,
-    getUsersList,
-    deleteUser,
-    getUserId,
+    getUserDataAPI,
+    registerUserAPI,
+    updateUserAPI,
+    getUserListAPI,
+    deleteUserAPI,
+    getUserIdAPI,
 };

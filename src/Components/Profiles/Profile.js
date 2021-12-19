@@ -10,17 +10,21 @@ import CompWorker from '../../Services/Profiles/companyWorker.service'
 import CompAdmin from '../../Services/Profiles/companyAdmin.service'
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useDispatch, useSelector } from "react-redux";
-import { editCompAdmin } from "../..//Actions/Profiles/companyAdmin";
-import { editCompWorker } from "../../Actions/Profiles/companyWorker";
-import { editUser } from "../../Actions/Profiles/user";
+import { editCompAdmin, getCompAdminIdDispatch } from "../../Actions/Profiles/companyAdmin";
+import { editCompWorker, getCompWorkerIdDispatch } from "../../Actions/Profiles/companyWorker";
+import { editUser, getUserIdDispatch } from "../../Actions/Profiles/user";
 import { useHistory } from "react-router-dom";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const Profile = () => {
   const classes = useStyles();
 
+  const [listLoaded, setListLoaded] = useState(false);
+
   const { profile: currentProfile } = useSelector((state) => state.auth);
 
   const { message } = useSelector(state => state.message);
+
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -61,21 +65,23 @@ const Profile = () => {
   useEffect(getProfileDetails, [currentProfile.id]);
 
   const getUserDetails = () => {
-    User.getUserId(currentProfile.id).then((response) => {
-      const user = response.data;
+    dispatch(getUserIdDispatch(currentProfile.id))
+      .then((response) => {
+        const user = response.data;
 
-      setFirstName(user.firstName);
-      setLastName(user.lastName);
-      setEmail(user.email);
-      setGender(user.gender);
-    })
+        setFirstName(user.firstName);
+        setLastName(user.lastName);
+        setEmail(user.email);
+        setGender(user.gender);
+        setListLoaded(true);
+      })
       .catch((e) => {
         console.log(e);
       });
   }
 
   const getCompWorkerDetails = () => {
-    CompWorker.getCompanyWorkerId(currentProfile.id)
+    dispatch(getCompWorkerIdDispatch(currentProfile.id))
       .then((response) => {
         const compWorker = response.data;
 
@@ -83,6 +89,7 @@ const Profile = () => {
         setLastName(compWorker.lastName);
         setEmail(compWorker.email);
         setGender(compWorker.gender);
+        setListLoaded(true);
       })
       .catch((e) => {
         console.log(e);
@@ -90,7 +97,7 @@ const Profile = () => {
   }
 
   const getCompAdminDetails = () => {
-    CompAdmin.getCompanyAdminId(currentProfile.id)
+    dispatch(getCompAdminIdDispatch(currentProfile.id))
       .then((response) => {
         const compAdmin = response.data;
 
@@ -98,6 +105,7 @@ const Profile = () => {
         setLastName(compAdmin.lastName);
         setEmail(compAdmin.email);
         setGender(compAdmin.gender);
+        setListLoaded(true);
       })
       .catch((e) => {
         console.log(e);
@@ -158,67 +166,72 @@ const Profile = () => {
   };
 
   return (
-    <Container className={classes.container} component="main" maxWidth="xs">
-      <Paper className={classes.paper} elevation={3}>
-        <Avatar className={classes.avatar}>
-          <SupervisorAccountIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">Details of your account</Typography>
-        {successful ?
-          <Alert className={classes.alert} severity="success">
-            <AlertTitle>Success</AlertTitle>
-            <strong>You have successfully edit your Company Admin</strong>
-          </Alert>
-          :
-          (message ?
-            <Alert className={successful ? classes.alert : classes.alert} severity="error">
-              <AlertTitle>Error</AlertTitle>
-              <strong>{message}</strong>
-            </Alert>
-            :
-            null
-          )
-        }
-        <form className={classes.form}>
-          <Grid container spacing={2}>
-            <Grid item xs={12} >
-              <TextField value={firstName} label="First Name" onChange={onChangeFirstName} InputProps={{ readOnly: disaled }} name="firstName" htmlFor="firstName" variant="outlined" fullWidth />
-            </Grid>
-            <Grid item xs={12} >
-              <TextField value={lastName} onChange={onChangeLastName} InputProps={{ readOnly: disaled }} name="lastName" htmlFor="lastName" variant="outlined" fullWidth label="Last Name" />
-            </Grid>
-            <Grid item xs={12} >
-              <TextField value={email} label="Email Address" onChange={onChangeEmail} InputProps={{ readOnly: disaled }} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
-            </Grid>
-            <Grid item xs={12} >
-              <TextField value={gender} htmlFor="gender" variant="outlined" InputProps={{ readOnly: disaled }} select={disaled ? false : true} fullWidth onChange={onChangeGender} type="text" label="Gender">
-                <MenuItem value={"Male"} >Male</MenuItem>
-                <MenuItem value={"Female"} >Female</MenuItem>
-              </TextField>
-            </Grid>
-          </Grid>
-          <Grid className={classes.buttonsContainer} spacing={2}>
-            {editMode ?
-              <>
-                <Button onClick={() => { sendEdited() }} className={classes.buttonEditSave} fullWidth variant="contained"  >
-                  Save
-                </Button>
-                <Button className={classes.buttonEditStop} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >
-                  Stop Editinig
-                </Button>
-              </>
+    (listLoaded !== true) ?
+      <CircularProgress />
+      :
+      <>
+        <Container className={classes.container} component="main" maxWidth="xs">
+          <Paper className={classes.paper} elevation={3}>
+            <Avatar className={classes.avatar}>
+              <SupervisorAccountIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">Details of your account</Typography>
+            {successful ?
+              <Alert className={classes.alert} severity="success">
+                <AlertTitle>Success</AlertTitle>
+                <strong>You have successfully edit your Company Admin</strong>
+              </Alert>
               :
-              <Button className={classes.buttonEditStart} onClick={() => { startEditing() }} fullWidth variant="contained" color="primary" >
-                Edit
-              </Button>
+              (message ?
+                <Alert className={successful ? classes.alert : classes.alert} severity="error">
+                  <AlertTitle>Error</AlertTitle>
+                  <strong>{message}</strong>
+                </Alert>
+                :
+                null
+              )
             }
-            <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
-              Close
-            </Button>
-          </Grid>
-        </form>
-      </Paper>
-    </Container>
+            <form className={classes.form}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} >
+                  <TextField value={firstName} label="First Name" onChange={onChangeFirstName} InputProps={{ readOnly: disaled }} name="firstName" htmlFor="firstName" variant="outlined" fullWidth />
+                </Grid>
+                <Grid item xs={12} >
+                  <TextField value={lastName} onChange={onChangeLastName} InputProps={{ readOnly: disaled }} name="lastName" htmlFor="lastName" variant="outlined" fullWidth label="Last Name" />
+                </Grid>
+                <Grid item xs={12} >
+                  <TextField value={email} label="Email Address" onChange={onChangeEmail} InputProps={{ readOnly: disaled }} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
+                </Grid>
+                <Grid item xs={12} >
+                  <TextField value={gender} htmlFor="gender" variant="outlined" InputProps={{ readOnly: disaled }} select={disaled ? false : true} fullWidth onChange={onChangeGender} type="text" label="Gender">
+                    <MenuItem value={"Male"} >Male</MenuItem>
+                    <MenuItem value={"Female"} >Female</MenuItem>
+                  </TextField>
+                </Grid>
+              </Grid>
+              <Grid className={classes.buttonsContainer} spacing={2}>
+                {editMode ?
+                  <>
+                    <Button onClick={() => { sendEdited() }} className={classes.buttonEditSave} fullWidth variant="contained"  >
+                      Save
+                    </Button>
+                    <Button className={classes.buttonEditStop} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >
+                      Stop Editinig
+                    </Button>
+                  </>
+                  :
+                  <Button className={classes.buttonEditStart} onClick={() => { startEditing() }} fullWidth variant="contained" color="primary" >
+                    Edit
+                  </Button>
+                }
+                <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
+                  Close
+                </Button>
+              </Grid>
+            </form>
+          </Paper>
+        </Container>
+      </>
   );
 };
 

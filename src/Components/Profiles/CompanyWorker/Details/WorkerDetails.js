@@ -5,7 +5,7 @@ import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField }
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { Link } from 'react-router-dom'
 import MenuItem from '@material-ui/core/MenuItem';
-import { editCompWorker } from "../../../../Actions/Profiles/companyWorker";
+import { editCompWorker, getCompWorkerIdDispatch } from "../../../../Actions/Profiles/companyWorker";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -15,16 +15,16 @@ import BusinessIcon from '@mui/icons-material/Business';
 const CompWorkerDetails = () => {
     const classes = useStyles();
 
-    const compWorkerId = useSelector(state => state.companyWorker.id_comp_worker);
+    const compWorker = useSelector(state => state.companyWorker.comp_worker);
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
 
-    const [company, setCompany] = useState("");
+    // const [company, setCompany] = useState(compWorker.company);
 
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [gender, setGender] = useState("");
+    const [firstName, setFirstName] = useState(compWorker.firstName);
+    const [lastName, setLastName] = useState(compWorker.lastName);
+    const [email, setEmail] = useState(compWorker.email);
+    const [gender, setGender] = useState(compWorker.gender);
     const [errors, setErrors] = useState({});
 
     const enabled =
@@ -66,43 +66,22 @@ const CompWorkerDetails = () => {
         setEditMode(false);
     }
 
-    const getCompWorkerDetails = () => {
-        CompWorker.getCompanyWorkerId(compWorkerId)
-            .then((response) => {
-                const compWorker = response.data;
-
-                setFirstName(compWorker.firstName);
-                setLastName(compWorker.lastName);
-                setEmail(compWorker.email);
-                setGender(compWorker.gender);
-                setCompany(compWorker.company);
-            })
-            .catch((e) => {
-                console.log(e);
-            });
-    }
-    useEffect(getCompWorkerDetails, [compWorkerId]);
-
     const [successful, setSuccessful] = useState(false);
 
     const { message } = useSelector(state => state.message);
     const dispatch = useDispatch();
 
-    const dispatchCompany = (company) => {
-        dispatch(setCompanyDispatch(company))
-    }
-
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
-        if (validate())
-            dispatch(editCompWorker(compWorkerId, firstName, lastName, gender, email))
-                .then(() => {
-                    setSuccessful(true);
-                })
-                .catch(() => {
-                    setSuccessful(false);
-                });
+        // if (validate())
+        dispatch(editCompWorker(compWorker.id, firstName, lastName, gender, email))
+            .then(() => {
+                setSuccessful(true);
+            })
+            .catch(() => {
+                setSuccessful(false);
+            });
     };
 
     let history = useHistory();
@@ -165,7 +144,7 @@ const CompWorkerDetails = () => {
                     </Grid>
                     <Grid className={classes.buttonsContainer} >
                         {(currentProfile.role === "GlobalAdmin") &&
-                            <Button className={classes.buttonCompanyDetails} component={Link} to="/companyDetails" onClick={() => { dispatchCompany(company) }} fullWidth variant="contained" color="primary" >
+                            <Button className={classes.buttonCompanyDetails} component={Link} to="/companyDetails" fullWidth variant="contained" color="primary" >
                                 {/* <BusinessIcon /> */}
                                 Company Details
                             </Button>}

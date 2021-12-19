@@ -4,7 +4,7 @@ import SERVER_API from "../../Static/serverApi";
 
 const API_URL = "company-admin/";
 
-const registerCompanyAdmin = (firstName, lastName, gender, email, companyId) => {
+const registerCompanyAdminAPI = (firstName, lastName, gender, email, companyId) => {
     return axios.post(SERVER_API + API_URL + "create",
         {
             firstName,
@@ -34,7 +34,7 @@ const editCompanyAdminAPI = (id, firstName, lastName, gender, email, companyId) 
     );
 };
 
-const getCompanyAdminsList = (pageNumber, rowsPerPage, companyId) => {
+const getCompAdminListAPI = (pageNumber, rowsPerPage, companyId) => {
     return axios.post(SERVER_API + API_URL + "list",
         {
             page: pageNumber,
@@ -47,7 +47,7 @@ const getCompanyAdminsList = (pageNumber, rowsPerPage, companyId) => {
     );
 };
 
-const deleteCompanyAdmin = (id, companyId) => {
+const deleteCompAdminAPI = (id, companyId) => {
     return axios.delete(SERVER_API + API_URL + "delete",
         {
             headers: authHeader(),
@@ -60,7 +60,7 @@ const deleteCompanyAdmin = (id, companyId) => {
     );
 };
 
-const getCompanyAdminId = (id) => {
+const getCompAdminIdAPI = (id) => {
     return axios.get(SERVER_API + API_URL + id,
         {
             headers: authHeader(),
@@ -70,9 +70,9 @@ const getCompanyAdminId = (id) => {
 };
 
 export default {
-    registerCompanyAdmin,
+    registerCompanyAdminAPI,
     editCompanyAdminAPI,
-    getCompanyAdminsList,
-    deleteCompanyAdmin,
-    getCompanyAdminId,
+    getCompAdminListAPI,
+    deleteCompAdminAPI,
+    getCompAdminIdAPI,
 };
