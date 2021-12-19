@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Router, Switch, Route } from "react-router-dom";
 import User from '../../Components/Profiles/User/User';
+import Payment from "../Payment/Payment";
 import CompanyWorker from '../../Components/Profiles/CompanyWorker/CompanyWorker';
 import CompanyAdmin from '../../Components/Profiles/CompanyAdmin/CompAdmin';
 import RegCompAdmin from '../../Components/Profiles/CompanyAdmin/Register/RegisterAdmin';
@@ -67,6 +68,7 @@ const SwitchComponent = () => {
             <Route exact path="/workerListCompanyFilter" component={WorkersListCompanyFiltered} />
             <Route exact path="/adminListCompanyFilter" component={AdminsListCompanyFiltered} />
             <Route exact path="/eventListCompanyFilter" component={EventListCompanyFiltered} />
+            <Route exact path="/create-payment/:eventId" component={Payment} />
 
         </Switch>
     );
