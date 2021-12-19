@@ -54,4 +54,15 @@ export default makeStyles((theme) => ({
   buttonCompanyDetails: {
     margin: theme.spacing(2, 0, 0),
   },
+  spinnerContainer: {
+    // position: "absolute",
+    // maxWidth: "90vw",
+    // margin: theme.spacing("1.5vw", "5vw"),
+    // borderRadius: "10px",
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%'
+  },
 }));

@@ -100,7 +100,9 @@ const CompanyAdminsList = () => {
     };
     return (
         (listLoaded !== true) ?
-            <CircularProgress />
+            <Grid className={classes.spinnerContainer}>
+                <CircularProgress size={500} thickness={1} />
+            </Grid>
             :
             <>
                 <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >

@@ -104,8 +104,9 @@ export const Events = () => {
                 </main>
             </>
             :
-
-            <CircularProgress />
+            <Grid className={classes.spinnerContainer}>
+                <CircularProgress size={500} thickness={1} />
+            </Grid>
     )
 }
 

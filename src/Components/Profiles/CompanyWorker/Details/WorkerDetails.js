@@ -11,9 +11,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setCompanyDispatch } from "../../../../Actions/Profiles/company";
 import BusinessIcon from '@mui/icons-material/Business';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const CompWorkerDetails = () => {
     const classes = useStyles();
+    const [loading, setLoading] = useState(false);
 
     const compWorker = useSelector(state => state.companyWorker.comp_worker);
 
@@ -74,13 +76,17 @@ const CompWorkerDetails = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
+        setLoading(true);
+
         // if (validate())
         dispatch(editCompWorker(compWorker.id, firstName, lastName, gender, email))
             .then(() => {
                 setSuccessful(true);
+                setLoading(false);
             })
             .catch(() => {
                 setSuccessful(false);
+                setLoading(false);
             });
     };
 
@@ -151,7 +157,9 @@ const CompWorkerDetails = () => {
                         {editMode ?
                             <>
                                 <Button disabled={!enabled} type="submit" className={classes.buttonEditSave} fullWidth variant="contained"  >
-                                    Save
+                                    {loading ? (
+                                        <CircularProgress size="20px" />
+                                    ) : "Save"}
                                 </Button>
                                 <Button className={classes.buttonEditStop} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >
                                     Stop Editinig

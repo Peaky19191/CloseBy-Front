@@ -17,10 +17,10 @@ import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@
 import PopupDeleteCompany from '../../../Popup/PopupDelete/Company/PopupDeleteCompany';
 import { setCompanyDispatch } from "../../../../Actions/Profiles/company";
 import { useSelector } from "react-redux";
-
 import { useDispatch } from "react-redux";
 import moment from 'moment'
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Box from '@mui/material/Box';
 
 const CompanyList = () => {
     const classes = useStyles();
@@ -97,7 +97,9 @@ const CompanyList = () => {
     };
     return (
         (listLoaded !== true) ?
-            <CircularProgress />
+            <Grid className={classes.spinnerContainer}>
+                <CircularProgress size={500} thickness={1} />
+            </Grid>
             :
             <>
                 <TableContainer className={classes.tableContainer} component={Paper} elevation={3} >

@@ -24,6 +24,7 @@ import { getEventIdDispatch } from "../../../../../Actions/Profiles/events";
 import { useHistory } from "react-router-dom";
 import { setCompanyDispatch } from "../../../../../Actions/Profiles/company";
 import BusinessIcon from '@mui/icons-material/Business';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -31,6 +32,7 @@ const Input = styled(MuiInput)`
 
 const EventDetailsEdit = () => {
     const classes = useStyles();
+    const [loading, setLoading] = useState(false);
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
 
@@ -148,12 +150,16 @@ const EventDetailsEdit = () => {
 
     const handleSubmit = () => {
         setSuccessful(false);
+        setLoading(true);
+
         dispatch(editEvent(eventIdToPass, title, company.id, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type))
             .then(() => {
                 setSuccessful(true);
+                setLoading(false);
             })
             .catch(() => {
                 setSuccessful(false);
+                setLoading(false);
             });
     };
 
@@ -315,7 +321,9 @@ const EventDetailsEdit = () => {
                                 {editMode &&
                                     <Grid item className={classes.buttonClose}>
                                         <Button onClick={() => { handleSubmit() }} className={classes.buttonEditSave} fullWidth variant="contained"  >
-                                            Save
+                                            {loading ? (
+                                                <CircularProgress size="20px" />
+                                            ) : "Save"}
                                         </Button>
                                     </Grid>}
                             </>

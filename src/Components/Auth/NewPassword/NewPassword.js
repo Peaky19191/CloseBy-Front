@@ -7,6 +7,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Link } from 'react-router-dom'
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useParams } from 'react-router';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 export const NewPassword = () => {
@@ -15,6 +16,7 @@ export const NewPassword = () => {
     const [successful, setSuccessful] = useState(false);
 
     const { message } = useSelector(state => state.message);
+    const [loading, setLoading] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -29,13 +31,19 @@ export const NewPassword = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
+        setLoading(true);
+
         console.log(token);
         dispatch(setNewPassword(password, token))
             .then(() => {
                 setSuccessful(true);
+                setLoading(false);
+
             })
             .catch(() => {
                 setSuccessful(false);
+                setLoading(false);
+
             });
     };
 
@@ -69,7 +77,9 @@ export const NewPassword = () => {
                         </Grid>
                     </Grid>
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-                        Set new password
+                        {loading ? (
+                            <CircularProgress size="20px" />
+                        ) : "Set new password"}
                     </Button>
                     <Grid container justifyContent="flex-end">
                         <Grid item>

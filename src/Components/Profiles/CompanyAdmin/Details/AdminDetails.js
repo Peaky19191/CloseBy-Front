@@ -11,10 +11,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setCompanyDispatch } from "../../../../Actions/Profiles/company";
 import BusinessIcon from '@mui/icons-material/Business';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const CompAdminDetails = () => {
     const classes = useStyles();
     const compAdmin = useSelector(state => state.companyAdmin.comp_admin);
+    const [loading, setLoading] = useState(false);
 
     const [firstName, setFirstName] = useState(compAdmin.firstName);
     const [lastName, setLastName] = useState(compAdmin.lastName);
@@ -70,14 +72,17 @@ const CompAdminDetails = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
+        setLoading(true);
 
         // if (validate())
         dispatch(editCompAdmin(compAdmin.id, firstName, lastName, gender, email))
             .then(() => {
                 setSuccessful(true);
+                setLoading(false);
             })
             .catch(() => {
                 setSuccessful(false);
+                setLoading(false);
             });
     };
 
@@ -146,7 +151,9 @@ const CompAdminDetails = () => {
                         {editMode ?
                             <>
                                 <Button disabled={!enabled} type="submit" className={classes.buttonEditSave} fullWidth variant="contained"  >
-                                    Save
+                                    {loading ? (
+                                        <CircularProgress size="20px" />
+                                    ) : "Save"}
                                 </Button>
                                 <Button className={classes.buttonEditStop} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >
                                     Stop Editinig

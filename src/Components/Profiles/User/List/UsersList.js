@@ -14,7 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Link } from 'react-router-dom'
 import { deleteUserDispatch, setUser, getUserListDispatch } from "../../../../Actions/Profiles/user";
-import { Paper } from '@material-ui/core';
+import { Paper, Grid } from '@material-ui/core';
 import PopupDeleteProfile from '../../../Popup/PopupDelete/Profile/PopupDeleteProfile';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useDispatch, useSelector } from "react-redux";
@@ -93,7 +93,9 @@ const UsersList = () => {
 
     return (
         (listLoaded !== true) ?
-            <CircularProgress />
+            <Grid className={classes.spinnerContainer}>
+                <CircularProgress size={500} thickness={1} />
+            </Grid>
             :
             <>
                 <TableContainer className={classes.tableContainer} component={Paper} elevation={3} autof >

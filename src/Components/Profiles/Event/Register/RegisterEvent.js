@@ -20,6 +20,7 @@ import DateTimePicker from '@mui/lab/DateTimePicker';
 import moment from 'moment'
 import { useHistory } from "react-router-dom";
 import { getCompWorkerIdDispatch } from "../../../../Actions/Profiles/companyWorker";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -30,6 +31,7 @@ const RegEvent = () => {
     const { profile: currentProfile } = useSelector((state) => state.auth);
 
     const classes = useStyles();
+    const [loading, setLoading] = useState(false);
 
     const [successful, setSuccessful] = useState(false);
     const [errors, setErrors] = useState({});
@@ -107,15 +109,18 @@ const RegEvent = () => {
     const status = "Added";
 
     const handleSubmit = (e) => {
-
         e.preventDefault();
         setSuccessful(false);
+        setLoading(true);
+
         dispatch(registerEventDispatch(name, companyId, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type))
             .then(() => {
                 setSuccessful(true);
+                setLoading(false);
             })
             .catch(() => {
                 setSuccessful(false);
+                setLoading(false);
             });
     };
 
@@ -229,7 +234,9 @@ const RegEvent = () => {
                         </Grid>
                         <Grid item className={classes.buttonSubmit}>
                             <Button type="submit" fullWidth variant="contained" color="primary" >
-                                Submit
+                                {loading ? (
+                                    <CircularProgress size="20px" />
+                                ) : "Submit"}
                             </Button>
                         </Grid>
                     </Grid>

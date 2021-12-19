@@ -16,6 +16,7 @@ const RegCompAdmin = () => {
     const classes = useStyles();
 
     const { message } = useSelector(state => state.message);
+    const [loading, setLoading] = useState(false);
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -73,13 +74,17 @@ const RegCompAdmin = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
+        setLoading(true);
+
         if (validate())
             dispatch(regCompAdmin(firstName, lastName, gender, email, companyId))
                 .then(() => {
                     setSuccessful(true);
+                    setLoading(false);
                 })
                 .catch(() => {
                     setSuccessful(false);
+                    setLoading(false);
                 });
     };
 
@@ -111,8 +116,9 @@ const RegCompAdmin = () => {
 
     return (
         (listLoaded !== true) ?
-            <CircularProgress />
-            :
+            <Grid className={classes.spinnerContainer}>
+                <CircularProgress size={500} thickness={1} />
+            </Grid> :
             <>
                 <Container className={classes.container} component="main" maxWidth="xs">
                     <Paper className={classes.paper} elevation={3}>
@@ -161,7 +167,9 @@ const RegCompAdmin = () => {
                                 </Grid>
                             </Grid>
                             <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>
-                                Register
+                                {loading ? (
+                                    <CircularProgress size="20px" />
+                                ) : "Register"}
                             </Button>
                             <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
                                 Close

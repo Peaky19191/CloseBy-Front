@@ -38,5 +38,16 @@ export default makeStyles((theme) => ({
     },
     select: {
         margin: 8,
-    }
+    },
+    spinnerContainer: {
+        // position: "absolute",
+        // maxWidth: "90vw",
+        // margin: theme.spacing("1.5vw", "5vw"),
+        // borderRadius: "10px",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%'
+    },
 }));

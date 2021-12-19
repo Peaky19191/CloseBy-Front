@@ -7,6 +7,7 @@ import { Alert, AlertTitle } from '@material-ui/lab';
 import { regCompany } from "../../../../Actions/Profiles/company";
 import { Link } from 'react-router-dom'
 import { useHistory } from "react-router-dom";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const RegCompany = () => {
     const classes = useStyles();
@@ -15,6 +16,7 @@ const RegCompany = () => {
 
     const [successful, setSuccessful] = useState(false);
     const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false);
 
     const { message } = useSelector(state => state.message);
 
@@ -28,13 +30,17 @@ const RegCompany = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
+        setLoading(true);
+
         if (validate())
             dispatch(regCompany(name))
                 .then(() => {
                     setSuccessful(true);
+                    setLoading(false);
                 })
                 .catch(() => {
                     setSuccessful(false);
+                    setLoading(false);
                 });
     };
 
@@ -84,7 +90,9 @@ const RegCompany = () => {
                         </Grid>
                     </Grid>
                     <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>
-                        Register
+                        {loading ? (
+                            <CircularProgress size="20px" />
+                        ) : "Register"}
                     </Button>
                     <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
                         Close

@@ -22,6 +22,7 @@ const Profile = () => {
   const [listLoaded, setListLoaded] = useState(false);
 
   const { profile: currentProfile } = useSelector((state) => state.auth);
+  const [loading, setLoading] = useState(false);
 
   const { message } = useSelector(state => state.message);
 
@@ -135,39 +136,48 @@ const Profile = () => {
 
   const sendEdited = () => {
     setSuccessful(false);
+    setLoading(true);
 
     if (currentProfile && (currentProfile.role === "User")) {
       dispatch(editUser(currentProfile.id, firstName, lastName, gender, email))
         .then(() => {
           setSuccessful(true);
+          setLoading(false);
         })
         .catch(() => {
           setSuccessful(false);
+          setLoading(false);
         })
     }
     if (currentProfile && (currentProfile.role === "CompanyWorker")) {
       dispatch(editCompWorker(currentProfile.id, firstName, lastName, gender, email))
         .then(() => {
           setSuccessful(true);
+          setLoading(false);
         })
         .catch(() => {
           setSuccessful(false);
+          setLoading(false);
         });
     }
     if (currentProfile && (currentProfile.role === "CompanyAdmin")) {
       dispatch(editCompAdmin(currentProfile.id, firstName, lastName, gender, email))
         .then(() => {
           setSuccessful(true);
+          setLoading(false);
         })
         .catch(() => {
           setSuccessful(false);
+          setLoading(false);
         });
     }
   };
 
   return (
     (listLoaded !== true) ?
-      <CircularProgress />
+      <Grid className={classes.spinnerContainer}>
+        <CircularProgress size={500} thickness={1} />
+      </Grid>
       :
       <>
         <Container className={classes.container} component="main" maxWidth="xs">
@@ -213,7 +223,9 @@ const Profile = () => {
                 {editMode ?
                   <>
                     <Button onClick={() => { sendEdited() }} className={classes.buttonEditSave} fullWidth variant="contained"  >
-                      Save
+                      {loading ? (
+                        <CircularProgress size="20px" />
+                      ) : "Save"}
                     </Button>
                     <Button className={classes.buttonEditStop} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >
                       Stop Editinig

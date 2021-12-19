@@ -22,6 +22,7 @@ const CompanyDetails = () => {
     const classes = useStyles();
 
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
 
     const company = useSelector(state => state.company.company);
 
@@ -120,13 +121,17 @@ const CompanyDetails = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
+        setLoading(true);
+
         if (validate())
             dispatch(editCompany(company.id, name))
                 .then(() => {
                     setSuccessful(true);
+                    setLoading(false);
                 })
                 .catch(() => {
                     setSuccessful(false);
+                    setLoading(false);
                 });
     };
     const [errors, setErrors] = useState({});
@@ -150,7 +155,9 @@ const CompanyDetails = () => {
     return (
         <>
             {((eventsListLoaded && compWorkersListLoaded && compAdminsListLoaded) !== true) ?
-                <CircularProgress />
+                <Grid className={classes.spinnerContainer}>
+                    <CircularProgress size={500} thickness={1} />
+                </Grid>
                 :
                 <Container className={classes.container} component="main" maxWidth="xs">
                     <Paper className={classes.paper} elevation={3}>
@@ -195,7 +202,9 @@ const CompanyDetails = () => {
                                 {editMode ?
                                     <>
                                         <Button disabled={!enabled} type="submit" className={classes.buttonEditSave} fullWidth variant="contained"  >
-                                            Save
+                                            {loading ? (
+                                                <CircularProgress size="20px" />
+                                            ) : "Save"}
                                         </Button>
                                         <Button className={classes.buttonEditStop} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >
                                             Stop Editinig

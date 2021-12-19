@@ -18,6 +18,7 @@ const RegCompWorker = () => {
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
     const company = useSelector(state => (state.companyAdmin.get_comp_admin_id.company.id));
+    const [loading, setLoading] = useState(false);
 
     const [companyLoaded, setCompanyLoaded] = useState(false);
 
@@ -69,13 +70,17 @@ const RegCompWorker = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
+        setLoading(true);
+
         if (validate())
             dispatch(regCompWorker(firstName, lastName, gender, email, company))
                 .then(() => {
                     setSuccessful(true);
+                    setLoading(false);
                 })
                 .catch(() => {
                     setSuccessful(false);
+                    setLoading(false);
                 });
     };
 
@@ -99,8 +104,9 @@ const RegCompWorker = () => {
 
     return (
         (companyLoaded !== true) ?
-            <CircularProgress />
-            :
+            <Grid className={classes.spinnerContainer}>
+                <CircularProgress size={500} thickness={1} />
+            </Grid> :
             <>
                 <Container className={classes.container} component="main" maxWidth="xs">
                     <Paper className={classes.paper} elevation={3}>
@@ -143,7 +149,9 @@ const RegCompWorker = () => {
                                 </Grid>
                             </Grid>
                             <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>
-                                Register
+                                {loading ? (
+                                    <CircularProgress size="20px" />
+                                ) : "Register"}
                             </Button>
                             <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
                                 Close

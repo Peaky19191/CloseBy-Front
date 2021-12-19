@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { InputAdornment, IconButton } from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export const Register = () => {
     const classes = useStyles();
@@ -21,6 +22,7 @@ export const Register = () => {
     const [password, setPassword] = useState("");
     const [successful, setSuccessful] = useState(false);
     const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false);
 
     const enabled =
         firstName.length > 0 &&
@@ -59,14 +61,17 @@ export const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
+        setLoading(true);
 
         if (validate())
             dispatch(registerUserDispatch(firstName, lastName, gender, email, password))
                 .then(() => {
                     setSuccessful(true);
+                    setLoading(false);
                 })
                 .catch(() => {
                     setSuccessful(false);
+                    setLoading(false);
                 });
     };
 
@@ -142,7 +147,9 @@ export const Register = () => {
                         </Grid>
                     </Grid>
                     <Button disabled={!enabled} type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-                        Register
+                        {loading ? (
+                            <CircularProgress size="20px" />
+                        ) : "Register"}
                     </Button>
                     <Grid container justifyContent="flex-end">
                         <Grid item>

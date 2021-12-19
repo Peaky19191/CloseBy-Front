@@ -6,19 +6,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { sendMessage } from "../../Actions/contact";
 import { Link } from 'react-router-dom'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const ContactForm = () => {
     const classes = useStyles();
 
     const [email, setEmail] = useState("");
     const [content, setContent] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const [successful, setSuccessful] = useState(false);
     const [errors, setErrors] = useState({});
 
     const { message } = useSelector(state => state.message);
 
-    const enabled = 
+    const enabled =
         email.length > 0 &&
         content.length > 0;
 
@@ -37,13 +39,19 @@ const ContactForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setSuccessful(false);
+        setLoading(true);
+
         if (validate())
             dispatch(sendMessage(email, content))
                 .then(() => {
                     setSuccessful(true);
+                    setLoading(false);
+
                 })
                 .catch(() => {
                     setSuccessful(false);
+                    setLoading(false);
+
                 });
     };
 
@@ -90,7 +98,9 @@ const ContactForm = () => {
                         </Grid>
                     </Grid>
                     <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>
-                        Send message
+                        {loading ? (
+                            <CircularProgress size="20px" />
+                        ) : "Send message"}
                     </Button>
                     <Button className={classes.buttonClose} component={Link} to="/" fullWidth variant="contained" color="secondary" >
                         Close

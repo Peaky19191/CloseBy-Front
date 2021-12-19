@@ -107,8 +107,9 @@ const CompanyWorkersList = () => {
 
     return (
         (listLoaded !== true) ?
-            <CircularProgress />
-            :
+            <Grid className={classes.spinnerContainer}>
+                <CircularProgress size={500} thickness={1} />
+            </Grid> :
             <>
                 <Container className={classes.container}>
                     <Paper className={classes.paper} >
