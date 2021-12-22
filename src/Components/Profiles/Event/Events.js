@@ -4,7 +4,7 @@ import useStyles from './styles';
 import Event from '../../../Services/Profiles/event.service'
 import moment from 'moment'
 import { useDispatch } from "react-redux";
-import { setEventId, getEventListAllDispatch } from "../../../Actions/Profiles/events";
+import { setEventDispatch, getEventListAllDispatch } from "../../../Actions/Profiles/events";
 import { Link } from 'react-router-dom'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useSelector } from "react-redux";
@@ -50,8 +50,8 @@ export const Events = () => {
     }
 
     const dispatch = useDispatch();
-    const setIdEvent = (id) => {
-        dispatch(setEventId(id))
+    const dispatchEvent = (id) => {
+        dispatch(setEventDispatch(id))
     }
 
     return (
@@ -89,7 +89,7 @@ export const Events = () => {
                                             </Typography>
                                         </CardContent>
                                         <CardActions>
-                                            <Button component={Link} color="primary" to="/eventDetailsView" onClick={() => { setIdEvent(event.id) }}>Details</Button>
+                                            <Button component={Link} color="primary" to="/eventDetailsView" onClick={() => { dispatchEvent(event) }}>Details</Button>
                                         </CardActions>
                                     </Card>
                                 </Grid>

@@ -98,7 +98,7 @@ const MapDetailsView = (props) => {
 
 
     function diffrentThanCurrent(event) {
-        return event.id !== currentEventRedux.id_event;
+        return event.id !== currentEventRedux.id;
     }
 
     const getCurrentEvent = () => {

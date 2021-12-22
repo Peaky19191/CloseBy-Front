@@ -52,10 +52,12 @@ export const regCompAdmin = (firstName, lastName, gender, email, companyId) => (
     );
 };
 
-export const setCompAdmin = (idToPass) => (dispatch) => {
+export const setCompAdmin = (compAdmin) => (dispatch) => {
+
+    localStorage.setItem("CompanyAdmin", JSON.stringify(compAdmin));
     dispatch({
         type: SET_COMP_ADMIN,
-        payload: idToPass,
+        payload: compAdmin,
     });
 };
 

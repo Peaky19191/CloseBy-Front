@@ -14,7 +14,11 @@ import {
     CLEAN_COMP_WORKER_LIST,
 } from "../../Constants/actionTypes";
 
-const initialState = {};
+const companyWorker = JSON.parse(localStorage.getItem("CompanyWorker"));
+
+const initialState = companyWorker
+    ? { isLoggedIn: true, comp_worker: companyWorker }
+    : { isLoggedIn: false, comp_worker: null };
 
 export default function (state = initialState, action) {
     const { type, payload } = action;

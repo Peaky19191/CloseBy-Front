@@ -52,10 +52,12 @@ export const registerUserDispatch = (firstName, lastName, gender, email, passwor
     );
 };
 
-export const setUser = (idToPass) => (dispatch) => {
+export const setUser = (user) => (dispatch) => {
+    localStorage.setItem("User", JSON.stringify(user));
+
     dispatch({
         type: SET_USER,
-        payload: idToPass,
+        payload: user,
     });
 };
 

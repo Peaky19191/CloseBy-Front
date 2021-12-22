@@ -6,8 +6,8 @@ import {
     SET_CURRENT_EVENT_LOC,
     CLEAR_NEW_EVENT_LOC,
     CLEAR_CURRENT_EVENT_LOC,
-    SET_EVENT_ID,
-    CLEAR_EVENT_ID,
+    SET_EVENT,
+    CLEAR_EVENT,
     EDIT_EVENT_SUCCESS,
     EDIT_EVENT_FAIL,
     GET_EVENT_LIST_SUCCESS,
@@ -85,16 +85,18 @@ export const clearCurrentEventLoc = () => (dispatch) => {
     });
 };
 
-export const setEventId = (idToPass) => (dispatch) => {
+export const setEventDispatch = (event) => (dispatch) => {
+    localStorage.setItem("Event", JSON.stringify(event));
+
     dispatch({
-        type: SET_EVENT_ID,
-        payload: idToPass,
+        type: SET_EVENT,
+        payload: event,
     });
 };
 
-export const clearEventId = () => (dispatch) => {
+export const clearEventDispatch = () => (dispatch) => {
     dispatch({
-        type: CLEAR_EVENT_ID,
+        type: CLEAR_EVENT,
     });
 };
 

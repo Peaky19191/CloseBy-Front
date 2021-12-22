@@ -31,24 +31,24 @@ const Input = styled(MuiInput)`
 const EventDetailsView = () => {
     const classes = useStyles();
 
-    const eventId = useSelector(state => state.event.id_event);
     //const userId = useSelector(state => state.user.id_user);
+    const { event: currentEvent } = useSelector((state) => state.event);
 
-    const [title, setTitle] = useState("");
+    const [eventId, setEventId] = useState(currentEvent.id);
 
-    const [desc, setDesc] = useState("");
+    const [title, setTitle] = useState(currentEvent.title);
 
+    const [desc, setDesc] = useState(currentEvent.description);
 
-    const [startDate, setStartDate] = useState("");
+    const [startDate, setStartDate] = useState(currentEvent.startDateTime);
 
-    const [endDate, setEndDate] = useState("");
+    const [endDate, setEndDate] = useState(currentEvent.endDateTime);
 
-    const [type, setType] = useState("");
+    const [type, setType] = useState(currentEvent.type);
 
-    // const [status, setStatus] = useState("");
+    // const [status, setStatus] = useState(currentEvent.status);
 
-
-    const [limit, setLimit] = useState("");
+    const [limit, setLimit] = useState(currentEvent.ticketLimit);
 
     const handleBlur = () => {
         if (limit < 0) {
@@ -164,10 +164,10 @@ const EventDetailsView = () => {
                         </Grid>
                     </Grid>
                     <Grid container className={classes.buttonsContainer}>
-                        <Grid item className={classes.buttonClose}>                          
+                        <Grid item className={classes.buttonClose}>
                             <Button onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
                                 Close
-                            </Button>   
+                            </Button>
                         </Grid>
                         <Grid item className={classes.buttonSubmit}>
                             <Button component={Link} to={`/create-payment/${eventId}`} className={classes.buttonEditSave} fullWidth variant="contained"  >

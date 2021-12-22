@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom'
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
 import PopupDeleteEvent from '../../../../Popup/PopupDelete/Event/PopupDeleteEvent';
-import { setEventId, getEventListAllDispatch, deleteEventDispatch } from "../../../../../Actions/Profiles/events";
+import { setEventDispatch, getEventListAllDispatch, deleteEventDispatch } from "../../../../../Actions/Profiles/events";
 import { useDispatch } from "react-redux";
 import CompAdmin from '../../../../../Services/Profiles/companyAdmin.service'
 import CompWorker from '../../../../../Services/Profiles/companyWorker.service'
@@ -59,8 +59,8 @@ const EventList = () => {
     useEffect(getList, [page, rowsPerPage]);
 
     const dispatch = useDispatch();
-    const setIdEvent = (id) => {
-        dispatch(setEventId(id))
+    const dispatchEvent = (event) => {
+        dispatch(setEventDispatch(event))
     }
 
     const [isOpen, setIsOpen] = useState(false);
@@ -137,7 +137,7 @@ const EventList = () => {
                                     <TableCell align="center">{moment(item.startDateTime).format('MM/DD/YYYY HH:mm')}</TableCell>
                                     <TableCell align="center">{moment(item.endDateTime).format('MM/DD/YYYY HH:mm')}</TableCell>
                                     <TableCell align="center">
-                                        <IconButton component={Link} to="/eventDetailsEdit" onClick={() => { setIdEvent(item.id) }} aria-label="edit" size="large" >
+                                        <IconButton component={Link} to="/eventDetailsEdit" onClick={() => { dispatchEvent(item) }} aria-label="edit" size="large" >
                                             <SettingsApplicationsIcon className={classes.settingICon} />
                                         </IconButton>
                                         <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.title) }} >

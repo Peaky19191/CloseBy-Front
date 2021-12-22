@@ -13,7 +13,11 @@ import {
     GET_COMPANY_ID_FAIL,
 } from "../../Constants/actionTypes";
 
-const initialState = {};
+const company = JSON.parse(localStorage.getItem("Company"));
+
+const initialState = company
+    ? { isLoggedIn: true, company: company }
+    : { isLoggedIn: false, company: null };
 
 export default function (state = initialState, action) {
     const { type, payload } = action;

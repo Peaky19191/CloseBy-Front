@@ -5,8 +5,8 @@ import {
     CLEAR_CURRENT_EVENT_LOC,
     SET_NEW_EVENT_LOC,
     CLEAR_NEW_EVENT_LOC,
-    SET_EVENT_ID,
-    CLEAR_EVENT_ID,
+    SET_EVENT,
+    CLEAR_EVENT,
     GET_EVENT_LIST_SUCCESS,
     GET_EVENT_LIST_FAIL,
     GET_EVENT_LIST_ALL_SUCCESS,
@@ -21,7 +21,11 @@ import {
     GET_EVENT_LIST_FOR_USER_FAIL,
 } from "../../Constants/actionTypes";
 
-const initialState = {};
+const event = JSON.parse(localStorage.getItem("Event"));
+
+const initialState = event
+    ? { isLoggedIn: true, event: event }
+    : { isLoggedIn: false, event: null };
 
 export default function (state = initialState, action) {
     const { type, payload } = action;
@@ -47,11 +51,11 @@ export default function (state = initialState, action) {
         case CLEAR_NEW_EVENT_LOC:
             return { ...state, new_event_loc: "" };
 
-        case SET_EVENT_ID:
-            return { ...state, id_event: payload };
+        case SET_EVENT:
+            return { ...state, event: payload };
 
-        case CLEAR_EVENT_ID:
-            return { ...state, id_event: "" };
+        case CLEAR_EVENT:
+            return { ...state, event: "" };
         case GET_EVENT_LIST_SUCCESS:
             return {
                 ...state,

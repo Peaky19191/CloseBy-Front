@@ -14,7 +14,12 @@ import {
     CLEAN_COMP_ADMIN_LIST
 } from "../../Constants/actionTypes";
 
-const initialState = {};
+
+const companyAdmin = JSON.parse(localStorage.getItem("CompanyAdmin"));
+
+const initialState = companyAdmin
+    ? { isLoggedIn: true, comp_admin: companyAdmin }
+    : { isLoggedIn: false, comp_admin: null };
 
 export default function (state = initialState, action) {
     const { type, payload } = action;

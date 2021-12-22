@@ -35,8 +35,9 @@ const EventDetailsEdit = () => {
     const [loading, setLoading] = useState(false);
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
+    const { event: currentEvent } = useSelector((state) => state.event);
 
-    const eventId = useSelector(state => state.event.id_event);
+    const [eventId, setEventId] = useState(currentEvent.id);
 
     const loc_lat = useSelector(state => ((state.event.new_event_loc !== undefined) ? state.event.new_event_loc.lat : ""));
     const loc_lng = useSelector(state => ((state.event.new_event_loc !== undefined) ? state.event.new_event_loc.lng : ""));
@@ -175,7 +176,7 @@ const EventDetailsEdit = () => {
                     <Avatar className={classes.avatar}>
                         <EventIcon />
                     </Avatar>
-                    <Typography className={classes.title} component="h1" variant="h4">Details of the {title}</Typography>
+                    <Typography className={classes.title} component="h1" variant="h4">Details of the Event</Typography>
                     {successful ?
                         <Alert className={classes.alert} severity="success">
                             <AlertTitle>Success</AlertTitle>

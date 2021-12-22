@@ -14,7 +14,12 @@ import {
     CLEAN_USER_LIST,
 } from "../../Constants/actionTypes";
 
-const initialState = {};
+
+const user = JSON.parse(localStorage.getItem("User"));
+
+const initialState = user
+    ? { isLoggedIn: true, user: user }
+    : { isLoggedIn: false, user: null };
 
 export default function (state = initialState, action) {
     const { type, payload } = action;

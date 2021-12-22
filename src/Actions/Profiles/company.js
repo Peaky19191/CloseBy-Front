@@ -53,6 +53,8 @@ export const regCompany = (name) => (dispatch) => {
 };
 
 export const setCompanyDispatch = (company) => (dispatch) => {
+    localStorage.setItem("Company", JSON.stringify(company));
+
     dispatch({
         type: SET_COMPANY,
         payload: company,

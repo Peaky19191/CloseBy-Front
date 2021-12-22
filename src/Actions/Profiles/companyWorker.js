@@ -52,10 +52,12 @@ export const regCompWorker = (firstName, lastName, gender, email, companyId) => 
     );
 };
 
-export const setCompWorker = (idToPass) => (dispatch) => {
+export const setCompWorker = (compWorker) => (dispatch) => {
+    localStorage.setItem("CompanyWorker", JSON.stringify(compWorker));
+
     dispatch({
         type: SET_COMP_WORKER,
-        payload: idToPass,
+        payload: compWorker,
     });
 };
 

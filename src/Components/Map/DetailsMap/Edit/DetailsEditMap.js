@@ -41,7 +41,7 @@ const MapDetailsEdit = (props) => {
     const classes = useStyles();
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
-    const { event: currentEventRedux } = useSelector((state) => state);
+    const { event: currentEventRedux } = useSelector((state) => state.event);
 
     const [selected, setSelected] = React.useState(null);
     const [markers, setMarkers] = React.useState([]);
@@ -169,7 +169,7 @@ const MapDetailsEdit = (props) => {
     }
 
     function diffrentThanCurrent(event) {
-        return event.id !== currentEventRedux.id_event;
+        return event.id !== currentEventRedux.id;
     }
 
     const getCurrentEvent = () => {
