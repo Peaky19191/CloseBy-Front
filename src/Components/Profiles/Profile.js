@@ -237,7 +237,7 @@ const Profile = () => {
                   </Button>
                 }
                 <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
-                  Close
+                  back
                 </Button>
               </Grid>
             </form>

@@ -18,6 +18,8 @@ const CompAdminDetails = () => {
     const compAdmin = useSelector(state => state.companyAdmin.comp_admin);
     const [loading, setLoading] = useState(false);
 
+    const [company, setCompany] = useState(compAdmin.company);
+
     const [firstName, setFirstName] = useState(compAdmin.firstName);
     const [lastName, setLastName] = useState(compAdmin.lastName);
     const [email, setEmail] = useState(compAdmin.email);
@@ -68,6 +70,10 @@ const CompAdminDetails = () => {
 
     const { message } = useSelector(state => state.message);
     const dispatch = useDispatch();
+
+    const dispatchCompany = (company) => {
+        dispatch(setCompanyDispatch(company))
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -145,7 +151,7 @@ const CompAdminDetails = () => {
                         </Grid>
                     </Grid>
                     <Grid className={classes.buttonsContainer}>
-                        <Button className={classes.buttonCompanyDetails} component={Link} to="/companyDetails" fullWidth variant="contained" color="primary" >
+                        <Button className={classes.buttonCompanyDetails} component={Link} to="/companyDetails" onClick={() => { dispatchCompany(company) }} fullWidth variant="contained" color="primary" >
                             Company Details
                         </Button>
                         {editMode ?
@@ -165,7 +171,7 @@ const CompAdminDetails = () => {
                             </Button>
                         }
                         <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
-                            Close
+                            back
                         </Button>
                     </Grid>
                 </form>

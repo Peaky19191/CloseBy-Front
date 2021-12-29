@@ -172,7 +172,7 @@ const RegCompAdmin = () => {
                                 ) : "Register"}
                             </Button>
                             <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
-                                Close
+                                back
                             </Button>
                         </form>
                     </Paper>

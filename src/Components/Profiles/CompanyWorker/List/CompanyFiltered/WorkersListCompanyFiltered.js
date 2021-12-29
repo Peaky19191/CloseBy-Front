@@ -161,7 +161,7 @@ const CompanyWorkersList = () => {
                                     </Grid>
                                     <Grid item >
                                         <Button onClick={goToPreviousPath} className={classes.bottomButtonClose}>
-                                            Close
+                                            back
                                         </Button>
                                     </Grid>
                                 </Grid>

@@ -166,7 +166,7 @@ const EventDetailsView = () => {
                     <Grid container className={classes.buttonsContainer}>
                         <Grid item className={classes.buttonClose}>
                             <Button onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
-                                Close
+                                back
                             </Button>
                         </Grid>
                         <Grid item className={classes.buttonSubmit}>

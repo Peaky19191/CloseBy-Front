@@ -16,12 +16,13 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 const CompWorkerDetails = () => {
     const classes = useStyles();
     const [loading, setLoading] = useState(false);
+    const { message } = useSelector(state => state.message);
 
     const compWorker = useSelector(state => state.companyWorker.comp_worker);
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
 
-    // const [company, setCompany] = useState(compWorker.company);
+    const [company, setCompany] = useState(compWorker.company);
 
     const [firstName, setFirstName] = useState(compWorker.firstName);
     const [lastName, setLastName] = useState(compWorker.lastName);
@@ -70,8 +71,11 @@ const CompWorkerDetails = () => {
 
     const [successful, setSuccessful] = useState(false);
 
-    const { message } = useSelector(state => state.message);
     const dispatch = useDispatch();
+
+    const dispatchCompany = (company) => {
+        dispatch(setCompanyDispatch(company))
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -150,7 +154,7 @@ const CompWorkerDetails = () => {
                     </Grid>
                     <Grid className={classes.buttonsContainer} >
                         {(currentProfile.role === "GlobalAdmin") &&
-                            <Button className={classes.buttonCompanyDetails} component={Link} to="/companyDetails" fullWidth variant="contained" color="primary" >
+                            <Button className={classes.buttonCompanyDetails} component={Link} to="/companyDetails" onClick={() => { dispatchCompany(company) }} fullWidth variant="contained" color="primary" >
                                 {/* <BusinessIcon /> */}
                                 Company Details
                             </Button>}
@@ -171,7 +175,7 @@ const CompWorkerDetails = () => {
                             </Button>
                         }
                         <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
-                            Close
+                            back
                         </Button>
                     </Grid>
                 </form>
