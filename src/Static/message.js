@@ -18,6 +18,6 @@ export const EVENT_EDIT_SUCCESS_200 = "Event has been successfully edited";
 export const USER_REG_SUCCESS_200 = "You have successfully registered your account. Please check your registered email for email verification";
 
 export const NEW_PASSW_SUCCESS_200 = "You have successfully changed your password";
-export const RESET_PASSW_SUCCESS_200 = "Link for the new password has ben sent to email registered with the account";
+export const RESET_PASSW_SUCCESS_200 = "If there is any account registered with this email, we will sent you a link for the new password.";
 
 export const SEND_CONTACT_MESSAGE_SUCCESS_200 = "We have received your message. Someone will contact you as soon as possible.";
