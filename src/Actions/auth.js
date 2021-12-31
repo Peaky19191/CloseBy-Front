@@ -7,8 +7,15 @@ import {
     RESET_PASSW_FAIL,
     NEW_PASSW_SUCCESS,
     NEW_PASSW_FAIL,
+    SET_MESSAGE_SUCCESS,
+    SET_MESSAGE_FAIL,
 } from "../Constants/actionTypes";
-
+import {
+    ADMIN_500,
+    ERROR_400,
+    NEW_PASSW_SUCCESS_200,
+    RESET_PASSW_SUCCESS_200,
+} from "../Static/message";
 import AuthService from "../Services/Auth/auth.service";
 
 export const login = (email, password) => (dispatch) => {
@@ -22,7 +29,7 @@ export const login = (email, password) => (dispatch) => {
             return Promise.resolve();
         },
         (error) => {
-            const message = error.response.data.type;
+            const message = ADMIN_500;
             dispatch({
                 type: LOGIN_FAIL,
             });
@@ -52,26 +59,22 @@ export const resetPassword = (email) => (dispatch) => {
             });
 
             dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
+                type: SET_MESSAGE_SUCCESS,
+                payload: RESET_PASSW_SUCCESS_200,
             });
 
             return Promise.resolve();
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            const message = ADMIN_500;
+
 
             dispatch({
                 type: RESET_PASSW_FAIL,
             });
 
             dispatch({
-                type: SET_MESSAGE,
+                type: SET_MESSAGE_FAIL,
                 payload: message,
             });
 
@@ -88,26 +91,21 @@ export const setNewPassword = (password, token) => (dispatch) => {
             });
 
             dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
+                type: SET_MESSAGE_SUCCESS,
+                payload: NEW_PASSW_SUCCESS_200,
             });
 
             return Promise.resolve();
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            const message = ADMIN_500;
 
             dispatch({
                 type: NEW_PASSW_FAIL,
             });
 
             dispatch({
-                type: SET_MESSAGE,
+                type: SET_MESSAGE_FAIL,
                 payload: message,
             });
 

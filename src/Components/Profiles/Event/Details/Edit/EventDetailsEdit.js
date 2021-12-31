@@ -25,6 +25,7 @@ import { useHistory } from "react-router-dom";
 import { setCompanyDispatch } from "../../../../../Actions/Profiles/company";
 import BusinessIcon from '@mui/icons-material/Business';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Message from '../../../../Message/Message';
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -127,7 +128,7 @@ const EventDetailsEdit = () => {
     }
     useEffect(getEventDetails, []);
 
-    const [successful, setSuccessful] = useState(false);
+    const [listLoaded, setListLoaded] = useState(false);
 
     const { message } = useSelector(state => state.message);
     const dispatch = useDispatch();
@@ -150,16 +151,16 @@ const EventDetailsEdit = () => {
     }
 
     const handleSubmit = () => {
-        setSuccessful(false);
+        setListLoaded(false);
         setLoading(true);
 
         dispatch(editEvent(eventIdToPass, title, company.id, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type))
             .then(() => {
-                setSuccessful(true);
+                setListLoaded(true);
                 setLoading(false);
             })
             .catch(() => {
-                setSuccessful(false);
+                setListLoaded(true);
                 setLoading(false);
             });
     };
@@ -177,20 +178,8 @@ const EventDetailsEdit = () => {
                         <EventIcon />
                     </Avatar>
                     <Typography className={classes.title} component="h1" variant="h4">Details of the Event</Typography>
-                    {successful ?
-                        <Alert className={classes.alert} severity="success">
-                            <AlertTitle>Success</AlertTitle>
-                            <strong>You have successfully edit your event</strong>
-                        </Alert>
-                        :
-                        (message ?
-                            <Alert className={successful ? classes.alert : classes.alert} severity="error">
-                                <AlertTitle>Error</AlertTitle>
-                                <strong>{message}</strong>
-                            </Alert>
-                            :
-                            null
-                        )
+                    {listLoaded &&
+                        <Message />
                     }
                 </Grid>
                 <form onSubmit={handleSubmit}>

@@ -4,9 +4,10 @@ import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import useStyles from './styles';
 import { useDispatch, useSelector } from "react-redux";
 import { Alert, AlertTitle } from '@material-ui/lab';
-import { sendMessage } from "../../Actions/contact";
+import { sendContactMessageDispatch } from "../../Actions/contact";
 import { Link } from 'react-router-dom'
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Message from '..//Message/Message';
 
 const ContactForm = () => {
     const classes = useStyles();
@@ -15,10 +16,9 @@ const ContactForm = () => {
     const [content, setContent] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const [successful, setSuccessful] = useState(false);
-    const [errors, setErrors] = useState({});
+    const [showMessage, setShowMessage] = useState(false);
 
-    const { message } = useSelector(state => state.message);
+    const [errors, setErrors] = useState({});
 
     const enabled =
         email.length > 0 &&
@@ -38,20 +38,18 @@ const ContactForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setSuccessful(false);
+        setShowMessage(false);
         setLoading(true);
 
         if (validate())
-            dispatch(sendMessage(email, content))
+            dispatch(sendContactMessageDispatch(email, content))
                 .then(() => {
-                    setSuccessful(true);
+                    setShowMessage(true);
                     setLoading(false);
-
                 })
                 .catch(() => {
-                    setSuccessful(false);
+                    setShowMessage(true);
                     setLoading(false);
-
                 });
     };
 
@@ -73,20 +71,8 @@ const ContactForm = () => {
                     <SupervisorAccountIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">Contact us!</Typography>
-                {successful ?
-                    <Alert className={classes.alert} severity="success">
-                        <AlertTitle>Success</AlertTitle>
-                        <strong>We will receive your email soon.</strong>
-                    </Alert>
-                    :
-                    (message ?
-                        <Alert className={successful ? classes.alert : classes.alert} severity="error">
-                            <AlertTitle>Error</AlertTitle>
-                            <strong>{message}</strong>
-                        </Alert>
-                        :
-                        null
-                    )
+                {showMessage &&
+                    <Message />
                 }
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>

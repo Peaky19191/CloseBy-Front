@@ -15,9 +15,11 @@ import { editCompWorker, getCompWorkerIdDispatch } from "../../Actions/Profiles/
 import { editUser, getUserIdDispatch } from "../../Actions/Profiles/user";
 import { useHistory } from "react-router-dom";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Message from '../Message/Message';
 
 const Profile = () => {
   const classes = useStyles();
+  const myAccount = true;
 
   const [listLoaded, setListLoaded] = useState(false);
 
@@ -25,7 +27,6 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
 
   const { message } = useSelector(state => state.message);
-
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -125,7 +126,7 @@ const Profile = () => {
     setDisabled(true);
     setEditMode(false);
   }
-  const [successful, setSuccessful] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -135,39 +136,39 @@ const Profile = () => {
   }
 
   const sendEdited = () => {
-    setSuccessful(false);
+    setShowMessage(false);
     setLoading(true);
 
     if (currentProfile && (currentProfile.role === "User")) {
       dispatch(editUser(currentProfile.id, firstName, lastName, gender, email))
         .then(() => {
-          setSuccessful(true);
+          setShowMessage(true);
           setLoading(false);
         })
         .catch(() => {
-          setSuccessful(false);
+          setShowMessage(true);
           setLoading(false);
         })
     }
     if (currentProfile && (currentProfile.role === "CompanyWorker")) {
-      dispatch(editCompWorker(currentProfile.id, firstName, lastName, gender, email))
+      dispatch(editCompWorker(currentProfile.id, firstName, lastName, gender, email, myAccount))
         .then(() => {
-          setSuccessful(true);
+          setShowMessage(true);
           setLoading(false);
         })
         .catch(() => {
-          setSuccessful(false);
+          setShowMessage(true);
           setLoading(false);
         });
     }
     if (currentProfile && (currentProfile.role === "CompanyAdmin")) {
-      dispatch(editCompAdmin(currentProfile.id, firstName, lastName, gender, email))
+      dispatch(editCompAdmin(currentProfile.id, firstName, lastName, gender, email, myAccount))
         .then(() => {
-          setSuccessful(true);
+          setShowMessage(true);
           setLoading(false);
         })
         .catch(() => {
-          setSuccessful(false);
+          setShowMessage(true);
           setLoading(false);
         });
     }
@@ -186,20 +187,8 @@ const Profile = () => {
               <SupervisorAccountIcon />
             </Avatar>
             <Typography component="h1" variant="h5">Details of your account</Typography>
-            {successful ?
-              <Alert className={classes.alert} severity="success">
-                <AlertTitle>Success</AlertTitle>
-                <strong>You have successfully edit your Company Admin</strong>
-              </Alert>
-              :
-              (message ?
-                <Alert className={successful ? classes.alert : classes.alert} severity="error">
-                  <AlertTitle>Error</AlertTitle>
-                  <strong>{message}</strong>
-                </Alert>
-                :
-                null
-              )
+            {showMessage &&
+              <Message />
             }
             <form className={classes.form}>
               <Grid container spacing={2}>

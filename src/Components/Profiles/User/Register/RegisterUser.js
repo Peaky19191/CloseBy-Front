@@ -12,6 +12,7 @@ import { InputAdornment, IconButton } from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Message from '../../../Message/Message';
 
 export const Register = () => {
     const classes = useStyles();
@@ -20,9 +21,10 @@ export const Register = () => {
     const [gender, setGender] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [successful, setSuccessful] = useState(false);
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
+
+    const [showMessage, setShowMessage] = useState(false);
 
     const enabled =
         firstName.length > 0 &&
@@ -60,17 +62,17 @@ export const Register = () => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        setSuccessful(false);
+        setShowMessage(false);
         setLoading(true);
 
         if (validate())
             dispatch(registerUserDispatch(firstName, lastName, gender, email, password))
                 .then(() => {
-                    setSuccessful(true);
+                    setShowMessage(true);
                     setLoading(false);
                 })
                 .catch(() => {
-                    setSuccessful(false);
+                    setShowMessage(true);
                     setLoading(false);
                 });
     };
@@ -96,20 +98,8 @@ export const Register = () => {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">Register</Typography>
-                {successful ?
-                    <Alert className={classes.alert} severity="success">
-                        <AlertTitle>Success</AlertTitle>
-                        <strong>You have successfully registered your account</strong>
-                    </Alert>
-                    :
-                    (message ?
-                        <Alert className={classes.alert} severity="error">
-                            <AlertTitle>Error</AlertTitle>
-                            <strong> {message}</strong>
-                        </Alert>
-                        :
-                        null
-                    )
+                {showMessage &&
+                    <Message />
                 }
                 <form className={classes.form} onSubmit={handleSubmit} >
                     <Grid container spacing={2}>

@@ -23,6 +23,7 @@ import { setNewEventLoc } from "../../../../../Actions/Profiles/events";
 import { setCurrentEventLoc, getEventIdDispatch } from "../../../../../Actions/Profiles/events";
 import { useHistory } from "react-router-dom";
 import { createPayment } from "../../../../../Services/Payment/payment.service";
+import Message from '../../../../Message/Message';
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -30,24 +31,17 @@ const Input = styled(MuiInput)`
 
 const EventDetailsView = () => {
     const classes = useStyles();
+    const dispatch = useDispatch();
 
-    //const userId = useSelector(state => state.user.id_user);
     const { event: currentEvent } = useSelector((state) => state.event);
 
     const [eventId, setEventId] = useState(currentEvent.id);
-
     const [title, setTitle] = useState(currentEvent.title);
-
     const [desc, setDesc] = useState(currentEvent.description);
-
     const [startDate, setStartDate] = useState(currentEvent.startDateTime);
-
     const [endDate, setEndDate] = useState(currentEvent.endDateTime);
-
     const [type, setType] = useState(currentEvent.type);
-
     // const [status, setStatus] = useState(currentEvent.status);
-
     const [limit, setLimit] = useState(currentEvent.ticketLimit);
 
     const handleBlur = () => {
@@ -77,28 +71,10 @@ const EventDetailsView = () => {
     }
     useEffect(getEventDetails, []);
 
-    const [successful, setSuccessful] = useState(false);
-
-    const { message } = useSelector(state => state.message);
-    const dispatch = useDispatch();
-
-    const handleSubmit = (e) => {
-        // e.preventDefault();
-        // setSuccessful(false);
-        // dispatch(createPayment(eventId, userId, 1))
-        //     .then(() => {
-        //         setSuccessful(true);
-        //     })
-        //     .catch(() => {
-        //         setSuccessful(false);
-        //     });
-    };
-
     let history = useHistory();
     const goToPreviousPath = () => {
         history.goBack()
     }
-
 
     return (
         <Container className={classes.container} component="main" maxWidth="xs">
@@ -108,23 +84,8 @@ const EventDetailsView = () => {
                         <EventIcon />
                     </Avatar>
                     <Typography className={classes.title} component="h1" variant="h4">Event {title}</Typography>
-                    {successful ?
-                        <Alert className={classes.alert} severity="success">
-                            <AlertTitle>Success</AlertTitle>
-                            <strong>You have successfully edit your event</strong>
-                        </Alert>
-                        :
-                        (message ?
-                            <Alert className={successful ? classes.alert : classes.alert} severity="error">
-                                <AlertTitle>Error</AlertTitle>
-                                <strong>{message}</strong>
-                            </Alert>
-                            :
-                            null
-                        )
-                    }
                 </Grid>
-                <form onSubmit={handleSubmit}>
+                <form >
                     <Grid container className={classes.formContainer}>
                         <Grid className={classes.fieldsContainer} >
                             <Grid className={classes.gridField} >

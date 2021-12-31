@@ -12,8 +12,15 @@ import {
     DELETE_COMPANY_FAIL,
     GET_COMPANY_ID_SUCCESS,
     GET_COMPANY_ID_FAIL,
+    SET_MESSAGE_SUCCESS,
+    SET_MESSAGE_FAIL,
 } from "../../Constants/actionTypes";
-
+import {
+    ADMIN_500,
+    COMP_ERROR_400,
+    COMP_REG_SUCCESS_200,
+    COMP_EDIT_SUCCESS_200
+} from "../../Static/message";
 import CompanyService from "../../Services/Profiles/company.service";
 
 export const regCompany = (name) => (dispatch) => {
@@ -24,26 +31,27 @@ export const regCompany = (name) => (dispatch) => {
             });
 
             dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
+                type: SET_MESSAGE_SUCCESS,
+                payload: COMP_REG_SUCCESS_200,
             });
 
             return Promise.resolve();
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+
+            let message = "Error"
+            if ((error.response.status === 400) || (error.response.data.type === "validation") || (error.response.data.errors[0].errorMessage === "name has to be unique")) {
+                message = COMP_ERROR_400;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: REGISTER_COMPANY_FAIL,
             });
 
             dispatch({
-                type: SET_MESSAGE,
+                type: SET_MESSAGE_FAIL,
                 payload: message,
             });
 
@@ -75,26 +83,26 @@ export const editCompany = (id, name) => (dispatch) => {
             });
 
             dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
+                type: SET_MESSAGE_SUCCESS,
+                payload: COMP_EDIT_SUCCESS_200,
             });
 
             return Promise.resolve();
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            let message = "Error"
+            if ((error.response.status === 400) || (error.response.data.type === "validation") || (error.response.data.errors[0].errorMessage === "name has to be unique")) {
+                message = COMP_ERROR_400;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: EDIT_COMPANY_FAIL,
             });
 
             dispatch({
-                type: SET_MESSAGE,
+                type: SET_MESSAGE_FAIL,
                 payload: message,
             });
 
@@ -112,7 +120,7 @@ export const getCompanyListDispatch = (pageNumber, rowsPerPage) => (dispatch) =>
             });
 
             dispatch({
-                type: SET_MESSAGE,
+                type: SET_MESSAGE_SUCCESS,
                 payload: response.data.message,
             });
 
@@ -131,7 +139,7 @@ export const getCompanyListDispatch = (pageNumber, rowsPerPage) => (dispatch) =>
             });
 
             dispatch({
-                type: SET_MESSAGE,
+                type: SET_MESSAGE_FAIL,
                 payload: message,
             });
 

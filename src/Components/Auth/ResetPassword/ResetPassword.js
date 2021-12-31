@@ -7,14 +7,14 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Link } from 'react-router-dom'
 import { Alert, AlertTitle } from '@material-ui/lab';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Message from '../../Message/Message';
 
 
 export const ResetPassword = () => {
     const classes = useStyles();
     const [email, setEmail] = useState("");
-    const [successful, setSuccessful] = useState(false);
+    const [showMessage, setShowMessage] = useState(false);
 
-    const { message } = useSelector(state => state.message);
     const [loading, setLoading] = useState(false);
 
     const dispatch = useDispatch();
@@ -26,17 +26,17 @@ export const ResetPassword = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setSuccessful(false);
+        setShowMessage(false);
         setLoading(true);
 
         dispatch(resetPassword(email))
             .then(() => {
-                setSuccessful(true);
+                setShowMessage(true);
                 setLoading(false);
 
             })
             .catch(() => {
-                setSuccessful(false);
+                setShowMessage(true);
                 setLoading(false);
 
             });
@@ -49,21 +49,8 @@ export const ResetPassword = () => {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">Reset Password</Typography>
-                {successful ?
-                    <Alert className={classes.alert} severity="success">
-                        <AlertTitle>Success</AlertTitle>
-                        <strong>You have successfully reset your password.
-                            Check the email linked to this account</strong>
-                    </Alert>
-                    :
-                    (message ?
-                        <Alert className={successful ? classes.alert : classes.alert} severity="error">
-                            <AlertTitle>Error</AlertTitle>
-                            <strong> {message}</strong>
-                        </Alert>
-                        :
-                        null
-                    )
+                {showMessage &&
+                    <Message />
                 }
                 <form className={classes.form} onSubmit={handleSubmit} >
                     <Grid container spacing={2}>

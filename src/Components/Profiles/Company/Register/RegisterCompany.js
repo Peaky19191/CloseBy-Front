@@ -8,13 +8,15 @@ import { regCompany } from "../../../../Actions/Profiles/company";
 import { Link } from 'react-router-dom'
 import { useHistory } from "react-router-dom";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Message from '../../../Message/Message';
 
 const RegCompany = () => {
     const classes = useStyles();
 
     const [name, setName] = useState("");
 
-    const [successful, setSuccessful] = useState(false);
+    const [loadMessage, setLoadMessage] = useState(false);
+
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
 
@@ -29,17 +31,17 @@ const RegCompany = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setSuccessful(false);
+        setLoadMessage(false);
         setLoading(true);
 
         if (validate())
             dispatch(regCompany(name))
                 .then(() => {
-                    setSuccessful(true);
+                    setLoadMessage(true);
                     setLoading(false);
                 })
                 .catch(() => {
-                    setSuccessful(false);
+                    setLoadMessage(true);
                     setLoading(false);
                 });
     };
@@ -68,20 +70,8 @@ const RegCompany = () => {
                     <SupervisorAccountIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">Register Company</Typography>
-                {successful ?
-                    <Alert className={classes.alert} severity="success">
-                        <AlertTitle>Success</AlertTitle>
-                        <strong>You have successfully registered your company</strong>
-                    </Alert>
-                    :
-                    (message ?
-                        <Alert className={successful ? classes.alert : classes.alert} severity="error">
-                            <AlertTitle>Error</AlertTitle>
-                            <strong>{message}</strong>
-                        </Alert>
-                        :
-                        null
-                    )
+                {loadMessage &&
+                    <Message />
                 }
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>

@@ -15,8 +15,8 @@ import { getCompanyIdDispatch } from '../../../../Actions/Profiles/company';
 import { getCompAdminListDispatch } from '../../../../Actions/Profiles/companyAdmin';
 import { getCompWorkerListDispatch } from '../../../../Actions/Profiles/companyWorker';
 import { getEventListAllDispatch } from '../../../../Actions/Profiles/events';
-import { clearCompanyAdminList, clearCompanyWorkerList, clearEventList } from '../../../../Actions/cleaner';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Message from '../../../Message/Message';
 
 const CompanyDetails = () => {
     const classes = useStyles();
@@ -57,18 +57,6 @@ const CompanyDetails = () => {
         setDisabled(true);
         setEditMode(false);
     }
-
-    // const getCompanyDetails = () => {
-    //     dispatch(getCompanyIdDispatch(company.id))
-    //         .then(() => {
-    //             setCompanyListLoaded(true);
-    //         })
-    //         .catch((e) => {
-    //             console.log(e);
-    //         });
-    // }
-    // useEffect(getCompanyDetails, [company.id]);
-
 
     const selectCompanyWorkersList = () => {
         dispatch(getCompWorkerListDispatch(page, rowsPerPage, company.id))
@@ -114,23 +102,23 @@ const CompanyDetails = () => {
     }
     useEffect(selectEventsList, [company.id]);
 
-    const [successful, setSuccessful] = useState(false);
+    const [loadMessage, setLoadMessage] = useState(false);
 
     const { message } = useSelector(state => state.message);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setSuccessful(false);
+        setLoadMessage(false);
         setLoading(true);
 
         if (validate())
             dispatch(editCompany(company.id, name))
                 .then(() => {
-                    setSuccessful(true);
+                    setLoadMessage(true);
                     setLoading(false);
                 })
                 .catch(() => {
-                    setSuccessful(false);
+                    setLoadMessage(true);
                     setLoading(false);
                 });
     };
@@ -165,20 +153,8 @@ const CompanyDetails = () => {
                             <SupervisorAccountIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">Details of the Company</Typography>
-                        {successful ?
-                            <Alert className={classes.alert} severity="success">
-                                <AlertTitle>Success</AlertTitle>
-                                <strong>You have successfully edit your company</strong>
-                            </Alert>
-                            :
-                            (message ?
-                                <Alert className={successful ? classes.alert : classes.alert} severity="error">
-                                    <AlertTitle>Error</AlertTitle>
-                                    <strong>{message}</strong>
-                                </Alert>
-                                :
-                                null
-                            )
+                        {loadMessage &&
+                            <Message />
                         }
                         <form className={classes.form} onSubmit={handleSubmit}>
                             <Grid container spacing={2}>

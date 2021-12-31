@@ -23,6 +23,8 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
 
 export const SET_MESSAGE = "SET_MESSAGE";
+export const SET_MESSAGE_SUCCESS = "SET_MESSAGE_SUCCESS";
+export const SET_MESSAGE_FAIL = "SET_MESSAGE_FAIL";
 export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
 export const AUTH = "AUTH";
 

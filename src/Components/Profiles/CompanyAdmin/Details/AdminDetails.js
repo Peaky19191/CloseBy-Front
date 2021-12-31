@@ -12,6 +12,7 @@ import { useHistory } from "react-router-dom";
 import { setCompanyDispatch } from "../../../../Actions/Profiles/company";
 import BusinessIcon from '@mui/icons-material/Business';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Message from '../../../Message/Message';
 
 const CompAdminDetails = () => {
     const classes = useStyles();
@@ -67,6 +68,7 @@ const CompAdminDetails = () => {
 
 
     const [successful, setSuccessful] = useState(false);
+    const [loadMessage, setLoadMessage] = useState(false);
 
     const { message } = useSelector(state => state.message);
     const dispatch = useDispatch();
@@ -77,17 +79,17 @@ const CompAdminDetails = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setSuccessful(false);
+        setLoadMessage(false);
         setLoading(true);
 
         // if (validate())
         dispatch(editCompAdmin(compAdmin.id, firstName, lastName, gender, email))
             .then(() => {
-                setSuccessful(true);
+                setLoadMessage(true);
                 setLoading(false);
             })
             .catch(() => {
-                setSuccessful(false);
+                setLoadMessage(true);
                 setLoading(false);
             });
     };
@@ -117,20 +119,8 @@ const CompAdminDetails = () => {
                     <SupervisorAccountIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">Details of the Company Admin</Typography>
-                {successful ?
-                    <Alert className={classes.alert} severity="success">
-                        <AlertTitle>Success</AlertTitle>
-                        <strong>You have successfully edit your Company Admin</strong>
-                    </Alert>
-                    :
-                    (message ?
-                        <Alert className={successful ? classes.alert : classes.alert} severity="error">
-                            <AlertTitle>Error</AlertTitle>
-                            <strong>{message}</strong>
-                        </Alert>
-                        :
-                        null
-                    )
+                {loadMessage &&
+                    <Message />
                 }
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>

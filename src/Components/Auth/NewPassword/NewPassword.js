@@ -8,14 +8,14 @@ import { Link } from 'react-router-dom'
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { useParams } from 'react-router';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Message from '../../Message/Message';
 
 
 export const NewPassword = () => {
     const classes = useStyles();
     const [password, setPassword] = useState("");
-    const [successful, setSuccessful] = useState(false);
+    const [showMessage, setShowMessage] = useState(false);
 
-    const { message } = useSelector(state => state.message);
     const [loading, setLoading] = useState(false);
 
     const dispatch = useDispatch();
@@ -26,22 +26,20 @@ export const NewPassword = () => {
     };
 
     const { token } = useParams();
-    console.log(token);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setSuccessful(false);
+        setShowMessage(false);
         setLoading(true);
 
-        console.log(token);
         dispatch(setNewPassword(password, token))
             .then(() => {
-                setSuccessful(true);
+                setShowMessage(true);
                 setLoading(false);
 
             })
             .catch(() => {
-                setSuccessful(false);
+                setShowMessage(true);
                 setLoading(false);
 
             });
@@ -54,21 +52,8 @@ export const NewPassword = () => {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">Set new password</Typography>
-                {successful ?
-                    <Alert className={classes.alert} severity="success">
-                        <AlertTitle>Success</AlertTitle>
-                        <strong>You have successfully set your new password.
-                            Now you can login!</strong>
-                    </Alert>
-                    :
-                    (message ?
-                        <Alert className={successful ? classes.alert : classes.alert} severity="error">
-                            <AlertTitle>Error</AlertTitle>
-                            <strong> {message}</strong>
-                        </Alert>
-                        :
-                        null
-                    )
+                {showMessage &&
+                    <Message />
                 }
                 <form className={classes.form} onSubmit={handleSubmit} >
                     <Grid container spacing={2}>

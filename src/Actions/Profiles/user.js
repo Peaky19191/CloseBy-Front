@@ -12,8 +12,15 @@ import {
     DELETE_USER_FAIL,
     GET_USER_ID_SUCCESS,
     GET_USER_ID_FAIL,
+    SET_MESSAGE_SUCCESS,
+    SET_MESSAGE_FAIL,
 } from "../../Constants/actionTypes";
-
+import {
+    ADMIN_500,
+    ERROR_400,
+    USER_REG_SUCCESS_200,
+    PROFILE_EDIT_SUCCESS_200
+} from "../../Static/message";
 import UserService from "../../Services/Profiles/user.service";
 
 export const registerUserDispatch = (firstName, lastName, gender, email, password) => (dispatch) => {
@@ -24,26 +31,26 @@ export const registerUserDispatch = (firstName, lastName, gender, email, passwor
             });
 
             dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
+                type: SET_MESSAGE_SUCCESS,
+                payload: USER_REG_SUCCESS_200,
             });
 
             return Promise.resolve();
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            let message = "Error"
+            if ((error.response.status === 400) || (error.response.data.message === "Email already in use")) {
+                message = ERROR_400;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: REGISTER_USER_FAIL,
             });
 
             dispatch({
-                type: SET_MESSAGE,
+                type: SET_MESSAGE_FAIL,
                 payload: message,
             });
 
@@ -75,26 +82,26 @@ export const editUser = (id, firstName, lastName, gender, email) => (dispatch) =
             });
 
             dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
+                type: SET_MESSAGE_SUCCESS,
+                payload: PROFILE_EDIT_SUCCESS_200,
             });
 
             return Promise.resolve();
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            let message = "Error"
+            if ((error.response.status === 400) || (error.response.data.type === "validation") || (error.response.data.errors[0].errorMessage === "email has to be unique")) {
+                message = ERROR_400;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: EDIT_USER_FAIL,
             });
 
             dispatch({
-                type: SET_MESSAGE,
+                type: SET_MESSAGE_FAIL,
                 payload: message,
             });
 

@@ -12,7 +12,17 @@ import {
     DELETE_COMP_WORKER_FAIL,
     GET_COMP_WORKER_ID_SUCCESS,
     GET_COMP_WORKER_ID_FAIL,
+    SET_MESSAGE_SUCCESS,
+    SET_MESSAGE_FAIL,
 } from "../../Constants/actionTypes";
+
+import {
+    ADMIN_500,
+    ERROR_400,
+    WORKER_REG_SUCCESS_200,
+    WORKER_EDIT_SUCCESS_200,
+    PROFILE_EDIT_SUCCESS_200,
+} from "../../Static/message";
 
 import CompanyWorkerService from "../../Services/Profiles/companyWorker.service";
 
@@ -24,26 +34,25 @@ export const regCompWorker = (firstName, lastName, gender, email, companyId) => 
             });
 
             dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
+                type: SET_MESSAGE_SUCCESS,
+                payload: WORKER_REG_SUCCESS_200,
             });
 
             return Promise.resolve();
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
-
+            let message = "Error"
+            if ((error.response.data.type === "validation") || (error.response.data.errors[0].errorMessage === "email has to be unique")) {
+                message = ERROR_400;
+            } else {
+                message = ADMIN_500;
+            }
             dispatch({
                 type: REGISTER_COMP_WORKER_FAIL,
             });
 
             dispatch({
-                type: SET_MESSAGE,
+                type: SET_MESSAGE_FAIL,
                 payload: message,
             });
 
@@ -67,34 +76,41 @@ export const clearCompWorkerId = () => (dispatch) => {
     });
 };
 
-export const editCompWorker = (id, firstName, lastName, gender, email) => (dispatch) => {
+export const editCompWorker = (id, firstName, lastName, gender, email, myAccount) => (dispatch) => {
     return CompanyWorkerService.editCompanyWorkerAPI(id, firstName, lastName, gender, email).then(
         (response) => {
+            let message = "Success"
+            if (myAccount === true) {
+                message = PROFILE_EDIT_SUCCESS_200
+            } else {
+                message = WORKER_EDIT_SUCCESS_200;
+            }
+
             dispatch({
                 type: EDIT_COMP_WORKER_SUCCESS,
             });
 
             dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
+                type: SET_MESSAGE_SUCCESS,
+                payload: message,
             });
 
             return Promise.resolve();
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            let message = "Error"
+            if ((error.response.status === 400) || (error.response.data.type === "validation") || (error.response.data.errors[0].errorMessage === "email has to be unique")) {
+                message = ERROR_400;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: EDIT_COMP_WORKER_FAIL,
             });
 
             dispatch({
-                type: SET_MESSAGE,
+                type: SET_MESSAGE_FAIL,
                 payload: message,
             });
 

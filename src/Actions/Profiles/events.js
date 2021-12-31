@@ -20,8 +20,15 @@ import {
     GET_EVENT_ID_FAIL,
     GET_EVENT_LIST_FOR_USER_SUCCESS,
     GET_EVENT_LIST_FOR_USER_FAIL,
+    SET_MESSAGE_SUCCESS,
+    SET_MESSAGE_FAIL,
 } from "../../Constants/actionTypes";
-
+import {
+    ADMIN_500,
+    ERROR_400,
+    EVENT_REG_SUCCESS_200,
+    EVENT_EDIT_SUCCESS_200,
+} from "../../Static/message";
 import EventService from "../../Services/Profiles/event.service";
 
 export const registerEventDispatch = (title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type) => (dispatch) => {
@@ -32,26 +39,21 @@ export const registerEventDispatch = (title, companyId, loc_lat, loc_lng, startD
             });
 
             dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
+                type: SET_MESSAGE_SUCCESS,
+                payload: EVENT_REG_SUCCESS_200,
             });
 
             return Promise.resolve();
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            const message = ADMIN_500;
 
             dispatch({
                 type: REGISTER_EVENT_FAIL,
             });
 
             dispatch({
-                type: SET_MESSAGE,
+                type: SET_MESSAGE_FAIL,
                 payload: message,
             });
 
@@ -109,26 +111,21 @@ export const editEvent = (eventId, title, companyId, loc_lat, loc_lng, startDate
             });
 
             dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
+                type: SET_MESSAGE_SUCCESS,
+                payload: EVENT_EDIT_SUCCESS_200,
             });
 
             return Promise.resolve();
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            const message = ADMIN_500;
 
             dispatch({
                 type: EDIT_EVENT_FAIL,
             });
 
             dispatch({
-                type: SET_MESSAGE,
+                type: SET_MESSAGE_FAIL,
                 payload: message,
             });
 
