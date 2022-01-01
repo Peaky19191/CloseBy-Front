@@ -1,6 +1,7 @@
 import React from "react";
 
 import useStyles from './styles';
+import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField, MenuItem } from '@material-ui/core';
 
 import usePlacesAutocomplete, {
     getGeocode,
@@ -17,9 +18,6 @@ import {
 import IconButton from '@material-ui/core/IconButton';
 
 import "@reach/combobox/styles.css";
-
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
-
 
 const Search = (props) => {
     const classes = useStyles();
@@ -38,10 +36,10 @@ const Search = (props) => {
     });
 
     return (
-        <div className={classes.searchContainer} >
+        <Grid container>
 
             {/* <TextField label="Search" name="name" htmlFor="name" variant="outlined" type="text" autoFocus > */}
-            <Combobox className={classes.search} onSelect={async (address) => {
+            <Combobox onSelect={async (address) => {
                 setValue(address, false);
                 clearSuggestions();
 
@@ -55,12 +53,12 @@ const Search = (props) => {
                     console.log(error)
                 }
             }}>
-                <ComboboxInput value={value} onChange={(e) => { setValue(e.target.value) }} disabled={!ready} placeholder="Enter an adress" />
+                <ComboboxInput className={classes.search} value={value} onChange={(e) => { setValue(e.target.value) }} disabled={!ready} placeholder="Search an adress" />
                 <ComboboxPopover>
                     {status === "OK" && data.map(({ id, description }) => <ComboboxOption key={id} value={description} />)}
                 </ComboboxPopover>
             </Combobox>
-        </div>
+        </Grid >
         // </TextField>
     );
 }
