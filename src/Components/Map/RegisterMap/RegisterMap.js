@@ -27,7 +27,7 @@ const options = {
 const libraries = ["places"];
 const mapContainerStyle = {
     width: "80vh",
-    height: "50vh",
+    height: "53vh",
 }
 
 const center = {
@@ -158,8 +158,10 @@ const MapRegister = () => {
 
     return (
         <>
-            <Search panTo={panTo} />
-            <Compass panTo={panTo} />
+            <Grid className={classes.gridTop} >
+                <Search panTo={panTo} />
+                <Compass panTo={panTo} />
+            </Grid>
 
             <GoogleMap mapContainerStyle={mapContainerStyle} zoom={12} center={center} options={options} onClick={onMapClick} onLoad={onMapLoad}>
                 {markers.map((marker) => (
