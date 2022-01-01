@@ -16,6 +16,7 @@ import {
     NEW_PASSW_SUCCESS_200,
     RESET_PASSW_SUCCESS_200,
     NEW_PASSW_ERROR_403,
+    LOGIN_ERROR_401,
 } from "../Static/message";
 import AuthService from "../Services/Auth/auth.service";
 
@@ -30,7 +31,14 @@ export const login = (email, password) => (dispatch) => {
             return Promise.resolve();
         },
         (error) => {
-            const message = ADMIN_500;
+            console.log(error.response)
+            let message = "Error"
+            if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.type === "authentication")) {
+                message = LOGIN_ERROR_401;
+            } else {
+                message = ADMIN_500;
+            }
+
             dispatch({
                 type: LOGIN_FAIL,
             });
@@ -99,7 +107,6 @@ export const setNewPassword = (password, token) => (dispatch) => {
             return Promise.resolve();
         },
         (error) => {
-            console.log(error.response)
             let message = "Error"
             if ((error.response.status === 403) || (error.response.data.type === "authorization")) {
                 message = NEW_PASSW_ERROR_403;
