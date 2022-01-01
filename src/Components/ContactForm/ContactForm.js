@@ -8,6 +8,7 @@ import { sendContactMessageDispatch } from "../../Actions/contact";
 import { Link } from 'react-router-dom'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Message from '..//Message/Message';
+import { useHistory } from "react-router-dom";
 
 const ContactForm = () => {
     const classes = useStyles();
@@ -24,6 +25,10 @@ const ContactForm = () => {
         email.length > 0 &&
         content.length > 0;
 
+    let history = useHistory();
+    const goToPreviousPath = () => {
+        history.goBack()
+    }
     const dispatch = useDispatch();
 
     const onChangeEmail = (e) => {
@@ -88,8 +93,8 @@ const ContactForm = () => {
                             <CircularProgress size="20px" />
                         ) : "Send message"}
                     </Button>
-                    <Button className={classes.buttonClose} component={Link} to="/" fullWidth variant="contained" color="secondary" >
-                        Close
+                    <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
+                        Back
                     </Button>
                 </form>
             </Paper>
