@@ -18,6 +18,8 @@ export const EVENT_EDIT_SUCCESS_200 = "Event has been successfully edited";
 export const USER_REG_SUCCESS_200 = "You have successfully registered your account. Please check your registered email for email verification";
 
 export const NEW_PASSW_SUCCESS_200 = "You have successfully changed your password";
+export const NEW_PASSW_ERROR_403 = "This link has expired";
+
 export const RESET_PASSW_SUCCESS_200 = "If there is any account registered with this email, we will sent you a link for the new password.";
 
 export const SEND_CONTACT_MESSAGE_SUCCESS_200 = "We have received your message. Someone will contact you as soon as possible.";
