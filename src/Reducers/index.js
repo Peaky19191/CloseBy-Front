@@ -6,7 +6,7 @@ import companyAdmin from "./Profiles/companyAdmin";
 import companyWorker from "./Profiles/companyWorker";
 import user from "./Profiles/user";
 import event from "./Profiles/event";
-
+import map from "./Map/map";
 
 export default combineReducers({
     auth,
@@ -16,4 +16,5 @@ export default combineReducers({
     companyWorker,
     user,
     event,
+    map,
 });

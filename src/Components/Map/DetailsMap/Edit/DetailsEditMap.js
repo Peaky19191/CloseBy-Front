@@ -41,6 +41,9 @@ const MapDetailsEdit = (props) => {
     const classes = useStyles();
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
+    const state = useSelector(state => state.map);
+    const [status, setStatus] = useState(state);
+
     const { event: currentEventRedux } = useSelector((state) => state.event);
 
     const [selected, setSelected] = React.useState(null);
@@ -209,7 +212,6 @@ const MapDetailsEdit = (props) => {
     const dispatch = useDispatch();
 
     const onMapClick = React.useCallback((event) => {
-
         setSelected(null);
         setCurrenEventSelected(null);
 

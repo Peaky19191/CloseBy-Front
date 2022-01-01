@@ -2,6 +2,7 @@ import {
     GET_ADRESS_SUCCESS,
     GET_ADRESS_FAIL,
     SET_MESSAGE,
+    SET_EDIT_MODE,
 } from "../../Constants/actionTypes";
 
 import MapService from "../../Services/Map/map.service";
@@ -40,4 +41,11 @@ export const getAdressDispatch = (lat, lng) => (dispatch) => {
             return Promise.reject();
         }
     );
+};
+
+export const setEditMapModeDispatch = (status) => (dispatch) => {
+    dispatch({
+        type: SET_EDIT_MODE,
+        payload: status,
+    });
 };

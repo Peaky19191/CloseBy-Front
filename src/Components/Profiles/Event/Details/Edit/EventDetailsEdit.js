@@ -26,6 +26,7 @@ import { setCompanyDispatch } from "../../../../../Actions/Profiles/company";
 import BusinessIcon from '@mui/icons-material/Business';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Message from '../../../../Message/Message';
+import { setEditMapModeDispatch } from "../../../../../Actions/Map/map";
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -143,11 +144,13 @@ const EventDetailsEdit = () => {
     const startEditing = () => {
         setDisabled(false);
         setEditMode(true);
+        dispatch(setEditMapModeDispatch(true))
     }
 
     const stopEditing = () => {
         setDisabled(true);
         setEditMode(false);
+        dispatch(setEditMapModeDispatch(false))
     }
 
     const handleSubmit = () => {
@@ -272,7 +275,7 @@ const EventDetailsEdit = () => {
                         </Grid> */}
                         </Grid>
                         <Grid className={classes.mapContainer}  >
-                            <MapDetailsEdit currentEventId={[eventId]} />
+                            <MapDetailsEdit currentEventId={[eventId]} editModePass={editMode} />
                         </Grid>
                     </Grid>
                     <Grid container className={classes.buttonsContainer}>
@@ -289,7 +292,6 @@ const EventDetailsEdit = () => {
                         {(currentProfile.role === "GlobalAdmin") &&
                             <Grid item className={classes.buttonClose}>
                                 <Button component={Link} to="/companyDetails" onClick={() => { dispatchCompany(company) }} className={classes.buttonLink} fullWidth variant="contained" >
-                                    {/* <BusinessIcon /> */}
                                     Company Details
                                 </Button>
                             </Grid>}
