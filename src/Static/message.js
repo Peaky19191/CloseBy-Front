@@ -24,3 +24,6 @@ export const NEW_PASSW_ERROR_403 = "This link has expired";
 export const RESET_PASSW_SUCCESS_200 = "If there is any account registered with this email, we will sent you a link for the new password.";
 
 export const SEND_CONTACT_MESSAGE_SUCCESS_200 = "We have received your message. Someone will contact you as soon as possible.";
+
+export const CONFIRM_EMAIL_FAIL_400 = "This link does not match with your account.";
+export const CONFIRM_EMAIL_SUCCESS_200 = "Your email has been successfully confirmed";
