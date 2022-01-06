@@ -33,6 +33,7 @@ import WorkersListCompanyFiltered from '../../Components/Profiles/CompanyWorker/
 import AdminsListCompanyFiltered from '../Profiles/CompanyAdmin/List/CompanyFiltered/AdminsListCompanyFiltered';
 import EventListCompanyFiltered from '../Profiles/Event/List/CompanyFiltered/EventListCompanyFiltered';
 import EmailConfirmation from '../../Components/Auth/EmailConfirmation/EmailConfirmation';
+import EventListFavorite from '../Profiles/Event/List/UserView/EventListFavorite';
 
 
 const SwitchComponent = () => {
