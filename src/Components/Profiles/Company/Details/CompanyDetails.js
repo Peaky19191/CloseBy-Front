@@ -133,7 +133,7 @@ const CompanyDetails = () => {
 
     const validate = () => {
         let temp = {}
-        temp.name = (/^[A-Za-z0-9]+$/).test(name) ? "" : "Whitespaces are not allowed"
+        temp.name = (/^[A-Za-z0-9ąćęłńóśźżĄĘŁŃÓŚŹŻ]+$/).test(name) ? "" : "Whitespaces are not allowed"
         setErrors({
             ...temp
         })

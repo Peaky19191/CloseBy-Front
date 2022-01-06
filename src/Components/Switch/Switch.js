@@ -32,7 +32,8 @@ import Login from '../../Components/Auth/Login/Login';
 import WorkersListCompanyFiltered from '../../Components/Profiles/CompanyWorker/List/CompanyFiltered/WorkersListCompanyFiltered';
 import AdminsListCompanyFiltered from '../Profiles/CompanyAdmin/List/CompanyFiltered/AdminsListCompanyFiltered';
 import EventListCompanyFiltered from '../Profiles/Event/List/CompanyFiltered/EventListCompanyFiltered';
-import EventListFavorite from '../Profiles/Event/List/UserView/EventListFavorite';
+import EmailConfirmation from '../../Components/Auth/EmailConfirmation/EmailConfirmation';
+
 
 const SwitchComponent = () => {
 
@@ -44,6 +45,7 @@ const SwitchComponent = () => {
             <Route exact path="/events" exact component={Events} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/email-confirmation/:token" component={EmailConfirmation} />
             <Route exact path="/resetPassword" component={ResetPassword} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/user" component={User} />

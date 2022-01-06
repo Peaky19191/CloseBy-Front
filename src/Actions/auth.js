@@ -7,6 +7,8 @@ import {
     RESET_PASSW_FAIL,
     NEW_PASSW_SUCCESS,
     NEW_PASSW_FAIL,
+    CONFIRM_EMAIL_SUCCESS,
+    CONFIRM_EMAIL_FAIL,
     SET_MESSAGE_SUCCESS,
     SET_MESSAGE_FAIL,
 } from "../Constants/actionTypes";
@@ -15,8 +17,10 @@ import {
     ERROR_400,
     NEW_PASSW_SUCCESS_200,
     RESET_PASSW_SUCCESS_200,
+    CONFIRM_EMAIL_SUCCESS_200,
     NEW_PASSW_ERROR_403,
     LOGIN_ERROR_401,
+    CONFIRM_EMAIL_FAIL_400,
 } from "../Static/message";
 import AuthService from "../Services/Auth/auth.service";
 
@@ -126,3 +130,39 @@ export const setNewPassword = (password, token) => (dispatch) => {
         }
     );
 };
+
+export const confirmUserEmail = (token) => (dispatch) => {
+    return AuthService.confirmUserEmail(token).then(
+        (response) => {
+            dispatch({
+                type: CONFIRM_EMAIL_SUCCESS,
+            });
+
+            dispatch({
+                type: SET_MESSAGE_SUCCESS,
+                payload: CONFIRM_EMAIL_SUCCESS_200,
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+            let message = "Error"
+            if ((error.response.status === 400) || (error.response.data.type === "validation")) {
+                message = CONFIRM_EMAIL_FAIL_400;
+            } else {
+                message = ADMIN_500;
+            }
+            dispatch({
+                type: CONFIRM_EMAIL_FAIL,
+            });
+
+            dispatch({
+                type: SET_MESSAGE_FAIL,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
