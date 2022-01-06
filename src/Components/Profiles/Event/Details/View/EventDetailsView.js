@@ -20,10 +20,14 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 import moment from 'moment'
 import { setNewEventLoc } from "../../../../../Actions/Profiles/events";
-import { setCurrentEventLoc, getEventIdDispatch } from "../../../../../Actions/Profiles/events";
+import { setCurrentEventLoc, getEventIdDispatch, addToFavoriteDispatch, deleteFromFavoriteDispatch } from "../../../../../Actions/Profiles/events";
 import { useHistory } from "react-router-dom";
 import { createPayment } from "../../../../../Services/Payment/payment.service";
 import Message from '../../../../Message/Message';
+import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
+import StarIcon from '@mui/icons-material/Star';
+import IconButton from '@mui/material/IconButton';
+import { amber } from '@mui/material/colors';
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -34,36 +38,50 @@ const EventDetailsView = () => {
     const dispatch = useDispatch();
 
     const { event: currentEvent } = useSelector((state) => state.event);
+    const { profile: currentProfile } = useSelector((state) => state.auth);
 
     const [eventId, setEventId] = useState(currentEvent.id);
     const [title, setTitle] = useState(currentEvent.title);
     const [desc, setDesc] = useState(currentEvent.description);
-    const [startDate, setStartDate] = useState(currentEvent.startDateTime);
-    const [endDate, setEndDate] = useState(currentEvent.endDateTime);
     const [type, setType] = useState(currentEvent.type);
     // const [status, setStatus] = useState(currentEvent.status);
     const [limit, setLimit] = useState(currentEvent.ticketLimit);
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const [favorite, setFavorite] = useState("");
 
-    const handleBlur = () => {
-        if (limit < 0) {
-            setLimit(0);
-        } else if (limit > 100) {
-            setLimit(100);
+    const changeFavorite = () => {
+        if (favorite) {
+            dispatch(deleteFromFavoriteDispatch(currentProfile.id, currentEvent.id))
+                .then((response) => {
+                    setFavorite(false);
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        } else {
+            dispatch(addToFavoriteDispatch(currentProfile.id, currentEvent.id))
+                .then((response) => {
+                    setFavorite(true);
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
         }
     };
 
     const getEventDetails = () => {
-        dispatch(getEventIdDispatch(eventId))
+        dispatch(getEventIdDispatch(eventId, currentProfile.id))
             .then((response) => {
                 const event = response.data;
-
-                setTitle(event.title);
-                setDesc(event.description);
+                setFavorite(event.isLiked);
+                // setTitle(event.title);
+                // setDesc(event.description);
                 setStartDate(moment(event.startDateTime).format('MM/DD/YYYY - HH:mm'));
                 setEndDate(moment(event.endDateTime).format('MM/DD/YYYY - HH:mm'));
-                setType(event.type);
+                // setType(event.type);
                 // setStatus(event.status);
-                setLimit(event.ticketLimit);
+                // setLimit(event.ticketLimit);
             })
             .catch((e) => {
                 console.log(e);
@@ -80,9 +98,22 @@ const EventDetailsView = () => {
         <Container className={classes.container} component="main" maxWidth="xs">
             <Paper className={classes.paper} elevation={3}>
                 <Grid container className={classes.titleContainer} >
-                    <Avatar className={classes.avatar}>
-                        <EventIcon />
-                    </Avatar>
+                    <Grid container className={classes.favoriteContainer} >
+                        <IconButton onClick={changeFavorite}>
+                            {
+                                favorite ?
+                                    (<StarIcon fontSize="large" sx={{ color: amber[500], fontSize: 60 }} />)
+                                    :
+                                    (<StarBorderOutlinedIcon fontSize="large" sx={{ color: amber[500], fontSize: 60 }} />)
+                            }
+                        </IconButton>
+                    </Grid>
+                    <Grid className={classes.topContainer} >
+                        <Avatar className={classes.avatar}>
+                            <EventIcon fontSize="large" />
+                        </Avatar>
+
+                    </Grid>
                     <Typography className={classes.title} component="h1" variant="h4">Event {title}</Typography>
                 </Grid>
                 <form >

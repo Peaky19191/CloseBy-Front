@@ -35,4 +35,10 @@ export default makeStyles((theme) => ({
         alignItems: 'center',
         width: '100%'
     },
+    actionsContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+    },
 }));

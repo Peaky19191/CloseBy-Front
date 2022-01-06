@@ -51,9 +51,9 @@ const MapDetailsView = (props) => {
 
     const mapRef = React.useRef();
 
-    const onMapLoad = React.useCallback((map) => {
+    const onMapLoad = React.useCallback(async (map) => {
         mapRef.current = map;
-        getList();
+        await getList();
         getCurrentEvent();
     });
 
@@ -102,7 +102,7 @@ const MapDetailsView = (props) => {
     }
 
     const getCurrentEvent = () => {
-        dispatch(getEventIdDispatch(props.currentEventId))
+        dispatch(getEventIdDispatch(props.currentEventId[0]))
             .then((response) => {
                 const curEvent = response.data;
 

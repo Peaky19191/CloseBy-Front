@@ -2,10 +2,11 @@ import axios from "axios";
 import authHeader from "../Auth/auth-header";
 import SERVER_API from "../../Static/serverApi";
 
-const API_URL = "event/";
+const API_URL = "event";
+const API_URL_FAV = "liked-event/";
 
 const registerEventAPI = (title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type) => {
-    return axios.post(SERVER_API + API_URL + "create",
+    return axios.post(SERVER_API + API_URL + "/create",
         {
             title: title,
             companyId: companyId,
@@ -28,7 +29,7 @@ const registerEventAPI = (title, companyId, loc_lat, loc_lng, startDate, endDate
 };
 
 const editEventAPI = (eventId, title, companyId, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type) => {
-    return axios.put(SERVER_API + API_URL + "update",
+    return axios.put(SERVER_API + API_URL + "/update",
         {
             id: eventId,
             title: title,
@@ -51,7 +52,7 @@ const editEventAPI = (eventId, title, companyId, loc_lat, loc_lng, startDate, en
 };
 
 const registerEventIdAPI = (pageNumber, rowsPerPage, companyId) => {
-    return axios.post(SERVER_API + API_URL + "list-by-company",
+    return axios.post(SERVER_API + API_URL + "/list-by-company",
         {
             page: pageNumber,
             limit: rowsPerPage,
@@ -64,7 +65,7 @@ const registerEventIdAPI = (pageNumber, rowsPerPage, companyId) => {
 };
 
 const getEventListAllApi = (pageNumber, rowsPerPage, companyId) => {
-    return axios.post(SERVER_API + API_URL + "list",
+    return axios.post(SERVER_API + API_URL + "/list",
         {
             page: pageNumber,
             limit: rowsPerPage,
@@ -76,8 +77,21 @@ const getEventListAllApi = (pageNumber, rowsPerPage, companyId) => {
     );
 };
 
+const getEventListFavoriteApi = (pageNumber, rowsPerPage, userId) => {
+    return axios.post(SERVER_API + API_URL_FAV + "list",
+        {
+            page: pageNumber,
+            limit: rowsPerPage,
+            userId: userId
+        },
+        {
+            headers: authHeader()
+        },
+    );
+};
+
 const deleteEventApi = (id) => {
-    return axios.delete(SERVER_API + API_URL + "delete",
+    return axios.delete(SERVER_API + API_URL + "/delete",
         {
             headers: authHeader(),
             data: {
@@ -87,10 +101,39 @@ const deleteEventApi = (id) => {
     );
 };
 
-const getEventIdApi = (id) => {
-    return axios.get(SERVER_API + API_URL + id,
+const getEventIdApi = (id, userId) => {
+    return axios.post(SERVER_API + API_URL,
+        {
+            id: id,
+            userId: userId
+        },
         {
             headers: authHeader(),
+        },
+    );
+};
+
+const addToFavoriteApi = (userId, eventId) => {
+    return axios.post(SERVER_API + API_URL_FAV + "create",
+        {
+            eventId: eventId,
+            userId: userId
+        },
+        {
+            headers: authHeader(),
+        },
+    );
+};
+
+const deleteFromFavoriteApi = (userId, eventId) => {
+    return axios.delete(SERVER_API + API_URL_FAV + "delete",
+
+        {
+            headers: authHeader(),
+            data: {
+                eventId: eventId,
+                userId: userId
+            }
         },
     );
 };
@@ -100,6 +143,9 @@ export default {
     editEventAPI,
     registerEventIdAPI,
     getEventListAllApi,
+    getEventListFavoriteApi,
     deleteEventApi,
     getEventIdApi,
+    addToFavoriteApi,
+    deleteFromFavoriteApi
 };
