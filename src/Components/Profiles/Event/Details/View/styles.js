@@ -17,6 +17,8 @@ export default makeStyles((theme) => ({
     avatar: {
         margin: theme.spacing(1),
         backgroundColor: theme.palette.secondary.main,
+        width: 56,
+        height: 56,
     },
     title: {
         display: 'flex',
@@ -37,11 +39,28 @@ export default makeStyles((theme) => ({
         padding: theme.spacing(2),
 
     },
+    avatarContainer: {
+        display: 'flex',
+
+        alignItems: 'center',
+        alignSelf: 'center'
+    },
+    favoriteContainer: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        position: 'relative',
+    },
     titleContainer: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         padding: theme.spacing(2),
+    },
+    topContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        position: 'absolute',
     },
     fieldsContainer: {
         // display: 'flex',

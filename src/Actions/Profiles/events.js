@@ -22,6 +22,12 @@ import {
     GET_EVENT_LIST_FOR_USER_FAIL,
     SET_MESSAGE_SUCCESS,
     SET_MESSAGE_FAIL,
+    GET_EVENT_LIST_FAV_SUCCESS,
+    GET_EVENT_LIST_FAV_FAIL,
+    SET_FAVORITE_SUCCESS,
+    SET_FAVORITE_FAIL,
+    DELETE_FAVORITE_SUCCESS,
+    DELETE_FAVORITE_FAIL,
 } from "../../Constants/actionTypes";
 import {
     ADMIN_500,
@@ -208,7 +214,42 @@ export const getEventListAllDispatch = (pageNumber, rowsPerPage, companyId) => (
     );
 };
 
+export const getEventListFavoriteDispatch = (pageNumber, rowsPerPage, userId) => (dispatch) => {
+    return EventService.getEventListFavoriteApi(pageNumber, rowsPerPage, userId).then(
+        (response) => {
+            dispatch({
+                type: GET_EVENT_LIST_FAV_SUCCESS,
+                payload: response.data.items,
+            });
 
+            dispatch({
+                type: SET_MESSAGE,
+                payload: response.data.message,
+            });
+
+            return Promise.resolve(response);
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: GET_EVENT_LIST_FAV_FAIL,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
 
 export const deleteEventDispatch = (id) => (dispatch) => {
     return EventService.deleteEventApi(id).then(
@@ -246,8 +287,8 @@ export const deleteEventDispatch = (id) => (dispatch) => {
     );
 };
 
-export const getEventIdDispatch = (id) => (dispatch) => {
-    return EventService.getEventIdApi(id).then(
+export const getEventIdDispatch = (id, userId) => (dispatch) => {
+    return EventService.getEventIdApi(id, userId).then(
         (response) => {
             dispatch({
                 type: GET_EVENT_ID_SUCCESS,
@@ -271,6 +312,80 @@ export const getEventIdDispatch = (id) => (dispatch) => {
 
             dispatch({
                 type: GET_EVENT_ID_FAIL,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
+export const deleteFromFavoriteDispatch = (userId, eventId) => (dispatch) => {
+    return EventService.deleteFromFavoriteApi(userId, eventId).then(
+        (response) => {
+            dispatch({
+                type: DELETE_FAVORITE_SUCCESS,
+                payload: response.data,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: response.data.message,
+            });
+
+            return Promise.resolve(response);
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: DELETE_FAVORITE_FAIL,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
+export const addToFavoriteDispatch = (userId, eventId) => (dispatch) => {
+    return EventService.addToFavoriteApi(userId, eventId).then(
+        (response) => {
+            dispatch({
+                type: SET_FAVORITE_SUCCESS,
+                payload: response.data,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: response.data.message,
+            });
+
+            return Promise.resolve(response);
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: SET_FAVORITE_FAIL,
             });
 
             dispatch({

@@ -27,12 +27,13 @@ import Profile from '../../Components/Profiles/Profile'
 import Home from '../../Pages/home';
 import About from '../../Pages/about';
 import Contact from '../../Pages/contact';
-import Events from '../../Components/Profiles/Event/Events';
+import Events from '../Profiles/Event/List/UserView/EventListMainView';
 import Login from '../../Components/Auth/Login/Login';
 import WorkersListCompanyFiltered from '../../Components/Profiles/CompanyWorker/List/CompanyFiltered/WorkersListCompanyFiltered';
 import AdminsListCompanyFiltered from '../Profiles/CompanyAdmin/List/CompanyFiltered/AdminsListCompanyFiltered';
 import EventListCompanyFiltered from '../Profiles/Event/List/CompanyFiltered/EventListCompanyFiltered';
 import EmailConfirmation from '../../Components/Auth/EmailConfirmation/EmailConfirmation';
+
 
 const SwitchComponent = () => {
 
@@ -71,6 +72,7 @@ const SwitchComponent = () => {
             <Route exact path="/adminListCompanyFilter" component={AdminsListCompanyFiltered} />
             <Route exact path="/eventListCompanyFilter" component={EventListCompanyFiltered} />
             <Route exact path="/create-payment/:eventId" component={Payment} />
+            <Route exact path="/favorites" component={EventListFavorite} />
 
         </Switch>
     );

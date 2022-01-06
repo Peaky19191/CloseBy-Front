@@ -176,7 +176,7 @@ const MapDetailsEdit = (props) => {
     }
 
     const getCurrentEvent = () => {
-        dispatch(getEventIdDispatch(props.currentEventId))
+        dispatch(getEventIdDispatch(props.currentEventId[0]))
             .then((response) => {
                 const curEvent = response.data;
 

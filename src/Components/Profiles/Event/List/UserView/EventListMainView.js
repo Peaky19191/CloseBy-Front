@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Card, CardActions, CardContent, CardMedia, Grid, Container, Button, Paper } from '@material-ui/core';
 import useStyles from './styles';
-import Event from '../../../Services/Profiles/event.service'
+import Event from '../../../../../Services/Profiles/event.service'
 import moment from 'moment'
 import { useDispatch } from "react-redux";
-import { setEventDispatch, getEventListAllDispatch } from "../../../Actions/Profiles/events";
+import { setEventDispatch, getEventListAllDispatch } from "../../../../../Actions/Profiles/events";
 import { Link } from 'react-router-dom'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useSelector } from "react-redux";
@@ -88,7 +88,7 @@ export const Events = () => {
                                                 {event.description}
                                             </Typography>
                                         </CardContent>
-                                        <CardActions>
+                                        <CardActions className={classes.actionsContainer}>
                                             <Button component={Link} color="primary" to="/eventDetailsView" onClick={() => { dispatchEvent(event) }}>Details</Button>
                                         </CardActions>
                                     </Card>
