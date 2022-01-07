@@ -37,7 +37,7 @@ const MapDetailsView = (props) => {
     const dispatch = useDispatch();
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
-    const { event: currentEventRedux } = useSelector((state) => state);
+    const { event: currentEventRedux } = useSelector((state) => state.event);
 
     const [selected, setSelected] = React.useState(null);
     const [markers, setMarkers] = React.useState([]);
@@ -51,9 +51,9 @@ const MapDetailsView = (props) => {
 
     const mapRef = React.useRef();
 
-    const onMapLoad = React.useCallback(async (map) => {
+    const onMapLoad = React.useCallback((map) => {
         mapRef.current = map;
-        await getList();
+        getList();
         getCurrentEvent();
     });
 
@@ -225,7 +225,6 @@ const MapDetailsView = (props) => {
                             <p>LNG:  {currenEventSelected.lng}</p> */}
                         </div>
                     </InfoWindow>)}
-
             </GoogleMap>
         </>
     );

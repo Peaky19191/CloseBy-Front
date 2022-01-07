@@ -50,8 +50,8 @@ export const EventsFavorite = () => {
     }
 
     const dispatch = useDispatch();
-    const dispatchEvent = (id) => {
-        dispatch(setEventDispatch(id))
+    const dispatchEvent = (event) => {
+        dispatch(setEventDispatch(event))
     }
 
     return (

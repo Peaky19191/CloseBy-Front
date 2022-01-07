@@ -50,12 +50,18 @@ export const Events = () => {
     }
 
     const dispatch = useDispatch();
-    const dispatchEvent = (id) => {
-        dispatch(setEventDispatch(id))
+    const dispatchEvent = (event) => {
+
+        dispatch(setEventDispatch(event))
     }
 
     return (
-        (listLoaded === true) ?
+        (listLoaded !== true) ?
+            <Grid className={classes.spinnerContainer}>
+                <CircularProgress size={500} thickness={1} />
+            </Grid>
+
+            :
             <>
                 <main>
                     {/* <div className={classes.container}>
@@ -103,10 +109,6 @@ export const Events = () => {
                     </Container>
                 </main>
             </>
-            :
-            <Grid className={classes.spinnerContainer}>
-                <CircularProgress size={500} thickness={1} />
-            </Grid>
     )
 }
 
