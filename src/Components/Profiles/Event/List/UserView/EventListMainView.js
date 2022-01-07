@@ -99,7 +99,7 @@ export const Events = () => {
                                             </Typography>
                                         </CardContent>
                                         <CardActions className={classes.actionsContainer}>
-                                            <Button component={Link} color="primary" to="/eventDetailsView" onClick={() => { dispatchEvent(event) }}>Details</Button>
+                                            <Button component={Link} fullWidth variant="contained" color="primary" to="/eventDetailsView" onClick={() => { dispatchEvent(event) }}>Details</Button>
                                         </CardActions>
                                     </Card>
                                 </Grid>

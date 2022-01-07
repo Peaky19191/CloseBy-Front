@@ -37,8 +37,12 @@ export default makeStyles((theme) => ({
     },
     actionsContainer: {
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-around',
+    },
+    buttonAction: {
+        margin: theme.spacing(1, 1, 0.5, 1),
+
     },
 }));

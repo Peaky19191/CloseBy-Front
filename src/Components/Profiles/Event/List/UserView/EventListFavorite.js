@@ -4,7 +4,7 @@ import useStyles from './styles';
 import Event from '../../../../../Services/Profiles/event.service'
 import moment from 'moment'
 import { useDispatch } from "react-redux";
-import { setEventDispatch, getEventListAllDispatch, getEventListFavoriteDispatch } from "../../../../../Actions/Profiles/events";
+import { setEventDispatch, getEventListAllDispatch, getEventListFavoriteDispatch, deleteFromFavoriteDispatch } from "../../../../../Actions/Profiles/events";
 import { Link } from 'react-router-dom'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useSelector } from "react-redux";
@@ -26,19 +26,11 @@ export const EventsFavorite = () => {
     const getList = () => {
         dispatch(getEventListFavoriteDispatch(page, rowsPerPage, currentProfile.id))
             .then((response) => {
-                console.log("response");
-                console.log(response);
-
-                console.log("response.data.items");
-                console.log(response.data.items);
                 const eventTemp = response.data.items;
                 const totalPages = response.data.count;
 
-                if (events.length === 0) {
-                    setEvent(eventTemp);
-                } else {
-                    setEvent([...events, ...eventTemp]);
-                }
+                setEvent(eventTemp);
+
                 setCount(totalPages);
                 setListLoaded(true);
             })
@@ -49,14 +41,35 @@ export const EventsFavorite = () => {
 
     useEffect(getList, [page, rowsPerPage]);
 
+    const getListOnClick = () => {
+        dispatch(getEventListFavoriteDispatch(page + 1, rowsPerPage, currentProfile.id))
+            .then((response) => {
+                const eventTemp = response.data.items;
+                const totalPages = response.data.count;
+
+
+                setEvent([...events, ...eventTemp]);
+                setCount(totalPages);
+                setListLoaded(true);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    };
+
+
     const loadMore = () => {
-        setPage(page + 1);
-        setRowsPerPage(rowsPerPage);
+        getListOnClick();
     }
 
     const dispatch = useDispatch();
     const dispatchEvent = (event) => {
         dispatch(setEventDispatch(event))
+    }
+
+    const deleteFromFavorite = async (eventId) => {
+        await dispatch(deleteFromFavoriteDispatch(currentProfile.id, eventId));
+        getList();
     }
 
     return (
@@ -87,7 +100,8 @@ export const EventsFavorite = () => {
                                             </Typography>
                                         </CardContent>
                                         <CardActions className={classes.actionsContainer}>
-                                            <Button component={Link} color="primary" to="/eventDetailsView" onClick={() => { dispatchEvent(item.event) }}>Details</Button>
+                                            <Button className={classes.buttonAction} fullWidth variant="contained" color="primary" component={Link} to="/eventDetailsView" onClick={() => { dispatchEvent(item.event) }}>Details</Button>
+                                            <Button className={classes.buttonAction} fullWidth variant="contained" color="secondary" to="/eventDetailsView" onClick={() => { deleteFromFavorite(item.event.id) }}>Delete from favorites</Button>
                                         </CardActions>
                                     </Card>
                                 </Grid>
