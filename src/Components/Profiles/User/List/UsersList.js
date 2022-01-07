@@ -58,14 +58,14 @@ const UsersList = () => {
     const [emailDelete, setEmailDelete] = useState();
 
 
-    const prepareDelete = (id, firstName, lastName, email) => {
-        setIdUserDelete(id);
-        setFirstNameDelete(firstName);
-        setLastNameDelete(lastName);
-        setEmailDelete(email);
+    // const prepareDelete = (id, firstName, lastName, email) => {
+    //     setIdUserDelete(id);
+    //     setFirstNameDelete(firstName);
+    //     setLastNameDelete(lastName);
+    //     setEmailDelete(email);
 
-        showPopup();
-    }
+    //     showPopup();
+    // }
 
     const showPopup = () => {
         setIsOpen(!isOpen);
@@ -120,9 +120,9 @@ const UsersList = () => {
                                         <IconButton component={Link} to="/userDetails" onClick={() => { dispatchUser(item) }} aria-label="edit" size="large" >
                                             <SettingsApplicationsIcon className={classes.settingICon} />
                                         </IconButton>
-                                        <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.firstName, item.lastName, item.email) }} >
+                                        {/* <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.firstName, item.lastName, item.email) }} >
                                             <DeleteIcon className={classes.deleteICon} />
-                                        </IconButton>
+                                        </IconButton> */}
                                     </TableCell>
                                 </TableRow>
                             ))}

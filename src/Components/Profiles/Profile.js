@@ -198,9 +198,9 @@ const Profile = () => {
                 <Grid item xs={12} >
                   <TextField value={lastName} onChange={onChangeLastName} InputProps={{ readOnly: disaled }} name="lastName" htmlFor="lastName" variant="outlined" fullWidth label="Last Name" />
                 </Grid>
-                <Grid item xs={12} >
+                {/* <Grid item xs={12} >
                   <TextField value={email} label="Email Address" onChange={onChangeEmail} InputProps={{ readOnly: disaled }} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
-                </Grid>
+                </Grid> */}
                 <Grid item xs={12} >
                   <TextField value={gender} htmlFor="gender" variant="outlined" InputProps={{ readOnly: disaled }} select={disaled ? false : true} fullWidth onChange={onChangeGender} type="text" label="Gender">
                     <MenuItem value={"Male"} >Male</MenuItem>

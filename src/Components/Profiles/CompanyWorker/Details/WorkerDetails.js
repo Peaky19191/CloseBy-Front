@@ -147,21 +147,25 @@ const CompWorkerDetails = () => {
                                 {/* <BusinessIcon /> */}
                                 Company Details
                             </Button>}
-                        {editMode ?
+                        {(currentProfile.role === "CompanyAdmin") &&
                             <>
-                                <Button disabled={!enabled} type="submit" className={classes.buttonEditSave} fullWidth variant="contained"  >
-                                    {loading ? (
-                                        <CircularProgress size="20px" />
-                                    ) : "Save"}
-                                </Button>
-                                <Button className={classes.buttonEditStop} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >
-                                    Stop Editinig
-                                </Button>
+                                {editMode ?
+                                    <>
+                                        <Button disabled={!enabled} type="submit" className={classes.buttonEditSave} fullWidth variant="contained"  >
+                                            {loading ? (
+                                                <CircularProgress size="20px" />
+                                            ) : "Save"}
+                                        </Button>
+                                        <Button className={classes.buttonEditStop} onClick={() => { stopEditing() }} fullWidth variant="contained" color="primary" >
+                                            Stop Editinig
+                                        </Button>
+                                    </>
+                                    :
+                                    <Button className={classes.buttonEditStart} onClick={() => { startEditing() }} fullWidth variant="contained" color="primary" >
+                                        Edit
+                                    </Button>
+                                }
                             </>
-                            :
-                            <Button className={classes.buttonEditStart} onClick={() => { startEditing() }} fullWidth variant="contained" color="primary" >
-                                Edit
-                            </Button>
                         }
                         <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
                             back
