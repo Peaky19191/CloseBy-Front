@@ -26,6 +26,11 @@ export const EventsFavorite = () => {
     const getList = () => {
         dispatch(getEventListFavoriteDispatch(page, rowsPerPage, currentProfile.id))
             .then((response) => {
+                console.log("response");
+                console.log(response);
+
+                console.log("response.data.items");
+                console.log(response.data.items);
                 const eventTemp = response.data.items;
                 const totalPages = response.data.count;
 
@@ -60,8 +65,8 @@ export const EventsFavorite = () => {
                 <main>
                     <Container className={classes.cardGrid} maxWidth="lg">
                         <Grid container spacing={4}>
-                            {events.map((event) => (
-                                <Grid item key={event.id} xs={12} sm={6} md={4} >
+                            {events.map((item) => (
+                                <Grid item key={item.event.id} xs={12} sm={6} md={4} >
                                     <Card className={classes.card}>
                                         <CardMedia
                                             className={classes.cardMedia}
@@ -69,20 +74,20 @@ export const EventsFavorite = () => {
                                         />
                                         <CardContent className={classes.cardContent}>
                                             <Typography gutterBottom variant="h5">
-                                                {event.title}
+                                                {item.event.title}
                                             </Typography>
                                             <Typography>
-                                                {moment(event.startDateTime).format('HH:mm - MM/DD/YYYY ')}
+                                                {moment(item.event.startDateTime).format('HH:mm - MM/DD/YYYY ')}
                                             </Typography>
                                             <Typography>
-                                                {event.type}
+                                                {item.event.type}
                                             </Typography>
                                             <Typography>
-                                                {event.description}
+                                                {item.event.description}
                                             </Typography>
                                         </CardContent>
                                         <CardActions className={classes.actionsContainer}>
-                                            <Button component={Link} color="primary" to="/eventDetailsView" onClick={() => { dispatchEvent(event) }}>Details</Button>
+                                            <Button component={Link} color="primary" to="/eventDetailsView" onClick={() => { dispatchEvent(item.event) }}>Details</Button>
                                         </CardActions>
                                     </Card>
                                 </Grid>
