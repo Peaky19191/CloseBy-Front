@@ -78,8 +78,8 @@ const CompWorkerDetails = () => {
         dispatch(setCompanyDispatch(company))
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const submit = () => {
+        // e.preventDefault();
         setLoadMessage(false);
         setLoading(true);
 
@@ -123,7 +123,7 @@ const CompWorkerDetails = () => {
                 {loadMessage &&
                     <Message />
                 }
-                <form className={classes.form} onSubmit={handleSubmit}>
+                <form className={classes.form} >
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
                             <TextField value={firstName} error={errors.firstName} helperText={(errors.firstName)} label="First Name" onChange={onChangeFirstName} InputProps={{ readOnly: disaled }} name="firstName" htmlFor="firstName" variant="outlined" fullWidth />
@@ -149,9 +149,9 @@ const CompWorkerDetails = () => {
                             </Button>}
                         {(currentProfile.role === "CompanyAdmin") &&
                             <>
-                                {editMode ?
+                                {(editMode) ?
                                     <>
-                                        <Button disabled={!enabled} type="submit" className={classes.buttonEditSave} fullWidth variant="contained"  >
+                                        <Button disabled={!enabled} onClick={() => { submit() }} className={classes.buttonEditSave} fullWidth variant="contained"  >
                                             {loading ? (
                                                 <CircularProgress size="20px" />
                                             ) : "Save"}
@@ -161,9 +161,11 @@ const CompWorkerDetails = () => {
                                         </Button>
                                     </>
                                     :
-                                    <Button className={classes.buttonEditStart} onClick={() => { startEditing() }} fullWidth variant="contained" color="primary" >
-                                        Edit
-                                    </Button>
+                                    <>
+                                        <Button className={classes.buttonEditStart} onClick={() => { startEditing() }} fullWidth variant="contained" color="primary" >
+                                            Edit
+                                        </Button>
+                                    </>
                                 }
                             </>
                         }

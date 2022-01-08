@@ -187,7 +187,7 @@ const MapDetailsView = (props) => {
                             <p>Desc:  {selected.desc}</p>
                             <p>Start Date {moment(selected.time).format('MM/DD/YYYY HH:mm')}</p>
                             {(currentProfile.role === "GlobalAdmin") && <p>Company:  {selected.company}</p>}
-                            <p>Tickets Limit:  {selected.personLimit}</p>
+                            {/* <p>Tickets Limit:  {selected.personLimit}</p> */}
                             <p>Type:  {selected.type}</p>
                             <p>Address:  {selected.address}</p>
                             {/* <p>LAT:  {selected.lat}</p>
