@@ -25,7 +25,7 @@ import { Register } from '../../Components/Profiles/User/Register/RegisterUser'
 import { ResetPassword } from '../../Components/Auth/ResetPassword/ResetPassword'
 import Profile from '../../Components/Profiles/Profile'
 import Home from '../../Pages/home';
-import About from '../../Pages/about';
+import About from '../../Components/About/About';
 import Contact from '../../Pages/contact';
 import Events from '../Profiles/Event/List/UserView/EventListMainView';
 import Login from '../../Components/Auth/Login/Login';
