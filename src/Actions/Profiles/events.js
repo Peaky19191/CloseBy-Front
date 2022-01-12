@@ -36,6 +36,7 @@ import {
     EVENT_EDIT_SUCCESS_200,
 } from "../../Static/message";
 import EventService from "../../Services/Profiles/event.service";
+import { toast } from 'react-toastify';
 
 export const registerEventDispatch = (title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type) => (dispatch) => {
     return EventService.registerEventAPI(title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type).then(
@@ -121,6 +122,8 @@ export const editEvent = (eventId, title, companyId, loc_lat, loc_lng, startDate
                 payload: EVENT_EDIT_SUCCESS_200,
             });
 
+            toast.success("Your changes have been saved.")
+
             return Promise.resolve();
         },
         (error) => {
@@ -134,6 +137,8 @@ export const editEvent = (eventId, title, companyId, loc_lat, loc_lng, startDate
                 type: SET_MESSAGE_FAIL,
                 payload: message,
             });
+
+            toast.error(message);
 
             return Promise.reject();
         }
@@ -263,6 +268,8 @@ export const deleteEventDispatch = (id) => (dispatch) => {
                 payload: response.data.message,
             });
 
+            toast.success("Event has been successfuly deleted.")
+
             return Promise.resolve();
         },
         (error) => {
@@ -281,6 +288,8 @@ export const deleteEventDispatch = (id) => (dispatch) => {
                 type: SET_MESSAGE,
                 payload: message,
             });
+
+            toast.error(message);
 
             return Promise.reject();
         }
@@ -337,6 +346,8 @@ export const deleteFromFavoriteDispatch = (userId, eventId) => (dispatch) => {
                 payload: response.data.message,
             });
 
+            toast.success("Event has been successfully removed from favorites.")
+
             return Promise.resolve(response);
         },
         (error) => {
@@ -356,6 +367,8 @@ export const deleteFromFavoriteDispatch = (userId, eventId) => (dispatch) => {
                 payload: message,
             });
 
+            toast.error(message);
+
             return Promise.reject();
         }
     );
@@ -373,6 +386,8 @@ export const addToFavoriteDispatch = (userId, eventId) => (dispatch) => {
                 type: SET_MESSAGE,
                 payload: response.data.message,
             });
+
+            toast.success("Event has been successfully added to your favorites.")
 
             return Promise.resolve(response);
         },
@@ -392,6 +407,8 @@ export const addToFavoriteDispatch = (userId, eventId) => (dispatch) => {
                 type: SET_MESSAGE,
                 payload: message,
             });
+
+            toast.error(message);
 
             return Promise.reject();
         }
