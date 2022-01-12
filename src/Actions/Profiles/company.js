@@ -22,6 +22,7 @@ import {
     COMP_EDIT_SUCCESS_200
 } from "../../Static/message";
 import CompanyService from "../../Services/Profiles/company.service";
+import { toast } from 'react-toastify';
 
 export const regCompany = (name) => (dispatch) => {
     return CompanyService.registerCompanyAPI(name).then(
@@ -34,6 +35,8 @@ export const regCompany = (name) => (dispatch) => {
                 type: SET_MESSAGE_SUCCESS,
                 payload: COMP_REG_SUCCESS_200,
             });
+
+            toast.success("Company has been successfully registered.")
 
             return Promise.resolve();
         },
@@ -54,6 +57,8 @@ export const regCompany = (name) => (dispatch) => {
                 type: SET_MESSAGE_FAIL,
                 payload: message,
             });
+
+            toast.error(message);
 
             return Promise.reject();
         }
@@ -87,6 +92,8 @@ export const editCompany = (id, name) => (dispatch) => {
                 payload: COMP_EDIT_SUCCESS_200,
             });
 
+            toast.success("Your changes have been successfully saved.")
+
             return Promise.resolve();
         },
         (error) => {
@@ -105,6 +112,8 @@ export const editCompany = (id, name) => (dispatch) => {
                 type: SET_MESSAGE_FAIL,
                 payload: message,
             });
+
+            toast.error(message);
 
             return Promise.reject();
         }
@@ -160,6 +169,8 @@ export const deleteCompanyDispatch = (id) => (dispatch) => {
                 payload: response.data.message,
             });
 
+            toast.success("Company has been successfully deleted.")
+
             return Promise.resolve();
         },
         (error) => {
@@ -178,6 +189,8 @@ export const deleteCompanyDispatch = (id) => (dispatch) => {
                 type: SET_MESSAGE,
                 payload: message,
             });
+
+            toast.error(message);
 
             return Promise.reject();
         }
