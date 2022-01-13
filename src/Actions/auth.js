@@ -23,6 +23,7 @@ import {
     CONFIRM_EMAIL_FAIL_400,
 } from "../Static/message";
 import AuthService from "../Services/Auth/auth.service";
+import { toast } from 'react-toastify';
 
 export const login = (email, password) => (dispatch) => {
     return AuthService.login(email, password).then(
@@ -31,6 +32,7 @@ export const login = (email, password) => (dispatch) => {
                 type: LOGIN_SUCCESS,
                 payload: { profile: data },
             });
+            toast.success("you have been logged in.")
 
             return Promise.resolve();
         },
@@ -51,6 +53,7 @@ export const login = (email, password) => (dispatch) => {
                 type: SET_MESSAGE,
                 payload: message,
             });
+            toast.warn(message)
 
             return Promise.reject();
         }
@@ -62,6 +65,7 @@ export const logout = () => (dispatch) => {
     dispatch({
         type: LOGOUT,
     });
+    toast.warn("You have been logged out");
 };
 
 export const resetPassword = (email) => (dispatch) => {
@@ -75,6 +79,7 @@ export const resetPassword = (email) => (dispatch) => {
                 type: SET_MESSAGE_SUCCESS,
                 payload: RESET_PASSW_SUCCESS_200,
             });
+            toast.success("Check your email for confirmation link.")
 
             return Promise.resolve();
         },
@@ -90,6 +95,7 @@ export const resetPassword = (email) => (dispatch) => {
                 type: SET_MESSAGE_FAIL,
                 payload: message,
             });
+            toast.error(message)
 
             return Promise.reject();
         }
@@ -107,6 +113,7 @@ export const setNewPassword = (password, token) => (dispatch) => {
                 type: SET_MESSAGE_SUCCESS,
                 payload: NEW_PASSW_SUCCESS_200,
             });
+            toast.success("Your password has been successfully changed.")
 
             return Promise.resolve();
         },
@@ -125,6 +132,7 @@ export const setNewPassword = (password, token) => (dispatch) => {
                 type: SET_MESSAGE_FAIL,
                 payload: message,
             });
+            toast.error(message)
 
             return Promise.reject();
         }
@@ -142,6 +150,7 @@ export const confirmUserEmail = (token) => (dispatch) => {
                 type: SET_MESSAGE_SUCCESS,
                 payload: CONFIRM_EMAIL_SUCCESS_200,
             });
+            toast.success("Your email has been successfully confirmed.")
 
             return Promise.resolve();
         },
@@ -160,6 +169,7 @@ export const confirmUserEmail = (token) => (dispatch) => {
                 type: SET_MESSAGE_FAIL,
                 payload: message,
             });
+            toast.error(message)
 
             return Promise.reject();
         }

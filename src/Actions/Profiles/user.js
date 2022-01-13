@@ -22,6 +22,7 @@ import {
     PROFILE_EDIT_SUCCESS_200
 } from "../../Static/message";
 import UserService from "../../Services/Profiles/user.service";
+import { toast } from 'react-toastify';
 
 export const registerUserDispatch = (firstName, lastName, gender, email, password) => (dispatch) => {
     return UserService.registerUserAPI(firstName, lastName, gender, email, password).then(
@@ -34,6 +35,7 @@ export const registerUserDispatch = (firstName, lastName, gender, email, passwor
                 type: SET_MESSAGE_SUCCESS,
                 payload: USER_REG_SUCCESS_200,
             });
+            toast.success("Your account has been successfully registered!")
 
             return Promise.resolve();
         },
@@ -53,6 +55,7 @@ export const registerUserDispatch = (firstName, lastName, gender, email, passwor
                 type: SET_MESSAGE_FAIL,
                 payload: message,
             });
+            toast.warn(message);
 
             return Promise.reject();
         }
@@ -86,6 +89,8 @@ export const editUser = (id, firstName, lastName, gender, email) => (dispatch) =
                 payload: PROFILE_EDIT_SUCCESS_200,
             });
 
+            toast.success("Your changes have been saved.")
+
             return Promise.resolve();
         },
         (error) => {
@@ -104,6 +109,8 @@ export const editUser = (id, firstName, lastName, gender, email) => (dispatch) =
                 type: SET_MESSAGE_FAIL,
                 payload: message,
             });
+
+            toast.error(message)
 
             return Promise.reject();
         }
@@ -142,6 +149,8 @@ export const getUserListDispatch = (pageNumber, rowsPerPage, companyId) => (disp
                 payload: message,
             });
 
+            toast.error(message)
+
             return Promise.reject();
         }
     );
@@ -158,6 +167,8 @@ export const deleteUserDispatch = (id, companyId) => (dispatch) => {
                 type: SET_MESSAGE,
                 payload: response.data.message,
             });
+
+            toast.success("User has been successffuly deleted.")
 
             return Promise.resolve();
         },
@@ -177,6 +188,8 @@ export const deleteUserDispatch = (id, companyId) => (dispatch) => {
                 type: SET_MESSAGE,
                 payload: message,
             });
+
+            toast.error(message)
 
             return Promise.reject();
         }

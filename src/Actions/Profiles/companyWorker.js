@@ -25,6 +25,7 @@ import {
 } from "../../Static/message";
 
 import CompanyWorkerService from "../../Services/Profiles/companyWorker.service";
+import { toast } from 'react-toastify';
 
 export const regCompWorker = (firstName, lastName, gender, email, companyId) => (dispatch) => {
     return CompanyWorkerService.registerCompanyWorkerAPI(firstName, lastName, gender, email, companyId).then(
@@ -37,6 +38,8 @@ export const regCompWorker = (firstName, lastName, gender, email, companyId) => 
                 type: SET_MESSAGE_SUCCESS,
                 payload: WORKER_REG_SUCCESS_200,
             });
+
+            toast.success("Company Worker has been successfully registered.")
 
             return Promise.resolve();
         },
@@ -55,6 +58,8 @@ export const regCompWorker = (firstName, lastName, gender, email, companyId) => 
                 type: SET_MESSAGE_FAIL,
                 payload: message,
             });
+
+            toast.error(message);
 
             return Promise.reject();
         }
@@ -95,6 +100,8 @@ export const editCompWorker = (id, firstName, lastName, gender, email, myAccount
                 payload: message,
             });
 
+            toast.success("Your changes have been successfully saved.")
+
             return Promise.resolve();
         },
         (error) => {
@@ -113,6 +120,8 @@ export const editCompWorker = (id, firstName, lastName, gender, email, myAccount
                 type: SET_MESSAGE_FAIL,
                 payload: message,
             });
+
+            toast.error(message);
 
             return Promise.reject();
         }
@@ -168,6 +177,8 @@ export const deleteCompWorkerDispatch = (id, companyId) => (dispatch) => {
                 payload: response.data.message,
             });
 
+            toast.success("Company Worker has been successfully deleted.")
+
             return Promise.resolve();
         },
         (error) => {
@@ -187,6 +198,8 @@ export const deleteCompWorkerDispatch = (id, companyId) => (dispatch) => {
                 payload: message,
             });
 
+            toast.error(message);
+            
             return Promise.reject();
         }
     );

@@ -23,6 +23,7 @@ import {
     PROFILE_EDIT_SUCCESS_200
 } from "../../Static/message";
 import CompanyAdminService from "../../Services/Profiles/companyAdmin.service";
+import { toast } from 'react-toastify';
 
 export const regCompAdmin = (firstName, lastName, gender, email, companyId) => (dispatch) => {
     return CompanyAdminService.registerCompanyAdminAPI(firstName, lastName, gender, email, companyId).then(
@@ -35,6 +36,8 @@ export const regCompAdmin = (firstName, lastName, gender, email, companyId) => (
                 type: SET_MESSAGE_SUCCESS,
                 payload: ADMIN_REG_SUCCESS_200,
             });
+
+            toast.success("Company Admin has been successfuly registered.")
 
             return Promise.resolve();
         },
@@ -54,6 +57,8 @@ export const regCompAdmin = (firstName, lastName, gender, email, companyId) => (
                 type: SET_MESSAGE_FAIL,
                 payload: message,
             });
+
+            toast.error(message);
 
             return Promise.reject();
         }
@@ -94,6 +99,8 @@ export const editCompAdmin = (id, firstName, lastName, gender, email, companyId,
                 payload: message,
             });
 
+            toast.success("Your changes have been successfully saved.");
+
             return Promise.resolve();
         },
         (error) => {
@@ -112,6 +119,8 @@ export const editCompAdmin = (id, firstName, lastName, gender, email, companyId,
                 type: SET_MESSAGE_FAIL,
                 payload: message,
             });
+
+            toast.error(message);
 
             return Promise.reject();
         }
@@ -167,6 +176,8 @@ export const deleteCompAdminDispatch = (id, companyId) => (dispatch) => {
                 payload: response.data.message,
             });
 
+            toast.success("Company Admin has been successfully deleted.")
+
             return Promise.resolve();
         },
         (error) => {
@@ -185,6 +196,8 @@ export const deleteCompAdminDispatch = (id, companyId) => (dispatch) => {
                 type: SET_MESSAGE,
                 payload: message,
             });
+
+            toast.error(message);
 
             return Promise.reject();
         }

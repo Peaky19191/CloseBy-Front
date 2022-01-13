@@ -10,6 +10,7 @@ import {
     SEND_CONTACT_MESSAGE_SUCCESS_200,
 } from "../Static/message";
 import ContactService from "../Services/Contact/contact.service";
+import { toast } from 'react-toastify';
 
 export const sendContactMessageDispatch = (email, content) => (dispatch) => {
     return ContactService.sendContactMessageAPI(email, content).then(
@@ -22,7 +23,7 @@ export const sendContactMessageDispatch = (email, content) => (dispatch) => {
                 type: SET_MESSAGE_SUCCESS,
                 payload: SEND_CONTACT_MESSAGE_SUCCESS_200,
             });
-
+            toast.success("Your message has been successfully sent.")
             return Promise.resolve();
         },
         (error) => {
@@ -36,6 +37,7 @@ export const sendContactMessageDispatch = (email, content) => (dispatch) => {
                 type: SET_MESSAGE_FAIL,
                 payload: message,
             });
+            toast.warn(message)
 
             return Promise.reject();
         }
