@@ -4,8 +4,9 @@ import SERVER_API from "../../Static/serverApi";
 
 const API_URL = "event";
 const API_URL_FAV = "liked-event/";
+const API_URL_TIC = "ticket/"
 
-const registerEventAPI = (title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type) => {
+const registerEventAPI = (title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type, ticketPrice) => {
     return axios.post(SERVER_API + API_URL + "/create",
         {
             title: title,
@@ -20,7 +21,7 @@ const registerEventAPI = (title, companyId, loc_lat, loc_lng, startDate, endDate
             description: description,
             ticketLimit: limit,
             type: type,
-            ticketPrice: "0,01",
+            ticketPrice: ticketPrice,
         },
         {
             headers: authHeader()
@@ -28,7 +29,7 @@ const registerEventAPI = (title, companyId, loc_lat, loc_lng, startDate, endDate
     );
 };
 
-const editEventAPI = (eventId, title, companyId, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type) => {
+const editEventAPI = (eventId, title, companyId, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type, ticketPrice) => {
     return axios.put(SERVER_API + API_URL + "/update",
         {
             id: eventId,
@@ -39,6 +40,7 @@ const editEventAPI = (eventId, title, companyId, loc_lat, loc_lng, startDate, en
             type: type,
             status: status,
             ticketLimit: limit,
+            ticketPrice: ticketPrice,
             companyId: companyId,
             localization: {
                 latitude: loc_lat,
@@ -83,6 +85,19 @@ const getEventListFavoriteApi = (pageNumber, rowsPerPage, userId) => {
             page: pageNumber,
             limit: rowsPerPage,
             userId: userId
+        },
+        {
+            headers: authHeader()
+        },
+    );
+};
+
+const getEventListTicketApi = (userId, pageNumber, rowsPerPage) => {
+    return axios.post(SERVER_API + API_URL_TIC + "list-by-user",
+        {
+            userId: userId,
+            page: pageNumber,
+            limit: rowsPerPage,
         },
         {
             headers: authHeader()
@@ -138,6 +153,19 @@ const deleteFromFavoriteApi = (userId, eventId) => {
     );
 };
 
+const getEventTicketsListApi = (pageNumber, rowsPerPage, eventId) => {
+    return axios.post(SERVER_API + API_URL_TIC + "list-by-worker",
+        {
+            page: pageNumber,
+            limit: rowsPerPage,
+            eventId: eventId,
+        },
+        {
+            headers: authHeader()
+        },
+    );
+};
+
 export default {
     registerEventAPI,
     editEventAPI,
@@ -147,5 +175,7 @@ export default {
     deleteEventApi,
     getEventIdApi,
     addToFavoriteApi,
-    deleteFromFavoriteApi
+    deleteFromFavoriteApi,
+    getEventListTicketApi,
+    getEventTicketsListApi,
 };
