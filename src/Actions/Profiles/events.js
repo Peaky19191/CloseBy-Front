@@ -28,6 +28,8 @@ import {
     SET_FAVORITE_FAIL,
     DELETE_FAVORITE_SUCCESS,
     DELETE_FAVORITE_FAIL,
+    GET_EVENT_LIST_TIC_SUCCESS,
+    GET_EVENT_LIST_TIC_FAIL,
 } from "../../Constants/actionTypes";
 import {
     ADMIN_500,
@@ -38,8 +40,8 @@ import {
 import EventService from "../../Services/Profiles/event.service";
 import { toast } from 'react-toastify';
 
-export const registerEventDispatch = (title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type) => (dispatch) => {
-    return EventService.registerEventAPI(title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type).then(
+export const registerEventDispatch = (title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type, ticketPrice) => (dispatch) => {
+    return EventService.registerEventAPI(title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type, ticketPrice).then(
         (response) => {
             dispatch({
                 type: REGISTER_EVENT_SUCCESS,
@@ -110,8 +112,8 @@ export const clearEventDispatch = () => (dispatch) => {
 };
 
 
-export const editEvent = (eventId, title, companyId, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type) => (dispatch) => {
-    return EventService.editEventAPI(eventId, title, companyId, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type).then(
+export const editEvent = (eventId, title, companyId, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type, ticketPrice) => (dispatch) => {
+    return EventService.editEventAPI(eventId, title, companyId, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type, ticketPrice).then(
         (response) => {
             dispatch({
                 type: EDIT_EVENT_SUCCESS,
@@ -414,3 +416,78 @@ export const addToFavoriteDispatch = (userId, eventId) => (dispatch) => {
         }
     );
 };
+
+export const getEventListTicketDispatch = (userId, pageNumber, rowsPerPage) => (dispatch) => {
+    return EventService.getEventListTicketApi(userId, pageNumber, rowsPerPage).then(
+        (response) => {
+            dispatch({
+                type: GET_EVENT_LIST_TIC_SUCCESS,
+                payload: response.data.items,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: response.data.message,
+            });
+
+            return Promise.resolve(response);
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: GET_EVENT_LIST_TIC_FAIL,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
+export const getEventTicketsListDispatch = (pageNumber, rowsPerPage, eventId) => (dispatch) => {
+    return EventService.getEventTicketsListApi(pageNumber, rowsPerPage, eventId).then(
+        (response) => {
+            dispatch({
+                type: GET_EVENT_LIST_ALL_SUCCESS,
+                payload: response.data.items,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: response.data.message,
+            });
+
+            return Promise.resolve(response);
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: GET_EVENT_LIST_ALL_FAIL,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
