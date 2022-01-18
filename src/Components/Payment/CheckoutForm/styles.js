@@ -5,9 +5,10 @@ export default makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: theme.spacing(2),
+    padding: theme.spacing(3),
     borderRadius: "10px",
     width: '',
+    marginTop: theme.spacing(15),
   },
 
   body: {
@@ -59,6 +60,24 @@ export default makeStyles((theme) => ({
     transition: 'all 0.2s ease',
     boxShadow: '0px 4px 5.5px 0px rgba(0,0,0,0.07)',
     width: '100%'
-  }
+  },
+
+  popupBox: {
+    position: "absolute",
+    background: "#00000099",
+    width: "100%",
+    height: "102vh",
+    top: 0,
+    left: 0,
+},
+
+closeIconContainer: {
+  display: 'flex',
+  flexDirection: 'column',
+  // justifyContent: 'center',
+  // alignItems: 'center',
+  alignItems: 'flex-end',
+  width: '100%'
+},
 
 }))

@@ -5,9 +5,9 @@ import {
   useElements
 } from "@stripe/react-stripe-js";
 import useStyles from './styles';
-import { Paper, Container } from '@material-ui/core';
+import { Paper, Container, Grid } from '@material-ui/core';
 
-const CheckoutForm = () => {
+const CheckoutForm = (props) => {
   const classes = useStyles();
 
   const stripe = useStripe();
@@ -59,7 +59,7 @@ const CheckoutForm = () => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "http://localhost:3000",
+        return_url: "http://localhost:3000/tickets",
       },
     });
 
@@ -73,19 +73,21 @@ const CheckoutForm = () => {
   };
 
   return (
-    <Container className={classes.container}>
-      <Paper className={classes.paper} component="main" maxWidth="xs">
-        <form id="payment-form" className={classes.form} onSubmit={handleSubmit}>
-          <PaymentElement id="paymentElement" classes="paymentElement" />
-          <button  className={classes.button} disabled={isLoading || !stripe || !elements} id="submit">
-            <span id="button-text">
-              {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
-            </span>
-          </button>
-          {message && <div id="paymentMessage" className={classes.paymentMessage}>{message}</div>}
-        </form>
-      </Paper>
-    </Container>
+    <div className={classes.popupBox}>
+      <Container className={classes.container}>
+        <Paper className={classes.paper} component="main" maxWidth="xs">
+          <form id="payment-form" className={classes.form} onSubmit={handleSubmit}>
+            <PaymentElement id="paymentElement" classes="paymentElement" />
+            <button  className={classes.button} disabled={isLoading || !stripe || !elements} id="submit">
+              <span id="button-text">
+                {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
+              </span>
+            </button>
+            {message && <div id="paymentMessage" className={classes.paymentMessage}>{message}</div>}
+          </form>
+        </Paper>
+      </Container>
+    </div>
   );
 }
 
