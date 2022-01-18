@@ -9,13 +9,13 @@ import User from '../../Services/Profiles/user.service'
 
 const stripePromise = loadStripe("pk_test_51JtBlaB8w02vjjwKiFtJFi9hChZg99wH3mePaaAC0OA1zaXkGRzLs0ixYnrRWVurceeXw8MsI6tvR6MpTGoDvcL300azJDH38s");
 
-export const Payment = () => {
+export const Payment = (props) => {
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
     
-    const { eventId } = useParams();
+    const { eventId } = props.handleData[1];
     const uId = currentProfile.id;
-    const quantity = 1;
+    const { quantity } = props.handleData[0];
 
     console.log(uId);
 
