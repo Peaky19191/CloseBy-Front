@@ -34,6 +34,9 @@ import AdminsListCompanyFiltered from '../Profiles/CompanyAdmin/List/CompanyFilt
 import EventListCompanyFiltered from '../Profiles/Event/List/CompanyFiltered/EventListCompanyFiltered';
 import EmailConfirmation from '../../Components/Auth/EmailConfirmation/EmailConfirmation';
 import EventListFavorite from '../Profiles/Event/List/UserView/EventListFavorite';
+import EventListTickets from '../Profiles/Event/List/UserView/EventListTickets';
+import TicketsEventList from '../../Components/Profiles/Event/List/TicketsFiltered/TicketsListEventFiltered'
+
 
 
 const SwitchComponent = () => {
@@ -55,7 +58,7 @@ const SwitchComponent = () => {
             <Route exact path="/registerCompAdmin" component={RegCompAdmin} />
             <Route exact path="/compAdminList" component={CompanyAdminList} />
             <Route exact path="/usersList" component={UsersList} />
-            <Route exact path="/compWorkerList" component={CompanyWorkerList} />\
+            <Route exact path="/compWorkerList" component={CompanyWorkerList} />
             <Route exact path="/registerCompWorker" component={RegCompWorker} />
             <Route exact path="/password-reset/:token" component={NewPassword} />
             <Route exact path="/companyList" component={CompanyList} />
@@ -72,8 +75,10 @@ const SwitchComponent = () => {
             <Route exact path="/workerListCompanyFilter" component={WorkersListCompanyFiltered} />
             <Route exact path="/adminListCompanyFilter" component={AdminsListCompanyFiltered} />
             <Route exact path="/eventListCompanyFilter" component={EventListCompanyFiltered} />
-            <Route exact path="/create-payment/:eventId" component={Payment} />
+            <Route exact path="/create-payment" component={Payment} />
             <Route exact path="/favorites" component={EventListFavorite} />
+            <Route exact path="/tickets" component={EventListTickets} />
+            <Route exact path="/eventTicketsList" component={TicketsEventList} />
 
         </Switch>
     );
