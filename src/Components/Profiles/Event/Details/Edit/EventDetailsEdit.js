@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useStyles from './styles';
 import Event from '../../../../../Services/Profiles/event.service'
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField, MenuItem } from '@material-ui/core';
+import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField, MenuItem, InputAdornment } from '@material-ui/core';
 import { Link } from 'react-router-dom'
 import { editEvent } from "../../../../../Actions/Profiles/events";
 import { Alert, AlertTitle } from '@material-ui/lab';
@@ -58,6 +58,13 @@ const EventDetailsEdit = () => {
     const onChangeDesc = (e) => {
         const desc = e.target.value;
         setDesc(desc);
+    };
+
+    const [ticketPrice, setTicketPrice] = useState("");
+
+    const onChangeTicketPrice = (e) => {
+        const ticketPrice = e.target.value;
+        setTicketPrice(ticketPrice);
     };
 
     const [startDate, setStartDate] = useState("2000-01-01T00:00:00");
@@ -120,6 +127,7 @@ const EventDetailsEdit = () => {
                 setStatus(event.status);
                 setLimit(event.ticketLimit);
                 setCompany(event.company);
+                setTicketPrice(event.ticketPrice);
 
                 dispatch(setNewEventLoc(event.localization.latitude, event.localization.longitude));
             })
@@ -157,7 +165,7 @@ const EventDetailsEdit = () => {
         setListLoaded(false);
         setLoading(true);
 
-        dispatch(editEvent(eventIdToPass, title, company.id, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type))
+        dispatch(editEvent(eventIdToPass, title, company.id, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type, ticketPrice))
             .then(() => {
                 setListLoaded(true);
                 setLoading(false);
@@ -173,6 +181,12 @@ const EventDetailsEdit = () => {
         history.goBack()
     }
 
+    const enabled =
+        title.length > 0 &&
+        type.length > 0 &&
+        `${ticketPrice}`.length > 0 &&
+        desc.length > 0;
+        
     return (
         <Container className={classes.container} component="main" maxWidth="xs">
             <Paper className={classes.paper} elevation={3}>
@@ -248,11 +262,11 @@ const EventDetailsEdit = () => {
                                         />
                                     </Grid>
                                     <Grid item>
-                                        <Input name="limit" htmlFor="limit" value={limit} size="small" onChange={handleInputChange} onBlur={handleBlur}
+                                        <Input name="limit" type="number" htmlFor="limit" value={limit} size="small" onChange={handleInputChange} onBlur={handleBlur}
                                             inputProps={
                                                 editMode ?
                                                     {
-                                                        step: 10,
+                                                        step: 1,
                                                         min: 0,
                                                         max: 100,
                                                         type: 'number',
@@ -266,6 +280,12 @@ const EventDetailsEdit = () => {
                                         />
                                     </Grid>
                                 </Grid>
+                            </Grid>
+                            <Grid className={classes.gridField} >
+                                <TextField label="Tickets left" fullWidth name="ticketsLeft" htmlFor="ticketsLeft" variant="outlined" type="text" value={limit - currentEvent.ticketsBought} onChange={onChangeTicketPrice} InputProps={{ readOnly: true }} />
+                            </Grid>
+                            <Grid className={classes.gridField} >
+                                <TextField label="Ticket price" fullWidth name="ticketPrice" htmlFor="ticketPrice" variant="outlined" type="number" value={ticketPrice} onChange={onChangeTicketPrice} InputProps={{ readOnly: disaled, startAdornment: <InputAdornment position="start">€</InputAdornment>, }} />
                             </Grid>
                             <Grid className={classes.gridField}>
                                 <TextField label="Description" rows={6} multiline fullWidth name="desc" htmlFor="desc" variant="outlined" type="text" value={desc} onChange={onChangeDesc} InputProps={{ readOnly: disaled }} />
@@ -285,7 +305,7 @@ const EventDetailsEdit = () => {
                             </Button>
                         </Grid>
                         <Grid item className={classes.buttonClose}>
-                            <Button onClick={() => { }} className={classes.buttonLink} fullWidth variant="contained" >
+                            <Button component={Link} to="/eventTicketsList" className={classes.buttonLink} fullWidth variant="contained" >
                                 Tickets
                             </Button>
                         </Grid>
@@ -312,7 +332,7 @@ const EventDetailsEdit = () => {
                                 </Grid>
                                 {editMode &&
                                     <Grid item className={classes.buttonClose}>
-                                        <Button onClick={() => { handleSubmit() }} className={classes.buttonEditSave} fullWidth variant="contained"  >
+                                        <Button onClick={() => { handleSubmit() }} disabled={!enabled} className={classes.buttonEditSave} fullWidth variant="contained"  >
                                             {loading ? (
                                                 <CircularProgress size="20px" />
                                             ) : "Save"}

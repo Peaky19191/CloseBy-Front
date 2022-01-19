@@ -49,6 +49,13 @@ const RegEvent = () => {
         setName(name);
     };
 
+    const [ticketPrice, setTicketPrice] = useState("");
+
+    const onChangeTicketPrice = (e) => {
+        const ticketPrice = e.target.value;
+        setTicketPrice(ticketPrice);
+    }
+
     const [limit, setLimit] = useState("10");
 
     const handleSliderChange = (event, newValue) => {
@@ -115,7 +122,7 @@ const RegEvent = () => {
         setListLoaded(false);
         setLoading(true);
 
-        dispatch(registerEventDispatch(name, companyId, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type))
+        dispatch(registerEventDispatch(name, companyId, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type, ticketPrice))
             .then(() => {
                 setListLoaded(true);
                 setLoading(false);
@@ -130,6 +137,12 @@ const RegEvent = () => {
     const goToPreviousPath = () => {
         history.goBack()
     }
+
+    const enabled =
+        name.length > 0 &&
+        type.length > 0 &&
+        ticketPrice.length > 0 &&
+        desc.length > 0;
 
     return (
         <Container className={classes.container}  >
@@ -198,7 +211,7 @@ const RegEvent = () => {
                                     <Grid item>
                                         <Input name="limit" htmlFor="limit" value={limit} size="small" onChange={handleInputChange} onBlur={handleBlur}
                                             inputProps={{
-                                                step: 10,
+                                                step: 1,
                                                 min: 0,
                                                 max: 100,
                                                 type: 'number',
@@ -207,6 +220,9 @@ const RegEvent = () => {
                                         />
                                     </Grid>
                                 </Grid>
+                            </Grid>
+                            <Grid className={classes.gridField} >
+                                <TextField label="Ticket price" fullWidth name="ticketPrice" htmlFor="ticketPrice" variant="outlined" type="number" value={ticketPrice} onChange={onChangeTicketPrice} autoFocus />
                             </Grid>
                             <Grid className={classes.gridField}>
                                 <TextField label="Description" rows={6} multiline fullWidth name="desc" htmlFor="desc" variant="outlined" type="text" value={desc} onChange={onChangeDesc} />
@@ -223,7 +239,7 @@ const RegEvent = () => {
                             </Button>
                         </Grid>
                         <Grid item className={classes.buttonSubmit}>
-                            <Button type="submit" fullWidth variant="contained" color="primary" >
+                            <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" >
                                 {loading ? (
                                     <CircularProgress size="20px" />
                                 ) : "Submit"}

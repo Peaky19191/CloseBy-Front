@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import useStyles from './styles';
 import Event from '../../../../../Services/Profiles/event.service'
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField, MenuItem } from '@material-ui/core';
+import { Avatar, Button, Paper, Grid, Typography, Container, Select, InputLabel, TextField, InputAdornment ,MenuItem } from '@material-ui/core';
 import { Link } from 'react-router-dom'
 import { editEvent } from "../../../../../Actions/Profiles/events";
 import { Alert, AlertTitle } from '@material-ui/lab';
@@ -20,7 +20,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 import moment from 'moment'
 import { setNewEventLoc } from "../../../../../Actions/Profiles/events";
-import { setCurrentEventLoc, getEventIdDispatch, addToFavoriteDispatch, deleteFromFavoriteDispatch } from "../../../../../Actions/Profiles/events";
+import { setCurrentEventLoc, getEventIdDispatch, addToFavoriteDispatch, deleteFromFavoriteDispatch, buyTicketDispatch } from "../../../../../Actions/Profiles/events";
 import { useHistory } from "react-router-dom";
 import { createPayment } from "../../../../../Services/Payment/payment.service";
 import Message from '../../../../Message/Message';
@@ -28,6 +28,9 @@ import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
 import StarIcon from '@mui/icons-material/Star';
 import IconButton from '@mui/material/IconButton';
 import { amber } from '@mui/material/colors';
+import { SettingsBackupRestoreOutlined, SettingsPowerRounded } from "@material-ui/icons";
+import PopupBuy from '../../../../Popup/PopupBuy/PopupBuy';
+import PopupPayment from '../../../../Popup/PopupPayment/PopupPayment'
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -40,6 +43,8 @@ const EventDetailsView = () => {
     const { event: currentEvent } = useSelector((state) => state.event);
     const { profile: currentProfile } = useSelector((state) => state.auth);
 
+    const uId = currentProfile.id;
+
     const [eventId, setEventId] = useState(currentEvent.id);
     const [title, setTitle] = useState(currentEvent.title);
     const [desc, setDesc] = useState(currentEvent.description);
@@ -49,6 +54,9 @@ const EventDetailsView = () => {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [favorite, setFavorite] = useState("");
+    const [ticketPrice, setTicketPrice] = useState(currentEvent.ticketPrice);
+    
+    const [quantity, setQuantity] = useState("");
 
     const changeFavorite = () => {
         if (favorite) {
@@ -69,6 +77,43 @@ const EventDetailsView = () => {
                 });
         }
     };
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen2, setIsOpen2] = useState(false);
+
+    const [idEventBuy, setIdEventBuy] = useState();
+    const [eventTitleBuy, setEventTitleBuy] = useState();
+    const [eventDescriptionBuy, setEventDescriptionBuy] = useState();
+    const [eventTicketPriceBuy, setEventTicketPriceBuy] = useState();
+    const [userId, setUserId] = useState();
+
+    const prepareBuy = (idEvent, eventTitle, eventDescription, eventTicketPrice, userId) => {
+        setIdEventBuy(idEvent);
+        setEventTitleBuy(eventTitle);
+        setEventDescriptionBuy(eventDescription);
+        setEventTicketPriceBuy(eventTicketPrice);
+        setUserId(userId);
+
+        showPopup();
+    }
+
+    const callback = useCallback((quantity) => {  
+        setQuantity(quantity);
+        closePopup();
+        showPopup2();  
+    }, []);
+
+    const showPopup = () => {
+        setIsOpen(true);
+    }
+
+    const closePopup = () => {
+        setIsOpen(false);
+    }
+
+    const showPopup2 = () => {
+        setIsOpen2(!isOpen2);
+    }
 
     const getEventDetails = () => {
         dispatch(getEventIdDispatch(eventId, currentProfile.id))
@@ -137,12 +182,15 @@ const EventDetailsView = () => {
                                 </Typography>
                                 <Grid container spacing={2} alignItems="center">
                                     <Grid item xs>
-                                        <Slider className={classes.limit} value={limit} />
+                                        <Slider className={classes.limit} value={limit - currentEvent.ticketsBought} />
                                     </Grid>
                                     <Grid item>
-                                        <Input value={limit} size="small" />
+                                        <Input value={limit - currentEvent.ticketsBought} size="small"/>
                                     </Grid>
                                 </Grid>
+                            </Grid>
+                            <Grid className={classes.gridField} >
+                                <TextField label="Ticket price" fullWidth name="ticketPrice" htmlFor="ticketPrice" variant="outlined" type="text" value={ticketPrice} InputProps={{ readOnly: true, startAdornment: <InputAdornment position="start">€</InputAdornment>, }} />
                             </Grid>
                             <Grid className={classes.gridField}>
                                 <TextField label="Description" rows={6} multiline fullWidth name="desc" htmlFor="desc" variant="outlined" type="text" value={desc} InputProps={{ readOnly: true }} />
@@ -162,13 +210,15 @@ const EventDetailsView = () => {
                             </Button>
                         </Grid>
                         <Grid item className={classes.buttonSubmit}>
-                            <Button component={Link} to={`/create-payment/${eventId}`} className={classes.buttonEditSave} fullWidth variant="contained"  >
+                            <Button onClick={() => { prepareBuy(eventId, title, desc, ticketPrice) }} className={classes.buttonEditSave} fullWidth variant="contained"  >
                                 Buy ticket
                             </Button>
                         </Grid>
                     </Grid>
                 </form>
             </Paper>
+                {isOpen && <PopupBuy handleClose={closePopup} handleData={[idEventBuy, eventTitleBuy, eventDescriptionBuy, eventTicketPriceBuy]} parentCallback={callback}  />}
+                {isOpen2 && <PopupPayment handleClose={showPopup2} handleData={[eventId, quantity]} />}
         </Container>
     );
 };

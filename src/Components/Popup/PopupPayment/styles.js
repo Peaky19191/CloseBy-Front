@@ -1,16 +1,6 @@
 import { colors, makeStyles, rgbToHex } from '@material-ui/core';
 
 export default makeStyles((theme) => ({
-  paper: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: theme.spacing(3),
-    borderRadius: "10px",
-    width: '',
-    marginTop: theme.spacing(15),
-  },
-
   body: {
     display: 'flex',
     justifyContent: 'center',
@@ -19,14 +9,7 @@ export default makeStyles((theme) => ({
     width: '100vw',
   },
 
-  root: {
-      '& .MuiTextField-root': {
-        margin: theme.spacing(1),
-    },
-  },
-
   form: {
-
     width: '30vw',
     minWidth: '500px',
     alignSelf: 'center',
@@ -64,20 +47,20 @@ export default makeStyles((theme) => ({
 
   popupBox: {
     position: "absolute",
-    background: "#00000099",
+    background: "#00000050",
     width: "100%",
-    height: "102vh",
+    height: "100vh",
     top: 0,
     left: 0,
 },
 
 closeIconContainer: {
-  display: 'flex',
-  flexDirection: 'column',
-  // justifyContent: 'center',
-  // alignItems: 'center',
-  alignItems: 'flex-end',
-  width: '100%'
-},
+    display: 'flex',
+    flexDirection: 'column',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    alignItems: 'flex-end',
+    width: '100%'
+  },
 
 }))
