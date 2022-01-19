@@ -25,6 +25,8 @@ const PopupBuy = (props) => {
         setQuantity(quantity);
     }
 
+    const enabled = `${quantity}`.length > 0;
+
     return (
         <div className={classes.popupBox} >
             <Container className={classes.container} component="main" maxWidth="xs">
@@ -40,7 +42,7 @@ const PopupBuy = (props) => {
                         </Avatar>
                     </Grid>
                     <Typography component="h1" variant="h5">
-                        Buy this Event?
+                        Buy ticket for this event?
                     </Typography>
                     <Grid container className={classes.containerData} spacing={2}>
                         <Grid item xs={12} >
@@ -63,9 +65,9 @@ const PopupBuy = (props) => {
                             </Grid>
                         <Grid item xs={12}>            
                         <Typography component="h1" variant="h5">
-                            Total amount: {props.handleData[3] * quantity}
+                            Total amount: €{props.handleData[3] * quantity} 
                         </Typography>
-                            <Button onClick={() => {props.parentCallback(quantity)}} variant="contained" color="primary" fullWidth>
+                            <Button disabled={!enabled} onClick={() => {props.parentCallback(quantity)}} variant="contained" color="primary" fullWidth>
                                 Buy
                             </Button>
                         </Grid>
