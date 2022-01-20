@@ -82,10 +82,10 @@ const ContactForm = () => {
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
-                            <TextField label="email" error={errors.email} helperText={(errors.email)} name="email" htmlFor="email" variant="outlined" type="email" value={email} onChange={onChangeEmail} fullWidth autoFocus />
+                            <TextField label="Email" error={errors.email} helperText={(errors.email)} name="email" htmlFor="email" variant="outlined" type="email" value={email} onChange={onChangeEmail} fullWidth autoFocus />
                         </Grid>
                         <Grid item xs={12} >
-                            <TextField multiline label="content" error={errors.content} helperText={(errors.content)} name="content" htmlFor="content" variant="outlined" type="text" value={content} onChange={onChangeContent} fullWidth autoFocus />
+                            <TextField multiline label="Message" rows={6} error={errors.content} helperText={(errors.content)} name="content" htmlFor="content" variant="outlined" type="text" value={content} onChange={onChangeContent} fullWidth autoFocus />
                         </Grid>
                     </Grid>
                     <Button type="submit" disabled={!enabled} fullWidth variant="contained" color="primary" className={classes.submit}>

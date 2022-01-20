@@ -222,7 +222,7 @@ const RegEvent = () => {
                                 </Grid>
                             </Grid>
                             <Grid className={classes.gridField} >
-                                <TextField label="Ticket price" fullWidth name="ticketPrice" htmlFor="ticketPrice" variant="outlined" type="number" value={ticketPrice} onChange={onChangeTicketPrice} autoFocus />
+                                <TextField label="Ticket price" fullWidth name="ticketPrice" htmlFor="ticketPrice" variant="outlined" type="number" value={ticketPrice} onChange={onChangeTicketPrice} />
                             </Grid>
                             <Grid className={classes.gridField}>
                                 <TextField label="Description" rows={6} multiline fullWidth name="desc" htmlFor="desc" variant="outlined" type="text" value={desc} onChange={onChangeDesc} />
