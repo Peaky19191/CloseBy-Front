@@ -144,6 +144,9 @@ const EventList = () => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+
+    const isCompanyWorker = currentProfile.role === "CompanyAdmin" || currentProfile.role === "CompanyWorker";
+
     return (
         (listLoaded !== true) ?
             <Grid className={classes.spinnerContainer}>
@@ -176,9 +179,11 @@ const EventList = () => {
                                         <IconButton component={Link} to="/eventDetailsEdit" onClick={() => { dispatchEvent(item) }} aria-label="edit" size="large" >
                                             <SettingsApplicationsIcon className={classes.settingICon} />
                                         </IconButton>
+                                        {isCompanyWorker &&
                                         <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.title, item.company.name, item.status) }} >
                                             <DeleteIcon className={classes.deleteICon} />
                                         </IconButton>
+                                        }      
                                     </TableCell>
                                 </TableRow>
                             ))}
