@@ -97,6 +97,9 @@ export const EventsTickets = () => {
                                             <Typography>
                                                 Quantity: {item.ticketPayment.quantity}
                                             </Typography>
+                                            <Typography>
+                                                Ticket ID: {item.id}
+                                            </Typography>
                                         </CardContent>
                                         <CardActions className={classes.actionsContainer}>
                                             <Button className={classes.buttonAction} fullWidth variant="contained" color="primary" component={Link} to="/eventDetailsView" onClick={() => { dispatchEvent(item.ticketPayment.event) }}>Details</Button>
