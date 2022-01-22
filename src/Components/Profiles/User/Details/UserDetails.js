@@ -47,7 +47,7 @@ const UserDetails = () => {
                         </Grid>
                     </Grid>
                     <Grid className={classes.buttonsContainer} spacing={2}>
-                        <Button className={classes.buttonCompanyDetails} onClick={() => { }} fullWidth variant="contained" color="primary" >
+                        <Button className={classes.buttonCompanyDetails} component={Link} to="/eventTicketsList" fullWidth variant="contained" color="primary" >
                             Tickets
                         </Button>
                         <Button className={classes.buttonClose} onClick={goToPreviousPath} fullWidth variant="contained" color="secondary" >
