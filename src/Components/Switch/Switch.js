@@ -64,7 +64,7 @@ const SwitchComponent = () => {
             <Route exact path="/adminListCompanyFilter" component={AdminsListCompanyFiltered} />
             <Route exact path="/eventListCompanyFilter" component={EventListCompanyFiltered} />
             <Route exact path="/favorites" component={EventListFavorite} />
-            <Route exact path="/tickets/:?" component={EventListTickets} />
+            <Route exact path="/tickets" component={EventListTickets} />
             <Route exact path="/eventTicketsList" component={TicketsEventList} />
         </Switch>
     );
