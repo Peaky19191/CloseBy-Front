@@ -41,6 +41,7 @@ const confirmUserEmail = (emailConfirmationToken) => {
   });
 };
 
+// eslint-disable-next-line
 export default {
   login,
   logout,

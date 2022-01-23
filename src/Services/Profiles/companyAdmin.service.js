@@ -69,6 +69,7 @@ const getCompAdminIdAPI = (id) => {
     );
 };
 
+// eslint-disable-next-line
 export default {
     registerCompanyAdminAPI,
     editCompanyAdminAPI,

@@ -5,6 +5,7 @@ const getAdressAPI = (lat, lng) => {
     );
 };
 
+// eslint-disable-next-line
 export default {
     getAdressAPI,
 }

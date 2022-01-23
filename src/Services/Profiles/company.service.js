@@ -58,6 +58,7 @@ const getCompanyIdAPI = (id) => {
     );
 };
 
+// eslint-disable-next-line
 export default {
     registerCompanyAPI,
     editCompanyAPI,

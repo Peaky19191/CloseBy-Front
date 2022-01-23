@@ -50,20 +50,14 @@ const UsersList = () => {
 
     const [isOpen, setIsOpen] = useState(false);
 
+    // eslint-disable-next-line
     const [idUserDelete, setIdUserDelete] = useState();
+    // eslint-disable-next-line
     const [firstNameDelete, setFirstNameDelete] = useState();
+    // eslint-disable-next-line
     const [lastNameDelete, setLastNameDelete] = useState();
+    // eslint-disable-next-line
     const [emailDelete, setEmailDelete] = useState();
-
-
-    // const prepareDelete = (id, firstName, lastName, email) => {
-    //     setIdUserDelete(id);
-    //     setFirstNameDelete(firstName);
-    //     setLastNameDelete(lastName);
-    //     setEmailDelete(email);
-
-    //     showPopup();
-    // }
 
     const showPopup = () => {
         setIsOpen(!isOpen);

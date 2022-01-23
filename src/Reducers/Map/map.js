@@ -2,6 +2,7 @@ import { SET_EDIT_MODE } from "../../Constants/actionTypes";
 
 const initialState = {};
 
+// eslint-disable-next-line
 export default function (state = initialState, action) {
     const { type, payload } = action;
 

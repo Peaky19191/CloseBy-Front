@@ -70,6 +70,7 @@ const getCompWorkerIdAPI = (id) => {
     );
 };
 
+// eslint-disable-next-line
 export default {
     registerCompanyWorkerAPI,
     editCompanyWorkerAPI,

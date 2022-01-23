@@ -9,6 +9,7 @@ const initialState = user
     ? { isLoggedIn: true, user: user }
     : { isLoggedIn: false, user: null };
 
+// eslint-disable-next-line
 export default function (state = initialState, action) {
     const { type, payload } = action;
 

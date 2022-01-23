@@ -1,8 +1,8 @@
 import { CLEAR_MESSAGE, SET_MESSAGE, SET_MESSAGE_FAIL, SET_MESSAGE_SUCCESS } from "../Constants/actionTypes";
 
-
 const initialState = {};
 
+// eslint-disable-next-line
 export default function (state = initialState, action) {
     const { type, payload } = action;
 

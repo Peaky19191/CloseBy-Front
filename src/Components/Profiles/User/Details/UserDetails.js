@@ -9,11 +9,15 @@ const UserDetails = () => {
     const classes = useStyles();
     const user = useSelector(state => state.user.user);
 
+    // eslint-disable-next-line
     const [firstName, setFirstName] = useState(user.firstName);
+    // eslint-disable-next-line
     const [lastName, setLastName] = useState(user.lastName);
+    // eslint-disable-next-line
     const [email, setEmail] = useState(user.email);
+    // eslint-disable-next-line
     const [gender, setGender] = useState(user.gender);
-
+    // eslint-disable-next-line
     const [disaled, setDisabled] = useState(true);
 
     let history = useHistory();

@@ -11,6 +11,7 @@ const sendContactMessageAPI = (email, content) => {
     );
 };
 
+// eslint-disable-next-line
 export default {
     sendContactMessageAPI
 };

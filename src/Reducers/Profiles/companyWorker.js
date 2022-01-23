@@ -8,6 +8,7 @@ const initialState = companyWorker
     ? { isLoggedIn: true, comp_worker: companyWorker }
     : { isLoggedIn: false, comp_worker: null };
 
+// eslint-disable-next-line
 export default function (state = initialState, action) {
     const { type, payload } = action;
 

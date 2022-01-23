@@ -34,7 +34,6 @@ const MapDetailsEdit = (props) => {
     const classes = useStyles();
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
-    const state = useSelector(state => state.map);
 
     const { event: currentEventRedux } = useSelector((state) => state.event);
 
@@ -47,7 +46,9 @@ const MapDetailsEdit = (props) => {
     const [currenEventSelected, setCurrenEventSelected] = React.useState(null);
     const [currentEvent, setCurrentEvent] = React.useState([]);
 
+    // eslint-disable-next-line
     const [page, setPage] = useState(0);
+    // eslint-disable-next-line
     const [rowsPerPage, setRowsPerPage] = useState(100);
 
     const mapRef = React.useRef();

@@ -9,6 +9,7 @@ const initialState = companyAdmin
     ? { isLoggedIn: true, comp_admin: companyAdmin }
     : { isLoggedIn: false, comp_admin: null };
 
+// eslint-disable-next-line
 export default function (state = initialState, action) {
     const { type, payload } = action;
 

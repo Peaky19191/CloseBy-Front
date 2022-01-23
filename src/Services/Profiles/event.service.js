@@ -166,6 +166,7 @@ const getEventTicketsListApi = (pageNumber, rowsPerPage, eventId) => {
     );
 };
 
+// eslint-disable-next-line
 export default {
     registerEventAPI,
     editEventAPI,

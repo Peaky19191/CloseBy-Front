@@ -16,6 +16,7 @@ const createPayment = (eventId, userId, quantity) => {
     );
 };
 
+// eslint-disable-next-line
 export default {
     createPayment,
 };

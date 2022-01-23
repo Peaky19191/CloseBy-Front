@@ -14,8 +14,9 @@ export const EventsFavorite = () => {
     const [listLoaded, setListLoaded] = useState(false);
     const [events, setEvent] = useState([]);
     const [count, setCount] = useState(0);
-
+    // eslint-disable-next-line
     const [page, setPage] = useState(0);
+    // eslint-disable-next-line
     const [rowsPerPage, setRowsPerPage] = useState(9);
 
     const getList = () => {

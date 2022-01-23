@@ -66,6 +66,7 @@ const getUserIdAPI = (id) => {
     );
 };
 
+// eslint-disable-next-line
 export default {
     getUserDataAPI,
     registerUserAPI,
