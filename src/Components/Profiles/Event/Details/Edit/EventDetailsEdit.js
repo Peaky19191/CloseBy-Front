@@ -30,7 +30,7 @@ const EventDetailsEdit = () => {
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
     const { event: currentEvent } = useSelector((state) => state.event);
-
+    // eslint-disable-next-line
     const [eventId, setEventId] = useState(currentEvent.id);
 
     const loc_lat = useSelector(state => ((state.event.new_event_loc !== undefined) ? state.event.new_event_loc.lat : ""));
@@ -80,11 +80,6 @@ const EventDetailsEdit = () => {
 
     const [status, setStatus] = useState("");
 
-    const onChangeStatus = (e) => {
-        const status = e.target.value;
-        setStatus(status);
-    };
-
     const [limit, setLimit] = useState("");
 
     const handleSliderChange = (event, newValue) => {
@@ -131,7 +126,6 @@ const EventDetailsEdit = () => {
 
     const [listLoaded, setListLoaded] = useState(false);
 
-    const { message } = useSelector(state => state.message);
     const dispatch = useDispatch();
 
     const dispatchCompany = (company) => {
@@ -198,7 +192,7 @@ const EventDetailsEdit = () => {
                                 <TextField value={title} label="Title" onChange={onChangeTitle} InputProps={{ readOnly: disaled }} name="title" htmlFor="title" variant="outlined" fullWidth />
                             </Grid>
                             <Grid className={classes.gridField} >
-                                <TextField label="Type of the Event" variant="outlined" fullWidth value={type} onChange={onChangeType} type="text" select InputProps={{ readOnly: disaled }} select={disaled ? false : true}>
+                                <TextField label="Type of the Event" variant="outlined" fullWidth value={type} onChange={onChangeType} type="text" InputProps={{ readOnly: disaled }} select={disaled ? false : true}>
                                     {EventTypes.map((EventTypes) => (
                                         <MenuItem key={EventTypes} value={EventTypes}>{EventTypes}</MenuItem>
                                     ))}

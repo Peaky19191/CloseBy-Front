@@ -28,8 +28,6 @@ const RegCompWorker = () => {
 
     const [errors, setErrors] = useState({});
 
-    const { message } = useSelector(state => state.message);
-
     const dispatch = useDispatch();
 
     const enabled =
@@ -92,12 +90,12 @@ const RegCompWorker = () => {
         temp.firstName = (/^[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+$/).test(firstName) ? "" : "Numbers and whitespaces are not allowed"
         temp.lastName = (/^[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+$/).test(lastName) ? "" : "Numbers and whitespaces are not allowed"
         temp.email = (/$^|.+@.+..+/).test(email) ? "" : "Email is not valid"
-        temp.gender = gender.length != 0 ? "" : "This field is required (gender)"
+        temp.gender = gender.length !== 0 ? "" : "This field is required (gender)"
         setErrors({
             ...temp
         })
 
-        return Object.values(temp).every(x => x == "");
+        return Object.values(temp).every(x => x === "");
     }
 
     return (
@@ -127,8 +125,7 @@ const RegCompWorker = () => {
                                     <TextField label="Email Address" error={errors.email} helperText={(errors.email)} name="email" htmlFor="email" variant="outlined" type="email" value={email} onChange={onChangeEmail} fullWidth />
                                 </Grid>
                                 <Grid item xs={12} >
-                                    <TextField label="Gender"
-                                        error={errors.gender} helperText={(errors.gender)} name="gender" htmlFor="gender" variant="outlined" fullWidth value={gender} onChange={onChangeGender} type="text" select label="Gender">
+                                    <TextField error={errors.gender} helperText={(errors.gender)} name="gender" htmlFor="gender" variant="outlined" fullWidth value={gender} onChange={onChangeGender} type="text" select label="Gender">
                                         <MenuItem value={"Male"} >Male</MenuItem>
                                         <MenuItem value={"Female"} >Female</MenuItem>
                                     </TextField>

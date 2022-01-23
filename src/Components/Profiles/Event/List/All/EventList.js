@@ -24,7 +24,6 @@ import useStyles from './styles';
 const EventList = () => {
     const classes = useStyles();
     const [listLoaded, setListLoaded] = useState(false);
-    const [companyLoaded, setCompanyLoaded] = useState(false);
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
 

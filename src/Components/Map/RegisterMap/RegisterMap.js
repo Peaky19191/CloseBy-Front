@@ -46,8 +46,9 @@ const MapRegister = () => {
 
     const [newSelected, setNewSelected] = React.useState(null);
     const [newMarker, setNewMarker] = React.useState([]);
-
+    // eslint-disable-next-line
     const [page, setPage] = useState(0);
+    // eslint-disable-next-line
     const [rowsPerPage, setRowsPerPage] = useState(100);
 
     const getList = () => {

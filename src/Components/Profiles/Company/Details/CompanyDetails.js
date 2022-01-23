@@ -27,8 +27,9 @@ const CompanyDetails = () => {
 
     const [compAdminsListLoaded, setCompAdminsListLoaded] = useState(false);
     const [compAdminsList, setCompAdminsList] = useState([]);
-
+    // eslint-disable-next-line
     const [page, setPage] = useState(0);
+    // eslint-disable-next-line
     const [rowsPerPage, setRowsPerPage] = useState(5);
 
     const [name, setName] = useState(company.name);
@@ -97,8 +98,6 @@ const CompanyDetails = () => {
 
     const [loadMessage, setLoadMessage] = useState(false);
 
-    const { message } = useSelector(state => state.message);
-
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoadMessage(false);
@@ -115,6 +114,7 @@ const CompanyDetails = () => {
                     setLoading(false);
                 });
     };
+    // eslint-disable-next-line
     const [errors, setErrors] = useState({});
     const enabled = name.length > 0;
 
@@ -130,7 +130,7 @@ const CompanyDetails = () => {
         setErrors({
             ...temp
         })
-        return Object.values(temp).every(x => x == "");
+        return Object.values(temp).every(x => x === "");
     }
 
     return (

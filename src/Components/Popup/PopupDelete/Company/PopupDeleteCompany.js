@@ -16,8 +16,9 @@ const PopupDeleteCompany = (props) => {
     const dispatch = useDispatch();
 
     const company = useSelector(state => state.company.company);
-
+    // eslint-disable-next-line
     const [page, setPage] = useState(0);
+    // eslint-disable-next-line
     const [rowsPerPage, setRowsPerPage] = useState(5);
 
     const [eventsListLoaded, setEventListLoaded] = useState(false);

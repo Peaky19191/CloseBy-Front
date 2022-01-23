@@ -13,12 +13,11 @@ import useStyles from './styles';
 const CompWorkerDetails = () => {
     const classes = useStyles();
     const [loading, setLoading] = useState(false);
-    const { message } = useSelector(state => state.message);
 
     const compWorker = useSelector(state => state.companyWorker.comp_worker);
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
-
+    // eslint-disable-next-line
     const [company, setCompany] = useState(compWorker.company);
 
     const [firstName, setFirstName] = useState(compWorker.firstName);
@@ -79,16 +78,16 @@ const CompWorkerDetails = () => {
         setLoadMessage(false);
         setLoading(true);
 
-        // if (validate())
-        dispatch(editCompWorker(compWorker.id, firstName, lastName, gender, email))
-            .then(() => {
-                setLoadMessage(true);
-                setLoading(false);
-            })
-            .catch(() => {
-                setLoadMessage(true);
-                setLoading(false);
-            });
+        if (validate())
+            dispatch(editCompWorker(compWorker.id, firstName, lastName, gender, email))
+                .then(() => {
+                    setLoadMessage(true);
+                    setLoading(false);
+                })
+                .catch(() => {
+                    setLoadMessage(true);
+                    setLoading(false);
+                });
     };
 
     let history = useHistory();
@@ -101,12 +100,11 @@ const CompWorkerDetails = () => {
         temp.firstName = (/^[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+$/).test(firstName) ? "" : "Numbers and whitespaces are not allowed"
         temp.lastName = (/^[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+$/).test(lastName) ? "" : "Numbers and whitespaces are not allowed"
         temp.email = (/$^|.+@.+..+/).test(email) ? "" : "Email is not valid"
-        temp.gender = gender.length != 0 ? "" : "This field is required (gender)"
+        temp.gender = gender.length !== 0 ? "" : "This field is required (gender)"
         setErrors({
             ...temp
         })
-        console.log(Object.values(temp).every(x => x == ""));
-        return Object.values(temp).every(x => x == "");
+        return Object.values(temp).every(x => x === "");
     }
 
     return (

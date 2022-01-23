@@ -27,16 +27,20 @@ const EventDetailsView = () => {
 
     const { event: currentEvent } = useSelector((state) => state.event);
     const { profile: currentProfile } = useSelector((state) => state.auth);
-
+    // eslint-disable-next-line
     const [eventId, setEventId] = useState(currentEvent.id);
+    // eslint-disable-next-line
     const [title, setTitle] = useState(currentEvent.title);
+    // eslint-disable-next-line
     const [desc, setDesc] = useState(currentEvent.description);
+    // eslint-disable-next-line
     const [type, setType] = useState(currentEvent.type);
-    // const [status, setStatus] = useState(currentEvent.status);
+    // eslint-disable-next-line
     const [limit, setLimit] = useState(currentEvent.ticketLimit);
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [favorite, setFavorite] = useState("");
+    // eslint-disable-next-line
     const [ticketPrice, setTicketPrice] = useState(currentEvent.ticketPrice);
 
     const [quantity, setQuantity] = useState("");
@@ -68,6 +72,7 @@ const EventDetailsView = () => {
     const [eventTitleBuy, setEventTitleBuy] = useState();
     const [eventDescriptionBuy, setEventDescriptionBuy] = useState();
     const [eventTicketPriceBuy, setEventTicketPriceBuy] = useState();
+    // eslint-disable-next-line
     const [userId, setUserId] = useState();
 
     const prepareBuy = (idEvent, eventTitle, eventDescription, eventTicketPrice, userId) => {

@@ -22,7 +22,6 @@ const CompanyAdminsList = () => {
     const classes = useStyles();
 
     const { company: currentCompany } = useSelector((state) => state.company);
-    const { profile: currentProfile } = useSelector((state) => state.auth);
 
     const [listLoaded, setListLoaded] = useState(false);
     const [adminsComp, setAdminsComp] = useState([]);

@@ -14,9 +14,8 @@ const CompAdminDetails = () => {
     const classes = useStyles();
     const compAdmin = useSelector(state => state.companyAdmin.comp_admin);
     const [loading, setLoading] = useState(false);
-
+    // eslint-disable-next-line
     const [company, setCompany] = useState(compAdmin.company);
-
     const [firstName, setFirstName] = useState(compAdmin.firstName);
     const [lastName, setLastName] = useState(compAdmin.lastName);
     const [email, setEmail] = useState(compAdmin.email);

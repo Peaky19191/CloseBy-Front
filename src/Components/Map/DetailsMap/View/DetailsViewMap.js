@@ -41,8 +41,9 @@ const MapDetailsView = (props) => {
 
     const [currenEventSelected, setCurrenEventSelected] = React.useState(null);
     const [currentEvent, setCurrentEvent] = React.useState([]);
-
+    // eslint-disable-next-line
     const [page, setPage] = useState(0);
+    // eslint-disable-next-line
     const [rowsPerPage, setRowsPerPage] = useState(100);
 
     const mapRef = React.useRef();

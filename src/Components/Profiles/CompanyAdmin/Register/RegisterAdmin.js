@@ -3,7 +3,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import MenuItem from '@material-ui/core/MenuItem';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getCompanyListDispatch } from "../../../../Actions/Profiles/company";
 import { regCompAdmin } from "../../../../Actions/Profiles/companyAdmin";
@@ -12,8 +12,6 @@ import useStyles from './styles';
 
 const RegCompAdmin = () => {
     const classes = useStyles();
-
-    const { message } = useSelector(state => state.message);
     const [loading, setLoading] = useState(false);
 
     const [firstName, setFirstName] = useState("");
@@ -27,8 +25,9 @@ const RegCompAdmin = () => {
     const [errors, setErrors] = useState({});
 
     const dispatch = useDispatch();
-
+    // eslint-disable-next-line
     const [page, setPage] = useState(0);
+    // eslint-disable-next-line
     const [rowsPerPage, setRowsPerPage] = useState(100);
 
     const [listLoaded, setListLoaded] = useState(false);
@@ -97,13 +96,13 @@ const RegCompAdmin = () => {
         temp.firstName = (/^[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+$/).test(firstName) ? "" : "Numbers and whitespaces are not allowed"
         temp.lastName = (/^[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+$/).test(lastName) ? "" : "Numbers and whitespaces are not allowed"
         temp.email = (/$^|.+@.+..+/).test(email) ? "" : "Email is not valid"
-        temp.gender = gender.length != 0 ? "" : "This field is required (gender)"
-        temp.companyId = gender.length != 0 ? "" : "This field is required (Compnay Name)"
+        temp.gender = gender.length !== 0 ? "" : "This field is required (gender)"
+        temp.companyId = gender.length !== 0 ? "" : "This field is required (Compnay Name)"
         setErrors({
             ...temp
         })
 
-        return Object.values(temp).every(x => x == "");
+        return Object.values(temp).every(x => x === "");
     }
 
     const enabled =
@@ -140,7 +139,7 @@ const RegCompAdmin = () => {
                                     <TextField label="Email Address" error={errors.email} helperText={(errors.email)} name="email" htmlFor="email" variant="outlined" type="email" value={email} onChange={onChangeEmail} fullWidth />
                                 </Grid>
                                 <Grid item xs={12} >
-                                    <TextField label="Gender" error={errors.gender} helperText={(errors.gender)} name="gender" htmlFor="gender" variant="outlined" fullWidth value={gender} onChange={onChangeGender} type="text" select label="Gender">
+                                    <TextField label="Gender" error={errors.gender} helperText={(errors.gender)} name="gender" htmlFor="gender" variant="outlined" fullWidth value={gender} onChange={onChangeGender} type="text" select >
                                         <MenuItem value={"Male"} >Male</MenuItem>
                                         <MenuItem value={"Female"} >Female</MenuItem>
                                     </TextField>
