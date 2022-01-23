@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch} from "react-redux";
 import { setNewPassword } from "../../../Actions/auth";
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
+import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
 import useStyles from './styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Link } from 'react-router-dom'

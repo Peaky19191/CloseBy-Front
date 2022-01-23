@@ -1,13 +1,7 @@
 import React from 'react'
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
+import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import useStyles from './styles';
-import { useDispatch, useSelector } from "react-redux";
-import { Alert, AlertTitle } from '@material-ui/lab';
-import { sendContactMessageDispatch } from "../../Actions/contact";
-import { Link } from 'react-router-dom'
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Message from '..//Message/Message';
 import { useHistory } from "react-router-dom";
 
 const About = () => {
@@ -47,23 +41,6 @@ const About = () => {
                 </Button>
             </Paper>
         </Container>
-
-
-        // <div style={{
-        //     display: 'flex',
-        //     justifyContent: 'center',
-        //     alignItems: 'center',
-        //     height: '90vh',
-        // }}
-        // >
-        //     <h1>About us</h1>
-        //     <p>
-        //         <b /
-        //         <b />
-        //         <b />
-        //         <b />
-        //     </p>
-        // </div>
     )
 }
 

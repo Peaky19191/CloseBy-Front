@@ -4,19 +4,13 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import CheckoutForm from "../../Payment/CheckoutForm/CheckoutForm";
 import PaymentService from "../../../Services/Payment/payment.service"
-import { useParams } from 'react-router';
-import User from '../../../Services/Profiles/user.service'
-import useStyles from './styles';
-import { Avatar, Button, Paper, Grid, Typography, Container, TextField, MenuItem, InputLabel } from '@material-ui/core';
-import CloseIcon from '@mui/icons-material/Close';
-import IconButton from '@material-ui/core/IconButton';
 
-const stripePromise = loadStripe("pk_test_51JtBlaB8w02vjjwKiFtJFi9hChZg99wH3mePaaAC0OA1zaXkGRzLs0ixYnrRWVurceeXw8MsI6tvR6MpTGoDvcL300azJDH38s");
+const pvKey = process.env.REACT_APP_API_KEY_3
+const stripePromise = loadStripe(pvKey);
 
 export const Payment = (props) => {
-    const classes = useStyles();
-    const { profile: currentProfile } = useSelector((state) => state.auth);
 
+    const { profile: currentProfile } = useSelector((state) => state.auth);
     const eventId = props.handleData[0];
     const uId = currentProfile.id;
     const quantity = props.handleData[1];

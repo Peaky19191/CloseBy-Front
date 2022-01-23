@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { AppBar, Avatar, Button, Grid, Toolbar, Typography, Menu, MenuItem, IconButton, Divider } from '@material-ui/core';
+import { Grid, Menu, MenuItem, IconButton, Divider } from '@material-ui/core';
 import useStyles from './styles';
-import { Link, useHistory, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from "../../Helpers/history";
 import { logout } from "../../Actions/auth";

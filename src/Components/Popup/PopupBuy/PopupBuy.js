@@ -1,24 +1,15 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import useStyles from './styles';
-import { Avatar, Button, Paper, Grid, Typography, Container, TextField, MenuItem, InputLabel } from '@material-ui/core';
+import { Avatar, Button, Paper, Grid, Typography, Container, TextField, MenuItem } from '@material-ui/core';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@material-ui/core/IconButton';
 import { useSelector } from "react-redux";
-import { ClosedCaptionSharp, SettingsPowerRounded } from "@material-ui/icons";
-import { Link } from 'react-router-dom'
 
 const PopupBuy = (props) => {
     const classes = useStyles();
-    const { profile: currentProfile } = useSelector((state) => state.auth);
-
+    
     const [quantity, setQuantity] = useState("");
-
-    const [isOpen, setIsOpen] = useState(false);
-
-    const [idEventBuy, setIdEventBuy] = useState();
-
-
     const onChangeQuantity = (e) => {
         const quantity = e.target.value;
         setQuantity(quantity);

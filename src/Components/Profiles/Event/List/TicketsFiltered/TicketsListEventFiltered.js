@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Event from '../../../../../Services/Profiles/event.service'
 import useStyles from './styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,18 +8,13 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableFooter from '@material-ui/core/TableFooter';
-import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import { Link } from 'react-router-dom'
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
-import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
-import PopupDeleteEvent from '../../../../Popup/PopupDelete/Event/PopupDeleteEvent';
-import { setEventDispatch, getEventTicketsListDispatch, deleteEventDispatch } from "../../../../../Actions/Profiles/events";
+import { Button, Paper, Grid, Typography, Container } from '@material-ui/core';
+import { setEventDispatch, getEventTicketsListDispatch } from "../../../../../Actions/Profiles/events";
 import { useDispatch } from "react-redux";
-import CompAdmin from '../../../../../Services/Profiles/companyAdmin.service'
-import CompWorker from '../../../../../Services/Profiles/companyWorker.service'
 import { useSelector } from "react-redux";
-import moment from 'moment'
 import { useHistory } from "react-router-dom";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -62,12 +56,6 @@ const TicketsEventList = () => {
     const dispatchEvent = (event) => {
         dispatch(setEventDispatch(event))
     }
-
-    const [isOpen, setIsOpen] = useState(false);
-
-    const [idEventDelete, setIdEventDelete] = useState();
-    const [eventTitleDelete, setEventTitleDelete] = useState();
-
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
