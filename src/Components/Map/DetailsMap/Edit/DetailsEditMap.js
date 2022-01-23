@@ -29,7 +29,7 @@ const options = {
 const libraries = ["places"];
 const mapContainerStyle = {
     width: "80vh",
-    height: "53vh",
+    height: "70vh",
 }
 
 const center = {

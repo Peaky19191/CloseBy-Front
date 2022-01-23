@@ -110,7 +110,7 @@ export const EventsTickets = () => {
                         </Grid>
                         <Paper className={classes.buttonPaper} >
                             <Button className={classes.buttonLoadMore} onClick={() => { loadMore() }} fullWidth variant="contained" color="primary" disabled={(events.length === count) ? true : false}  >
-                                {(events.length === count) ? "You haven't buy any tickets yet" : "Load More"}
+                                {(events.length === count) ? "No tickets" : "Load More"}
                             </Button>
                         </Paper>
                     </Container>
