@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { GoogleMap, useLoadScript, Marker, InfoWindow, } from "@react-google-maps/api";
-import mapStyles from "../../mapStyles";
-import useStyles from '../../styles';
-import { formatRelative } from "date-fns";
+import { Grid } from '@material-ui/core';
 import "@reach/combobox/styles.css";
-import Search from '../../Search/Search'
+import { GoogleMap, InfoWindow, Marker, useLoadScript } from "@react-google-maps/api";
+import moment from 'moment';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAdressDispatch } from '../../../../Actions/Map/map';
+import { getEventIdDispatch, getEventListAllDispatch } from '../../../../Actions/Profiles/events';
 import Compass from '../../Compass/Compass';
-import Events from '../../../../Services/Profiles/event.service';
-import { useDispatch } from "react-redux";
-import moment from 'moment'
-import { useSelector } from "react-redux";
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
-import Event from '../../../../Services/Profiles/event.service'
-import { getEventListAllDispatch, getEventIdDispatch } from '../../../../Actions/Profiles/events'
-import { getAdressDispatch } from '../../../../Actions/Map/map'
+import mapStyles from "../../mapStyles";
+import Search from '../../Search/Search';
+import useStyles from '../../styles';
 
 const options = {
     styles: mapStyles,

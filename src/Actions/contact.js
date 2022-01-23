@@ -1,16 +1,12 @@
+import { toast } from 'react-toastify';
 import {
-    CONTACT_SUCCESS,
-    CONTACT_FAIL,
-    SET_MESSAGE,
-    SET_MESSAGE_SUCCESS,
-    SET_MESSAGE_FAIL,
+    CONTACT_FAIL, CONTACT_SUCCESS, SET_MESSAGE_FAIL, SET_MESSAGE_SUCCESS
 } from "../Constants/actionTypes";
+import ContactService from "../Services/Contact/contact.service";
 import {
     ADMIN_500,
-    SEND_CONTACT_MESSAGE_SUCCESS_200,
+    SEND_CONTACT_MESSAGE_SUCCESS_200
 } from "../Static/message";
-import ContactService from "../Services/Contact/contact.service";
-import { toast } from 'react-toastify';
 
 export const sendContactMessageDispatch = (email, content) => (dispatch) => {
     return ContactService.sendContactMessageAPI(email, content).then(

@@ -1,9 +1,9 @@
-import React from "react";
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField, MenuItem } from '@material-ui/core';
-
-import useStyles from './styles';
-import ExploreIcon from '@mui/icons-material/Explore';
+import { Grid } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
+import ExploreIcon from '@mui/icons-material/Explore';
+import React from "react";
+import useStyles from './styles';
+
 
 
 const Compass = (props) => {

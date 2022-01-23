@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import useStyles from './styles';
-import { useDispatch } from "react-redux";
-import { sendContactMessageDispatch } from "../../Actions/contact";
+import { Avatar, Button, Container, Grid, Paper, TextField, Typography } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Message from '..//Message/Message';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { sendContactMessageDispatch } from "../../Actions/contact";
+import Message from '..//Message/Message';
+import useStyles from './styles';
 
 const ContactForm = () => {
     const classes = useStyles();

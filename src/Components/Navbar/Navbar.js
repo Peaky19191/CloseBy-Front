@@ -1,30 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { AppBar, Avatar, Button, Grid, Toolbar, Typography, Menu, MenuItem, IconButton, Divider } from '@material-ui/core';
-import useStyles from './styles';
-import { Link, useHistory, useLocation } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux';
-import { history } from "../../Helpers/history";
-import { logout } from "../../Actions/auth";
-import { clearMessage } from "../../Actions/message";
+import { Divider, Grid, IconButton, Menu, MenuItem } from '@material-ui/core';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import MenuIcon from '@material-ui/icons/Menu';
-import Logo from '../../Images/logo2.jpg'
 import PersonAdd from '@material-ui/icons/PersonAdd';
 import SettingsIcon from '@material-ui/icons/Settings';
-import LogoutIcon from '@mui/icons-material/Logout';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import LoginIcon from '@mui/icons-material/Login';
-import ContactSupportIcon from '@mui/icons-material/ContactSupport';
-import InfoIcon from '@mui/icons-material/Info';
-import EventIcon from '@mui/icons-material/Event';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import BusinessIcon from '@mui/icons-material/Business';
+import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+import EventIcon from '@mui/icons-material/Event';
+import InfoIcon from '@mui/icons-material/Info';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import PersonIcon from '@mui/icons-material/Person';
 import PersonIconEmpty from '@mui/icons-material/PersonOutline';
 import StarIcon from '@mui/icons-material/Star';
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import StorageIcon from '@mui/icons-material/Storage';
-import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { logout } from "../../Actions/auth";
+import { clearMessage } from "../../Actions/message";
+import { history } from "../../Helpers/history";
+import Logo from '../../Images/logo2.jpg';
+import useStyles from './styles';
 
 const Navbar = () => {
     const classes = useStyles();

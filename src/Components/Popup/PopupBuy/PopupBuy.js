@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
-import useStyles from './styles';
-import { Avatar, Button, Paper, Grid, Typography, Container, TextField, MenuItem, InputLabel } from '@material-ui/core';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import CloseIcon from '@mui/icons-material/Close';
+import { Avatar, Button, Container, Grid, MenuItem, Paper, TextField, Typography } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { ClosedCaptionSharp, SettingsPowerRounded } from "@material-ui/icons";
-import { Link } from 'react-router-dom'
+import useStyles from './styles';
 
 const PopupBuy = (props) => {
     const classes = useStyles();

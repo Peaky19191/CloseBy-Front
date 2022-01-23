@@ -1,16 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Typography, Card, CardActions, CardContent, CardMedia, Grid, Container, Button, Paper } from '@material-ui/core';
-import useStyles from './styles';
-import Event from '../../../../../Services/Profiles/event.service'
-import moment from 'moment'
-import { useDispatch } from "react-redux";
-import { setEventDispatch, getEventListTicketDispatch } from "../../../../../Actions/Profiles/events";
-import { Link } from 'react-router-dom'
+import { Button, Card, CardActions, CardContent, CardMedia, Container, Grid, Paper, Typography } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { useSelector } from "react-redux";
-import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
-import StarIcon from '@mui/icons-material/Star';
-import IconButton from '@mui/material/IconButton';
+import moment from 'moment';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
+import { getEventListTicketDispatch, setEventDispatch } from "../../../../../Actions/Profiles/events";
+import useStyles from './styles';
 
 export const EventsTickets = () => {
     const classes = useStyles();

@@ -1,17 +1,15 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from 'react-router-dom';
-import { login } from "../../../Actions/auth";
-import { Avatar, Button, Paper, Grid, Typography, Container, TextField, Box, FormControlLabel, CssBaseline } from '@material-ui/core';
-import useStyles from './styles';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { Link } from 'react-router-dom'
-import { Alert, AlertTitle } from '@material-ui/lab';
+import { Avatar, Button, Container, CssBaseline, Grid, IconButton, InputAdornment, Paper, TextField, Typography } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Form from "react-validation/build/form";
-import { InputAdornment, IconButton } from '@material-ui/core';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import { Alert, AlertTitle } from '@material-ui/lab';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Redirect } from 'react-router-dom';
+import Form from "react-validation/build/form";
+import { login } from "../../../Actions/auth";
+import useStyles from './styles';
 
 const Login = (props) => {
     const classes = useStyles();

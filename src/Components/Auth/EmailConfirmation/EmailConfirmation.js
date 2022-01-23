@@ -1,12 +1,12 @@
-import { Typography } from '@material-ui/core';
-import { confirmUserEmail } from '../../../Actions/auth';
-import React, { useState, useEffect } from 'react';
+import { Avatar, Button, Container, Paper, Typography } from '@material-ui/core';
+import { Alert, AlertTitle } from '@material-ui/lab';
+import EmailIcon from '@mui/icons-material/Email';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from 'react-router-dom';
-import { Avatar, Button, Paper, Container } from '@material-ui/core';
-import useStyles from './styles';
-import EmailIcon from '@mui/icons-material/Email'; import { Alert, AlertTitle } from '@material-ui/lab';
 import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
+import { confirmUserEmail } from '../../../Actions/auth';
+import useStyles from './styles';
 
 
 const EmailConfirmation = () => {

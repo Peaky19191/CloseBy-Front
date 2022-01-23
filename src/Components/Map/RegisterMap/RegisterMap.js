@@ -1,22 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { GoogleMap, useLoadScript, Marker, InfoWindow, } from "@react-google-maps/api";
-import mapStyles from "../mapStyles";
-import useStyles from '../styles';
-import { formatRelative } from "date-fns";
+import { Grid } from '@material-ui/core';
 import "@reach/combobox/styles.css";
-import Search from '../Search/Search'
-import Compass from '../Compass/Compass';
-import Events from '../../../Services/Profiles/event.service';
-import { setNewEventLoc, getEventListAllDispatch } from "../../../Actions/Profiles/events";
+import { GoogleMap, InfoWindow, Marker, useLoadScript } from "@react-google-maps/api";
+import moment from 'moment';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAdressDispatch } from '../../../Actions/Map/map';
 import { getCompAdminIdDispatch } from "../../../Actions/Profiles/companyAdmin";
 import { getCompWorkerIdDispatch } from "../../../Actions/Profiles/companyWorker";
-import { useDispatch } from "react-redux";
-import moment from 'moment'
-import CompAdmin from '../../../Services/Profiles/companyAdmin.service'
-import CompWorker from '../../../Services/Profiles/companyWorker.service'
-import { useSelector } from "react-redux";
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
-import { getAdressDispatch } from '../../../Actions/Map/map'
+import { getEventListAllDispatch, setNewEventLoc } from "../../../Actions/Profiles/events";
+import Compass from '../Compass/Compass';
+import mapStyles from "../mapStyles";
+import Search from '../Search/Search';
+import useStyles from '../styles';
 
 const options = {
     styles: mapStyles,

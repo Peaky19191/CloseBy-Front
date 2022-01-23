@@ -1,23 +1,19 @@
-import React from "react";
-
-import useStyles from './styles';
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField, MenuItem } from '@material-ui/core';
-
-import usePlacesAutocomplete, {
-    getGeocode,
-    getLatLng,
-} from "use-places-autocomplete";
-
+import { Grid } from '@material-ui/core';
 import {
     Combobox,
-    ComboboxInput,
-    ComboboxPopover,
-    ComboboxList,
-    ComboboxOption,
+    ComboboxInput, ComboboxOption, ComboboxPopover
 } from "@reach/combobox";
-import IconButton from '@material-ui/core/IconButton';
-
 import "@reach/combobox/styles.css";
+import React from "react";
+import usePlacesAutocomplete, {
+    getGeocode,
+    getLatLng
+} from "use-places-autocomplete";
+import useStyles from './styles';
+
+
+
+
 
 const Search = (props) => {
     const classes = useStyles();

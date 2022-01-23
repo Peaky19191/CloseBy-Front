@@ -1,21 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { Redirect } from 'react-router-dom';
-import useStyles from './styles';
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
-import { Link } from 'react-router-dom'
+import { Avatar, Button, Container, Grid, Paper, TextField, Typography } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import MenuItem from '@material-ui/core/MenuItem';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import User from '../../Services/Profiles/user.service'
-import CompWorker from '../../Services/Profiles/companyWorker.service'
-import CompAdmin from '../../Services/Profiles/companyAdmin.service'
-import { Alert, AlertTitle } from '@material-ui/lab';
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { editCompAdmin, getCompAdminIdDispatch } from "../../Actions/Profiles/companyAdmin";
 import { editCompWorker, getCompWorkerIdDispatch } from "../../Actions/Profiles/companyWorker";
 import { editUser, getUserIdDispatch } from "../../Actions/Profiles/user";
-import { useHistory } from "react-router-dom";
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Message from '../Message/Message';
+import useStyles from './styles';
 
 const Profile = () => {
   const classes = useStyles();

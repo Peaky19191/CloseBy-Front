@@ -1,36 +1,21 @@
-import React, { useState, useEffect, useCallback } from "react";
-import useStyles from './styles';
-import Event from '../../../../../Services/Profiles/event.service'
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, InputLabel, TextField, InputAdornment, MenuItem } from '@material-ui/core';
-import { Link } from 'react-router-dom'
-import { editEvent } from "../../../../../Actions/Profiles/events";
-import { Alert, AlertTitle } from '@material-ui/lab';
-import { useDispatch, useSelector } from "react-redux";
-import MapDetailsView from '../../../../Map/DetailsMap/View/DetailsViewMap'
+import { Avatar, Button, Container, Grid, InputAdornment, Paper, TextField, Typography } from '@material-ui/core';
 import EventIcon from '@mui/icons-material/Event';
-import EventTypes from '../../../../../Static/select'
-import Slider from '@mui/material/Slider';
-import MuiInput from '@mui/material/Input';
-import { styled } from '@mui/material/styles';
-import { registerEventDispatch } from "../../../../../Actions/Profiles/events";
-import CompWorker from '../../../../../Services/Profiles/companyWorker.service'
-import Stack from '@mui/material/Stack';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DateTimePicker from '@mui/lab/DateTimePicker';
-import moment from 'moment'
-import { setNewEventLoc } from "../../../../../Actions/Profiles/events";
-import { setCurrentEventLoc, getEventIdDispatch, addToFavoriteDispatch, deleteFromFavoriteDispatch, buyTicketDispatch } from "../../../../../Actions/Profiles/events";
-import { useHistory } from "react-router-dom";
-import { createPayment } from "../../../../../Services/Payment/payment.service";
-import Message from '../../../../Message/Message';
-import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
 import StarIcon from '@mui/icons-material/Star';
-import IconButton from '@mui/material/IconButton';
+import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
 import { amber } from '@mui/material/colors';
-import { SettingsBackupRestoreOutlined, SettingsPowerRounded } from "@material-ui/icons";
+import IconButton from '@mui/material/IconButton';
+import MuiInput from '@mui/material/Input';
+import Slider from '@mui/material/Slider';
+import { styled } from '@mui/material/styles';
+import moment from 'moment';
+import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { addToFavoriteDispatch, deleteFromFavoriteDispatch, getEventIdDispatch } from "../../../../../Actions/Profiles/events";
+import MapDetailsView from '../../../../Map/DetailsMap/View/DetailsViewMap';
 import PopupBuy from '../../../../Popup/PopupBuy/PopupBuy';
-import PopupPayment from '../../../../Popup/PopupPayment/PopupPayment'
+import PopupPayment from '../../../../Popup/PopupPayment/PopupPayment';
+import useStyles from './styles';
 
 const Input = styled(MuiInput)`
   width: 42px;

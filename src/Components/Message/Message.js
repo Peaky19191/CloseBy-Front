@@ -1,7 +1,7 @@
-import React from "react";
-import useStyles from './styles';
 import { Alert, AlertTitle } from '@material-ui/lab';
+import React from "react";
 import { useSelector } from "react-redux";
+import useStyles from './styles';
 
 const Message = () => {
     const classes = useStyles();

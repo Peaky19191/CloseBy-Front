@@ -1,29 +1,11 @@
-import {
-    REGISTER_COMP_ADMIN_SUCCESS,
-    REGISTER_COMP_ADMIN_FAIL,
-    SET_MESSAGE,
-    SET_COMP_ADMIN,
-    CLEAR_COMP_ADMIN,
-    EDIT_COMP_ADMIN_SUCCESS,
-    EDIT_COMP_ADMIN_FAIL,
-    GET_COMP_ADMIN_LIST_SUCCESS,
-    GET_COMP_ADMIN_LIST_FAIL,
-    DELETE_COMP_ADMIN_SUCCESS,
-    DELETE_COMP_ADMIN_FAIL,
-    GET_COMP_ADMIN_ID_SUCCESS,
-    GET_COMP_ADMIN_ID_FAIL,
-    SET_MESSAGE_SUCCESS,
-    SET_MESSAGE_FAIL,
-} from "../../Constants/actionTypes";
-import {
-    ADMIN_500,
-    ERROR_400,
-    ADMIN_REG_SUCCESS_200,
-    ADMIN_EDIT_SUCCESS_200,
-    PROFILE_EDIT_SUCCESS_200
-} from "../../Static/message";
-import CompanyAdminService from "../../Services/Profiles/companyAdmin.service";
 import { toast } from 'react-toastify';
+import {
+    CLEAR_COMP_ADMIN, DELETE_COMP_ADMIN_FAIL, DELETE_COMP_ADMIN_SUCCESS, EDIT_COMP_ADMIN_FAIL, EDIT_COMP_ADMIN_SUCCESS, GET_COMP_ADMIN_ID_FAIL, GET_COMP_ADMIN_ID_SUCCESS, GET_COMP_ADMIN_LIST_FAIL, GET_COMP_ADMIN_LIST_SUCCESS, REGISTER_COMP_ADMIN_FAIL, REGISTER_COMP_ADMIN_SUCCESS, SET_COMP_ADMIN, SET_MESSAGE, SET_MESSAGE_FAIL, SET_MESSAGE_SUCCESS
+} from "../../Constants/actionTypes";
+import CompanyAdminService from "../../Services/Profiles/companyAdmin.service";
+import {
+    ADMIN_500, ADMIN_EDIT_SUCCESS_200, ADMIN_REG_SUCCESS_200, ERROR_400, PROFILE_EDIT_SUCCESS_200
+} from "../../Static/message";
 
 export const regCompAdmin = (firstName, lastName, gender, email, companyId) => (dispatch) => {
     return CompanyAdminService.registerCompanyAdminAPI(firstName, lastName, gender, email, companyId).then(

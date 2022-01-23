@@ -1,11 +1,8 @@
 import {
-    GET_ADRESS_SUCCESS,
-    GET_ADRESS_FAIL,
-    SET_MESSAGE,
-    SET_EDIT_MODE,
+    GET_ADRESS_FAIL, GET_ADRESS_SUCCESS, SET_EDIT_MODE, SET_MESSAGE
 } from "../../Constants/actionTypes";
-
 import MapService from "../../Services/Map/map.service";
+
 
 export const getAdressDispatch = (lat, lng) => (dispatch) => {
     return MapService.getAdressAPI(lat, lng).then(

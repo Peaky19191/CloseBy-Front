@@ -1,4 +1,4 @@
-import { SET_EDIT_MODE, } from "../../Constants/actionTypes";
+import { SET_EDIT_MODE } from "../../Constants/actionTypes";
 
 const initialState = {};
 

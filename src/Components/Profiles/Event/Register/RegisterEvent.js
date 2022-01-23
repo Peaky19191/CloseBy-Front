@@ -1,27 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField, MenuItem } from '@material-ui/core';
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import useStyles from './styles';
-import { useDispatch, useSelector } from "react-redux";
-import { Alert, AlertTitle } from '@material-ui/lab';
-import { Link } from 'react-router-dom'
-import MapRegister from '../../../Map/RegisterMap/RegisterMap'
+import { Avatar, Button, Container, Grid, MenuItem, Paper, TextField, Typography } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import EventIcon from '@mui/icons-material/Event';
-import EventTypes from '../../../../Static/select'
-import Slider from '@mui/material/Slider';
-import MuiInput from '@mui/material/Input';
-import { styled } from '@mui/material/styles';
-import { registerEventDispatch } from "../../../../Actions/Profiles/events";
-import CompWorker from '../../../../Services/Profiles/companyWorker.service'
-import Stack from '@mui/material/Stack';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
-import moment from 'moment'
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import MuiInput from '@mui/material/Input';
+import Slider from '@mui/material/Slider';
+import Stack from '@mui/material/Stack';
+import { styled } from '@mui/material/styles';
+import moment from 'moment';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getCompWorkerIdDispatch } from "../../../../Actions/Profiles/companyWorker";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { registerEventDispatch } from "../../../../Actions/Profiles/events";
+import EventTypes from '../../../../Static/select';
+import MapRegister from '../../../Map/RegisterMap/RegisterMap';
 import Message from '../../../Message/Message';
+import useStyles from './styles';
 
 const Input = styled(MuiInput)`
   width: 42px;

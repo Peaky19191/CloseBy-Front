@@ -1,31 +1,14 @@
+import { toast } from 'react-toastify';
 import {
-    REGISTER_COMP_WORKER_SUCCESS,
-    REGISTER_COMP_WORKER_FAIL,
-    SET_MESSAGE,
-    SET_COMP_WORKER,
-    CLEAR_COMP_WORKER,
-    EDIT_COMP_WORKER_SUCCESS,
-    EDIT_COMP_WORKER_FAIL,
-    GET_COMP_WORKER_LIST_SUCCESS,
-    GET_COMP_WORKER_LIST_FAIL,
-    DELETE_COMP_WORKER_SUCCESS,
-    DELETE_COMP_WORKER_FAIL,
-    GET_COMP_WORKER_ID_SUCCESS,
-    GET_COMP_WORKER_ID_FAIL,
-    SET_MESSAGE_SUCCESS,
-    SET_MESSAGE_FAIL,
+    CLEAR_COMP_WORKER, DELETE_COMP_WORKER_FAIL, DELETE_COMP_WORKER_SUCCESS, EDIT_COMP_WORKER_FAIL, EDIT_COMP_WORKER_SUCCESS, GET_COMP_WORKER_ID_FAIL, GET_COMP_WORKER_ID_SUCCESS, GET_COMP_WORKER_LIST_FAIL, GET_COMP_WORKER_LIST_SUCCESS, REGISTER_COMP_WORKER_FAIL, REGISTER_COMP_WORKER_SUCCESS, SET_COMP_WORKER, SET_MESSAGE, SET_MESSAGE_FAIL, SET_MESSAGE_SUCCESS
 } from "../../Constants/actionTypes";
-
+import CompanyWorkerService from "../../Services/Profiles/companyWorker.service";
 import {
     ADMIN_500,
-    ERROR_400,
-    WORKER_REG_SUCCESS_200,
-    WORKER_EDIT_SUCCESS_200,
-    PROFILE_EDIT_SUCCESS_200,
+    ERROR_400, PROFILE_EDIT_SUCCESS_200, WORKER_EDIT_SUCCESS_200, WORKER_REG_SUCCESS_200
 } from "../../Static/message";
 
-import CompanyWorkerService from "../../Services/Profiles/companyWorker.service";
-import { toast } from 'react-toastify';
+
 
 export const regCompWorker = (firstName, lastName, gender, email, companyId) => (dispatch) => {
     return CompanyWorkerService.registerCompanyWorkerAPI(firstName, lastName, gender, email, companyId).then(
@@ -199,7 +182,7 @@ export const deleteCompWorkerDispatch = (id, companyId) => (dispatch) => {
             });
 
             toast.error(message);
-            
+
             return Promise.reject();
         }
     );

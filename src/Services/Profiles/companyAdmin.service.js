@@ -1,6 +1,6 @@
 import axios from "axios";
-import authHeader from "../Auth/auth-header";
 import SERVER_API from "../../Static/serverApi";
+import authHeader from "../Auth/auth-header";
 
 const API_URL = "company-admin/";
 

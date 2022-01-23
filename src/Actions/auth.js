@@ -1,29 +1,12 @@
-import {
-    LOGIN_SUCCESS,
-    LOGIN_FAIL,
-    LOGOUT,
-    SET_MESSAGE,
-    RESET_PASSW_SUCCESS,
-    RESET_PASSW_FAIL,
-    NEW_PASSW_SUCCESS,
-    NEW_PASSW_FAIL,
-    CONFIRM_EMAIL_SUCCESS,
-    CONFIRM_EMAIL_FAIL,
-    SET_MESSAGE_SUCCESS,
-    SET_MESSAGE_FAIL,
-} from "../Constants/actionTypes";
-import {
-    ADMIN_500,
-    ERROR_400,
-    NEW_PASSW_SUCCESS_200,
-    RESET_PASSW_SUCCESS_200,
-    CONFIRM_EMAIL_SUCCESS_200,
-    NEW_PASSW_ERROR_403,
-    LOGIN_ERROR_401,
-    CONFIRM_EMAIL_FAIL_400,
-} from "../Static/message";
-import AuthService from "../Services/Auth/auth.service";
 import { toast } from 'react-toastify';
+import {
+    CONFIRM_EMAIL_FAIL, CONFIRM_EMAIL_SUCCESS, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, NEW_PASSW_FAIL, NEW_PASSW_SUCCESS, RESET_PASSW_FAIL, RESET_PASSW_SUCCESS, SET_MESSAGE, SET_MESSAGE_FAIL, SET_MESSAGE_SUCCESS
+} from "../Constants/actionTypes";
+import AuthService from "../Services/Auth/auth.service";
+import {
+    ADMIN_500, CONFIRM_EMAIL_FAIL_400, CONFIRM_EMAIL_SUCCESS_200, LOGIN_ERROR_401, NEW_PASSW_ERROR_403, NEW_PASSW_SUCCESS_200,
+    RESET_PASSW_SUCCESS_200
+} from "../Static/message";
 
 export const login = (email, password) => (dispatch) => {
     return AuthService.login(email, password).then(

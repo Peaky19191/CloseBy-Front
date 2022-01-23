@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Grow, Grid } from '@material-ui/core';
+import { Container, Grid, Grow } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-
 import { getEvents } from '../../Actions/events';
+
 
 const Home = () => {
     const [currentId, setCurrentId] = useState(0);

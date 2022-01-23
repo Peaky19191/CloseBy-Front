@@ -1,32 +1,24 @@
-import React, { useState, useEffect } from "react";
-import useStyles from './styles';
-import Event from '../../../../../Services/Profiles/event.service'
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField, MenuItem, InputAdornment } from '@material-ui/core';
-import { Link } from 'react-router-dom'
-import { editEvent } from "../../../../../Actions/Profiles/events";
-import { Alert, AlertTitle } from '@material-ui/lab';
-import { useDispatch, useSelector } from "react-redux";
-import MapDetailsEdit from '../../../../Map/DetailsMap/Edit/DetailsEditMap'
-import EventIcon from '@mui/icons-material/Event';
-import EventTypes from '../../../../../Static/select'
-import Slider from '@mui/material/Slider';
-import MuiInput from '@mui/material/Input';
-import { styled } from '@mui/material/styles';
-import { registerEventDispatch } from "../../../../../Actions/Profiles/events";
-import CompWorker from '../../../../../Services/Profiles/companyWorker.service'
-import Stack from '@mui/material/Stack';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DateTimePicker from '@mui/lab/DateTimePicker';
-import moment from 'moment'
-import { setNewEventLoc } from "../../../../../Actions/Profiles/events";
-import { getEventIdDispatch } from "../../../../../Actions/Profiles/events";
-import { useHistory } from "react-router-dom";
-import { setCompanyDispatch } from "../../../../../Actions/Profiles/company";
-import BusinessIcon from '@mui/icons-material/Business';
+import { Avatar, Button, Container, Grid, InputAdornment, MenuItem, Paper, TextField, Typography } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Message from '../../../../Message/Message';
+import EventIcon from '@mui/icons-material/Event';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import DateTimePicker from '@mui/lab/DateTimePicker';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import MuiInput from '@mui/material/Input';
+import Slider from '@mui/material/Slider';
+import Stack from '@mui/material/Stack';
+import { styled } from '@mui/material/styles';
+import moment from 'moment';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory } from 'react-router-dom';
 import { setEditMapModeDispatch } from "../../../../../Actions/Map/map";
+import { setCompanyDispatch } from "../../../../../Actions/Profiles/company";
+import { editEvent, getEventIdDispatch, setNewEventLoc } from "../../../../../Actions/Profiles/events";
+import EventTypes from '../../../../../Static/select';
+import MapDetailsEdit from '../../../../Map/DetailsMap/Edit/DetailsEditMap';
+import Message from '../../../../Message/Message';
+import useStyles from './styles';
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -186,7 +178,7 @@ const EventDetailsEdit = () => {
         type.length > 0 &&
         `${ticketPrice}`.length > 0 &&
         desc.length > 0;
-        
+
     return (
         <Container className={classes.container} component="main" maxWidth="xs">
             <Paper className={classes.paper} elevation={3}>

@@ -1,29 +1,25 @@
-import React, { useState, useEffect } from "react";
-import Event from '../../../../../Services/Profiles/event.service'
-import useStyles from './styles';
+import { Button, Grid, Paper } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TablePagination from '@material-ui/core/TablePagination';
 import TableFooter from '@material-ui/core/TableFooter';
+import TableHead from '@material-ui/core/TableHead';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableRow from '@material-ui/core/TableRow';
 import DeleteIcon from '@material-ui/icons/Delete';
-import IconButton from '@material-ui/core/IconButton';
-import { Link } from 'react-router-dom'
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
-import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
-import PopupDeleteEvent from '../../../../Popup/PopupDelete/Event/PopupDeleteEvent';
-import { setEventDispatch, getEventListAllDispatch, deleteEventDispatch } from "../../../../../Actions/Profiles/events";
-import { useDispatch } from "react-redux";
-import CompAdmin from '../../../../../Services/Profiles/companyAdmin.service'
-import CompWorker from '../../../../../Services/Profiles/companyWorker.service'
-import { useSelector } from "react-redux";
-import moment from 'moment'
+import moment from 'moment';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
 import { getCompAdminIdDispatch } from "../../../../../Actions/Profiles/companyAdmin";
 import { getCompWorkerIdDispatch } from "../../../../../Actions/Profiles/companyWorker";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { deleteEventDispatch, getEventListAllDispatch, setEventDispatch } from "../../../../../Actions/Profiles/events";
+import PopupDeleteEvent from '../../../../Popup/PopupDelete/Event/PopupDeleteEvent';
+import useStyles from './styles';
 
 const EventList = () => {
     const classes = useStyles();
@@ -180,10 +176,10 @@ const EventList = () => {
                                             <SettingsApplicationsIcon className={classes.settingICon} />
                                         </IconButton>
                                         {isCompanyWorker &&
-                                        <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.title, item.company.name, item.status) }} >
-                                            <DeleteIcon className={classes.deleteICon} />
-                                        </IconButton>
-                                        }      
+                                            <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.title, item.company.name, item.status) }} >
+                                                <DeleteIcon className={classes.deleteICon} />
+                                            </IconButton>
+                                        }
                                     </TableCell>
                                 </TableRow>
                             ))}

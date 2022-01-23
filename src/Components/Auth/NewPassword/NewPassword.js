@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
-import { useDispatch} from "react-redux";
-import { setNewPassword } from "../../../Actions/auth";
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
-import useStyles from './styles';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { Link } from 'react-router-dom'
-import { useParams } from 'react-router';
+import { Avatar, Button, Container, Grid, IconButton, InputAdornment, Paper, TextField, Typography } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Message from '../../Message/Message';
-import { InputAdornment, IconButton } from '@material-ui/core';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import React, { useState } from 'react';
+import { useDispatch } from "react-redux";
+import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
+import { setNewPassword } from "../../../Actions/auth";
+import Message from '../../Message/Message';
+import useStyles from './styles';
 
 export const NewPassword = () => {
     const classes = useStyles();
@@ -46,17 +45,17 @@ export const NewPassword = () => {
         setLoading(true);
 
         if (validate())
-        dispatch(setNewPassword(password, token))
-        .then(() => {
-            setShowMessage(true);
-            setLoading(false);
+            dispatch(setNewPassword(password, token))
+                .then(() => {
+                    setShowMessage(true);
+                    setLoading(false);
 
-        })
-        .catch(() => {
-            setShowMessage(true);
-            setLoading(false);
+                })
+                .catch(() => {
+                    setShowMessage(true);
+                    setLoading(false);
 
-        });
+                });
     };
 
     const validate = () => {
@@ -82,7 +81,7 @@ export const NewPassword = () => {
                 <form className={classes.form} onSubmit={handleSubmit} >
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
-                        <TextField
+                            <TextField
                                 InputProps={{
                                     endAdornment: (
                                         <InputAdornment position="end">

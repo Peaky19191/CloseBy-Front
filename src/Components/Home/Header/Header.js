@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import useStyles from './styles';
-import Logo from '../../../Images/logo2.jpg'
 import { Collapse } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import Logo from '../../../Images/logo2.jpg';
+import useStyles from './styles';
 
 const Header = () => {
     const classes = useStyles();

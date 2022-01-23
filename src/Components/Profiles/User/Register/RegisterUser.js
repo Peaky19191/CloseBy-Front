@@ -1,18 +1,15 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { registerUserDispatch } from "../../../../Actions/Profiles/user";
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField, FormHelperText, FormControl } from '@material-ui/core';
-import useStyles from './styles';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { Link } from 'react-router-dom'
-import { Alert, AlertTitle } from '@material-ui/lab';
-import InputLabel from '@material-ui/core/InputLabel';
+import { Avatar, Button, Container, Grid, IconButton, InputAdornment, Paper, TextField, Typography } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import MenuItem from '@material-ui/core/MenuItem';
-import { InputAdornment, IconButton } from '@material-ui/core';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
+import { registerUserDispatch } from "../../../../Actions/Profiles/user";
 import Message from '../../../Message/Message';
+import useStyles from './styles';
 
 export const Register = () => {
     const classes = useStyles();

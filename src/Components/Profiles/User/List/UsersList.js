@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from "react";
-import User from '../../../../Services/Profiles/user.service'
-import useStyles from './styles';
+import { Grid, Paper } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import TablePagination from '@material-ui/core/TablePagination';
 import TableFooter from '@material-ui/core/TableFooter';
-import DeleteIcon from '@material-ui/icons/Delete';
-import IconButton from '@material-ui/core/IconButton';
+import TableHead from '@material-ui/core/TableHead';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableRow from '@material-ui/core/TableRow';
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
-import { Link } from 'react-router-dom'
-import { deleteUserDispatch, setUser, getUserListDispatch } from "../../../../Actions/Profiles/user";
-import { Paper, Grid } from '@material-ui/core';
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link } from 'react-router-dom';
+import { deleteUserDispatch, getUserListDispatch, setUser } from "../../../../Actions/Profiles/user";
 import PopupDeleteProfile from '../../../Popup/PopupDelete/Profile/PopupDeleteProfile';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { useDispatch, useSelector } from "react-redux";
+import useStyles from './styles';
 
 const UsersList = () => {
     const classes = useStyles();

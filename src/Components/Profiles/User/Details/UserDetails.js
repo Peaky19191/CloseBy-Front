@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from "react";
-import useStyles from './styles';
-import { getUserIdDispatch } from '../../../../Actions/Profiles/user';
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
+import { Avatar, Button, Container, Grid, Paper, TextField, Typography } from '@material-ui/core';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import { Link } from 'react-router-dom'
-import MenuItem from '@material-ui/core/MenuItem';
-import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { Link, useHistory } from 'react-router-dom';
+import useStyles from './styles';
 
 const UserDetails = () => {
     const classes = useStyles();

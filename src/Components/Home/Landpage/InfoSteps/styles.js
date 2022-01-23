@@ -7,19 +7,19 @@ export default makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
         [theme.breakpoints.down('md')]: {
-          flexDirection: 'column',
-        }, 
+            flexDirection: 'column',
+        },
     },
-    arrowForward:{
+    arrowForward: {
         color: '#CEE4E8',
         fontSize: '7rem',
     },
-    goDown:{
+    goDown: {
         color: '#CEE4E8',
         fontSize: '7rem',
         maxHeight: 100
     },
     container: {
         textAlign: 'center',
-      },
+    },
 }))

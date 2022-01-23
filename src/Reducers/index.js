@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 import auth from "./auth";
+import map from "./Map/map";
 import message from "./message";
 import company from "./Profiles/company";
 import companyAdmin from "./Profiles/companyAdmin";
 import companyWorker from "./Profiles/companyWorker";
-import user from "./Profiles/user";
 import event from "./Profiles/event";
-import map from "./Map/map";
+import user from "./Profiles/user";
 
 export default combineReducers({
     auth,

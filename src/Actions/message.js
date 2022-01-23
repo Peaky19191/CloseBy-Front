@@ -1,4 +1,4 @@
-import { SET_MESSAGE, CLEAR_MESSAGE, SET_MESSAGE_SUCCESS, SET_MESSAGE_FAIL } from "../Constants/actionTypes";
+import { CLEAR_MESSAGE, SET_MESSAGE, SET_MESSAGE_FAIL, SET_MESSAGE_SUCCESS } from "../Constants/actionTypes";
 
 
 export const setMessage = (message) => ({

@@ -1,15 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import PaymentService from "../../../Services/Payment/payment.service";
 import CheckoutForm from "../../Payment/CheckoutForm/CheckoutForm";
-import PaymentService from "../../../Services/Payment/payment.service"
-import { useParams } from 'react-router';
-import User from '../../../Services/Profiles/user.service'
 import useStyles from './styles';
-import { Avatar, Button, Paper, Grid, Typography, Container, TextField, MenuItem, InputLabel } from '@material-ui/core';
-import CloseIcon from '@mui/icons-material/Close';
-import IconButton from '@material-ui/core/IconButton';
 
 const stripePromise = loadStripe("pk_test_51JtBlaB8w02vjjwKiFtJFi9hChZg99wH3mePaaAC0OA1zaXkGRzLs0ixYnrRWVurceeXw8MsI6tvR6MpTGoDvcL300azJDH38s");
 

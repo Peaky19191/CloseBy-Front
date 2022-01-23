@@ -1,28 +1,12 @@
+import { toast } from 'react-toastify';
 import {
-    REGISTER_USER_SUCCESS,
-    REGISTER_USER_FAIL,
-    SET_MESSAGE,
-    SET_USER,
-    CLEAR_USER,
-    EDIT_USER_SUCCESS,
-    EDIT_USER_FAIL,
-    GET_USER_LIST_SUCCESS,
-    GET_USER_LIST_FAIL,
-    DELETE_USER_SUCCESS,
-    DELETE_USER_FAIL,
-    GET_USER_ID_SUCCESS,
-    GET_USER_ID_FAIL,
-    SET_MESSAGE_SUCCESS,
-    SET_MESSAGE_FAIL,
+    CLEAR_USER, DELETE_USER_FAIL, DELETE_USER_SUCCESS, EDIT_USER_FAIL, EDIT_USER_SUCCESS, GET_USER_ID_FAIL, GET_USER_ID_SUCCESS, GET_USER_LIST_FAIL, GET_USER_LIST_SUCCESS, REGISTER_USER_FAIL, REGISTER_USER_SUCCESS, SET_MESSAGE, SET_MESSAGE_FAIL, SET_MESSAGE_SUCCESS, SET_USER
 } from "../../Constants/actionTypes";
+import UserService from "../../Services/Profiles/user.service";
 import {
     ADMIN_500,
-    ERROR_400,
-    USER_REG_SUCCESS_200,
-    PROFILE_EDIT_SUCCESS_200
+    ERROR_400, PROFILE_EDIT_SUCCESS_200, USER_REG_SUCCESS_200
 } from "../../Static/message";
-import UserService from "../../Services/Profiles/user.service";
-import { toast } from 'react-toastify';
 
 export const registerUserDispatch = (firstName, lastName, gender, email, password) => (dispatch) => {
     return UserService.registerUserAPI(firstName, lastName, gender, email, password).then(

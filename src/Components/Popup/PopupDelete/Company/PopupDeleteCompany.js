@@ -1,22 +1,15 @@
-import React, { useState, useEffect } from "react";
-import useStyles from './styles';
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
+import { Avatar, Button, Container, Grid, Paper, TextField, Typography } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import IconButton from '@material-ui/core/IconButton';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import CloseIcon from '@mui/icons-material/Close';
-import IconButton from '@material-ui/core/IconButton';
-import Company from '../../../../Services/Profiles/company.service'
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import { Link } from 'react-router-dom'
-import { getEventListAllDispatch } from "../../../../Actions/Profiles/events";
-import { getCompWorkerListDispatch } from "../../../../Actions/Profiles/companyWorker";
-import { Alert, AlertTitle } from '@material-ui/lab';
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import CompWorker from '../../../../Services/Profiles/companyWorker.service'
-import CompAdmin from '../../../../Services/Profiles/companyAdmin.service'
-import Events from '../../../../Services/Profiles/event.service'
+import { Link } from 'react-router-dom';
 import { getCompAdminListDispatch } from '../../../../Actions/Profiles/companyAdmin';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { getCompWorkerListDispatch } from "../../../../Actions/Profiles/companyWorker";
+import { getEventListAllDispatch } from "../../../../Actions/Profiles/events";
+import useStyles from './styles';
 
 const PopupDeleteCompany = (props) => {
     const classes = useStyles();

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import useStyles from './styles';
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
+import { Avatar, Button, Container, Grid, Paper, TextField, Typography } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import CloseIcon from '@mui/icons-material/Close';
-import IconButton from '@material-ui/core/IconButton';
+import React from "react";
+import useStyles from './styles';
 
 const PopupDeleteProfile = (props) => {
     const classes = useStyles();

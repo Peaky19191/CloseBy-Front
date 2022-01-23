@@ -1,12 +1,12 @@
+import { Avatar, Button, Container, Grid, Paper, TextField, Typography } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
+import { Link } from 'react-router-dom';
 import { resetPassword } from "../../../Actions/auth";
-import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
-import useStyles from './styles';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { Link } from 'react-router-dom'
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Message from '../../Message/Message';
+import useStyles from './styles';
 
 
 export const ResetPassword = () => {

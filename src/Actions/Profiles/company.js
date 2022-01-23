@@ -1,28 +1,12 @@
-import {
-    REGISTER_COMPANY_SUCCESS,
-    REGISTER_COMPANY_FAIL,
-    SET_MESSAGE,
-    SET_COMPANY,
-    CLEAR_COMPANY,
-    EDIT_COMPANY_SUCCESS,
-    EDIT_COMPANY_FAIL,
-    GET_COMPANY_LIST_SUCCESS,
-    GET_COMPANY_LIST_FAIL,
-    DELETE_COMPANY_SUCCESS,
-    DELETE_COMPANY_FAIL,
-    GET_COMPANY_ID_SUCCESS,
-    GET_COMPANY_ID_FAIL,
-    SET_MESSAGE_SUCCESS,
-    SET_MESSAGE_FAIL,
-} from "../../Constants/actionTypes";
-import {
-    ADMIN_500,
-    COMP_ERROR_400,
-    COMP_REG_SUCCESS_200,
-    COMP_EDIT_SUCCESS_200
-} from "../../Static/message";
-import CompanyService from "../../Services/Profiles/company.service";
 import { toast } from 'react-toastify';
+import {
+    CLEAR_COMPANY, DELETE_COMPANY_FAIL, DELETE_COMPANY_SUCCESS, EDIT_COMPANY_FAIL, EDIT_COMPANY_SUCCESS, GET_COMPANY_ID_FAIL, GET_COMPANY_ID_SUCCESS, GET_COMPANY_LIST_FAIL, GET_COMPANY_LIST_SUCCESS, REGISTER_COMPANY_FAIL, REGISTER_COMPANY_SUCCESS, SET_COMPANY, SET_MESSAGE, SET_MESSAGE_FAIL, SET_MESSAGE_SUCCESS
+} from "../../Constants/actionTypes";
+import CompanyService from "../../Services/Profiles/company.service";
+import {
+    ADMIN_500, COMP_EDIT_SUCCESS_200, COMP_ERROR_400,
+    COMP_REG_SUCCESS_200
+} from "../../Static/message";
 
 export const regCompany = (name) => (dispatch) => {
     return CompanyService.registerCompanyAPI(name).then(

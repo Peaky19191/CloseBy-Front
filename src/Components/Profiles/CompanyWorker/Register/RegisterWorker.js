@@ -1,18 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import useStyles from './styles';
-import InputLabel from '@material-ui/core/InputLabel';
+import { Avatar, Button, Container, Grid, Paper, TextField, Typography } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import MenuItem from '@material-ui/core/MenuItem';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { regCompWorker } from "../../../../Actions/Profiles/companyWorker";
-import { Alert, AlertTitle } from '@material-ui/lab';
-import CompAdmin from '../../../../Services/Profiles/companyAdmin.service'
-import { Link } from 'react-router-dom'
 import { useHistory } from "react-router-dom";
 import { getCompAdminIdDispatch } from "../../../../Actions/Profiles/companyAdmin";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { regCompWorker } from "../../../../Actions/Profiles/companyWorker";
 import Message from '../../../Message/Message';
+import useStyles from './styles';
 
 const RegCompWorker = () => {
     const classes = useStyles();

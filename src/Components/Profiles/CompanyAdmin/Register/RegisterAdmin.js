@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import useStyles from './styles';
-import MenuItem from '@material-ui/core/MenuItem';
-import { useDispatch, useSelector } from "react-redux";
-import { regCompAdmin } from "../../../../Actions/Profiles/companyAdmin";
-import { getCompanyListDispatch } from "../../../../Actions/Profiles/company";
-import { Alert, AlertTitle } from '@material-ui/lab';
-import Company from '../../../../Services/Profiles/company.service'
-import { Link } from 'react-router-dom'
-import { useHistory } from "react-router-dom";
+import { Avatar, Button, Container, Grid, Paper, TextField, Typography } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import MenuItem from '@material-ui/core/MenuItem';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { getCompanyListDispatch } from "../../../../Actions/Profiles/company";
+import { regCompAdmin } from "../../../../Actions/Profiles/companyAdmin";
 import Message from '../../../Message/Message';
+import useStyles from './styles';
 
 const RegCompAdmin = () => {
     const classes = useStyles();
