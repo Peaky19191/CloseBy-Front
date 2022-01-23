@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, TextField } from '@material-ui/core';
+import React, { useState } from "react";
+import { Avatar, Button, Paper, Grid, Typography, Container, TextField } from '@material-ui/core';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import useStyles from './styles';
-import { useDispatch, useSelector } from "react-redux";
-import { Alert, AlertTitle } from '@material-ui/lab';
+import { useDispatch } from "react-redux";
 import { sendContactMessageDispatch } from "../../Actions/contact";
-import { Link } from 'react-router-dom'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Message from '..//Message/Message';
 import { useHistory } from "react-router-dom";

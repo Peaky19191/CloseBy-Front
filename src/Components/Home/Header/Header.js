@@ -16,7 +16,7 @@ const Header = () => {
 
     return (
         <div className={classes.root} id="header">
-            <Collapse in={checked} {...(checked ? { timeout: 1000 } : {})} collapsedHeight={50}>
+            <Collapse in={checked} {...(checked ? { timeout: 1000 } : {})} collapsedSize={50}>
                 <div className={classes.container}>
                     <h1 className={classes.title}>
                         Welcome to <br />
