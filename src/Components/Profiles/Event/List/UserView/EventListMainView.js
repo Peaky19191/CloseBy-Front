@@ -13,13 +13,8 @@ export const Events = () => {
     const [events, setEvent] = useState([]);
     const [count, setCount] = useState(0);
 
-    const [listMoreLoaded, setListMoreLoaded] = useState(false);
-
-
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(9);
-
-    const [disable, setDisable] = useState((events.length === count) ? true : false);
 
     const getList = () => {
         dispatch(getEventListAllDispatch(page, rowsPerPage))

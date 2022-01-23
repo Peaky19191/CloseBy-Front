@@ -95,7 +95,7 @@ const Login = (props) => {
                                     </InputAdornment>
                                 )
                             }}
-                                fullWidth name="password" htmlFor="password" type="password" label="Password" value={password} onChange={onChangePassword} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} variant="outlined" item />
+                                fullWidth name="password" htmlFor="password" label="Password" value={password} onChange={onChangePassword} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} variant="outlined" item />
                         </Grid>
                     </Grid>
                     <Button fullWidth type="submit" variant="contained" color="primary" className={classes.submit} disabled={loading}>

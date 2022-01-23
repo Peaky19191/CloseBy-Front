@@ -54,7 +54,7 @@ export const ResetPassword = () => {
                 <form className={classes.form} onSubmit={handleSubmit} >
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
-                            <TextField label="Email Address" name="email" htmlFor="email" type="email" variant="outlined" fullWidth value={email} onChange={onChangeEmail} type="email" />
+                            <TextField label="Email Address" name="email" htmlFor="email" type="email" variant="outlined" fullWidth value={email} onChange={onChangeEmail} />
                         </Grid>
                     </Grid>
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>

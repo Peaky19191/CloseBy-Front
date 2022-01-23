@@ -61,14 +61,9 @@ const CompAdminDetails = () => {
         setDisabled(true);
         setEditMode(false);
     }
-
-
-    const [successful, setSuccessful] = useState(false);
     const [loadMessage, setLoadMessage] = useState(false);
 
-    const { message } = useSelector(state => state.message);
     const dispatch = useDispatch();
-
     const dispatchCompany = (company) => {
         dispatch(setCompanyDispatch(company))
     }
@@ -78,16 +73,16 @@ const CompAdminDetails = () => {
         setLoadMessage(false);
         setLoading(true);
 
-        // if (validate())
-        dispatch(editCompAdmin(compAdmin.id, firstName, lastName, gender, email))
-            .then(() => {
-                setLoadMessage(true);
-                setLoading(false);
-            })
-            .catch(() => {
-                setLoadMessage(true);
-                setLoading(false);
-            });
+        if (validate())
+            dispatch(editCompAdmin(compAdmin.id, firstName, lastName, gender, email))
+                .then(() => {
+                    setLoadMessage(true);
+                    setLoading(false);
+                })
+                .catch(() => {
+                    setLoadMessage(true);
+                    setLoading(false);
+                });
     };
 
     let history = useHistory();
@@ -100,12 +95,11 @@ const CompAdminDetails = () => {
         temp.firstName = (/^[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+$/).test(firstName) ? "" : "Numbers and whitespaces are not allowed"
         temp.lastName = (/^[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+$/).test(lastName) ? "" : "Numbers and whitespaces are not allowed"
         temp.email = (/$^|.+@.+..+/).test(email) ? "" : "Email is not valid"
-        temp.gender = gender.length != 0 ? "" : "This field is required (gender)"
+        temp.gender = gender.length !== 0 ? "" : "This field is required (gender)"
         setErrors({
             ...temp
         })
-        console.log(Object.values(temp).every(x => x == ""));
-        return Object.values(temp).every(x => x == "");
+        return Object.values(temp).every(x => x === "");
     }
 
     return (

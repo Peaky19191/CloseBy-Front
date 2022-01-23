@@ -28,8 +28,6 @@ const EventDetailsView = () => {
     const { event: currentEvent } = useSelector((state) => state.event);
     const { profile: currentProfile } = useSelector((state) => state.auth);
 
-    const uId = currentProfile.id;
-
     const [eventId, setEventId] = useState(currentEvent.id);
     const [title, setTitle] = useState(currentEvent.title);
     const [desc, setDesc] = useState(currentEvent.description);

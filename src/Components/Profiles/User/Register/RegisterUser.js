@@ -5,7 +5,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from 'react-router-dom';
 import { registerUserDispatch } from "../../../../Actions/Profiles/user";
 import Message from '../../../Message/Message';
@@ -33,7 +33,6 @@ export const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
     const handleShowPassword = () => setShowPassword(!showPassword);
 
-    const { message } = useSelector(state => state.message);
 
     const dispatch = useDispatch();
 
@@ -79,13 +78,12 @@ export const Register = () => {
         temp.firstName = (/^[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+$/).test(firstName) ? "" : "Numbers and whitespaces are not allowed"
         temp.lastName = (/^[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+$/).test(lastName) ? "" : "Numbers and whitespaces are not allowed"
         temp.email = (/$^|.+@.+..+/).test(email) ? "" : "Email is not valid"
-        temp.gender = gender.length != 0 ? "" : "This field is required (gender)"
+        temp.gender = gender.length !== 0 ? "" : "This field is required (gender)"
         temp.password = (/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*ąćęłńóśźżĄĘŁŃÓŚŹŻ]{6,50}$/).test(password) ? "" : "At least 6 characters required including one number and one special character"
         setErrors({
             ...temp
         })
-        console.log(Object.values(temp).every(x => x == ""));
-        return Object.values(temp).every(x => x == "");
+        return Object.values(temp).every(x => x === "");
     }
 
     return (
@@ -109,8 +107,7 @@ export const Register = () => {
                                 error={errors.lastName} helperText={(errors.lastName)} name="lastName" htmlFor="lastName" variant="outlined" fullWidth value={lastName} onChange={onChangeLastName} type="text" />
                         </Grid>
                         <Grid item xs={12} >
-                            <TextField label="Gender"
-                                error={errors.gender} helperText={(errors.gender)} name="gender" htmlFor="gender" variant="outlined" fullWidth value={gender} onChange={onChangeGender} type="text" select label="Gender">
+                            <TextField error={errors.gender} helperText={(errors.gender)} name="gender" htmlFor="gender" variant="outlined" fullWidth value={gender} onChange={onChangeGender} type="text" select label="Gender">
                                 <MenuItem value={"Male"} >Male</MenuItem>
                                 <MenuItem value={"Female"} >Female</MenuItem>
                             </TextField>

@@ -61,11 +61,11 @@ export const NewPassword = () => {
     const validate = () => {
         let temp = {}
         temp.password = (/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*ąćęłńóśźżĄĘŁŃÓŚŹŻ]{6,50}$/).test(password) ? "" : "At least 6 characters required including one number and one special character"
-        temp.confirm_password = confirm_password == password ? "" : "Passwords are not the same"
+        temp.confirm_password = confirm_password === password ? "" : "Passwords are not the same"
         setErrors({
             ...temp
         })
-        return Object.values(temp).every(x => x == "");
+        return Object.values(temp).every(x => x === "");
     }
 
     return (
@@ -102,7 +102,7 @@ export const NewPassword = () => {
                                             </IconButton>
                                         </InputAdornment>
                                     )
-                                }} type={showConfirmPassword ? 'text' : 'password'} handleShowConfirmPassword={handleShowConfirmPassword} variant="outlined" fullWidth value={confirm_password} error={errors.confirm_password} helperText={(errors.confirm_password)} label="Confirm password" name="confirm_password" htmlFor="confirm_password" variant="outlined" fullWidth value={confirm_password} onChange={onChangeConfirmPassword} />
+                                }} type={showConfirmPassword ? 'text' : 'password'} handleShowConfirmPassword={handleShowConfirmPassword} variant="outlined" fullWidth value={confirm_password} error={errors.confirm_password} helperText={(errors.confirm_password)} label="Confirm password" name="confirm_password" htmlFor="confirm_password" onChange={onChangeConfirmPassword} />
                         </Grid>
                     </Grid>
                     <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>

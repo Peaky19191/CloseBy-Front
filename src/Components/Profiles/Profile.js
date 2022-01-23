@@ -20,8 +20,6 @@ const Profile = () => {
   const { profile: currentProfile } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState(false);
 
-  const { message } = useSelector(state => state.message);
-
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -35,11 +33,6 @@ const Profile = () => {
   const onChangeLastName = (e) => {
     const lastName = e.target.value;
     setLastName(lastName);
-  };
-
-  const onChangeEmail = (e) => {
-    const email = e.target.value;
-    setEmail(email);
   };
 
   const onChangeGender = (e) => {

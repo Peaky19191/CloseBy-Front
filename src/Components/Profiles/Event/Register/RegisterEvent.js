@@ -32,10 +32,6 @@ const RegEvent = () => {
 
     const [listLoaded, setListLoaded] = useState(false);
 
-    const [errors, setErrors] = useState({});
-
-    const { message } = useSelector(state => state.message);
-
     const dispatch = useDispatch();
 
     const [name, setName] = useState("");

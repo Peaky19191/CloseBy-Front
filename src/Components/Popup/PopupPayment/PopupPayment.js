@@ -4,12 +4,10 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import PaymentService from "../../../Services/Payment/payment.service";
 import CheckoutForm from "../../Payment/CheckoutForm/CheckoutForm";
-import useStyles from './styles';
 
 const stripePromise = loadStripe("pk_test_51JtBlaB8w02vjjwKiFtJFi9hChZg99wH3mePaaAC0OA1zaXkGRzLs0ixYnrRWVurceeXw8MsI6tvR6MpTGoDvcL300azJDH38s");
 
 export const Payment = (props) => {
-    const classes = useStyles();
     const { profile: currentProfile } = useSelector((state) => state.auth);
 
     const eventId = props.handleData[0];

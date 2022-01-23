@@ -35,7 +35,6 @@ const MapDetailsEdit = (props) => {
 
     const { profile: currentProfile } = useSelector((state) => state.auth);
     const state = useSelector(state => state.map);
-    const [status, setStatus] = useState(state);
 
     const { event: currentEventRedux } = useSelector((state) => state.event);
 

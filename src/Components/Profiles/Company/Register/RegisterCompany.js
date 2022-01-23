@@ -2,7 +2,7 @@ import { Avatar, Button, Container, Grid, Paper, TextField, Typography } from '@
 import CircularProgress from '@material-ui/core/CircularProgress';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { regCompany } from "../../../../Actions/Profiles/company";
 import Message from '../../../Message/Message';
@@ -17,8 +17,6 @@ const RegCompany = () => {
 
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
-
-    const { message } = useSelector(state => state.message);
 
     const dispatch = useDispatch();
 
@@ -56,7 +54,7 @@ const RegCompany = () => {
             ...temp
         })
 
-        return Object.values(temp).every(x => x == "");
+        return Object.values(temp).every(x => x === "");
     }
 
     const enabled = name.length > 0

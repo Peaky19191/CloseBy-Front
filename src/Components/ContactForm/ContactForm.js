@@ -64,7 +64,7 @@ const ContactForm = () => {
             ...temp
         })
 
-        return Object.values(temp).every(x => x == "");
+        return Object.values(temp).every(x => x === "");
     }
 
     return (

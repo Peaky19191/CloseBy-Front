@@ -35,10 +35,10 @@ import EventListTickets from '../Profiles/Event/List/UserView/EventListTickets';
 const SwitchComponent = () => {
     return (
         <Switch>
-            <Route exact path="/" exact component={Home} />
-            <Route exact path="/about" exact component={About} />
-            <Route exact path="/contact" exact component={Contact} />
-            <Route exact path="/events" exact component={Events} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/contact" component={Contact} />
+            <Route exact path="/events" component={Events} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/email-confirmation/:token" component={EmailConfirmation} />
