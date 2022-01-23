@@ -122,7 +122,7 @@ const EventDetailsEdit = () => {
                 console.log(e);
             });
     }
-    useEffect(getEventDetails, []);
+    useEffect(getEventDetails, []);// eslint-disable-line react-hooks/exhaustive-deps
 
     const [listLoaded, setListLoaded] = useState(false);
 

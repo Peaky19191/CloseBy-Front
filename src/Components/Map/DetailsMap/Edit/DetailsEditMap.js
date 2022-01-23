@@ -52,7 +52,7 @@ const MapDetailsEdit = (props) => {
     const [rowsPerPage, setRowsPerPage] = useState(100);
 
     const mapRef = React.useRef();
-
+    // eslint-disable-next-line
     const onMapLoad = React.useCallback((map) => {
         mapRef.current = map;
         getList();
@@ -228,7 +228,7 @@ const MapDetailsEdit = (props) => {
                 });
             dispatch(setNewEventLoc(event.latLng.lat(), event.latLng.lng()))
         }
-    }, []);
+    }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_API_KEY_2,

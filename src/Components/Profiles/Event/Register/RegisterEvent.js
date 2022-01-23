@@ -90,7 +90,7 @@ const RegEvent = () => {
             .catch((e) => {
                 console.log(e);
             });
-    }, [])
+    }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
     const [startDate, setStartDate] = useState("2000-01-01T00:00:00");
     const onChangeStartDate = (e) => {

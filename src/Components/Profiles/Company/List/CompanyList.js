@@ -45,7 +45,7 @@ const CompanyList = () => {
 
     };
 
-    useEffect(getList, [page, rowsPerPage]);
+    useEffect(getList, [page, rowsPerPage]);// eslint-disable-line react-hooks/exhaustive-deps
 
     const dispatch = useDispatch();
 

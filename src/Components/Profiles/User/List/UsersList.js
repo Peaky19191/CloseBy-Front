@@ -42,7 +42,7 @@ const UsersList = () => {
                 console.log(e);
             });
     };
-    useEffect(getList, [page, rowsPerPage]);
+    useEffect(getList, [page, rowsPerPage]);// eslint-disable-line react-hooks/exhaustive-deps
 
     const dispatchUser = (user) => {
         dispatch(setUser(user))

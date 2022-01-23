@@ -64,7 +64,7 @@ const CompanyDetails = () => {
                 console.log(e);
             });
     }
-    useEffect(selectCompanyWorkersList, [company.id]);
+    useEffect(selectCompanyWorkersList, [company.id]);// eslint-disable-line react-hooks/exhaustive-deps
 
 
     const selectCompanyAdminsList = () => {
@@ -79,7 +79,7 @@ const CompanyDetails = () => {
                 console.log(e);
             });
     }
-    useEffect(selectCompanyAdminsList, [company.id]);
+    useEffect(selectCompanyAdminsList, [company.id]);// eslint-disable-line react-hooks/exhaustive-deps
 
 
     const selectEventsList = () => {
@@ -94,7 +94,7 @@ const CompanyDetails = () => {
                 console.log(e);
             });
     }
-    useEffect(selectEventsList, [company.id]);
+    useEffect(selectEventsList, [company.id]);// eslint-disable-line react-hooks/exhaustive-deps
 
     const [loadMessage, setLoadMessage] = useState(false);
 

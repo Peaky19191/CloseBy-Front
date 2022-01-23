@@ -46,7 +46,7 @@ const CompanyWorkersList = () => {
             });
     };
 
-    useEffect(getList, [page, rowsPerPage]);
+    useEffect(getList, [page, rowsPerPage]);// eslint-disable-line react-hooks/exhaustive-deps
 
     const dispatchCompWorker = (compWorker) => {
         dispatch(setCompWorker(compWorker))

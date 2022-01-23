@@ -84,12 +84,12 @@ const EventDetailsView = () => {
 
         showPopup();
     }
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const callback = useCallback((quantity) => {
         setQuantity(quantity);
         closePopup();
         showPopup2();
-    }, []);
+    }, []);   // eslint-disable-line react-hooks/exhaustive-deps
 
     const showPopup = () => {
         setIsOpen(true);
@@ -120,7 +120,7 @@ const EventDetailsView = () => {
                 console.log(e);
             });
     }
-    useEffect(getEventDetails, []);
+    useEffect(getEventDetails, []);// eslint-disable-line react-hooks/exhaustive-deps
 
     let history = useHistory();
     const goToPreviousPath = () => {

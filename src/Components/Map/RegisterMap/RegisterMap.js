@@ -36,6 +36,7 @@ const MapRegister = () => {
     const { profile: currentProfile } = useSelector((state) => state.auth);
 
     const mapRef = React.useRef();
+    // eslint-disable-next-line
     const onMapLoad = React.useCallback((map) => {
         mapRef.current = map;
         getList();
@@ -137,7 +138,7 @@ const MapRegister = () => {
             });
 
         dispatch(setNewEventLoc(event.latLng.lat(), event.latLng.lng()))
-    }, []);
+    }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_API_KEY_2,

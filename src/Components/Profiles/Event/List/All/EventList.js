@@ -61,7 +61,7 @@ const EventList = () => {
         }
     };
 
-    useEffect(getList, [page, rowsPerPage]);
+    useEffect(getList, [page, rowsPerPage]);// eslint-disable-line react-hooks/exhaustive-deps
 
     const getEventListId = (companyId) => {
         dispatch(getEventListAllDispatch(page, rowsPerPage, companyId))

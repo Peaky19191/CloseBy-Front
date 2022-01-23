@@ -36,7 +36,7 @@ export const EventsTickets = () => {
             });
     };
 
-    useEffect(getList, [page, rowsPerPage]);
+    useEffect(getList, [page, rowsPerPage]);// eslint-disable-line react-hooks/exhaustive-deps
 
     const getListOnClick = () => {
         dispatch(getEventListTicketDispatch(currentProfile.id, page + 1, rowsPerPage))

@@ -47,7 +47,7 @@ const MapDetailsView = (props) => {
     const [rowsPerPage, setRowsPerPage] = useState(100);
 
     const mapRef = React.useRef();
-
+    // eslint-disable-next-line
     const onMapLoad = React.useCallback((map) => {
         mapRef.current = map;
         getList();

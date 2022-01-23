@@ -40,7 +40,7 @@ export const Events = () => {
             });
     };
 
-    useEffect(getList, [page, rowsPerPage]);
+    useEffect(getList, [page, rowsPerPage]);// eslint-disable-line react-hooks/exhaustive-deps
 
     const loadMore = () => {
         setPage(page + 1);

@@ -44,7 +44,7 @@ const RegCompWorker = () => {
             .catch((e) => {
                 console.log(e);
             });
-    }, [])
+    }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
     const onChangeFirstName = (e) => {
         const firstName = e.target.value;

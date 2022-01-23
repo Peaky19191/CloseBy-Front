@@ -24,7 +24,7 @@ const EmailConfirmation = () => {
             .catch(() => {
                 setSuccessful(false);
             });
-    }, [])
+    }, [])// eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <Container className={classes.container} component="main" maxWidth="xs">

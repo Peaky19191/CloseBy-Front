@@ -35,7 +35,7 @@ export const EventsFavorite = () => {
             });
     };
 
-    useEffect(getList, [page, rowsPerPage]);
+    useEffect(getList, [page, rowsPerPage]);// eslint-disable-line react-hooks/exhaustive-deps
 
     const getListOnClick = () => {
         dispatch(getEventListFavoriteDispatch(page + 1, rowsPerPage, currentProfile.id))

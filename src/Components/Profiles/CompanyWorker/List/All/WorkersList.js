@@ -50,7 +50,7 @@ const CompanyWorkersList = () => {
         }
     };
 
-    useEffect(getList, [page, rowsPerPage]);
+    useEffect(getList, [page, rowsPerPage]);// eslint-disable-line react-hooks/exhaustive-deps
 
     const getCompWorkersListId = (companyId) => {
         dispatch(getCompWorkerListDispatch(page, rowsPerPage, companyId))

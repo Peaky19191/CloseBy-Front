@@ -34,7 +34,7 @@ export const Payment = (props) => {
                 setClientSecret(_clientSecret);
             }
         );
-    }, []);
+    }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
     const apperarance = {
         theme: 'stripe',

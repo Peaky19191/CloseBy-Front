@@ -51,7 +51,7 @@ const Profile = () => {
       getCompAdminDetails();
     }
   }
-  useEffect(getProfileDetails, [currentProfile.id]);
+  useEffect(getProfileDetails, [currentProfile.id]);// eslint-disable-line react-hooks/exhaustive-deps
 
   const getUserDetails = () => {
     dispatch(getUserIdDispatch(currentProfile.id))
