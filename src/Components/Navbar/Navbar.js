@@ -83,7 +83,7 @@ const Navbar = () => {
                     classes={{ list: classes.list }}
                 >
                     {currentProfile && showUserBoard && (
-                        <>
+                        <div>
                             <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/favorites" variant="contained" >
                                 <ListItemIcon>
                                     <StarIcon />
@@ -97,10 +97,10 @@ const Navbar = () => {
                                 <ListItemIcon>
                                     <LocalOfferIcon />
                                 </ListItemIcon>Tickets</MenuItem>
-                        </>
+                        </div>
                     )}
                     {currentProfile && showCompanyWorkerBoard && (
-                        <>
+                        <div>
                             <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/eventList" variant="contained" >
                                 <ListItemIcon>
                                     <StorageIcon />
@@ -109,10 +109,10 @@ const Navbar = () => {
                                 <ListItemIcon>
                                     <AddCircleOutlineIcon />
                                 </ListItemIcon>Add</MenuItem>
-                        </>
+                        </div>
                     )}
                     {currentProfile && showCompanyAdminBoard && (
-                        <>
+                        <div>
                             <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/eventList" variant="contained" >
                                 <ListItemIcon>
                                     <StorageIcon />
@@ -126,10 +126,10 @@ const Navbar = () => {
                                 <ListItemIcon>
                                     <PersonAdd />
                                 </ListItemIcon>Add</MenuItem>
-                        </>
+                        </div>
                     )}
                     {currentProfile && showGlobalAdminBoard && (
-                        <>
+                        <div>
                             <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/eventList" variant="contained" >
                                 <ListItemIcon>
                                     <StorageIcon />
@@ -152,10 +152,10 @@ const Navbar = () => {
                                 <ListItemIcon>
                                     <PersonIconEmpty />
                                 </ListItemIcon>Users</MenuItem>
-                        </>
+                        </div>
                     )}
                     {currentProfile ? (
-                        <>
+                        <div>
                             <Divider />
                             {currentProfile && !showGlobalAdminBoard && // Global Adin doesnt need to see settings on his own account
                                 (<MenuItem className={classes.main} onClick={handleClose} component={Link} to="/profile" variant="contained" >
@@ -167,9 +167,9 @@ const Navbar = () => {
                                 <ListItemIcon>
                                     <LogoutIcon />
                                 </ListItemIcon>Logout</MenuItem>
-                        </>
+                        </div>
                     ) : (
-                        <>
+                        <div>
                             <MenuItem className={classes.main} onClick={handleClose} component={Link} to="/about" variant="contained" >
                                 <ListItemIcon>
                                     <InfoIcon />
@@ -184,7 +184,7 @@ const Navbar = () => {
                                 <ListItemIcon>
                                     <LoginIcon />
                                 </ListItemIcon> Login</MenuItem>
-                        </>
+                        </div>
                     )}
                 </Menu>
 
