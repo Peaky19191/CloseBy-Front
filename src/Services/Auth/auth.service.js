@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/Api/identity";
+const API_URL = "https://close-by-backend.herokuapp.com/Api/identity";
 
 
 const login = (email, password) => {
@@ -36,7 +36,7 @@ const setNewUsersPassword = (newPassword, passwordResetToken) => {
 };
 
 const confirmUserEmail = (emailConfirmationToken) => {
-  return axios.put("http://localhost:5000/Api/user/confirm", {
+  return axios.put("https://close-by-backend.herokuapp.com/Api/user/confirm", {
     emailConfirmationToken
   });
 };
