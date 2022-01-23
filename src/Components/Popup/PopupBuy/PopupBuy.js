@@ -3,20 +3,11 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import useStyles from './styles';
 
 const PopupBuy = (props) => {
     const classes = useStyles();
-    const { profile: currentProfile } = useSelector((state) => state.auth);
-
     const [quantity, setQuantity] = useState("");
-
-    const [isOpen, setIsOpen] = useState(false);
-
-    const [idEventBuy, setIdEventBuy] = useState();
-
-
     const onChangeQuantity = (e) => {
         const quantity = e.target.value;
         setQuantity(quantity);

@@ -55,12 +55,6 @@ const TicketsEventList = () => {
         dispatch(setEventDispatch(event))
     }
 
-    const [isOpen, setIsOpen] = useState(false);
-
-    const [idEventDelete, setIdEventDelete] = useState();
-    const [eventTitleDelete, setEventTitleDelete] = useState();
-
-
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
