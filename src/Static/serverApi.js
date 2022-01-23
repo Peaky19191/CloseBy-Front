@@ -1,2 +1,2 @@
-const SERVER_API = "http://localhost:5000/api/";
+const SERVER_API = "https://close-by-backend.herokuapp.com/";
 export default SERVER_API;
