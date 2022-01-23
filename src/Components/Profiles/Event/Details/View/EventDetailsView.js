@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import useStyles from './styles';
 import Event from '../../../../../Services/Profiles/event.service'
-import { Avatar, Button, Paper, Grid, Typography, Container, Select, InputLabel, TextField, InputAdornment ,MenuItem } from '@material-ui/core';
+import { Avatar, Button, Paper, Grid, Typography, Container, Select, InputLabel, TextField, InputAdornment, MenuItem } from '@material-ui/core';
 import { Link } from 'react-router-dom'
 import { editEvent } from "../../../../../Actions/Profiles/events";
 import { Alert, AlertTitle } from '@material-ui/lab';
@@ -55,7 +55,7 @@ const EventDetailsView = () => {
     const [endDate, setEndDate] = useState("");
     const [favorite, setFavorite] = useState("");
     const [ticketPrice, setTicketPrice] = useState(currentEvent.ticketPrice);
-    
+
     const [quantity, setQuantity] = useState("");
 
     const changeFavorite = () => {
@@ -97,10 +97,10 @@ const EventDetailsView = () => {
         showPopup();
     }
 
-    const callback = useCallback((quantity) => {  
+    const callback = useCallback((quantity) => {
         setQuantity(quantity);
         closePopup();
-        showPopup2();  
+        showPopup2();
     }, []);
 
     const showPopup = () => {
@@ -185,7 +185,7 @@ const EventDetailsView = () => {
                                         <Slider className={classes.limit} value={limit - currentEvent.ticketsBought} />
                                     </Grid>
                                     <Grid item>
-                                        <Input value={limit - currentEvent.ticketsBought} size="small"/>
+                                        <Input value={limit - currentEvent.ticketsBought} size="small" />
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -217,8 +217,8 @@ const EventDetailsView = () => {
                     </Grid>
                 </form>
             </Paper>
-                {isOpen && <PopupBuy handleClose={closePopup} handleData={[idEventBuy, eventTitleBuy, eventDescriptionBuy, eventTicketPriceBuy]} parentCallback={callback}  />}
-                {isOpen2 && <PopupPayment handleClose={showPopup2} handleData={[eventId, quantity]} />}
+            {isOpen && <PopupBuy handleClose={closePopup} handleData={[idEventBuy, eventTitleBuy, eventDescriptionBuy, eventTicketPriceBuy]} parentCallback={callback} />}
+            {isOpen2 && <PopupPayment handleClose={showPopup2} handleData={[eventId, quantity]} />}
         </Container>
     );
 };

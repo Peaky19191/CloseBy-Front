@@ -6,6 +6,8 @@ import {
 } from "@stripe/react-stripe-js";
 import useStyles from './styles';
 import { Paper, Container, Grid } from '@material-ui/core';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@material-ui/core/IconButton';
 
 const CheckoutForm = (props) => {
   const classes = useStyles();
@@ -76,9 +78,14 @@ const CheckoutForm = (props) => {
     <div className={classes.popupBox}>
       <Container className={classes.container}>
         <Paper className={classes.paper} component="main" maxWidth="xs">
+          <Grid className={classes.closeIconContainer}>
+            <IconButton onClick={props.handleClosePopup} aria-label="close" size="small">
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </Grid>
           <form id="payment-form" className={classes.form} onSubmit={handleSubmit}>
             <PaymentElement id="paymentElement" classes="paymentElement" />
-            <button  className={classes.button} disabled={isLoading || !stripe || !elements} id="submit">
+            <button className={classes.button} disabled={isLoading || !stripe || !elements} id="submit">
               <span id="button-text">
                 {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
               </span>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import {Elements} from '@stripe/react-stripe-js';
-import {loadStripe} from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 import CheckoutForm from "../../Payment/CheckoutForm/CheckoutForm";
 import PaymentService from "../../../Services/Payment/payment.service"
 import { useParams } from 'react-router';
@@ -16,14 +16,11 @@ const stripePromise = loadStripe("pk_test_51JtBlaB8w02vjjwKiFtJFi9hChZg99wH3mePa
 export const Payment = (props) => {
     const classes = useStyles();
     const { profile: currentProfile } = useSelector((state) => state.auth);
-    
+
     const eventId = props.handleData[0];
     const uId = currentProfile.id;
     const quantity = props.handleData[1];
-
-    console.log('user: '+ uId);
-    console.log('eventid: ' + eventId);
-    console.log('quantity: ' + props.handleData[1]);
+    const handleClose = props.handleClose;
 
     const [clientSecret, setClientSecret] = useState("");
 
@@ -54,10 +51,10 @@ export const Payment = (props) => {
     };
 
     return (
-        <div className="Payment">
+        <div >
             {clientSecret && (
                 <Elements options={options} stripe={stripePromise}>
-                    <CheckoutForm />
+                    <CheckoutForm handleClosePopup={handleClose} />
                 </Elements>
             )}
         </div>

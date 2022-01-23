@@ -5,7 +5,7 @@ export default makeStyles((theme) => ({
         position: "absolute",
         background: "#00000050",
         width: "100%",
-        height: "100vh",
+        height: "109.4vh",
         top: 0,
         left: 0,
     },
@@ -66,5 +66,8 @@ export default makeStyles((theme) => ({
             backgroundColor: '#008ae6',
             color: '#ffffff',
         },
+    },
+    amountBox: {
+        margin: theme.spacing(1),
     },
 }));

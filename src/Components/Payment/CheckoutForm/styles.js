@@ -20,13 +20,12 @@ export default makeStyles((theme) => ({
   },
 
   root: {
-      '& .MuiTextField-root': {
-        margin: theme.spacing(1),
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
     },
   },
 
   form: {
-
     width: '30vw',
     minWidth: '500px',
     alignSelf: 'center',
@@ -59,25 +58,26 @@ export default makeStyles((theme) => ({
     display: 'block',
     transition: 'all 0.2s ease',
     boxShadow: '0px 4px 5.5px 0px rgba(0,0,0,0.07)',
-    width: '100%'
+    width: '100%',
+    margin: theme.spacing(3, 1, 1, 1),
   },
 
   popupBox: {
     position: "absolute",
     background: "#00000099",
     width: "100%",
-    height: "102vh",
+    height: "109.4vh",
     top: 0,
     left: 0,
-},
+  },
 
-closeIconContainer: {
-  display: 'flex',
-  flexDirection: 'column',
-  // justifyContent: 'center',
-  // alignItems: 'center',
-  alignItems: 'flex-end',
-  width: '100%'
-},
+  closeIconContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    alignItems: 'flex-end',
+    width: '100%'
+  },
 
 }))
