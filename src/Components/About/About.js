@@ -41,23 +41,6 @@ const About = () => {
                 </Button>
             </Paper>
         </Container>
-
-
-        // <div style={{
-        //     display: 'flex',
-        //     justifyContent: 'center',
-        //     alignItems: 'center',
-        //     height: '90vh',
-        // }}
-        // >
-        //     <h1>About us</h1>
-        //     <p>
-        //         <b /
-        //         <b />
-        //         <b />
-        //         <b />
-        //     </p>
-        // </div>
     )
 }
 

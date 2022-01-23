@@ -5,7 +5,8 @@ import { useSelector } from "react-redux";
 import PaymentService from "../../../Services/Payment/payment.service";
 import CheckoutForm from "../../Payment/CheckoutForm/CheckoutForm";
 
-const stripePromise = loadStripe("pk_test_51JtBlaB8w02vjjwKiFtJFi9hChZg99wH3mePaaAC0OA1zaXkGRzLs0ixYnrRWVurceeXw8MsI6tvR6MpTGoDvcL300azJDH38s");
+const pvKey = process.env.REACT_APP_API_KEY_3;
+const stripePromise = loadStripe(pvKey);
 
 export const Payment = (props) => {
     const { profile: currentProfile } = useSelector((state) => state.auth);
