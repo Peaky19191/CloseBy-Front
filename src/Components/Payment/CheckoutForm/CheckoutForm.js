@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
-import {
-  PaymentElement,
-  useStripe,
-  useElements
-} from "@stripe/react-stripe-js";
-import useStyles from './styles';
-import { Paper, Container, Grid } from '@material-ui/core';
-import CloseIcon from '@mui/icons-material/Close';
+import { Container, Grid, Paper } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import {
+  PaymentElement, useElements, useStripe
+} from "@stripe/react-stripe-js";
+import React, { useEffect, useState } from "react";
+import useStyles from './styles';
 
 const CheckoutForm = (props) => {
   const classes = useStyles();
@@ -61,7 +59,7 @@ const CheckoutForm = (props) => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "http://localhost:3000/tickets",
+        return_url: "https://close-by.netlify.app/tickets",
       },
     });
 
