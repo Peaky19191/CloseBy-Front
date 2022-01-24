@@ -1,9 +1,8 @@
 import { Container, Grid, Paper } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import {
-  PaymentElement, useElements, useStripe
-} from "@stripe/react-stripe-js";
+import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { toast } from 'react-toastify';
 import React, { useEffect, useState } from "react";
 import { UI_API } from '../../../Static/API';
 import useStyles from './styles';
@@ -34,6 +33,7 @@ const CheckoutForm = (props) => {
       switch (paymentIntent.status) {
         case "succeeded":
           setMessage("Payment succeeded!");
+          toast.success("Payment succeeded! You can check your tickets on tickets page.")
           break;
         case "processing":
           setMessage("Your payment is processing.");

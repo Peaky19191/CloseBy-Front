@@ -166,14 +166,14 @@ const EventDetailsView = () => {
                             </Grid>
                             <Grid className={classes.gridField} >
                                 <Typography id="input-slider" gutterBottom>
-                                    Tickets left
+                                    Tickets limit
                                 </Typography>
                                 <Grid container spacing={2} alignItems="center">
                                     <Grid item xs>
-                                        <Slider className={classes.limit} value={limit - currentEvent.ticketsBought} />
+                                        <Slider className={classes.limit} value={limit} />
                                     </Grid>
                                     <Grid item>
-                                        <Input value={limit - currentEvent.ticketsBought} size="small" />
+                                        <Input value={limit} size="small" />
                                     </Grid>
                                 </Grid>
                             </Grid>
