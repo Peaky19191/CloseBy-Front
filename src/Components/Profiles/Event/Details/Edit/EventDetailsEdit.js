@@ -268,7 +268,7 @@ const EventDetailsEdit = () => {
                                 </Grid>
                             </Grid>
                             <Grid className={classes.gridField} >
-                                <TextField label="Tickets left" fullWidth name="ticketsLeft" htmlFor="ticketsLeft" variant="outlined" type="text" value={limit - currentEvent.ticketsBought} onChange={onChangeTicketPrice} InputProps={{ readOnly: true }} />
+                                <TextField label="Tickets bought" fullWidth name="ticketsBought" htmlFor="ticketsBought" variant="outlined" type="text" value={currentEvent.ticketsBought} InputProps={{ readOnly: true }} />
                             </Grid>
                             <Grid className={classes.gridField} >
                                 <TextField label="Ticket price" fullWidth name="ticketPrice" htmlFor="ticketPrice" variant="outlined" type="number" value={ticketPrice} onChange={onChangeTicketPrice} InputProps={{ readOnly: disaled, startAdornment: <InputAdornment position="start">€</InputAdornment>, }} />
