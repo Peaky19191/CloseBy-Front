@@ -2,7 +2,6 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { toast } from 'react-toastify';
 import PaymentService from "../../../Services/Payment/payment.service";
 import CheckoutForm from "../../Payment/CheckoutForm/CheckoutForm";
 
@@ -23,7 +22,6 @@ export const Payment = (props) => {
         PaymentService.createPayment(eventId, uId, quantity).then(
             (response) => {
                 setClientSecret(response.data.paymentIntentToken);
-                toast.success("Payment succeeded! You can check your tickets on tickets page.")
             },
             (error) => {
                 const _clientSecret =
