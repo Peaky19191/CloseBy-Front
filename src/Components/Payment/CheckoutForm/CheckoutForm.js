@@ -2,9 +2,9 @@ import { Container, Grid, Paper } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import React, { useEffect, useState } from "react";
 import { toast } from 'react-toastify';
-import { UI_API } from "../../../Static/API";
+import React, { useEffect, useState } from "react";
+import { UI_API } from '../../../Static/API';
 import useStyles from './styles';
 
 const CheckoutForm = (props) => {
