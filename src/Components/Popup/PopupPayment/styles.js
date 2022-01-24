@@ -46,8 +46,9 @@ export default makeStyles((theme) => ({
   },
 
   popupBox: {
-    position: "absolute",
+    position: "fixed",
     background: "#00000050",
+    backgroundSize: "cover",
     width: "100%",
     height: "100vh",
     top: 0,
