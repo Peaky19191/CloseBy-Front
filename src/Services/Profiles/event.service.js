@@ -1,5 +1,5 @@
 import axios from "axios";
-import SERVER_API from "../../Static/serverApi";
+import { SERVER_API } from "../../Static/API";
 import authHeader from "../Auth/auth-header";
 
 const API_URL = "event";
