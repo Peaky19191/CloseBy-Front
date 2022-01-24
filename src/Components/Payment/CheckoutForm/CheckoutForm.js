@@ -1,11 +1,13 @@
 import { Container, Grid, Paper } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import {
-  PaymentElement, useElements, useStripe
-} from "@stripe/react-stripe-js";
+import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
+<<<<<<< HEAD
 import { toast } from 'react-toastify';
+=======
+import { UI_API } from "../../../Static/API";
+>>>>>>> 6ef848e (Link for production - fix)
 import useStyles from './styles';
 
 const CheckoutForm = (props) => {
@@ -61,7 +63,7 @@ const CheckoutForm = (props) => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "https://close-by.netlify.app/tickets",
+        return_url: UI_API + "tickets",
       },
     });
 

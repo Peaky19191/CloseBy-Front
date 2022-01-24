@@ -1,9 +1,10 @@
 import axios from "axios";
+import { SERVER_API } from "../../Static/API";
 
-const API_URL = "https://close-by-backend.herokuapp.com/Api/contact";
+const API_URL = "contact";
 
 const sendContactMessageAPI = (email, content) => {
-    return axios.post(API_URL,
+    return axios.post(SERVER_API + API_URL,
         {
             email: email,
             content: content

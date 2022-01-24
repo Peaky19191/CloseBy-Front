@@ -1,11 +1,11 @@
 import axios from "axios";
+import { SERVER_API } from "../../Static/API";
 
-const API_URL = "https://close-by-backend.herokuapp.com/Api/identity";
-
+const API_URL = "identity";
 
 const login = (email, password) => {
   return axios
-    .post(API_URL + "/login", {
+    .post(SERVER_API + API_URL + "/login", {
       email,
       password
     })
@@ -23,20 +23,20 @@ const logout = () => {
 };
 
 const resetUsersPassword = (email) => {
-  return axios.post(API_URL + "/request-password-reset", {
+  return axios.post(SERVER_API + API_URL + "/request-password-reset", {
     email
   });
 };
 
 const setNewUsersPassword = (newPassword, passwordResetToken) => {
-  return axios.put(API_URL + "/reset-password", {
+  return axios.put(SERVER_API + API_URL + "/reset-password", {
     newPassword,
     passwordResetToken
   });
 };
 
 const confirmUserEmail = (emailConfirmationToken) => {
-  return axios.put("https://close-by-backend.herokuapp.com/Api/user/confirm", {
+  return axios.put(SERVER_API + "user/confirm", {
     emailConfirmationToken
   });
 };

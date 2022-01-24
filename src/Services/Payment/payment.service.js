@@ -1,10 +1,11 @@
 import axios from "axios";
+import { SERVER_API } from "../../Static/API";
 import authHeader from "../Auth/auth-header";
 
-const API_URL = "https://close-by-backend.herokuapp.com/api/ticket";
+const API_URL = "ticket";
 
 const createPayment = (eventId, userId, quantity) => {
-    return axios.post(API_URL + "/create-payment",
+    return axios.post(SERVER_API + API_URL + "/create-payment",
         {
             eventId: eventId,
             userId: userId,
