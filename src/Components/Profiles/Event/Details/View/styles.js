@@ -87,6 +87,7 @@ export default makeStyles((theme) => ({
     },
     gridField: {
         margin: theme.spacing(3),
+        zIndex: 0,
     },
     buttonsContainer: {
         display: 'flex',

@@ -9,6 +9,7 @@ export default makeStyles((theme) => ({
         height: "109.4vh",
         top: 0,
         left: 0,
+        zIndex: 1,
     },
     container: {
         // maxWidth: "30vw",
