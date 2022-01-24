@@ -5,6 +5,7 @@ import {
   PaymentElement, useElements, useStripe
 } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
+import { toast } from 'react-toastify';
 import useStyles from './styles';
 
 const CheckoutForm = (props) => {
@@ -33,6 +34,7 @@ const CheckoutForm = (props) => {
       switch (paymentIntent.status) {
         case "succeeded":
           setMessage("Payment succeeded!");
+          toast.success("Payment succeeded! You can check your tickets on tickets page.")
           break;
         case "processing":
           setMessage("Your payment is processing.");
@@ -59,7 +61,7 @@ const CheckoutForm = (props) => {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "https://close-by.netlify.app/tickets/:?",
+        return_url: "https://close-by.netlify.app/",
       },
     });
 
