@@ -23,9 +23,9 @@ const registerEventAPI = (title, companyId, loc_lat, loc_lng, startDate, endDate
             type: type,
             ticketPrice: ticketPrice,
         },
-        {
-            headers: authHeader()
-        }
+        // {
+        //     headers: authHeader()
+        // }
     );
 };
 
@@ -47,9 +47,9 @@ const editEventAPI = (eventId, title, companyId, loc_lat, loc_lng, startDate, en
                 longitude: loc_lng
             },
         },
-        {
-            headers: authHeader()
-        }
+        // {
+        //     headers: authHeader()
+        // }
     );
 };
 
@@ -108,7 +108,7 @@ const getEventListTicketApi = (userId, pageNumber, rowsPerPage) => {
 const deleteEventApi = (id) => {
     return axios.delete(SERVER_API + API_URL + "/delete",
         {
-            headers: authHeader(),
+            // headers: authHeader(),
             data: {
                 id: id
             }
@@ -123,7 +123,7 @@ const getEventIdApi = (id, userId) => {
             userId: userId
         },
         {
-            headers: authHeader(),
+            // headers: authHeader(),
         },
     );
 };
@@ -135,7 +135,7 @@ const addToFavoriteApi = (userId, eventId) => {
             userId: userId
         },
         {
-            headers: authHeader(),
+            // headers: authHeader(),
         },
     );
 };
@@ -144,7 +144,7 @@ const deleteFromFavoriteApi = (userId, eventId) => {
     return axios.delete(SERVER_API + API_URL_FAV + "delete",
 
         {
-            headers: authHeader(),
+            // headers: authHeader(),
             data: {
                 eventId: eventId,
                 userId: userId

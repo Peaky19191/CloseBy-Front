@@ -1,6 +1,5 @@
 import axios from "axios";
 import { SERVER_API } from "../../Static/API";
-import authHeader from "../Auth/auth-header";
 
 const API_URL = "company/";
 
@@ -9,9 +8,9 @@ const registerCompanyAPI = (name) => {
         {
             name: name
         },
-        {
-            headers: authHeader()
-        }
+        // {
+        //     headers: authHeader()
+        // }
     );
 };
 
@@ -21,9 +20,9 @@ const editCompanyAPI = (id, name) => {
             id: id,
             name: name
         },
-        {
-            headers: authHeader()
-        }
+        // {
+        //     headers: authHeader()
+        // }
     );
 };
 
@@ -33,16 +32,16 @@ const getCompanyListAPI = (pageNumber, rowsPerPage) => {
             page: pageNumber,
             limit: rowsPerPage
         },
-        {
-            headers: authHeader()
-        },
+        // {
+        //     headers: authHeader()
+        // },
     );
 };
 
 const deleteCompanyAPI = (id) => {
     return axios.delete(SERVER_API + API_URL + "delete",
         {
-            headers: authHeader(),
+            // // headers: authHeader(),
             data: {
                 id: id
             }
@@ -53,7 +52,7 @@ const deleteCompanyAPI = (id) => {
 const getCompanyIdAPI = (id) => {
     return axios.get(SERVER_API + API_URL + id,
         {
-            headers: authHeader(),
+            // // headers: authHeader(),
         },
     );
 };

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { SERVER_API } from "../../Static/API";
-import authHeader from "../Auth/auth-header";
 
 const API_URL = "ticket";
 
@@ -11,9 +10,9 @@ const createPayment = (eventId, userId, quantity) => {
             userId: userId,
             quantity: quantity
         },
-        {
-            headers: authHeader()
-        }
+        // {
+        //     headers: authHeader()
+        // }
     );
 };
 

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { SERVER_API } from "../../Static/API";
-import authHeader from "../Auth/auth-header";
 
 const API_URL = "company-worker/";
 
@@ -13,9 +12,9 @@ const registerCompanyWorkerAPI = (firstName, lastName, gender, email, companyId)
             gender,
             companyId
         },
-        {
-            headers: authHeader()
-        }
+        // {
+        //     headers: authHeader()
+        // }
     );
 };
 
@@ -28,9 +27,9 @@ const editCompanyWorkerAPI = (id, firstName, lastName, gender, email) => {
             gender: gender,
             email: email,
         },
-        {
-            headers: authHeader()
-        }
+        // {
+        //     headers: authHeader()
+        // }
     );
 };
 
@@ -41,16 +40,16 @@ const getCompWorkerListAPI = (pageNumber, rowsPerPage, companyId) => {
             limit: rowsPerPage,
             companyId: companyId
         },
-        {
-            headers: authHeader()
-        }
+        // {
+        //     headers: authHeader()
+        // }
     );
 };
 
 const deleteCompWorkerAPI = (id, companyId) => {
     return axios.delete(SERVER_API + API_URL + "delete",
         {
-            headers: authHeader(),
+            // headers: authHeader(),
             data: {
                 id: id,
                 companyId: companyId
@@ -64,7 +63,7 @@ const deleteCompWorkerAPI = (id, companyId) => {
 const getCompWorkerIdAPI = (id) => {
     return axios.get(SERVER_API + API_URL + id,
         {
-            headers: authHeader(),
+            // headers: authHeader(),
         },
 
     );

@@ -1,5 +1,5 @@
 import {
-    LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT
+    LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, REFRESH_TOKEN
 } from "../Constants/actionTypes";
 
 const profile = JSON.parse(localStorage.getItem("profile"));
@@ -31,6 +31,11 @@ export default function (state = initialState, action) {
                 ...state,
                 isLoggedIn: false,
                 profile: null,
+            };
+        case REFRESH_TOKEN:
+            return {
+                ...state,
+                profile: { ...profile, accessToken: payload },
             };
         default:
             return state;

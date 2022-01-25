@@ -1,6 +1,5 @@
 import axios from "axios";
 import { SERVER_API } from "../../Static/API";
-import authHeader from "../Auth/auth-header";
 
 const API_URL = "user/";
 
@@ -27,9 +26,9 @@ const updateUserAPI = (id, firstName, lastName, gender, email) => {
             gender: gender,
             email: email,
         },
-        {
-            headers: authHeader()
-        }
+        // {
+        //     headers: authHeader()
+        // }
     );
 };
 
@@ -40,7 +39,7 @@ const getUserListAPI = (pageNumber, rowsPerPage) => {
             limit: rowsPerPage
         },
         {
-            headers: authHeader(),
+            // headers: authHeader(),
         }
     );
 };
@@ -48,7 +47,7 @@ const getUserListAPI = (pageNumber, rowsPerPage) => {
 const deleteUserAPI = (id) => {
     return axios.delete(SERVER_API + API_URL + "delete",
         {
-            headers: authHeader(),
+            // headers: authHeader(),
             data: {
                 id: id
             }
@@ -60,7 +59,7 @@ const deleteUserAPI = (id) => {
 const getUserIdAPI = (id) => {
     return axios.get(SERVER_API + API_URL + id,
         {
-            headers: authHeader(),
+            // headers: authHeader(),
         },
 
     );
