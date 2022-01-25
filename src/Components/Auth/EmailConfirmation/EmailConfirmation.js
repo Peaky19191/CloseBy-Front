@@ -40,7 +40,7 @@ const EmailConfirmation = () => {
                     </Alert>
                     :
                     (message ?
-                        <Alert className={successful ? classes.alert : classes.alert} severity="error">
+                        <Alert className={classes.alert} severity="error">
                             <AlertTitle>Error</AlertTitle>
                             <strong> {message} </strong>
                         </Alert>

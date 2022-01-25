@@ -102,17 +102,20 @@ const PopupDeleteCompany = (props) => {
                                 <TextField value={props.handleData[1]} label="Company" InputProps={{ readOnly: true }} variant="outlined" fullWidth />
                             </Grid>
                             <Grid item xs={12}>
-                                <Button disabled={(eventsList.length !== 0) ? false : true} className={classes.buttonLink} component={Link} to="/eventListCompanyFilter" fullWidth variant="contained" color="primary" >
+                                <Button disabled={(eventsList.length === 0) ? true : false}
+                                    className={classes.buttonLink} component={Link} to="/eventListCompanyFilter" fullWidth variant="contained" color="primary" >
                                     {(eventsList.length !== 0) ? "Events" : "No Event"}
                                 </Button>
                             </Grid>
                             <Grid item xs={12}>
-                                <Button disabled={(compAdminsList.length !== 0) ? false : true} className={classes.buttonLink} component={Link} to="/adminListCompanyFilter" fullWidth variant="contained" color="primary" >
+                                <Button disabled={(compAdminsList.length === 0) ? true : false}
+                                    className={classes.buttonLink} component={Link} to="/adminListCompanyFilter" fullWidth variant="contained" color="primary" >
                                     {(compAdminsList.length !== 0) ? "Admins" : "No Admin"}
                                 </Button>
                             </Grid>
                             <Grid item xs={12}>
-                                <Button disabled={(compWorkersList.length !== 0) ? false : true} className={classes.buttonLink} component={Link} to="/workerListCompanyFilter" fullWidth variant="contained" color="primary" >
+                                <Button disabled={(compWorkersList.length === 0) ? true : false}
+                                    className={classes.buttonLink} component={Link} to="/workerListCompanyFilter" fullWidth variant="contained" color="primary" >
                                     {(compWorkersList.length !== 0) ? "Workers" : "No Worker"}
                                 </Button>
                             </Grid>
