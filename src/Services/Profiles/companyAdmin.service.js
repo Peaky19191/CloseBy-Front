@@ -1,10 +1,10 @@
-import axios from "axios";
 import { SERVER_API } from "../../Static/API";
+import apiInstance from "../Auth/apiInstance";
 
 const API_URL = "company-admin/";
 
 const registerCompanyAdminAPI = (firstName, lastName, gender, email, companyId) => {
-    return axios.post(SERVER_API + API_URL + "create",
+    return apiInstance.post(SERVER_API + API_URL + "create",
         {
             firstName,
             lastName,
@@ -19,7 +19,7 @@ const registerCompanyAdminAPI = (firstName, lastName, gender, email, companyId) 
 };
 
 const editCompanyAdminAPI = (id, firstName, lastName, gender, email, companyId) => {
-    return axios.put(SERVER_API + API_URL + "update",
+    return apiInstance.put(SERVER_API + API_URL + "update",
         {
             id: id,
             firstName: firstName,
@@ -34,7 +34,7 @@ const editCompanyAdminAPI = (id, firstName, lastName, gender, email, companyId) 
 };
 
 const getCompAdminListAPI = (pageNumber, rowsPerPage, companyId) => {
-    return axios.post(SERVER_API + API_URL + "list",
+    return apiInstance.post(SERVER_API + API_URL + "list",
         {
             page: pageNumber,
             limit: rowsPerPage,
@@ -47,7 +47,7 @@ const getCompAdminListAPI = (pageNumber, rowsPerPage, companyId) => {
 };
 
 const deleteCompAdminAPI = (id, companyId) => {
-    return axios.delete(SERVER_API + API_URL + "delete",
+    return apiInstance.delete(SERVER_API + API_URL + "delete",
         {
             // headers: authHeader(),
             data: {
@@ -60,7 +60,7 @@ const deleteCompAdminAPI = (id, companyId) => {
 };
 
 const getCompAdminIdAPI = (id) => {
-    return axios.get(SERVER_API + API_URL + id,
+    return apiInstance.get(SERVER_API + API_URL + id,
         {
             // headers: authHeader(),
         },

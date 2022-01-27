@@ -1,29 +1,29 @@
 const getLocalRefreshToken = () => {
-    const profil = JSON.parse(localStorage.getItem("profil"));
-    return profil?.refreshToken;
+    const profile = JSON.parse(localStorage.getItem("profile"));
+    return profile?.refreshToken;
 };
 
 const getLocalAccessToken = () => {
-    const profil = JSON.parse(localStorage.getItem("profil"));
-    return profil?.accessToken;
+    const profile = JSON.parse(localStorage.getItem("profile"));
+    return profile?.accessToken;
 };
 
 const updateLocalAccessToken = (token) => {
-    let profil = JSON.parse(localStorage.getItem("profil"));
-    profil.accessToken = token;
-    localStorage.setItem("profil", JSON.stringify(profil));
+    let profile = JSON.parse(localStorage.getItem("profile"));
+    profile.accessToken = token;
+    localStorage.setItem("profile", JSON.stringify(profile));
 };
 
 const getProfile = () => {
-    return JSON.parse(localStorage.getItem("profil"));
+    return JSON.parse(localStorage.getItem("profile"));
 };
 
-const setProfile = (profil) => {
-    localStorage.setItem("profil", JSON.stringify(profil));
+const setProfile = (profile) => {
+    localStorage.setItem("profile", JSON.stringify(profile));
 };
 
 const removeProfile = () => {
-    localStorage.removeItem("profil");
+    localStorage.removeItem("profile");
 };
 
 const TokenService = {

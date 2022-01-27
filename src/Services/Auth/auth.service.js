@@ -13,8 +13,6 @@ const login = (email, password) => {
     .then((response) => {
       console.log(response);
       if (response.data.accessToken) {
-        console.log("111");
-
         TokenService.setProfile(response.data);
       }
       return response.data;
@@ -23,7 +21,6 @@ const login = (email, password) => {
 
 const logout = () => {
   localStorage.removeItem("profile");
-
 };
 
 const resetUsersPassword = (email) => {
