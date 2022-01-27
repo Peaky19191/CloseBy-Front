@@ -17,6 +17,7 @@ import RegCompWorker from '../../Components/Profiles/CompanyWorker/Register/Regi
 import EventDetailsEdit from '../../Components/Profiles/Event/Details/Edit/EventDetailsEdit';
 import EventDetailsView from '../../Components/Profiles/Event/Details/View/EventDetailsView';
 import TicketsEventList from '../../Components/Profiles/Event/List/TicketsFiltered/TicketsListEventFiltered';
+import TicketDetails from '../../Components/Profiles/Event/List/UserView/TicketDetails/TicketDetails';
 import RegEvent from '../../Components/Profiles/Event/Register/RegisterEvent';
 import Profile from '../../Components/Profiles/Profile';
 import UserDetails from '../../Components/Profiles/User/Details/UserDetails';
@@ -30,7 +31,7 @@ import EventList from '../Profiles/Event/List/All/EventList';
 import EventListCompanyFiltered from '../Profiles/Event/List/CompanyFiltered/EventListCompanyFiltered';
 import EventListFavorite from '../Profiles/Event/List/UserView/EventListFavorite';
 import Events from '../Profiles/Event/List/UserView/EventListMainView';
-import EventListTickets from '../Profiles/Event/List/UserView/EventListTickets';
+import EventListTickets from '../Profiles/Event/List/UserView/EventListTickets/EventListTickets';
 
 const SwitchComponent = () => {
     return (
@@ -54,6 +55,7 @@ const SwitchComponent = () => {
             <Route exact path="/registerCompany" component={RegCompany} />
             <Route exact path="/userDetails" component={UserDetails} />
             <Route exact path="/compAdminDetails" component={CompAdminDetails} />
+            <Route exact path="/ticketDetails" component={TicketDetails} />
             <Route exact path="/companyDetails" component={CompanyDetails} />
             <Route exact path="/compWorkerDetails" component={CompWorkerDetails} />
             <Route exact path="/registerEvent" component={RegEvent} />

@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import {
-    CLEAR_CURRENT_EVENT_LOC, CLEAR_EVENT, CLEAR_NEW_EVENT_LOC, DELETE_EVENT_FAIL, DELETE_EVENT_SUCCESS, DELETE_FAVORITE_FAIL, DELETE_FAVORITE_SUCCESS, EDIT_EVENT_FAIL, EDIT_EVENT_SUCCESS, GET_EVENT_ID_FAIL, GET_EVENT_ID_SUCCESS, GET_EVENT_LIST_ALL_FAIL, GET_EVENT_LIST_ALL_SUCCESS, GET_EVENT_LIST_FAIL, GET_EVENT_LIST_FAV_FAIL, GET_EVENT_LIST_FAV_SUCCESS, GET_EVENT_LIST_SUCCESS, GET_EVENT_LIST_TIC_FAIL, GET_EVENT_LIST_TIC_SUCCESS, REGISTER_EVENT_FAIL, REGISTER_EVENT_SUCCESS, SET_CURRENT_EVENT_LOC, SET_EVENT, SET_FAVORITE_FAIL, SET_FAVORITE_SUCCESS, SET_MESSAGE, SET_MESSAGE_FAIL, SET_MESSAGE_SUCCESS, SET_NEW_EVENT_LOC
+    CLEAR_CURRENT_EVENT_LOC, CLEAR_EVENT, CLEAR_NEW_EVENT_LOC, CLEAR_TICKET, DELETE_EVENT_FAIL, DELETE_EVENT_SUCCESS, DELETE_FAVORITE_FAIL, DELETE_FAVORITE_SUCCESS, EDIT_EVENT_FAIL, EDIT_EVENT_SUCCESS, GET_EVENT_ID_FAIL, GET_EVENT_ID_SUCCESS, GET_EVENT_LIST_ALL_FAIL, GET_EVENT_LIST_ALL_SUCCESS, GET_EVENT_LIST_FAIL, GET_EVENT_LIST_FAV_FAIL, GET_EVENT_LIST_FAV_SUCCESS, GET_EVENT_LIST_SUCCESS, GET_EVENT_LIST_TIC_FAIL, GET_EVENT_LIST_TIC_SUCCESS, REGISTER_EVENT_FAIL, REGISTER_EVENT_SUCCESS, SET_CURRENT_EVENT_LOC, SET_EVENT, SET_FAVORITE_FAIL, SET_FAVORITE_SUCCESS, SET_MESSAGE, SET_MESSAGE_FAIL, SET_MESSAGE_SUCCESS, SET_NEW_EVENT_LOC, SET_TICKET
 } from "../../Constants/actionTypes";
 import EventService from "../../Services/Profiles/event.service";
 import {
@@ -72,12 +72,26 @@ export const setEventDispatch = (event) => (dispatch) => {
     });
 };
 
+export const setTicketDispatch = (ticket) => (dispatch) => {
+    localStorage.setItem("Ticket", JSON.stringify(ticket));
+
+    dispatch({
+        type: SET_TICKET,
+        payload: ticket,
+    });
+};
+
 export const clearEventDispatch = () => (dispatch) => {
     dispatch({
         type: CLEAR_EVENT,
     });
 };
 
+export const clearTicketDispatch = () => (dispatch) => {
+    dispatch({
+        type: CLEAR_TICKET,
+    });
+};
 
 export const editEvent = (eventId, title, companyId, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type, ticketPrice) => (dispatch) => {
     return EventService.editEventAPI(eventId, title, companyId, loc_lat, loc_lng, startDate, endDate, status, desc, limit, type, ticketPrice).then(
