@@ -1,5 +1,6 @@
 import axios from "axios";
 import { SERVER_API } from "../../Static/API";
+import TokenService from "./token.service";
 
 const API_URL = "identity";
 
@@ -10,8 +11,9 @@ const login = (email, password) => {
       password
     })
     .then((response) => {
+      console.log(response);
       if (response.data.accessToken) {
-        localStorage.setItem("profile", JSON.stringify(response.data));
+        TokenService.setProfile(response.data);
       }
       return response.data;
     });
@@ -19,7 +21,6 @@ const login = (email, password) => {
 
 const logout = () => {
   localStorage.removeItem("profile");
-
 };
 
 const resetUsersPassword = (email) => {

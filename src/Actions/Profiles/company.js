@@ -25,7 +25,6 @@ export const regCompany = (name) => (dispatch) => {
             return Promise.resolve();
         },
         (error) => {
-
             let message = "Error"
             if ((error.response.status === 400) || (error.response.data.type === "validation") || (error.response.data.errors[0].errorMessage === "name has to be unique")) {
                 message = COMP_ERROR_400;

@@ -2,12 +2,14 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
     popupBox: {
-        position: "absolute",
+        position: "fixed",
         background: "#00000050",
+        backgroundSize: "cover",
         width: "100%",
         height: "109.4vh",
         top: 0,
         left: 0,
+        zIndex: 1,
     },
     container: {
         // maxWidth: "30vw",

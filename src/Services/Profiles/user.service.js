@@ -1,11 +1,10 @@
-import axios from "axios";
 import { SERVER_API } from "../../Static/API";
-import authHeader from "../Auth/auth-header";
+import apiInstance from "../Auth/apiInstance";
 
 const API_URL = "user/";
 
 const registerUserAPI = (firstName, lastName, gender, email, password) => {
-    return axios.post(SERVER_API + API_URL + "register", {
+    return apiInstance.post(SERVER_API + API_URL + "register", {
         firstName,
         lastName,
         gender,
@@ -15,11 +14,11 @@ const registerUserAPI = (firstName, lastName, gender, email, password) => {
 };
 
 const getUserDataAPI = (id) => {
-    return axios.get(SERVER_API + API_URL, { id });
+    return apiInstance.get(SERVER_API + API_URL, { id });
 };
 
 const updateUserAPI = (id, firstName, lastName, gender, email) => {
-    return axios.put(SERVER_API + API_URL + "update",
+    return apiInstance.put(SERVER_API + API_URL + "update",
         {
             id: id,
             firstName: firstName,
@@ -27,28 +26,28 @@ const updateUserAPI = (id, firstName, lastName, gender, email) => {
             gender: gender,
             email: email,
         },
-        {
-            headers: authHeader()
-        }
+        // {
+        //     headers: authHeader()
+        // }
     );
 };
 
 const getUserListAPI = (pageNumber, rowsPerPage) => {
-    return axios.post(SERVER_API + API_URL + "list",
+    return apiInstance.post(SERVER_API + API_URL + "list",
         {
             page: pageNumber,
             limit: rowsPerPage
         },
         {
-            headers: authHeader(),
+            // headers: authHeader(),
         }
     );
 };
 
 const deleteUserAPI = (id) => {
-    return axios.delete(SERVER_API + API_URL + "delete",
+    return apiInstance.delete(SERVER_API + API_URL + "delete",
         {
-            headers: authHeader(),
+            // headers: authHeader(),
             data: {
                 id: id
             }
@@ -58,9 +57,9 @@ const deleteUserAPI = (id) => {
 };
 
 const getUserIdAPI = (id) => {
-    return axios.get(SERVER_API + API_URL + id,
+    return apiInstance.get(SERVER_API + API_URL + id,
         {
-            headers: authHeader(),
+            // headers: authHeader(),
         },
 
     );
