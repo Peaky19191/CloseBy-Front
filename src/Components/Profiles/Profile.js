@@ -161,6 +161,12 @@ const Profile = () => {
     }
   };
 
+  const enabled =
+    firstName.length > 0 &&
+    lastName.length > 0 &&
+    gender.length > 0;
+ 
+
   return (
     (listLoaded !== true) ?
       <Grid className={classes.spinnerContainer}>
@@ -198,7 +204,7 @@ const Profile = () => {
               <Grid className={classes.buttonsContainer} spacing={2}>
                 {editMode ?
                   <>
-                    <Button onClick={() => { sendEdited() }} className={classes.buttonEditSave} fullWidth variant="contained"  >
+                    <Button onClick={() => { sendEdited() }} className={classes.buttonEditSave} disabled={!enabled} fullWidth variant="contained"  >
                       {loading ? (
                         <CircularProgress size="20px" />
                       ) : "Save"}

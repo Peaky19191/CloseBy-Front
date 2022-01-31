@@ -1,48 +1,47 @@
-import axios from "axios";
 import { SERVER_API } from "../../Static/API";
-import authHeader from "../Auth/auth-header";
+import apiInstance from "../Auth/apiInstance";
 
 const API_URL = "company/";
 
 const registerCompanyAPI = (name) => {
-    return axios.post(SERVER_API + API_URL + "create",
+    return apiInstance.post(SERVER_API + API_URL + "create",
         {
             name: name
         },
-        {
-            headers: authHeader()
-        }
+        // {
+        //     headers: authHeader()
+        // }
     );
 };
 
 const editCompanyAPI = (id, name) => {
-    return axios.put(SERVER_API + API_URL + "update",
+    return apiInstance.put(SERVER_API + API_URL + "update",
         {
             id: id,
             name: name
         },
-        {
-            headers: authHeader()
-        }
+        // {
+        //     headers: authHeader()
+        // }
     );
 };
 
 const getCompanyListAPI = (pageNumber, rowsPerPage) => {
-    return axios.post(SERVER_API + API_URL + "list",
+    return apiInstance.post(SERVER_API + API_URL + "list",
         {
             page: pageNumber,
             limit: rowsPerPage
         },
-        {
-            headers: authHeader()
-        },
+        // {
+        //     headers: authHeader()
+        // },
     );
 };
 
 const deleteCompanyAPI = (id) => {
-    return axios.delete(SERVER_API + API_URL + "delete",
+    return apiInstance.delete(SERVER_API + API_URL + "delete",
         {
-            headers: authHeader(),
+            // // headers: authHeader(),
             data: {
                 id: id
             }
@@ -51,9 +50,9 @@ const deleteCompanyAPI = (id) => {
 };
 
 const getCompanyIdAPI = (id) => {
-    return axios.get(SERVER_API + API_URL + id,
+    return apiInstance.get(SERVER_API + API_URL + id,
         {
-            headers: authHeader(),
+            // // headers: authHeader(),
         },
     );
 };

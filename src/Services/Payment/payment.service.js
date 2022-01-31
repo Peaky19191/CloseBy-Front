@@ -1,19 +1,18 @@
-import axios from "axios";
 import { SERVER_API } from "../../Static/API";
-import authHeader from "../Auth/auth-header";
+import apiInstance from "../Auth/apiInstance";
 
 const API_URL = "ticket";
 
 const createPayment = (eventId, userId, quantity) => {
-    return axios.post(SERVER_API + API_URL + "/create-payment",
+    return apiInstance.post(SERVER_API + API_URL + "/create-payment",
         {
             eventId: eventId,
             userId: userId,
             quantity: quantity
         },
-        {
-            headers: authHeader()
-        }
+        // {
+        //     headers: authHeader()
+        // }
     );
 };
 

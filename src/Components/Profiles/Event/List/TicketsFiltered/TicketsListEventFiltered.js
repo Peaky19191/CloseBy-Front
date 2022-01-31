@@ -13,7 +13,7 @@ import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from 'react-router-dom';
-import { getEventTicketsListDispatch, setEventDispatch } from "../../../../../Actions/Profiles/events";
+import { getEventTicketsListDispatch, setEventDispatch, setTicketDispatch } from "../../../../../Actions/Profiles/events";
 import useStyles from './styles';
 
 const TicketsEventList = () => {
@@ -53,6 +53,10 @@ const TicketsEventList = () => {
     const dispatch = useDispatch();
     const dispatchEvent = (event) => {
         dispatch(setEventDispatch(event))
+    }
+
+    const dispatchTicket = (ticket) => {
+        dispatch(setTicketDispatch(ticket))
     }
 
     const handleChangePage = (event, newPage) => {
@@ -106,7 +110,7 @@ const TicketsEventList = () => {
                                     <TableCell align="center" component="th" scope="row">{item.ticketPayment.paymentStatus}</TableCell>
 
                                     <TableCell align="center">
-                                        <IconButton component={Link} to="/eventDetailsEdit" onClick={() => { dispatchEvent(item.ticketPayment.event) }} aria-label="edit" size="large" >
+                                        <IconButton component={Link} to="/ticketDetails" onClick={() => { dispatchTicket(item) }} aria-label="edit" size="large" >
                                             <SettingsApplicationsIcon className={classes.settingICon} />
                                         </IconButton>
                                         {/* <IconButton aria-label="delete" size="large" onClick={() => { prepareDelete(item.id, item.title) }} >

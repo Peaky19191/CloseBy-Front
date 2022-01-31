@@ -34,16 +34,16 @@ const PopupBuy = (props) => {
                     </Typography>
                     <Grid container className={classes.containerData} spacing={2}>
                         <Grid item xs={12} >
-                            <TextField value={props.handleData[1]} label="Title" InputProps={{ readOnly: true }} variant="outlined" fullWidth />
+                            <TextField value={props.handleData[1]} label="Title" disabled InputProps={{ readOnly: true }} variant="outlined" fullWidth />
                         </Grid>
                         <Grid item xs={12} >
-                            <TextField value={props.handleData[2]} label="Description" InputProps={{ readOnly: true }} variant="outlined" fullWidth />
+                            <TextField value={props.handleData[2]} label="Description" disabled InputProps={{ readOnly: true }} variant="outlined" fullWidth />
                         </Grid>
                         <Grid item xs={12} >
-                            <TextField value={props.handleData[3]} label="Price" InputProps={{ readOnly: true }} variant="outlined" fullWidth />
+                            <TextField value={props.handleData[3]} label="Price" disabled InputProps={{ readOnly: true }} variant="outlined" fullWidth />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField variant="outlined" label="Quantity" fullWidth name="quantity" htmlFor="quantity" value={quantity} select onChange={onChangeQuantity}>
+                            <TextField variant="outlined" label="Quantity" fullWidth name="quantity" autoFocus htmlFor="quantity" value={quantity} select onChange={onChangeQuantity}>
                                 <MenuItem value={1}>1</MenuItem>
                                 <MenuItem value={2}>2</MenuItem>
                                 <MenuItem value={3}>3</MenuItem>
