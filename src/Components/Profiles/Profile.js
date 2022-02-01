@@ -24,6 +24,7 @@ const Profile = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("");
+  const [errors, setErrors] = useState({});
 
   const onChangeFirstName = (e) => {
     const firstName = e.target.value;
@@ -124,40 +125,48 @@ const Profile = () => {
 
   const sendEdited = () => {
     setShowMessage(false);
-    setLoading(true);
 
     if (currentProfile && (currentProfile.role === "User")) {
-      dispatch(editUser(currentProfile.id, firstName, lastName, gender, email))
-        .then(() => {
-          setShowMessage(true);
-          setLoading(false);
-        })
-        .catch(() => {
-          setShowMessage(true);
-          setLoading(false);
-        })
+      if (validate()) {
+        setLoading(true);
+        dispatch(editUser(currentProfile.id, firstName, lastName, gender, email))
+          .then(() => {
+            setShowMessage(true);
+            setLoading(false);
+          })
+          .catch(() => {
+            setShowMessage(true);
+            setLoading(false);
+          })
+      }
     }
     if (currentProfile && (currentProfile.role === "CompanyWorker")) {
-      dispatch(editCompWorker(currentProfile.id, firstName, lastName, gender, email, myAccount))
-        .then(() => {
-          setShowMessage(true);
-          setLoading(false);
-        })
-        .catch(() => {
-          setShowMessage(true);
-          setLoading(false);
-        });
+      if (validate()) {
+        setLoading(true);
+        dispatch(editCompWorker(currentProfile.id, firstName, lastName, gender, email, myAccount))
+          .then(() => {
+            setShowMessage(true);
+            setLoading(false);
+          })
+          .catch(() => {
+            setShowMessage(true);
+            setLoading(false);
+          });
+      }
     }
     if (currentProfile && (currentProfile.role === "CompanyAdmin")) {
-      dispatch(editCompAdmin(currentProfile.id, firstName, lastName, gender, email, myAccount))
-        .then(() => {
-          setShowMessage(true);
-          setLoading(false);
-        })
-        .catch(() => {
-          setShowMessage(true);
-          setLoading(false);
-        });
+      if (validate()) {
+        setLoading(true);
+        dispatch(editCompAdmin(currentProfile.id, firstName, lastName, gender, email, myAccount))
+          .then(() => {
+            setShowMessage(true);
+            setLoading(false);
+          })
+          .catch(() => {
+            setShowMessage(true);
+            setLoading(false);
+          });
+      }
     }
   };
 
@@ -165,7 +174,17 @@ const Profile = () => {
     firstName.length > 0 &&
     lastName.length > 0 &&
     gender.length > 0;
- 
+
+  const validate = () => {
+    let temp = {}
+    temp.firstName = (/^[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+$/).test(firstName) ? "" : "Numbers and whitespaces are not allowed"
+    temp.lastName = (/^[A-Za-ząćęłńóśźżĄĘŁŃÓŚŹŻ]+$/).test(lastName) ? "" : "Numbers and whitespaces are not allowed"
+    temp.gender = gender.length !== 0 ? "" : "This field is required (gender)"
+    setErrors({
+      ...temp
+    })
+    return Object.values(temp).every(x => x === "");
+  }
 
   return (
     (listLoaded !== true) ?
@@ -186,16 +205,16 @@ const Profile = () => {
             <form className={classes.form}>
               <Grid container spacing={2}>
                 <Grid item xs={12} >
-                  <TextField value={firstName} label="First Name" onChange={onChangeFirstName} InputProps={{ readOnly: disaled }} name="firstName" htmlFor="firstName" variant="outlined" fullWidth />
+                  <TextField value={firstName} error={errors.firstName} helperText={(errors.firstName)} label="First Name" onChange={onChangeFirstName} InputProps={{ readOnly: disaled }} name="firstName" htmlFor="firstName" variant="outlined" fullWidth />
                 </Grid>
                 <Grid item xs={12} >
-                  <TextField value={lastName} onChange={onChangeLastName} InputProps={{ readOnly: disaled }} name="lastName" htmlFor="lastName" variant="outlined" fullWidth label="Last Name" />
+                  <TextField value={lastName} error={errors.lastName} helperText={(errors.lastName)} onChange={onChangeLastName} InputProps={{ readOnly: disaled }} name="lastName" htmlFor="lastName" variant="outlined" fullWidth label="Last Name" />
                 </Grid>
                 {/* <Grid item xs={12} >
                   <TextField value={email} label="Email Address" onChange={onChangeEmail} InputProps={{ readOnly: disaled }} name="email" htmlFor="email" variant="outlined" type="email" fullWidth />
                 </Grid> */}
                 <Grid item xs={12} >
-                  <TextField value={gender} htmlFor="gender" variant="outlined" InputProps={{ readOnly: disaled }} select={disaled ? false : true} fullWidth onChange={onChangeGender} type="text" label="Gender">
+                  <TextField value={gender} error={errors.gender} helperText={(errors.gender)} htmlFor="gender" variant="outlined" InputProps={{ readOnly: disaled }} select={disaled ? false : true} fullWidth onChange={onChangeGender} type="text" label="Gender">
                     <MenuItem value={"Male"} >Male</MenuItem>
                     <MenuItem value={"Female"} >Female</MenuItem>
                   </TextField>
