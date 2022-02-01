@@ -66,9 +66,9 @@ const RegCompWorker = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoadMessage(false);
-        setLoading(true);
 
-        if (validate())
+        if (validate()) {
+            setLoading(true);
             dispatch(regCompWorker(firstName, lastName, gender, email, company))
                 .then(() => {
                     setLoadMessage(true);
@@ -78,6 +78,7 @@ const RegCompWorker = () => {
                     setLoadMessage(true);
                     setLoading(false);
                 });
+        }
     };
 
     let history = useHistory();

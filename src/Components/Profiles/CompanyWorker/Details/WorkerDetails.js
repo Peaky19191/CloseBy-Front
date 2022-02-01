@@ -76,9 +76,9 @@ const CompWorkerDetails = () => {
     const submit = () => {
         // e.preventDefault();
         setLoadMessage(false);
-        setLoading(true);
 
-        if (validate())
+        if (validate()) {
+            setLoading(true);
             dispatch(editCompWorker(compWorker.id, firstName, lastName, gender, email))
                 .then(() => {
                     setLoadMessage(true);
@@ -88,6 +88,7 @@ const CompWorkerDetails = () => {
                     setLoadMessage(true);
                     setLoading(false);
                 });
+        }
     };
 
     let history = useHistory();
