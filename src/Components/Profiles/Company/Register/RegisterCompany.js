@@ -28,9 +28,9 @@ const RegCompany = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoadMessage(false);
-        setLoading(true);
 
-        if (validate())
+        if (validate()) {
+            setLoading(true);
             dispatch(regCompany(name))
                 .then(() => {
                     setLoadMessage(true);
@@ -40,6 +40,7 @@ const RegCompany = () => {
                     setLoadMessage(true);
                     setLoading(false);
                 });
+        }
     };
 
     let history = useHistory();

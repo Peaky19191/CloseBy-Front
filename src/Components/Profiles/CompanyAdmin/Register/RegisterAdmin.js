@@ -72,9 +72,9 @@ const RegCompAdmin = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoadMessage(false);
-        setLoading(true);
 
-        if (validate())
+        if (validate()) {
+            setLoading(true);
             dispatch(regCompAdmin(firstName, lastName, gender, email, companyId))
                 .then(() => {
                     setLoadMessage(true);
@@ -84,6 +84,7 @@ const RegCompAdmin = () => {
                     setLoadMessage(true);
                     setLoading(false);
                 });
+        }
     };
 
     let history = useHistory();

@@ -42,9 +42,9 @@ const ContactForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setShowMessage(false);
-        setLoading(true);
 
-        if (validate())
+        if (validate()) {
+            setLoading(true);
             dispatch(sendContactMessageDispatch(email, content))
                 .then(() => {
                     setShowMessage(true);
@@ -54,6 +54,7 @@ const ContactForm = () => {
                     setShowMessage(true);
                     setLoading(false);
                 });
+        }
     };
 
     const validate = () => {
