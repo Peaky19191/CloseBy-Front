@@ -101,9 +101,9 @@ const CompanyDetails = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoadMessage(false);
-        setLoading(true);
 
-        if (validate())
+        if (validate()) {
+            setLoading(true);
             dispatch(editCompany(company.id, name))
                 .then(() => {
                     setLoadMessage(true);
@@ -113,6 +113,7 @@ const CompanyDetails = () => {
                     setLoadMessage(true);
                     setLoading(false);
                 });
+        }
     };
     // eslint-disable-next-line
     const [errors, setErrors] = useState({});

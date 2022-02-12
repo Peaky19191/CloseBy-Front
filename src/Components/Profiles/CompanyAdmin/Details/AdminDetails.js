@@ -70,9 +70,9 @@ const CompAdminDetails = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoadMessage(false);
-        setLoading(true);
 
-        if (validate())
+        if (validate()) {
+            setLoading(true);
             dispatch(editCompAdmin(compAdmin.id, firstName, lastName, gender, email))
                 .then(() => {
                     setLoadMessage(true);
@@ -82,6 +82,7 @@ const CompAdminDetails = () => {
                     setLoadMessage(true);
                     setLoading(false);
                 });
+        }
     };
 
     let history = useHistory();

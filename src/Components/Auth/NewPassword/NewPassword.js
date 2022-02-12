@@ -42,9 +42,9 @@ export const NewPassword = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setShowMessage(false);
-        setLoading(true);
 
-        if (validate())
+        if (validate()) {
+            setLoading(true);
             dispatch(setNewPassword(password, token))
                 .then(() => {
                     setShowMessage(true);
@@ -56,6 +56,7 @@ export const NewPassword = () => {
                     setLoading(false);
 
                 });
+        }
     };
 
     const validate = () => {

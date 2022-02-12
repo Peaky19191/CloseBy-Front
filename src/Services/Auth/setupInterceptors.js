@@ -1,4 +1,4 @@
-import { refreshToken } from "../../Actions/auth";
+import { newAccessToken, newRefreshToken } from "../../Actions/auth";
 import axiosInstance from "./apiInstance";
 import TokenService from "./token.service";
 
@@ -32,9 +32,14 @@ const setup = (store) => {
                             refreshToken: TokenService.getLocalRefreshToken(),
                             accessToken: TokenService.getLocalAccessToken(),
                         });
-                        const { accessToken } = rs.data;
-                        dispatch(refreshToken(accessToken));
+                        const accessToken = rs.data.accessToken;
+                        const refreshToken = rs.data.refreshToken;
+
+                        dispatch(newAccessToken(accessToken));
                         TokenService.updateLocalAccessToken(accessToken);
+
+                        dispatch(newRefreshToken(refreshToken));
+                        TokenService.updateLocalRefreshToken(refreshToken);
 
                         return axiosInstance(originalConfig);
                     } catch (_error) {

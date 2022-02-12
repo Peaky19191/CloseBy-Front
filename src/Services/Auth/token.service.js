@@ -14,6 +14,12 @@ const updateLocalAccessToken = (token) => {
     localStorage.setItem("profile", JSON.stringify(profile));
 };
 
+const updateLocalRefreshToken = (token) => {
+    let profile = JSON.parse(localStorage.getItem("profile"));
+    profile.refreshToken = token;
+    localStorage.setItem("profile", JSON.stringify(profile));
+};
+
 const getProfile = () => {
     return JSON.parse(localStorage.getItem("profile"));
 };
@@ -30,6 +36,7 @@ const TokenService = {
     getLocalRefreshToken,
     getLocalAccessToken,
     updateLocalAccessToken,
+    updateLocalRefreshToken,
     getProfile,
     setProfile,
     removeProfile,

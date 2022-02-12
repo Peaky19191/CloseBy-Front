@@ -59,9 +59,9 @@ export const Register = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setShowMessage(false);
-        setLoading(true);
 
-        if (validate())
+        if (validate()) {
+            setLoading(true);
             dispatch(registerUserDispatch(firstName, lastName, gender, email, password))
                 .then(() => {
                     setShowMessage(true);
@@ -71,6 +71,7 @@ export const Register = () => {
                     setShowMessage(true);
                     setLoading(false);
                 });
+        }
     };
 
     const validate = () => {

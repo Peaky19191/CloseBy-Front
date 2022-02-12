@@ -11,7 +11,6 @@ const login = (email, password) => {
       password
     })
     .then((response) => {
-      console.log(response);
       if (response.data.accessToken) {
         TokenService.setProfile(response.data);
       }
