@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 import {
-    CONFIRM_EMAIL_FAIL, CONFIRM_EMAIL_SUCCESS, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, NEW_PASSW_FAIL, NEW_PASSW_SUCCESS, REFRESH_TOKEN, RESET_PASSW_FAIL, RESET_PASSW_SUCCESS, SET_MESSAGE, SET_MESSAGE_FAIL, SET_MESSAGE_SUCCESS
+    CONFIRM_EMAIL_FAIL, CONFIRM_EMAIL_SUCCESS, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, NEW_ACCESS_TOKEN, NEW_PASSW_FAIL, NEW_PASSW_SUCCESS, NEW_REFRESH_TOKEN, RESET_PASSW_FAIL, RESET_PASSW_SUCCESS, SET_MESSAGE, SET_MESSAGE_FAIL, SET_MESSAGE_SUCCESS
 } from "../Constants/actionTypes";
 import AuthService from "../Services/Auth/auth.service";
 import {
@@ -161,9 +161,16 @@ export const confirmUserEmail = (token) => (dispatch) => {
     );
 };
 
-export const refreshToken = (accessToken) => (dispatch) => {
+export const newAccessToken = (accessToken) => (dispatch) => {
     dispatch({
-        type: REFRESH_TOKEN,
+        type: NEW_ACCESS_TOKEN,
         payload: accessToken,
+    })
+}
+
+export const newRefreshToken = (refreshToken) => (dispatch) => {
+    dispatch({
+        type: NEW_REFRESH_TOKEN,
+        payload: refreshToken,
     })
 }

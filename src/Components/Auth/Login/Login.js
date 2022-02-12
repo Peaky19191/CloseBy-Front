@@ -47,7 +47,6 @@ const Login = (props) => {
 
         dispatch(login(email, password))
             .then(() => {
-                console.log("111")
                 if (currentProfile.role === "User") {
                     props.history.push("/events");
                 }
