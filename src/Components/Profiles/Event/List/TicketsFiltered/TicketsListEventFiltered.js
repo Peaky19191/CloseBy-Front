@@ -13,7 +13,7 @@ import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from 'react-router-dom';
-import { getEventTicketsListDispatch, setEventDispatch, setTicketDispatch } from "../../../../../Actions/Profiles/events";
+import { getEventTicketsListDispatch, setTicketDispatch } from "../../../../../Actions/Profiles/events";
 import useStyles from './styles';
 
 const TicketsEventList = () => {
@@ -51,9 +51,6 @@ const TicketsEventList = () => {
     useEffect(getList, [page, rowsPerPage]);// eslint-disable-line react-hooks/exhaustive-deps
 
     const dispatch = useDispatch();
-    const dispatchEvent = (event) => {
-        dispatch(setEventDispatch(event))
-    }
 
     const dispatchTicket = (ticket) => {
         dispatch(setTicketDispatch(ticket))
