@@ -1,9 +1,11 @@
+import { useHistory } from "react-router-dom";
 import { logout, newAccessToken, newRefreshToken } from "../../Actions/auth";
-import { history } from "../../Helpers/history";
 import axiosInstance from "./apiInstance";
 import TokenService from "./token.service";
 
 const setup = (store) => {
+    const history = useHistory();
+
     axiosInstance.interceptors.request.use(
         (config) => {
             const token = TokenService.getLocalAccessToken();
@@ -45,14 +47,14 @@ const setup = (store) => {
                         return axiosInstance(originalConfig);
                     } catch (_error) {
                         history.push("/");
-                        window.location.reload();
+                        // window.location.reload();
                         dispatch(logout());
                         return Promise.reject(_error);
                     }
                 }
             }
             history.push("/");
-            window.location.reload();
+            // window.location.reload();
             dispatch(logout());
             return Promise.reject(err);
         }
