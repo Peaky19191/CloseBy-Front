@@ -1,5 +1,5 @@
-import { Redirect } from 'react-router-dom';
 import { logout, newAccessToken, newRefreshToken } from "../../Actions/auth";
+import { history } from "../../Helpers/history";
 import axiosInstance from "./apiInstance";
 import TokenService from "./token.service";
 
@@ -45,14 +45,16 @@ const setup = (store) => {
                         return axiosInstance(originalConfig);
                     } catch (_error) {
                         dispatch(logout());
-                        Promise.reject(_error);
-                        return <Redirect to="/" />;
+                        history.push("/");
+                        window.location.reload();
+                        return Promise.reject(_error);
                     }
                 }
             }
             dispatch(logout());
-            Promise.reject(err)
-            return <Redirect to="/" />;
+            history.push("/");
+            window.location.reload();
+            return Promise.reject(err);
         }
     );
 };
