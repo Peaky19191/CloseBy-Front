@@ -1,4 +1,4 @@
-import { newAccessToken, newRefreshToken } from "../../Actions/auth";
+import { logout, newAccessToken, newRefreshToken } from "../../Actions/auth";
 import axiosInstance from "./apiInstance";
 import TokenService from "./token.service";
 
@@ -23,7 +23,7 @@ const setup = (store) => {
         },
         async (err) => {
             const originalConfig = err.config;
-            if ((originalConfig.url !== ("/identity/refresh-access-token" && "/identity/login")) && err.response) {
+            if (originalConfig.url !== "/identity/refresh-access-token" && originalConfig.url !== "/identity/login" && err.response) {
                 // Access Token was expired
                 if (err.response.status === 401 && !originalConfig._retry) {
                     originalConfig._retry = true;
@@ -43,10 +43,12 @@ const setup = (store) => {
 
                         return axiosInstance(originalConfig);
                     } catch (_error) {
+                        dispatch(logout());
                         return Promise.reject(_error);
                     }
                 }
             }
+            dispatch(logout());
             return Promise.reject(err);
         }
     );
