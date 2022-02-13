@@ -20,9 +20,6 @@ export const login = (email, password) => (dispatch) => {
             return Promise.resolve();
         },
         (error) => {
-            console.log(error)
-
-            console.log(error.response)
             let message = "Error"
             if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.type === "authentication")) {
                 message = LOGIN_ERROR_401;

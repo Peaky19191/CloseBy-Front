@@ -4,7 +4,7 @@ import {
 } from "../../Constants/actionTypes";
 import EventService from "../../Services/Profiles/event.service";
 import {
-    ADMIN_500, EVENT_EDIT_SUCCESS_200, EVENT_REG_SUCCESS_200
+    ADMIN_500, ERROR_401, EVENT_EDIT_SUCCESS_200, EVENT_REG_SUCCESS_200
 } from "../../Static/message";
 
 export const registerEventDispatch = (title, companyId, loc_lat, loc_lng, startDate, endDate, status, description, limit, type, ticketPrice) => (dispatch) => {
@@ -22,7 +22,12 @@ export const registerEventDispatch = (title, companyId, loc_lat, loc_lng, startD
             return Promise.resolve();
         },
         (error) => {
-            const message = ADMIN_500;
+            let message = "Error"
+            if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                message = ERROR_401;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: REGISTER_EVENT_FAIL,
@@ -110,7 +115,12 @@ export const editEvent = (eventId, title, companyId, loc_lat, loc_lng, startDate
             return Promise.resolve();
         },
         (error) => {
-            const message = ADMIN_500;
+            let message = "Error"
+            if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                message = ERROR_401;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: EDIT_EVENT_FAIL,
@@ -144,12 +154,12 @@ export const getEventListDispatch = (pageNumber, rowsPerPage, companyId) => (dis
             return Promise.resolve(response);
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            let message = "Error"
+            if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                message = ERROR_401;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: GET_EVENT_LIST_FAIL,
@@ -181,12 +191,12 @@ export const getEventListAllDispatch = (pageNumber, rowsPerPage, companyId) => (
             return Promise.resolve(response);
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            let message = "Error"
+            if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                message = ERROR_401;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: GET_EVENT_LIST_ALL_FAIL,
@@ -218,12 +228,12 @@ export const getEventListFavoriteDispatch = (pageNumber, rowsPerPage, userId) =>
             return Promise.resolve(response);
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            let message = "Error"
+            if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                message = ERROR_401;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: GET_EVENT_LIST_FAV_FAIL,
@@ -256,12 +266,12 @@ export const deleteEventDispatch = (id) => (dispatch) => {
             return Promise.resolve();
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            let message = "Error"
+            if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                message = ERROR_401;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: DELETE_EVENT_FAIL,
@@ -295,12 +305,12 @@ export const getEventIdDispatch = (id, userId) => (dispatch) => {
             return Promise.resolve(response);
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            let message = "Error"
+            if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                message = ERROR_401;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: GET_EVENT_ID_FAIL,
@@ -334,12 +344,12 @@ export const deleteFromFavoriteDispatch = (userId, eventId) => (dispatch) => {
             return Promise.resolve(response);
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            let message = "Error"
+            if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                message = ERROR_401;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: DELETE_FAVORITE_FAIL,
@@ -375,12 +385,12 @@ export const addToFavoriteDispatch = (userId, eventId) => (dispatch) => {
             return Promise.resolve(response);
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            let message = "Error"
+            if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                message = ERROR_401;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: SET_FAVORITE_FAIL,
@@ -414,12 +424,12 @@ export const getEventListTicketDispatch = (userId, pageNumber, rowsPerPage) => (
             return Promise.resolve(response);
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            let message = "Error"
+            if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                message = ERROR_401;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: GET_EVENT_LIST_TIC_FAIL,
@@ -451,12 +461,12 @@ export const getEventTicketsListDispatch = (pageNumber, rowsPerPage, eventId) =>
             return Promise.resolve(response);
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            let message = "Error"
+            if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                message = ERROR_401;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: GET_EVENT_LIST_ALL_FAIL,

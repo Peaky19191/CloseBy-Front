@@ -19,11 +19,6 @@ export const Events = () => {
     const getList = () => {
         dispatch(getEventListAllDispatch(page, rowsPerPage))
             .then((response) => {
-                console.log("response");
-                console.log(response);
-
-                console.log("response.data.items");
-                console.log(response.data.items);
                 const eventTemp = response.data.items;
                 const totalPages = response.data.count;
 

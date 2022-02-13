@@ -1,5 +1,6 @@
 export const ADMIN_500 = "The server is not responding, please try again later or contact your administrator";
 export const ERROR_400 = "Profile with that email already exists";
+export const ERROR_401 = "Account was already in use. Please login once again";
 export const PROFILE_EDIT_SUCCESS_200 = "You have successfully edited your account";
 export const LOGIN_ERROR_401 = "Wrong Email or Password";
 export const LOGIN_ERROR_403 = "Account not activated";

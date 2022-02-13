@@ -12,12 +12,16 @@ import Message from '../Message/Message';
 import useStyles from './styles';
 
 const Profile = () => {
+  let history = useHistory();
   const classes = useStyles();
   const myAccount = true;
 
   const [listLoaded, setListLoaded] = useState(false);
 
   const { profile: currentProfile } = useSelector((state) => state.auth);
+  if (currentProfile === null) {
+    history.push("/");
+  }
   const [loading, setLoading] = useState(false);
 
   const [firstName, setFirstName] = useState("");
@@ -52,7 +56,10 @@ const Profile = () => {
       getCompAdminDetails();
     }
   }
-  useEffect(getProfileDetails, [currentProfile.id]);// eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    getProfileDetails()
+  }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
   const getUserDetails = () => {
     dispatch(getUserIdDispatch(currentProfile.id))
@@ -118,7 +125,6 @@ const Profile = () => {
 
   const dispatch = useDispatch();
 
-  let history = useHistory();
   const goToPreviousPath = () => {
     history.goBack()
   }

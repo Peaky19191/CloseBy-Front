@@ -5,7 +5,7 @@ import {
 import CompanyWorkerService from "../../Services/Profiles/companyWorker.service";
 import {
     ADMIN_500,
-    ERROR_400, PROFILE_EDIT_SUCCESS_200, WORKER_EDIT_SUCCESS_200, WORKER_REG_SUCCESS_200
+    ERROR_400, ERROR_401, PROFILE_EDIT_SUCCESS_200, WORKER_EDIT_SUCCESS_200, WORKER_REG_SUCCESS_200
 } from "../../Static/message";
 
 
@@ -92,7 +92,11 @@ export const editCompWorker = (id, firstName, lastName, gender, email, myAccount
             if ((error.response.status === 400) || (error.response.data.type === "validation") || (error.response.data.errors[0].errorMessage === "email has to be unique")) {
                 message = ERROR_400;
             } else {
-                message = ADMIN_500;
+                if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                    message = ERROR_401;
+                } else {
+                    message = ADMIN_500;
+                }
             }
 
             dispatch({
@@ -127,12 +131,12 @@ export const getCompWorkerListDispatch = (pageNumber, rowsPerPage, companyId) =>
             return Promise.resolve(response);
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            let message = "Error"
+            if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                message = ERROR_401;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: GET_COMP_WORKER_LIST_FAIL,
@@ -165,13 +169,12 @@ export const deleteCompWorkerDispatch = (id, companyId) => (dispatch) => {
             return Promise.resolve();
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
-
+            let message = "Error"
+            if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                message = ERROR_401;
+            } else {
+                message = ADMIN_500;
+            }
             dispatch({
                 type: DELETE_COMP_WORKER_FAIL,
             });
@@ -204,12 +207,12 @@ export const getCompWorkerIdDispatch = (id) => (dispatch) => {
             return Promise.resolve(response);
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            let message = "Error"
+            if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                message = ERROR_401;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: GET_COMP_WORKER_ID_FAIL,

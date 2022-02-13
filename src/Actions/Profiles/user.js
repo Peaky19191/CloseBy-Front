@@ -5,7 +5,7 @@ import {
 import UserService from "../../Services/Profiles/user.service";
 import {
     ADMIN_500,
-    ERROR_400, PROFILE_EDIT_SUCCESS_200, USER_REG_SUCCESS_200
+    ERROR_400, ERROR_401, PROFILE_EDIT_SUCCESS_200, USER_REG_SUCCESS_200
 } from "../../Static/message";
 
 export const registerUserDispatch = (firstName, lastName, gender, email, password) => (dispatch) => {
@@ -28,7 +28,11 @@ export const registerUserDispatch = (firstName, lastName, gender, email, passwor
             if ((error.response.status === 400) || (error.response.data.message === "Email already in use")) {
                 message = ERROR_400;
             } else {
-                message = ADMIN_500;
+                if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                    message = ERROR_401;
+                } else {
+                    message = ADMIN_500;
+                }
             }
 
             dispatch({
@@ -82,7 +86,11 @@ export const editUser = (id, firstName, lastName, gender, email) => (dispatch) =
             if ((error.response.status === 400) || (error.response.data.type === "validation") || (error.response.data.errors[0].errorMessage === "email has to be unique")) {
                 message = ERROR_400;
             } else {
-                message = ADMIN_500;
+                if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                    message = ERROR_401;
+                } else {
+                    message = ADMIN_500;
+                }
             }
 
             dispatch({
@@ -117,12 +125,12 @@ export const getUserListDispatch = (pageNumber, rowsPerPage, companyId) => (disp
             return Promise.resolve(response);
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            let message = "Error"
+            if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                message = ERROR_401;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: GET_USER_LIST_FAIL,
@@ -157,12 +165,12 @@ export const deleteUserDispatch = (id, companyId) => (dispatch) => {
             return Promise.resolve();
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            let message = "Error"
+            if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                message = ERROR_401;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: DELETE_USER_FAIL,
@@ -196,12 +204,12 @@ export const getUserIdDispatch = (id) => (dispatch) => {
             return Promise.resolve(response);
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            let message = "Error"
+            if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                message = ERROR_401;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: GET_USER_ID_FAIL,

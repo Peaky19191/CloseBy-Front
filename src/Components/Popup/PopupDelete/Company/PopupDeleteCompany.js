@@ -41,7 +41,7 @@ const PopupDeleteCompany = (props) => {
                 console.log(e);
             });
     }
-    useEffect(selectCompanyWorkersList, [company.id]);// eslint-disable-line react-hooks/exhaustive-deps
+    // useEffect(selectCompanyWorkersList, [company.id]);// eslint-disable-line react-hooks/exhaustive-deps
 
     const [compAdminsList, setCompAdminsList] = useState([]);
 
@@ -57,7 +57,7 @@ const PopupDeleteCompany = (props) => {
                 console.log(e);
             });
     }
-    useEffect(selectCompanyAdminsList, [company.id]);// eslint-disable-line react-hooks/exhaustive-deps
+    // useEffect(selectCompanyAdminsList, [company.id]);// eslint-disable-line react-hooks/exhaustive-deps
 
     const [eventsList, setEventList] = useState([]);
 
@@ -73,7 +73,12 @@ const PopupDeleteCompany = (props) => {
                 console.log(e);
             });
     }
-    useEffect(selectEventsList, [company.id]);// eslint-disable-line react-hooks/exhaustive-deps
+    // useEffect(selectEventsList, [company.id]);// eslint-disable-line react-hooks/exhaustive-deps
+    useEffect(() => {
+        selectCompanyWorkersList();
+        selectCompanyAdminsList();
+        selectEventsList();
+    }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
     const disable = ((compAdminsList.length !== 0) || (compWorkersList.length !== 0) || (eventsList.length !== 0));
 

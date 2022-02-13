@@ -4,8 +4,7 @@ import {
 } from "../../Constants/actionTypes";
 import CompanyService from "../../Services/Profiles/company.service";
 import {
-    ADMIN_500, COMP_EDIT_SUCCESS_200, COMP_ERROR_400,
-    COMP_REG_SUCCESS_200
+    ADMIN_500, COMP_EDIT_SUCCESS_200, COMP_ERROR_400, COMP_REG_SUCCESS_200, ERROR_401
 } from "../../Static/message";
 
 export const regCompany = (name) => (dispatch) => {
@@ -29,7 +28,11 @@ export const regCompany = (name) => (dispatch) => {
             if ((error.response.status === 400) || (error.response.data.type === "validation") || (error.response.data.errors[0].errorMessage === "name has to be unique")) {
                 message = COMP_ERROR_400;
             } else {
-                message = ADMIN_500;
+                if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                    message = ERROR_401;
+                } else {
+                    message = ADMIN_500;
+                }
             }
 
             dispatch({
@@ -84,7 +87,11 @@ export const editCompany = (id, name) => (dispatch) => {
             if ((error.response.status === 400) || (error.response.data.type === "validation") || (error.response.data.errors[0].errorMessage === "name has to be unique")) {
                 message = COMP_ERROR_400;
             } else {
-                message = ADMIN_500;
+                if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                    message = ERROR_401;
+                } else {
+                    message = ADMIN_500;
+                }
             }
 
             dispatch({
@@ -119,12 +126,12 @@ export const getCompanyListDispatch = (pageNumber, rowsPerPage) => (dispatch) =>
             return Promise.resolve(response);
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            let message = "Error"
+            if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                message = ERROR_401;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: GET_COMPANY_LIST_FAIL,
@@ -157,12 +164,12 @@ export const deleteCompanyDispatch = (id) => (dispatch) => {
             return Promise.resolve();
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            let message = "Error"
+            if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                message = ERROR_401;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: DELETE_COMPANY_FAIL,
@@ -196,12 +203,12 @@ export const getCompanyIdDispatch = (id) => (dispatch) => {
             return Promise.resolve();
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            let message = "Error"
+            if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.code === "RefreshTokenFailed")) {
+                message = ERROR_401;
+            } else {
+                message = ADMIN_500;
+            }
 
             dispatch({
                 type: GET_COMPANY_ID_FAIL,
