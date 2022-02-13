@@ -1,3 +1,4 @@
+import { Redirect } from 'react-router-dom';
 import { logout, newAccessToken, newRefreshToken } from "../../Actions/auth";
 import axiosInstance from "./apiInstance";
 import TokenService from "./token.service";
@@ -44,12 +45,12 @@ const setup = (store) => {
                         return axiosInstance(originalConfig);
                     } catch (_error) {
                         dispatch(logout());
-                        return Promise.reject(_error);
+                        return <Redirect to="/" /> && Promise.reject(_error);
                     }
                 }
             }
             dispatch(logout());
-            return Promise.reject(err);
+            return <Redirect to="/" /> && Promise.reject(err);
         }
     );
 };
