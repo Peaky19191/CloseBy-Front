@@ -44,16 +44,16 @@ const setup = (store) => {
 
                         return axiosInstance(originalConfig);
                     } catch (_error) {
-                        dispatch(logout());
                         history.push("/");
                         window.location.reload();
+                        dispatch(logout());
                         return Promise.reject(_error);
                     }
                 }
             }
-            dispatch(logout());
             history.push("/");
             window.location.reload();
+            dispatch(logout());
             return Promise.reject(err);
         }
     );
