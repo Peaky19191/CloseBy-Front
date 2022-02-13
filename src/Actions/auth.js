@@ -4,7 +4,7 @@ import {
 } from "../Constants/actionTypes";
 import AuthService from "../Services/Auth/auth.service";
 import {
-    ADMIN_500, CONFIRM_EMAIL_FAIL_400, CONFIRM_EMAIL_SUCCESS_200, LOGIN_ERROR_401, NEW_PASSW_ERROR_403, NEW_PASSW_SUCCESS_200,
+    ADMIN_500, CONFIRM_EMAIL_FAIL_400, CONFIRM_EMAIL_SUCCESS_200, LOGIN_ERROR_401, LOGIN_ERROR_403, NEW_PASSW_ERROR_403, NEW_PASSW_SUCCESS_200,
     RESET_PASSW_SUCCESS_200
 } from "../Static/message";
 
@@ -27,7 +27,11 @@ export const login = (email, password) => (dispatch) => {
             if ((error.response.statusText === "Unauthorized") || (error.response.status === 401) || (error.response.data.type === "authentication")) {
                 message = LOGIN_ERROR_401;
             } else {
-                message = ADMIN_500;
+                if ((error.response.statusText === "Forbidden") || (error.response.status === 403) || (error.response.data.message === "Account is not confirmed!")) {
+                    message = LOGIN_ERROR_403;
+                } else {
+                    message = ADMIN_500;
+                }
             }
 
             dispatch({
