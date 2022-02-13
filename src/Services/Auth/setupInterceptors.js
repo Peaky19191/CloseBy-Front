@@ -23,7 +23,7 @@ const setup = (store) => {
         },
         async (err) => {
             const originalConfig = err.config;
-            if (originalConfig.url !== "/identity/refresh-access-token" && err.response) {
+            if ((originalConfig.url !== ("/identity/refresh-access-token" && "/identity/login")) && err.response) {
                 // Access Token was expired
                 if (err.response.status === 401 && !originalConfig._retry) {
                     originalConfig._retry = true;
