@@ -1,11 +1,9 @@
-import { useHistory } from "react-router-dom";
+import { Redirect } from 'react-router-dom';
 import { logout, newAccessToken, newRefreshToken } from "../../Actions/auth";
 import axiosInstance from "./apiInstance";
 import TokenService from "./token.service";
 
-const Setup = (store) => {
-    const history = useHistory();
-
+const setup = (store) => {
     axiosInstance.interceptors.request.use(
         (config) => {
             const token = TokenService.getLocalAccessToken();
@@ -46,19 +44,15 @@ const Setup = (store) => {
 
                         return axiosInstance(originalConfig);
                     } catch (_error) {
-                        history.push("/");
-                        window.location.reload();
                         dispatch(logout());
-                        return Promise.reject(_error);
+                        return <Redirect to="/" />;
                     }
                 }
             }
-            history.push("/");
-            window.location.reload();
             dispatch(logout());
-            return Promise.reject(err);
+            return <Redirect to="/" />;
         }
     );
 };
 
-export default Setup;
+export default setup;
