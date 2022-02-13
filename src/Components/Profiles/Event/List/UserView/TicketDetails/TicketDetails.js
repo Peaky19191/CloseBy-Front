@@ -4,22 +4,18 @@ import moment from 'moment';
 import React from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
-//import { setTicket } from "../../../../Actions/Profiles/events.js";
 import useStyles from './styles';
 
 const TicketDetails = () => {
     const classes = useStyles();
 
-    //const tic = useSelector(state => state.ticket.ticket)
     const { ticket: currentTicket } = useSelector((state) => state.ticket);
-
 
     let history = useHistory();
     const goToPreviousPath = () => {
         history.goBack()
     }
 
-    console.log(currentTicket)
     return (
         <Container className={classes.container} component="main" maxWidth="xs">
             <Paper className={classes.paper} elevation={3}>

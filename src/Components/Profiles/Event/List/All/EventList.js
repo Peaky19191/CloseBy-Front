@@ -120,7 +120,6 @@ const EventList = () => {
     }
 
     const deleteFromList = () => {
-        console.log(idEventDelete);
         dispatch(deleteEventDispatch(idEventDelete))
             .then(() => {
                 showPopup();
