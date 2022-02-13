@@ -47,14 +47,14 @@ const Setup = (store) => {
                         return axiosInstance(originalConfig);
                     } catch (_error) {
                         history.push("/");
-                        // window.location.reload();
+                        window.location.reload();
                         dispatch(logout());
                         return Promise.reject(_error);
                     }
                 }
             }
             history.push("/");
-            // window.location.reload();
+            window.location.reload();
             dispatch(logout());
             return Promise.reject(err);
         }
