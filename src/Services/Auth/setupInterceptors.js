@@ -45,12 +45,14 @@ const setup = (store) => {
                         return axiosInstance(originalConfig);
                     } catch (_error) {
                         dispatch(logout());
-                        return <Redirect to="/" /> && Promise.reject(_error);
+                        Promise.reject(_error);
+                        return <Redirect to="/" />;
                     }
                 }
             }
             dispatch(logout());
-            return <Redirect to="/" /> && Promise.reject(err);
+            Promise.reject(err)
+            return <Redirect to="/" />;
         }
     );
 };
