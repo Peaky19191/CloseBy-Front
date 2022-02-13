@@ -3,7 +3,7 @@ import { logout, newAccessToken, newRefreshToken } from "../../Actions/auth";
 import axiosInstance from "./apiInstance";
 import TokenService from "./token.service";
 
-const setup = (store) => {
+const Setup = (store) => {
     const history = useHistory();
 
     axiosInstance.interceptors.request.use(
@@ -61,4 +61,4 @@ const setup = (store) => {
     );
 };
 
-export default setup;
+export default Setup;
